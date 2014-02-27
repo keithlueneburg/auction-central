@@ -1,3 +1,4 @@
+
 /*
  * Testing branches/merging
  * 
@@ -14,4 +15,7 @@ public class Main {
 		System.out.println("Hey I changed something else...");
 	}
 
+	public static void test_method() {
+		System.out.println("testing..");
+	}
 }
