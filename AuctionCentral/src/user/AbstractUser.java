@@ -4,9 +4,12 @@ package user;
  * Provides default implementation of shared user fields
  * 
  * @author Josh Hammer
+ * @author Keith Lueneburg (minor changes)
+ * 
+ * @version 3/2/2014
  *
  */
-public class AbstractUser {
+public abstract class AbstractUser {
 
 	/**
 	 * the username that the user will use
@@ -42,4 +45,27 @@ public class AbstractUser {
 		myFirstName = the_first_name;
 		myLastName = the_last_name;
 	}
+	
+	
+	/**
+	 * Returns the user's first name.
+	 * 
+	 * @return the first name.
+	 * 
+	 * @author Keith Lueneburg
+	 */
+	public String getFirstName() {
+	  return myFirstName;
+	}
+	
+  /**
+   * Returns the user's last name.
+   * 
+   * @return the last name.
+   * 
+   * @author Keith Lueneburg
+   */
+	public String getLastName() {
+    return myLastName;
+  }
 }
