@@ -6,7 +6,9 @@ import bidding.Address;
 import bidding.Bank;
 import bidding.CreditCard;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,11 +48,12 @@ public class CreditCardTest {
   @Before
   public void setup() {
 
-    card_1 = new CreditCard(1234123412341234L, new Date(2015, 1, 15), 123,
-        "John Smith", new Address(), new Bank());
+    card_1 = new CreditCard(1234123412341234L, new Date(2015, 1, 15), 123, "John Smith",
+        new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), new Bank("Chase"));
 
-    card_1_duplicate = new CreditCard(1234123412341234L, new Date(2015, 1, 15),
-        123, "John Smith", new Address(), new Bank());
+    card_1_duplicate = new CreditCard(1234123412341234L, new Date(2015, 1, 15), 123, 
+        "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), 
+        new Bank("Chase"));
   }
 
   /**
@@ -70,46 +73,46 @@ public class CreditCardTest {
   @Test
   public void testEqualsObject() {
     // Object should equal itself
-    assertTrue(card_1.equals(card_1));
+    assertTrue("Fail equals itself", card_1.equals(card_1));
 
     // Object should equal an identical object with same field values
     // TODO: This currently fails due to Address and Bank not being
     // implemented yet.
 
-    assertTrue(card_1.equals(card_1_duplicate));
+    assertTrue("Fail equals identical", card_1.equals(card_1_duplicate));
 
     // Should not equal a null object
     final CreditCard null_card = null;
-    assertFalse(card_1.equals(null_card));
+    assertFalse("Fail equals null", card_1.equals(null_card));
 
     // Should not equal a different type of object
-    assertFalse(card_1.equals(new StringBuilder()));
+    assertFalse("Fail equals different type", card_1.equals(new StringBuilder()));
 
     // Should not equal a card with different fields:
 
     // Different card number:
-    assertFalse(card_1.equals(new CreditCard(4567123412341234L, new Date(2015,
-        1, 15), 123, "John Smith", new Address(), new Bank())));
+    assertFalse("Fail different card number", card_1.equals(new CreditCard(4567123412341234L, new GregorianCalendar(2015,
+        1, 15), 123, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), new Bank("Chase"))));
 
     // Different expiration date:
-    assertFalse(card_1.equals(new CreditCard(1234123412341234L, new Date(2238,
-        1, 15), 123, "John Smith", new Address(), new Bank())));
+    assertFalse("Fail different expiration date", card_1.equals(new CreditCard(1234123412341234L, new Date(2238,
+        1, 15), 123, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), new Bank("Chase"))));
 
     // Different CSC
-    assertFalse(card_1.equals(new CreditCard(1234123412341234L, new Date(2015,
-        1, 15), 456, "John Smith", new Address(), new Bank())));
+    assertFalse("Fail different CSC", card_1.equals(new CreditCard(1234123412341234L, new Date(2015,
+        1, 15), 456, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), new Bank("Chase"))));
 
-    // Different CSC
-    assertFalse(card_1.equals(new CreditCard(1234123412341234L, new Date(2015,
-        1, 15), 123, "Dave Jones", new Address(), new Bank())));
+    // Different name
+    assertFalse("Fail different name", card_1.equals(new CreditCard(1234123412341234L, new Date(2015,
+        1, 15), 123, "Dave Jones", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), new Bank("Chase"))));
 
     // Different Address
-
-    // TODO: Test once Address implemented
+    assertFalse("Fail different address", card_1.equals(new CreditCard(1234123412341234L, new Date(2015,
+        1, 15), 123, "John Smith", new Address("255 Broadway", 0, "Tacoma", "WA", 98501, null), new Bank("Chase"))));
 
     // Different Bank
-
-    // TODO: Test once Bank implemented
+    assertFalse("Fail different bank", card_1.equals(new CreditCard(1234123412341234L, new Date(2015,
+        1, 15), 123, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), new Bank("Bank of America"))));
   }
 
   /**
