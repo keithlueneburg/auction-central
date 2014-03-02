@@ -31,7 +31,7 @@ public class ApplicationFrame extends JFrame {
   private void setup() {
     setSize(1024, 680);
     
-    my_menu_panel.setBackground(Color.BLUE);
+    my_menu_panel.setBackground(Color.GRAY);
     add(my_menu_panel, BorderLayout.WEST);
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,14 +46,18 @@ public class ApplicationFrame extends JFrame {
   }
 
   public void showAuctionInfo(final Auction an_auction) {
-
+    replaceContentPanel(new AuctionPanel(an_auction));
   }
 
   public void showInventory(final Auction an_auction) {
-
+    replaceContentPanel(new InventoryPanel(an_auction));
   }
 
   public void showItem(final Item an_item) {
-
+    replaceContentPanel(new ItemPanel(an_item));
+  }
+  
+  public void showCalender() {
+    replaceContentPanel(new CalendarPanel());
   }
 }

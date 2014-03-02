@@ -7,7 +7,7 @@ import user.AuctionCentralStaff;
 import user.User;
 
 public final class Main {
-  //TODO: Remove from final build
+  //TODO: Remove DEFAULT_USER from final build
   private static User DEFAULT_USER = new AuctionCentralStaff("xx_username_xx",
       "password", "John", "Smith"); 
   
