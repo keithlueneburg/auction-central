@@ -9,7 +9,7 @@ package user;
  * @version 3/2/2014
  *
  */
-public abstract class AbstractUser {
+public abstract class AbstractUser implements User{
 
 	/**
 	 * the username that the user will use
