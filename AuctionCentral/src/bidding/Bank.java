@@ -112,4 +112,18 @@ public final class Bank {
   public int hashCode() {
     return my_name.hashCode();
   }
+  
+  /**
+   * String representation of bank.
+   * <p>
+   * <dt><b> Precondition: Bank has been initialized. </b><dd>
+   * <dt><b> Postcondition: The Bank has not been changed. </b><dd>
+   * 
+   * @return string representing the bank.
+   * 
+   * @author Keith Lueneburg
+   */
+  public String toString() {
+    return my_name;
+  }
 }
