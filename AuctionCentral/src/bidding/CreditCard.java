@@ -1,6 +1,8 @@
 package bidding;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Class: CreditCard
@@ -12,7 +14,7 @@ import java.util.Date;
  * Washington, Tacoma Winter 2014 Instructor: Dr. Adwoa Donyina
  * 
  * @author Keith Lueneburg
- * @version 2/26/2014
+ * @version 3/2/2014
  * 
  */
 public final class CreditCard {
@@ -26,6 +28,12 @@ public final class CreditCard {
    */
   private static final int CSC_LENGTH = 3;
 
+  
+  /**
+   * Character for use in String representation of dates (i.e. 3/2/2014) 
+   */
+  private static final int DATE_SEPARATOR_CHARACTER = '/';
+
   /**
    * The 16 digit card number.
    */
@@ -34,7 +42,7 @@ public final class CreditCard {
   /**
    * Card expiration date.
    */
-  private Date my_expiration_date;
+  private Calendar my_expiration_date;
 
   /**
    * The 3 digit card security code.
@@ -80,7 +88,7 @@ public final class CreditCard {
    * @throws IllegalArgumentException
    *           Throws exception in the case of invalid parameters.
    */
-  public CreditCard(final long a_card_num, final Date an_exp_date,
+  public CreditCard(final long a_card_num, final Calendar an_exp_date,
       final int a_csc, final String a_card_holder, final Address an_address,
       final Bank a_bank) {
 
@@ -103,7 +111,7 @@ public final class CreditCard {
   /**
    * @return The expiration date.
    */
-  private Date getExpDate() {
+  private Calendar getExpDate() {
 
     // TODO : return a defensive copy here
     return my_expiration_date;
@@ -155,7 +163,7 @@ public final class CreditCard {
    * @param an_expiration_date
    *          The expiration date to set.
    */
-  private void setExpDate(final Date an_expiration_date) {
+  private void setExpDate(final Calendar an_expiration_date) {
 
     // TODO : make defensive copy
     this.my_expiration_date = an_expiration_date;
@@ -250,7 +258,7 @@ public final class CreditCard {
         is_equal = false;
       } else if (my_csc != other.getCSC()) {
         is_equal = false;
-      } else if (!my_address.equals(other.getAddress().toString())) {
+      } else if (!my_address.toString().equals(other.getAddress().toString())) {
         is_equal = false;
       } else if (!my_bank.equals(other.getBank())) {
         is_equal = false;
@@ -260,6 +268,15 @@ public final class CreditCard {
     return is_equal;
   }
 
+  
+  /**
+   * @return the item's hashcode
+   */
+  @Override
+  public int hashCode() {
+    return this.toString().hashCode();
+  }
+  
   /**
    * Get a String representation of the CreditCard.
    * <p>
@@ -280,8 +297,8 @@ public final class CreditCard {
     sb.append(my_card_num);
     sb.append("\n");
     sb.append("Expiration Date: ");
-    sb.append(my_expiration_date.getMonth() + "/" + my_expiration_date.getDay() + "/" 
-        + my_expiration_date.getYear());
+    sb.append(my_expiration_date.get(Calendar.MONTH) + DATE_SEPARATOR_CHARACTER + my_expiration_date.get(Calendar.DAY_OF_MONTH) + DATE_SEPARATOR_CHARACTER 
+        + my_expiration_date.get(Calendar.YEAR));
     sb.append("\n");
     sb.append("CSC: ");
     sb.append(my_csc);
