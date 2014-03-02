@@ -176,20 +176,21 @@ public final class Address {
 	}
 	
 	/**
-	 * Get a String representation of the CreditCard.
+	 * Get a String representation of the Address.
 	 * <p>
-	 * <dt><b> Precondition: CreditCard has been initialized. </b><dd>
-	 * <dt><b> Postcondition: The CreditCard has not been changed. </b><dd>
+	 * <dt><b> Precondition: Address has been initialized. </b><dd>
+	 * <dt><b> Postcondition: The Address has not been changed. </b><dd>
 	 * 
-	 * @return A string representation of the card.
+	 * @return A string representation of the Address.
+	 * @author Keith Lueneburg (Minor changes)
 	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Address: \n");
-		sb.append(myStreet + " ");
+		sb.append("Address:\n");
+		sb.append(myStreet);
 		if (myApt > 0)
-			sb.append(myApt + " ");	
+			sb.append(" " + myApt);	
 		sb.append("\n" + myCity + " " + myState + " ");
 		sb.append(myZip);
 		sb.append("\n");

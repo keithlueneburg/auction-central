@@ -1,8 +1,6 @@
 package bidding;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * Class: CreditCard
@@ -28,11 +26,15 @@ public final class CreditCard {
    */
   private static final int CSC_LENGTH = 3;
 
-  
   /**
-   * Character for use in String representation of dates (i.e. 3/2/2014) 
+   * Character for use in String representation of dates (i.e. 3/2/2014)
    */
   private static final int DATE_SEPARATOR_CHARACTER = '/';
+
+  /**
+   * Line separator.
+   */
+  private static final String LINE_SEPARATOR = "\n";
 
   /**
    * The 16 digit card number.
@@ -90,7 +92,7 @@ public final class CreditCard {
    */
   public CreditCard(final long a_card_num, final Calendar an_exp_date,
       final int a_csc, final String a_card_holder, final Address an_address,
-      final Bank a_bank) {
+      final Bank a_bank) throws IllegalArgumentException {
 
     // Validation is handled by individual setters
     setCardNum(a_card_num);
@@ -150,10 +152,13 @@ public final class CreditCard {
   /**
    * @param a_card_num
    *          The card number to set.
+   * 
+   * @throws IllegalArgumentException
+   *           Throws exception in the case of wrong card number length.
    */
-  private void setCardNum(final long a_card_num) {
+  private void setCardNum(final long a_card_num) throws IllegalArgumentException {
     if ((new Long(a_card_num)).toString().length() != CARD_NUMBER_LENGTH) {
-      throw new IllegalArgumentException("Invalid card number length");
+      throw new IllegalArgumentException("Card number must be 16 digits.");
     } else {
       this.my_card_num = a_card_num;
     }
@@ -162,9 +167,16 @@ public final class CreditCard {
   /**
    * @param an_expiration_date
    *          The expiration date to set.
+   * 
+   * @throws IllegalArgumentException
+   *           Throws exception in the case of invalid parameters.
    */
-  private void setExpDate(final Calendar an_expiration_date) {
-
+  private void setExpDate(final Calendar an_expiration_date) throws IllegalArgumentException {
+    if (an_expiration_date == null) {
+      throw new IllegalArgumentException("Expiration date cannot be null.");
+    } else if (an_expiration_date.compareTo(Calendar.getInstance()) <= 0) {
+      throw new IllegalArgumentException("Expiration date must be in the future.");
+    }
     // TODO : make defensive copy
     this.my_expiration_date = an_expiration_date;
   }
@@ -172,8 +184,11 @@ public final class CreditCard {
   /**
    * @param a_csc
    *          The CSC to set.
+   * 
+   * @throws IllegalArgumentException
+   *           Throws exception in the case of invalid parameters.
    */
-  private void setCSC(final int a_csc) {
+  private void setCSC(final int a_csc) throws IllegalArgumentException {
     if ((new Integer(a_csc)).toString().length() != CSC_LENGTH) {
       throw new IllegalArgumentException("Invalid CSC length");
     } else {
@@ -190,8 +205,11 @@ public final class CreditCard {
    * 
    * @param a_card_holder
    *          The card holder name to set.
+   * 
+   * @throws IllegalArgumentException
+   *           Throws exception in the case of invalid parameters.
    */
-  private void setCardHolder(final String a_card_holder) {
+  private void setCardHolder(final String a_card_holder) throws IllegalArgumentException {
     if (a_card_holder.length() == 0) {
       throw new IllegalArgumentException("Name cannot be blank");
     } else {
@@ -202,8 +220,11 @@ public final class CreditCard {
   /**
    * @param an_address
    *          The address to set.
+   * 
+   * @throws IllegalArgumentException
+   *           Throws exception in the case of invalid parameters.
    */
-  private void setAddress(final Address an_address) {
+  private void setAddress(final Address an_address) throws IllegalArgumentException {
 
     // TODO : make defensive copy
     this.my_address = an_address;
@@ -212,8 +233,11 @@ public final class CreditCard {
   /**
    * @param a_bank
    *          The bank name to set.
+   * 
+   * @throws IllegalArgumentException
+   *           Throws exception in the case of invalid parameters.
    */
-  private void setBank(final Bank a_bank) {
+  private void setBank(final Bank a_bank) throws IllegalArgumentException {
 
     // TODO : make defensive copy
     this.my_bank = a_bank;
@@ -230,7 +254,7 @@ public final class CreditCard {
    * @param an_object
    *          The object to compare this CreditCard with.
    * 
-   * @return True if the other object is also a CreditCard, and it represents
+   * @return true if the other object is also a CreditCard, and it represents
    *         the same card as the card we are checking.
    */
   @Override
@@ -264,19 +288,24 @@ public final class CreditCard {
         is_equal = false;
       }
     }
-
     return is_equal;
   }
 
-  
   /**
+   * Hash code for CreditCard.
+   * <p>
+   * <dt><b> Precondition: CreditCard has been initialized. </b>
+   * <dd>
+   * <dt><b> Postcondition: The CreditCard has not been changed. </b>
+   * <dd>
+   * 
    * @return the item's hashcode
    */
   @Override
   public int hashCode() {
     return this.toString().hashCode();
   }
-  
+
   /**
    * Get a String representation of the CreditCard.
    * <p>
@@ -292,27 +321,28 @@ public final class CreditCard {
     final StringBuilder sb = new StringBuilder();
     sb.append("Cardholder: ");
     sb.append(my_card_holder);
-    sb.append("\n");
+    sb.append(LINE_SEPARATOR);
     sb.append("Card Number: ");
     sb.append(my_card_num);
-    sb.append("\n");
+    sb.append(LINE_SEPARATOR);
     sb.append("Expiration Date: ");
-    sb.append(my_expiration_date.get(Calendar.MONTH) + DATE_SEPARATOR_CHARACTER + my_expiration_date.get(Calendar.DAY_OF_MONTH) + DATE_SEPARATOR_CHARACTER 
-        + my_expiration_date.get(Calendar.YEAR));
-    sb.append("\n");
+    sb.append(my_expiration_date.get(Calendar.MONTH) + DATE_SEPARATOR_CHARACTER
+        + my_expiration_date.get(Calendar.DAY_OF_MONTH)
+        + DATE_SEPARATOR_CHARACTER + my_expiration_date.get(Calendar.YEAR));
+    sb.append(LINE_SEPARATOR);
     sb.append("CSC: ");
     sb.append(my_csc);
-    sb.append("\n");
-    sb.append("Address: ");
+    sb.append(LINE_SEPARATOR);
+    //sb.append("Address: ");
 
     // TODO : once Address toString() is implemented, use that here!
-    sb.append("PLACEHOLDER ADDRESS");
+    sb.append(my_address);
 
-    sb.append("\n");
+    sb.append(LINE_SEPARATOR);
     sb.append("Bank: ");
     // TODO : once Address toString() is implemented, use that here!
-    sb.append("PLACEHOLDER BANK");
-    sb.append("\n");
+    sb.append(my_bank);
+    
 
     return sb.toString();
   }
