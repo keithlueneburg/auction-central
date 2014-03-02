@@ -3,12 +3,10 @@
 
 <!--
     This configuration file was written by the eclipse-cs plugin configuration editor
-    This file was then edited in Spring 2013 by Alan Fowler to adjust import order checking and line wrapping rules.
 -->
 <!--
-    Checkstyle-Configuration: TCSS 305 Same Line Style for Test Code
-    Description: 
-      The "braces on same line" style for test code for Spring 2013 TCSS 305.
+    Checkstyle-Configuration: TCSS 305 - Same Line Test
+    Description: none
 -->
 <module name="Checker">
   <property name="severity" value="warning"/>
@@ -60,7 +58,6 @@
     <module name="UnusedImports"/>
     <module name="ImportOrder">
       <property name="option" value="top"/>
-      <property name="ordered" value="true"/>
       <property name="separated" value="true"/>
     </module>
     <module name="ExecutableStatementCount">
@@ -104,14 +101,7 @@
     <module name="NoWhitespaceBefore">
       <property name="tokens" value="SEMI,DOT,POST_DEC,POST_INC"/>
     </module>
- <!--
     <module name="OperatorWrap">
-      <property name="option" value="eol"/>
-      <property name="tokens" value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LE,LITERAL_INSTANCEOF,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,SL,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN"/>
-    </module>
--->
-    <module name="OperatorWrap">
-      <property name="option" value= "nl"/>
       <property name="tokens" value="BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LE,LITERAL_INSTANCEOF,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,SL,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN"/>
     </module>
     <module name="MethodParamPad">

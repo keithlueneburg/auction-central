@@ -46,18 +46,19 @@ public class CreditCardTest {
   @Before
   public void setup() {
 
-    card_1 = new CreditCard(1234123412341234L, new GregorianCalendar(2015, 1,
-        15), 123, "John Smith", new Address("123 Main Street", 0, "Tacoma",
-        "WA", 98501, null), new Bank("Chase"));
+    card_1 = new CreditCard(1234123412341234L, new GregorianCalendar(2015, 1, 15), 123,
+        "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), 
+        new Bank("Chase"));
 
-    card_1_duplicate = new CreditCard(1234123412341234L, new GregorianCalendar(
-        2015, 1, 15), 123, "John Smith", new Address("123 Main Street", 0,
-        "Tacoma", "WA", 98501, null), new Bank("Chase"));
+    card_1_duplicate = new CreditCard(1234123412341234L, 
+        new GregorianCalendar(2015, 1, 15), 123, "John Smith", new Address("123 Main Street", 
+            0, "Tacoma", "WA", 98501, null), new Bank("Chase"));
   }
 
   /**
    * Test method for
-   * {@link bidding.CreditCard#CreditCard(long, int, int, java.lang.String, bidding.Address, java.lang.String)}
+   * {@link bidding.CreditCard#CreditCard(long, int, int, java.lang.String, bidding.Address, 
+   * java.lang.String)}
    * .
    */
   @Test
@@ -138,9 +139,6 @@ public class CreditCardTest {
         + LINE_SEPARATOR + "Tacoma WA 98501" + LINE_SEPARATOR + LINE_SEPARATOR
         + "Bank: Chase";
     
-    System.out.println(card_1);
-    System.out.println(test_credit_card_string);
-    System.out.println(card_1.toString().equals(test_credit_card_string));
     assertTrue("toString not equal", card_1.toString().equals(test_credit_card_string));
   }
 
