@@ -31,6 +31,12 @@ import user.User;
 public final class ApplicationFrame extends JFrame {
 
   /**
+   * Required for extended Serializable class JFrame.
+   */
+  private static final long serialVersionUID = -716727811602146864L;
+
+
+  /**
    * Default witdth of the program frame. 
    */
   private static final int DEFAULT_FRAME_WIDTH = 1024;
@@ -72,20 +78,24 @@ public final class ApplicationFrame extends JFrame {
    */
   private void setup() {
     setSize(DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
-
-    my_menu_panel.setBackground(Color.GRAY);
-    add(my_menu_panel, BorderLayout.WEST);
+    setResizable(false);
+    
+    setLocationByPlatform(true);
+    
+    //my_menu_panel.setBackground(Color.GRAY);
+    
 
     // TODO: Possibly remove this default color..
-    my_content_panel.setBackground(Color.LIGHT_GRAY);
+    //my_content_panel.setBackground(Color.LIGHT_GRAY);
 
+    add(my_menu_panel, BorderLayout.WEST);
     add(my_content_panel, BorderLayout.CENTER);
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
   /**
-   * Used once frame is set up. Displays the frame on screen.
+   * Displays the frame on screen.
    */
   public void start() {
     setVisible(true);
@@ -100,6 +110,13 @@ public final class ApplicationFrame extends JFrame {
     my_content_panel = a_panel;
   }
 
+  /**
+   * Display an auction list panel in the content area.
+   */
+  public void showAuctionList() {
+    replaceContentPanel(new AuctionListPanel());
+  }
+  
   /**
    * Display an auction info panel in the content area, for the given auction.
    * 

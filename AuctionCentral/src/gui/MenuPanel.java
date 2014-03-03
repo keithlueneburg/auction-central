@@ -2,10 +2,9 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -33,6 +32,11 @@ import user.User;
  */
 public class MenuPanel extends JPanel {
   /**
+   * Required for extended Serializable class JPanel.
+   */
+  private static final long serialVersionUID = 3756153799427907645L;
+
+  /**
    * Default width of the menu panel.
    */
   private static final int DEFAULT_WIDTH = 200;
@@ -57,6 +61,7 @@ public class MenuPanel extends JPanel {
    */
   private static final String LOGO_IMAGE_PATH = "images/logo.gif";
 
+  //TODO: Remove button size constant if not used.
   /**
    * Default button width.
    */
@@ -71,6 +76,11 @@ public class MenuPanel extends JPanel {
    * Height of the button panel.
    */
   private static final int BUTTON_PANEL_HEIGHT = 365;
+
+  /**
+   * Number of buttons to create spots for in menu.
+   */
+  private static final int MAX_BUTTON_SLOTS = 4;
 
   /**
    * Menu button for displaying auction list.
@@ -121,20 +131,25 @@ public class MenuPanel extends JPanel {
    * @return the button panel.
    */
   private JPanel getButtonPanel() {
+    //TODO: Clean up once menu panel finalized
+    
     final JPanel button_panel = new JPanel();
     button_panel.setPreferredSize(new Dimension(DEFAULT_WIDTH, BUTTON_PANEL_HEIGHT));
-    button_panel.setLayout(new BoxLayout(button_panel, BoxLayout.Y_AXIS));
+    //button_panel.setLayout(new BoxLayout(button_panel, BoxLayout.Y_AXIS));
+    button_panel.setLayout(new GridLayout(MAX_BUTTON_SLOTS, 1));
     
     my_auctions_button = new JButton("Auctions");
-    my_auctions_button.setAlignmentX(Component.CENTER_ALIGNMENT);
+    //my_auctions_button.setAlignmentX(Component.CENTER_ALIGNMENT);
     //my_auctions_button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));    
     
     my_calendar_button = new JButton("Calendar");
-    my_calendar_button.setAlignmentX(Component.CENTER_ALIGNMENT);
+    //my_calendar_button.setAlignmentX(Component.CENTER_ALIGNMENT);
     //my_calendar_button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));        
     
     button_panel.add(my_calendar_button);
     button_panel.add(my_auctions_button);
+    button_panel.add(new JPanel());
+    button_panel.add(new JButton("Logout"));
     
     return button_panel;
   }

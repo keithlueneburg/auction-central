@@ -164,7 +164,7 @@ public final class CreditCard {
     if ((new Long(a_card_num)).toString().length() != CARD_NUMBER_LENGTH) {
       throw new IllegalArgumentException("Card number must be 16 digits.");
     } else {
-      this.my_card_num = a_card_num;
+      my_card_num = a_card_num;
     }
   }
 
@@ -182,7 +182,7 @@ public final class CreditCard {
       throw new IllegalArgumentException("Expiration date must be in the future.");
     }
     // TODO : make defensive copy
-    this.my_expiration_date = an_expiration_date;
+    my_expiration_date = an_expiration_date;
   }
 
   /**
@@ -196,7 +196,7 @@ public final class CreditCard {
     if ((new Integer(a_csc)).toString().length() != CSC_LENGTH) {
       throw new IllegalArgumentException("Invalid CSC length");
     } else {
-      this.my_csc = a_csc;
+      my_csc = a_csc;
     }
   }
 
@@ -217,7 +217,7 @@ public final class CreditCard {
     if (a_card_holder.length() == 0) {
       throw new IllegalArgumentException("Name cannot be blank");
     } else {
-      this.my_card_holder = a_card_holder;
+      my_card_holder = a_card_holder;
     }
   }
 
@@ -229,9 +229,12 @@ public final class CreditCard {
    *           Throws exception in the case of invalid parameters.
    */
   private void setAddress(final Address an_address) throws IllegalArgumentException {
-
-    // TODO : make defensive copy
-    this.my_address = an_address;
+    if (an_address == null) {
+      throw new IllegalArgumentException("Address cannot be null.");
+    } else {
+      // TODO : make defensive copy
+      my_address = an_address;
+    }
   }
 
   /**
@@ -242,9 +245,12 @@ public final class CreditCard {
    *           Throws exception in the case of invalid parameters.
    */
   private void setBank(final Bank a_bank) throws IllegalArgumentException {
-
-    // TODO : make defensive copy
-    this.my_bank = a_bank;
+    if (a_bank == null) {
+      throw new IllegalArgumentException("Bank cannot be null.");
+    } else {
+      // TODO : make defensive copy
+      my_bank = a_bank;
+    }
   }
 
   /**
