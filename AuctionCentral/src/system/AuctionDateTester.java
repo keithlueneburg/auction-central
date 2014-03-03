@@ -58,7 +58,6 @@ class AuctionDateTester {
       //false if same day is available
       mySolution = false;
     }
-
   }
   
   /**
@@ -256,3 +255,5 @@ class AuctionDateTester {
     return is2Hour; 
   }
 }
+
+

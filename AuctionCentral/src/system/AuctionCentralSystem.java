@@ -34,6 +34,12 @@ public class AuctionCentralSystem {
     AuctionDateTester tester = new AuctionDateTester(anAuction, myAuction);
     isSuccess = tester.getSolution();
     
+    //Test Business Rule #5
+    if (((NonProfitUser) myCurrentUser).getAuction().getAuctionDate().get(Calendar.YEAR) ==
+        anAuction.getAuctionDate().get(Calendar.YEAR)) {
+      isSuccess = false;//two auction in same year
+    }
+    
     if (isSuccess) {
       myAuction.add(anAuction);
     }

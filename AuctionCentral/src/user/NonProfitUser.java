@@ -1,5 +1,7 @@
 package user;
 
+import java.util.List;
+
 import auction.Auction;
 
 /**
@@ -44,6 +46,10 @@ public class NonProfitUser extends AbstractUser {
     super(the_username, the_password, the_first_name, the_last_name);
     my_organization = the_organization;
     my_auction = the_auction;
+  }
+  
+  public Auction getAuction() {
+    return my_auction;
   }
 
 }
