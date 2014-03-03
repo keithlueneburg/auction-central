@@ -12,7 +12,12 @@ public class AuctionCentralSystem {
   private AbstractUser myCurrentUser;
   private List<Auction> myAuction;
     //private Calendar myCalendar;
-    
+   
+  /**
+   * This method add a new Auction to the auction list
+   * @param anAuction the new auction would be added to the list
+   * @return true if the new auction was successfully added, else false
+   */
   public boolean addAuction(Auction anAuction) {
     boolean isSuccess = true;
     
@@ -37,6 +42,9 @@ public class AuctionCentralSystem {
     return isSuccess;
   }
   
+  /**
+   * This method refresh the auction list, remove all the auctions before or on today
+   */
   private void refreshAuction()
   {
     Calendar today = Calendar.getInstance();
