@@ -32,4 +32,11 @@ public interface User {
    * @return the last name.
    */
   String getLastName();
+  
+  /**
+   * Returns the user's username.
+   * 
+   * @return the username.
+   */
+  String getUsername();
 }
