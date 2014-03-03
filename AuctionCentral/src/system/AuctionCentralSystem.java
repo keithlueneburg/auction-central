@@ -11,7 +11,6 @@ public class AuctionCentralSystem {
   private List<AbstractUser> myUsers;
   private AbstractUser myCurrentUser;
   private List<Auction> myAuction;
-    //private Calendar myCalendar;
    
   /**
    * This method add a new Auction to the auction list
@@ -49,7 +48,9 @@ public class AuctionCentralSystem {
   }
   
   /**
-   * This method refresh the auction list, remove all the auctions before or on today
+   * This method refresh the auction list, remove all the auctions before or on today.
+   * <dt><b>Postconditions:</b><dd>
+   * All Auctions in the list are in the future
    */
   private void refreshAuction()
   {

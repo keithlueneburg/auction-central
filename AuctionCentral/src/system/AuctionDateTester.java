@@ -27,6 +27,9 @@ class AuctionDateTester {
    * The constructor of the tester
    * @param anAuction the new Auction would added to the AuctionList
    * @param anAuctionList current Auction list
+   * <dt><b>Preconditions:</b><dd>
+   * The Auction != null
+   * The user of adding this auction is a non-profit user
    */
   public AuctionDateTester(Auction anAuction, List<Auction> anAuctionList) {
     
@@ -127,6 +130,8 @@ class AuctionDateTester {
    * @param anAuction the new Auction would added to the AuctionList
    * @return true if more than 5 Auctions in 7 days,
    *  false if no more than 5 Auctions in 7 days
+   * <dt><b>Preconditions:</b><dd>
+   * The new Auction's date must in 30 days after today
    */
   private boolean test7DayFull(Auction anAuction) {
     boolean isFull = false;
@@ -155,6 +160,8 @@ class AuctionDateTester {
    * @param auctionDate a Date that be started
    * @return the number of Auctions in the list in 7 days after
    *  the parameter's Date
+   * <dt><b>Preconditions:</b><dd>
+   * The date of the parameter's must be one of the date in Auction list.
    */
   private int calculate7Day(Calendar auctionDate) {
     
@@ -194,6 +201,8 @@ class AuctionDateTester {
    * in 2 hours.
    * @param auctionDate anAuction the new Auction would added to the AuctionList
    * @return true if there would be more than 2 Auctions in 2 hours, else false
+   * <dt><b>Preconditions:</b><dd>
+   * There must be no more than 5 Auctions in 7 days
    */
   private boolean test1DayFull(Auction anAuction) {
     boolean isFull = false;
@@ -240,6 +249,8 @@ class AuctionDateTester {
    * @param after the auction that begin second
    * @return true if the second auction begin after at least 2 hours
    *  the first auction finish, else false
+   * <dt><b>Preconditions:</b><dd>
+   * The time of the Auction before must before the time of the Auction after
    */
   private boolean is2Hour(Auction before, Auction after) {
     boolean is2Hour = true;
