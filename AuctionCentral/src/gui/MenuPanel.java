@@ -50,7 +50,7 @@ public class MenuPanel extends JPanel {
   /**
    * Default label panel height.
    */
-  private static final int LABEL_PANEL_HEIGHT = 150;
+  private static final int LABEL_PANEL_HEIGHT = 1150;
 
   /**
    * Path to the logo image file.
@@ -70,7 +70,7 @@ public class MenuPanel extends JPanel {
   /**
    * Height of the button panel.
    */
-  private static final int BUTTON_PANEL_HEIGHT = 330;
+  private static final int BUTTON_PANEL_HEIGHT = 365;
 
   /**
    * Menu button for displaying auction list.
@@ -126,14 +126,12 @@ public class MenuPanel extends JPanel {
     button_panel.setLayout(new BoxLayout(button_panel, BoxLayout.Y_AXIS));
     
     my_auctions_button = new JButton("Auctions");
-    //button_1.setSize(new Dimension(50, 50));
     my_auctions_button.setAlignmentX(Component.CENTER_ALIGNMENT);
-    my_auctions_button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));    
+    //my_auctions_button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));    
     
     my_calendar_button = new JButton("Calendar");
-    //button_2.setPreferredSize(new Dimension(100, 100));
     my_calendar_button.setAlignmentX(Component.CENTER_ALIGNMENT);
-    my_calendar_button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));        
+    //my_calendar_button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));        
     
     button_panel.add(my_calendar_button);
     button_panel.add(my_auctions_button);
@@ -156,8 +154,9 @@ public class MenuPanel extends JPanel {
     
     label_panel.setBackground(Color.LIGHT_GRAY);
     
-    label_panel.add(new JLabel("THE USERNAME HERE"), BorderLayout.SOUTH);
-    label_panel.add(new JLabel("THE ROLE HERE"), BorderLayout.NORTH);
+    label_panel.add(new JLabel("User: " + a_user.getUsername()), BorderLayout.SOUTH);
+    label_panel.add(new JLabel("Role: " + a_user.getClass().getSimpleName()),
+        BorderLayout.NORTH);
     return label_panel;
   }
 

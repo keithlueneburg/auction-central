@@ -9,7 +9,7 @@ package user;
  * @version 3/2/2014
  *
  */
-public abstract class AbstractUser implements User{
+public abstract class AbstractUser implements User {
 
 	/**
 	 * the username that the user will use
@@ -68,5 +68,16 @@ public abstract class AbstractUser implements User{
    */
   public String getLastName() {
     return myLastName;
+  }
+  
+  /**
+   * Returns the user's username.
+   * 
+   * @return the username.
+   * 
+   * @author Keith Lueneubrg
+   */
+  public String getUsername() {
+    return myUsername;
   }
 }

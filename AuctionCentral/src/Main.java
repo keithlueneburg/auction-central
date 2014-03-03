@@ -3,6 +3,7 @@ import gui.ApplicationFrame;
 import java.awt.EventQueue;
 
 import user.AuctionCentralStaff;
+import user.NonProfitUser;
 import user.User;
 
 /**
@@ -23,8 +24,11 @@ import user.User;
  */
 public final class Main {
   //TODO: Remove DEFAULT_USER from final build (should be decided by login window)
-  private static User DEFAULT_USER = new AuctionCentralStaff("xx_username_xx",
+  private static User DEFAULT_USER = new AuctionCentralStaff("staff_dude-0101",
       "password", "John", "Smith");
+  
+  //private static User DEFAULT_USER = new NonProfitUser("non-profit-guy",
+  //    "password", "Bob", "Jones", "Charity group", null);
   
   /**
    * Private constructor, to prevent instantiation of this class.
