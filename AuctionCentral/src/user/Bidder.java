@@ -1,54 +1,55 @@
 package user;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import auction.Bid;
+
 import bidding.Address;
 import bidding.CreditCard;
 
-public class Bidder extends AbstractUser
-{
-	private CreditCard myCard;
-	private Address myAddress;
-	private List<Bid> myBids;
-	
-	public Bidder(String aUserName, String aPassword, String aFirstName, 
-			String aLastName, CreditCard aCard, Address anAddress)
-	{
-		super(aUserName, aPassword, aFirstName, aLastName);
-		myCard = aCard;
-		myAddress = anAddress;
-		myBids = new ArrayList<Bid>();
-	}
+import java.util.ArrayList;
+import java.util.List;
 
-	public CreditCard getCard()
-	{
-		return myCard;
-	}
+/**
+ * User type for a user who may bid on items through the "online" sealed bidding system.
+ * 
+ * @author Kaiyuan Shi
+ * 
+ * @version 3/2/2014
+ *
+ */
+public class Bidder extends AbstractUser {
+  private CreditCard my_card;
+  private Address my_address;
+  private List<Bid> my_bids;
 
-	public void setCard(CreditCard aCard)
-	{
-		myCard = aCard;
-	}
+  public Bidder(final String a_user_name, final String a_password, final String a_first_name,
+      final String a_last_name, final CreditCard a_card, final Address an_address) {
+    super(a_user_name, a_password, a_first_name, a_last_name);
+    my_card = a_card;
+    my_address = an_address;
+    my_bids = new ArrayList<Bid>();
+  }
 
-	public Address getAddress()
-	{
-		return myAddress;
-	}
+  public CreditCard getCard() {
+    return my_card;
+  }
 
-	public void setAddress(Address anAddress)
-	{
-		myAddress = anAddress;
-	}
+  public void setCard(final CreditCard a_card) {
+    my_card = a_card;
+  }
 
-	public List<Bid> getBids()
-	{
-		return myBids;
-	}
-	
-	public void addBid(Bid aBid)
-	{
-		myBids.add(aBid);
-	}
+  public Address getAddress() {
+    return my_address;
+  }
+
+  public void setAddress(final Address an_address) {
+    my_address = an_address;
+  }
+
+  public List<Bid> getBids() {
+    return my_bids;
+  }
+
+  public void addBid(final Bid a_bid) {
+    my_bids.add(a_bid);
+  }
 }
