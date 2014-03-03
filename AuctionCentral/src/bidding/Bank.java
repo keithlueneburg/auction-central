@@ -8,12 +8,17 @@ import auction.Item;
  * Represents a Bank that will process the bills and payments.
  * 
  * TCSS 360 - Software Development and Quality Assurance
+ * 
  * University of Washington, Tacoma
+ * 
  * Winter 2014
+ * 
  * Instructor: Dr. Adwoa Donyina
  * 
  * @author Casey Morrison
+ * 
  * @author Keith Lueneburg (Minor changes)
+ * 
  * @version 1.0 Winter 2014
  */
 public final class Bank {
@@ -24,10 +29,13 @@ public final class Bank {
   /**
    * Create a new Bank object.
    * <p>
-   * <dt><b> Precondition: Valid parameters are passed to constructor. </b><dd>
-   * <dt><b> Postcondition: The Bank has been initialized properly. </b><dd>
+   * <dt><b> Precondition: Valid parameters are passed to constructor. </b>
+   * <dd>
+   * <dt><b> Postcondition: The Bank has been initialized properly. </b>
+   * <dd>
    * 
-   * @param a_name The name of the bank.
+   * @param a_name
+   *          The name of the bank.
    * 
    */
   public Bank(final String a_name) {
@@ -46,29 +54,37 @@ public final class Bank {
   }
 
   /**
-    * Pays a bill for a bidder.
+   * Pays a bill for a bidder.
    * <p>
-   * <dt><b> Precondition: Valid parameters are passed to payment. </b><dd>
-   * <dt><b> Postcondition: The Bill has been initialized properly. </b><dd>
+   * <dt><b> Precondition: Valid parameters are passed to payment. </b>
+   * <dd>
+   * <dt><b> Postcondition: The Bill has been initialized properly. </b>
+   * <dd>
    * 
-   * @param an_item The item.
-   * @param a_price The price of the bill.
-   * @param a_card The card used to pay.
+   * @param an_item
+   *          The item.
+   * @param a_price
+   *          The price of the bill.
+   * @param a_card
+   *          The card used to pay.
    * @return bill, a Bill used to charge a bidder.
    */
-  public static Bill makePayment(final Item an_item, final double a_price, 
+  public static Bill makePayment(final Item an_item, final double a_price,
       final CreditCard a_card) {
-    Bill bill;
-    return bill = new Bill(an_item, a_price, a_card); 
+    final Bill bill = new Bill(an_item, a_price, a_card);
+    return bill;
   }
 
   /**
    * Check for equality with another Bank.
    * <p>
-   * <dt><b> Precondition: Bank has been initialized. </b><dd>
-   * <dt><b> Postcondition: The Bank has not been changed. </b><dd>
+   * <dt><b> Precondition: Bank has been initialized. </b>
+   * <dd>
+   * <dt><b> Postcondition: The Bank has not been changed. </b>
+   * <dd>
    * 
-   * @param an_object The object to check equality with.
+   * @param an_object
+   *          The object to check equality with.
    * 
    * @return true if the other object is an identical bank
    * 
@@ -101,8 +117,10 @@ public final class Bank {
   /**
    * Hash code for bank.
    * <p>
-   * <dt><b> Precondition: Bank has been initialized. </b><dd>
-   * <dt><b> Postcondition: The Bank has not been changed. </b><dd>
+   * <dt><b> Precondition: Bank has been initialized. </b>
+   * <dd>
+   * <dt><b> Postcondition: The Bank has not been changed. </b>
+   * <dd>
    * 
    * @return the bank's hash code
    * 
@@ -112,12 +130,14 @@ public final class Bank {
   public int hashCode() {
     return my_name.hashCode();
   }
-  
+
   /**
    * String representation of bank.
    * <p>
-   * <dt><b> Precondition: Bank has been initialized. </b><dd>
-   * <dt><b> Postcondition: The Bank has not been changed. </b><dd>
+   * <dt><b> Precondition: Bank has been initialized. </b>
+   * <dd>
+   * <dt><b> Postcondition: The Bank has not been changed. </b>
+   * <dd>
    * 
    * @return string representing the bank.
    * 
