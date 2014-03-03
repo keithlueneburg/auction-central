@@ -8,12 +8,16 @@ import java.util.Calendar;
  * Represents a credit card that a bidder will use to pay for a item that they
  * win the bidding for.
  * 
- * TCSS 360 - Software Development and Quality Assurance University of
- * Washington, Tacoma Winter 2014 Instructor: Dr. Adwoa Donyina
+ * TCSS 360 - Software Development and Quality Assurance 
+ * 
+ * University of Washington, Tacoma 
+ * 
+ * Winter 2014 
+ * 
+ * Instructor: Dr. Adwoa Donyina
  * 
  * @author Keith Lueneburg
  * @version 3/2/2014
- * 
  */
 public final class CreditCard {
   /**
@@ -333,14 +337,12 @@ public final class CreditCard {
     sb.append("CSC: ");
     sb.append(my_csc);
     sb.append(LINE_SEPARATOR);
-    //sb.append("Address: ");
-
-    // TODO : once Address toString() is implemented, use that here!
+    
     sb.append(my_address);
 
     sb.append(LINE_SEPARATOR);
     sb.append("Bank: ");
-    // TODO : once Address toString() is implemented, use that here!
+    
     sb.append(my_bank);
     
 

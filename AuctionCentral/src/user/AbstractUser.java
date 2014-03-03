@@ -39,12 +39,13 @@ public abstract class AbstractUser implements User{
 	 * @param the_first_name a first name
 	 * @param the_last_name a last name
 	 */
-	public AbstractUser(String the_username, String the_password, String the_first_name, String the_last_name){
-		myUsername = the_username;
-		myPassword = the_password;
-		myFirstName = the_first_name;
-		myLastName = the_last_name;
-	}
+  public AbstractUser(String the_username, String the_password,
+      String the_first_name, String the_last_name) {
+    myUsername = the_username;
+    myPassword = the_password;
+    myFirstName = the_first_name;
+    myLastName = the_last_name;
+  }
 	
 	
 	/**
@@ -54,9 +55,9 @@ public abstract class AbstractUser implements User{
 	 * 
 	 * @author Keith Lueneburg
 	 */
-	public String getFirstName() {
-	  return myFirstName;
-	}
+  public String getFirstName() {
+    return myFirstName;
+  }
 	
   /**
    * Returns the user's last name.
@@ -65,7 +66,7 @@ public abstract class AbstractUser implements User{
    * 
    * @author Keith Lueneburg
    */
-	public String getLastName() {
+  public String getLastName() {
     return myLastName;
   }
 }

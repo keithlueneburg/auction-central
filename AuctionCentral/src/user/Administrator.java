@@ -1,5 +1,6 @@
 package user;
 
+//TODO: Possibly remove this class??
 
 /**
  * Represents an administrator of the system
