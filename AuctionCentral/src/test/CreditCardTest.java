@@ -46,13 +46,13 @@ public class CreditCardTest {
   @Before
   public void setup() {
 
-    card_1 = new CreditCard(1234123412341234L, new GregorianCalendar(2015, 1, 15), 123,
-        "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), 
+    card_1 = new CreditCard(1234123412341234L, new GregorianCalendar(2015, 1, 15),
+        123, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), 
         new Bank("Chase"));
 
-    card_1_duplicate = new CreditCard(1234123412341234L, 
-        new GregorianCalendar(2015, 1, 15), 123, "John Smith", new Address("123 Main Street", 
-            0, "Tacoma", "WA", 98501, null), new Bank("Chase"));
+    card_1_duplicate = new CreditCard(1234123412341234L, new GregorianCalendar(2015, 1, 15), 
+        123, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), 
+        new Bank("Chase"));
   }
 
   /**
@@ -63,9 +63,75 @@ public class CreditCardTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testCreditCardInvalidCardNumber() {
-    final CreditCard bad_param_card = new CreditCard(1234L, new GregorianCalendar(2015, 1, 15),
-        123, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), 
-        new Bank("Chase"));
+    final CreditCard bad_param_card = new CreditCard(1234L,
+        new GregorianCalendar(2015, 1, 15), 123, "John Smith", new Address(
+            "123 Main Street", 0, "Tacoma", "WA", 98501, null), 
+            new Bank("Chase"));
+  }
+
+  /**
+   * Test method for
+   * {@link bidding.CreditCard#CreditCard(long, int, int, java.lang.String, bidding.Address
+   * , java.lang.String)}
+   * .
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testCreditCardExpirationDateNull() {
+    final CreditCard bad_param_card = new CreditCard(1234123412341234L, null,
+        123, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA",
+            98501, null), new Bank("Chase"));
+  }
+
+  /**
+   * Test method for
+   * {@link bidding.CreditCard#CreditCard(long, int, int, java.lang.String, bidding.Address,
+   *  java.lang.String)}
+   * .
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testCreditCardExpiredCard() {
+    final CreditCard bad_param_card = new CreditCard(1234123412341234L,
+        new GregorianCalendar(2012, 1, 15), 123, "John Smith", new Address(
+            "123 Main Street", 0, "Tacoma", "WA", 98501, null), new Bank("Chase"));
+  }
+
+  /**
+   * Test method for
+   * {@link bidding.CreditCard#CreditCard(long, int, int, java.lang.String, bidding.Address,
+   *  java.lang.String)}
+   * .
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testCreditCardInvalidCSC() {
+    final CreditCard bad_param_card = new CreditCard(1234123412341234L,
+        new GregorianCalendar(2015, 1, 15), 5, "John Smith", new Address(
+            "123 Main Street", 0, "Tacoma", "WA", 98501, null), new Bank("Chase"));
+  }
+
+  /**
+   * Test method for
+   * {@link bidding.CreditCard#CreditCard(long, int, int, java.lang.String, bidding.Address,
+   *  java.lang.String)}
+   * .
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testCreditCardNoCardHolderName() {
+    final CreditCard bad_param_card = new CreditCard(1234123412341234L,
+        new GregorianCalendar(2015, 1, 15), 123, "", new Address(
+            "123 Main Street", 0, "Tacoma", "WA", 98501, null), new Bank("Chase"));
+  }
+
+  /**
+   * Test method for
+   * {@link bidding.CreditCard#CreditCard(long, int, int, java.lang.String, bidding.Address,
+   *  java.lang.String)}
+   * .
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testCreditCardNullAddress() {
+    final CreditCard bad_param_card = new CreditCard(1234123412341234L,
+        new GregorianCalendar(2015, 1, 15), 123, "John Smith", null, new Bank(
+            "Chase"));
   }
 
   /**
@@ -75,84 +141,19 @@ public class CreditCardTest {
    * .
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testCreditCardExpirationDateNull() {
-    final CreditCard bad_param_card = new CreditCard(1234123412341234L, null, 123,
-        "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), 
-        new Bank("Chase"));
-  }
-  
-  /**
-   * Test method for
-   * {@link bidding.CreditCard#CreditCard(long, int, int, java.lang.String, bidding.Address, 
-   * java.lang.String)}
-   * .
-   */
-  @Test(expected = IllegalArgumentException.class)
-  public void testCreditCardExpiredCard() {
-    final CreditCard bad_param_card = new CreditCard(1234123412341234L, new GregorianCalendar(2012, 1, 15),
-        123, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), 
-        new Bank("Chase"));
-  }
-  
-  /**
-   * Test method for
-   * {@link bidding.CreditCard#CreditCard(long, int, int, java.lang.String, bidding.Address, 
-   * java.lang.String)}
-   * .
-   */
-  @Test(expected = IllegalArgumentException.class)
-  public void testCreditCardInvalidCSC() {
-    final CreditCard bad_param_card = new CreditCard(1234123412341234L, new GregorianCalendar(2015, 1, 15),
-        5, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), 
-        new Bank("Chase"));
-  }
-  
-  /**
-   * Test method for
-   * {@link bidding.CreditCard#CreditCard(long, int, int, java.lang.String, bidding.Address, 
-   * java.lang.String)}
-   * .
-   */
-  @Test(expected = IllegalArgumentException.class)
-  public void testCreditCardNoCardHolderName() {
-    final CreditCard bad_param_card = new CreditCard(1234123412341234L, new GregorianCalendar(2015, 1, 15),
-        123, "", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), 
-        new Bank("Chase"));
-  }
-  
-  /**
-   * Test method for
-   * {@link bidding.CreditCard#CreditCard(long, int, int, java.lang.String, bidding.Address, 
-   * java.lang.String)}
-   * .
-   */
-  @Test(expected = IllegalArgumentException.class)
-  public void testCreditCardNullAddress() {
-    final CreditCard bad_param_card = new CreditCard(1234123412341234L, new GregorianCalendar(2015, 1, 15),
-        123, "John Smith", null, 
-        new Bank("Chase"));
-  }
-  
-  /**
-   * Test method for
-   * {@link bidding.CreditCard#CreditCard(long, int, int, java.lang.String, bidding.Address, 
-   * java.lang.String)}
-   * .
-   */
-  @Test(expected = IllegalArgumentException.class)
   public void testCreditCardNullBank() {
-    final CreditCard bad_param_card = new CreditCard(1234123412341234L, new GregorianCalendar(2015, 1, 15),
-        123, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), 
-        null);
+    final CreditCard bad_param_card = new CreditCard(1234123412341234L,
+        new GregorianCalendar(2015, 1, 15), 123, "John Smith", new Address(
+            "123 Main Street", 0, "Tacoma", "WA", 98501, null), null);
   }
-  
+
   /**
    * Test method for {@link bidding.CreditCard#equals(java.lang.Object)}.
    */
   @Test
   public void testEqualsObject() {
     // Object should equal itself
-    assertTrue("Fail equals itself", card_1.equals(card_1) 
+    assertTrue("Fail equals itself", card_1.equals(card_1)
         && card_1.hashCode() == card_1.hashCode());
 
     // Object should equal an identical object with same field values
@@ -220,8 +221,9 @@ public class CreditCardTest {
         + LINE_SEPARATOR + "Address:" + LINE_SEPARATOR + "123 Main Street"
         + LINE_SEPARATOR + "Tacoma WA 98501" + LINE_SEPARATOR + LINE_SEPARATOR
         + "Bank: Chase";
-    
-    assertTrue("toString not equal", card_1.toString().equals(test_credit_card_string));
+
+    assertTrue("toString not equal",
+        card_1.toString().equals(test_credit_card_string));
   }
 
 }

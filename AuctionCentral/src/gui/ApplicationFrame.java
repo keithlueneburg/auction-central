@@ -4,7 +4,6 @@ import auction.Auction;
 import auction.Item;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
