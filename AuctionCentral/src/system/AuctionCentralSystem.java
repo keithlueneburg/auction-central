@@ -121,6 +121,7 @@ public class AuctionCentralSystem {
       return error_message;
     } else if (!(my_current_user instanceof NonProfitUser)) {
       error_message = "current user is not a non-profit user!"; // not right user
+      return error_message;
     }
     
     refreshAuction();
