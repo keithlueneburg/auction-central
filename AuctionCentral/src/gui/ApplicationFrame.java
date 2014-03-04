@@ -137,7 +137,7 @@ public final class ApplicationFrame extends JFrame {
    * Display an auction list panel in the content area.
    */
   public void showAuctionList() {
-    replaceContentPanel(new AuctionListPanel());
+    replaceContentPanel(new AuctionListPanel(this, my_system.getAuctionList()));
   }
 
   /**

@@ -99,6 +99,10 @@ public class Auction {
   public String getComments() {
     return my_comments;
   }
+  
+  public int getItemCount() {
+    return my_auction_items.size();
+  }
 
   // METHODS
   boolean addItem(final Item the_item) {
