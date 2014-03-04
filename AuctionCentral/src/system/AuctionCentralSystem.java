@@ -1,50 +1,95 @@
 package system;
 
+import auction.Auction;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import auction.Auction;
+
+
 import user.AbstractUser;
 import user.NonProfitUser;
 
+/**
+ * This class is the core system of the Auction Central System.
+ * @author Kaiyuan Shi
+ * @version Win. 2014
+ */
 public class AuctionCentralSystem {
-  private List<AbstractUser> myUsers;
-  private AbstractUser myCurrentUser;
-  private List<Auction> myAuction;
+  
+  /**
+   * The list of users in the system.
+   */
+  private List<AbstractUser> my_users;
+  
+  /**
+   * The current user who use the system.
+   */
+  private AbstractUser my_current_user;
+  
+  /**
+   * A list of current user in the system.
+   */
+  private List<Auction> my_auction;
+  
+  /**
+   * The constructor, initialized the system.
+   * in check-in5 manually set the current user is a non-profit user
+   */
+  public AuctionCentralSystem() {
+    my_current_user = new NonProfitUser("username", "password", "Tom", "Smith", "non-profit");
+    my_auction = new ArrayList<Auction>();
+  }
+  
+  /**
+   * This method get the List of the current Auction.
+   * @return a list of the current Auction
+   * <dt><b>Postconditions:</b><dd>
+   * All of the past auction would be removed.
+   */
+  public List<Auction> getAuctionList() {
+    refreshAuction();
+    return my_auction;
+  }
    
   /**
-   * This method add a new Auction to the auction list
-   * @param anAuction the new auction would be added to the list
+   * This method add a new Auction to the auction list.
+   * @param an_auction the new auction would be added to the list
    * @return true if the new auction was successfully added, else false
    */
-  public boolean addAuction(Auction anAuction) {
-    boolean isSuccess = true;
+  public String addAuction(final Auction an_auction) {
+    String error_message = null;
     
-    if (anAuction == null) {
-      isSuccess = false;
-      return isSuccess;
-    } else if(!(myCurrentUser instanceof NonProfitUser)) {
-      isSuccess = false; // not right user
+    if (an_auction == null) {
+      error_message = "input Auction is null!";
+      return error_message;
+    } else if (!(my_current_user instanceof NonProfitUser)) {
+      error_message = "current user is not a non-profit user!"; // not right user
     }
     
     refreshAuction();
     
     //Test Business Rule #1, 2, 3, 4
-    AuctionDateTester tester = new AuctionDateTester(anAuction, myAuction);
-    isSuccess = tester.getSolution();
+    error_message = AuctionDateTester.getSolution(an_auction, my_auction);
     
     //Test Business Rule #5
-    if (((NonProfitUser) myCurrentUser).getAuction().getAuctionDate().get(Calendar.YEAR) ==
-        anAuction.getAuctionDate().get(Calendar.YEAR)) {
-      isSuccess = false;//two auction in same year
+    final List<Auction> current_user_list = ((NonProfitUser) my_current_user).getAuction();
+    for (Auction each: current_user_list) {
+      if (each.getAuctionDate().get(Calendar.YEAR)
+          == an_auction.getAuctionDate().get(Calendar.YEAR)) {
+        error_message = "No more than one auction per year"
+            + " per Non-profit organization can be scheduled"; //two auction in same year
+      }
     }
     
-    if (isSuccess) {
-      myAuction.add(anAuction);
+    if (error_message == null) {
+      my_auction.add(an_auction);
+      ((NonProfitUser) my_current_user).getAuction().add(an_auction);
     }
     
     
-    return isSuccess;
+    return error_message;
   }
   
   /**
@@ -52,23 +97,22 @@ public class AuctionCentralSystem {
    * <dt><b>Postconditions:</b><dd>
    * All Auctions in the list are in the future
    */
-  private void refreshAuction()
-  {
-    Calendar today = Calendar.getInstance();
-    int todayYear = today.get(Calendar.YEAR);
-    int todayMonth = today.get(Calendar.MONTH) + 1;
-    int todayDay = today.get(Calendar.DATE);
+  private void refreshAuction() {
+    final Calendar today = Calendar.getInstance();
+    final int today_year = today.get(Calendar.YEAR);
+    final int today_month = today.get(Calendar.MONTH) + 1;
+    final int today_day = today.get(Calendar.DATE);
     
-    for (Auction each: myAuction) {
-      Calendar auctionDate = each.getAuctionDate();
-      int auctionYear = auctionDate.get(Calendar.YEAR);
-      int auctionMonth = auctionDate.get(Calendar.MONTH) + 1;
-      int auctionDay = auctionDate.get(Calendar.DATE);
+    for (Auction each: my_auction) {
+      final Calendar auction_date = each.getAuctionDate();
+      final int auction_year = auction_date.get(Calendar.YEAR);
+      final int auction_month = auction_date.get(Calendar.MONTH) + 1;
+      final int auction_day = auction_date.get(Calendar.DATE);
       
-      if (today.compareTo(auctionDate) > 0 || //if the auction is past
-          (todayYear == auctionYear && todayMonth == auctionMonth
-          && todayDay == auctionDay)) { // if the auction is on today
-        myAuction.remove(each); //remove the past auction
+      if (today.compareTo(auction_date) > 0 || //if the auction is past
+          (today_year == auction_year && today_month == auction_month
+          && today_day == auction_day)) { // if the auction is on today
+        my_auction.remove(each); //remove the past auction
       }
     }
   }
