@@ -4,7 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -92,13 +95,19 @@ public class MenuPanel extends JPanel {
    */
   private JButton my_calendar_button;
 
+  private ApplicationFrame my_application_frame;
+
+  private JButton my_exit_button;
+
   /**
    * Instantiate a new menu panel object.
    * 
    * @param a_user
    *          The user type that is logged in to the program.
+   * @param an_application_frame 
    */
-  public MenuPanel(final User a_user) {
+  public MenuPanel(final User a_user, final ApplicationFrame an_application_frame) {
+    my_application_frame = an_application_frame;
     setup(a_user);
     setButtonVisibility(a_user);
   }
@@ -138,20 +147,52 @@ public class MenuPanel extends JPanel {
     //button_panel.setLayout(new BoxLayout(button_panel, BoxLayout.Y_AXIS));
     button_panel.setLayout(new GridLayout(MAX_BUTTON_SLOTS, 1));
     
-    my_auctions_button = new JButton("Auctions");
-    //my_auctions_button.setAlignmentX(Component.CENTER_ALIGNMENT);
-    //my_auctions_button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));    
+    createAuctionsButton();
+    createCalendarButton();
+    createExitButton();
     
-    my_calendar_button = new JButton("Calendar");
     //my_calendar_button.setAlignmentX(Component.CENTER_ALIGNMENT);
     //my_calendar_button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));        
     
     button_panel.add(my_calendar_button);
     button_panel.add(my_auctions_button);
     button_panel.add(new JPanel());
-    button_panel.add(new JButton("Logout"));
+    button_panel.add(my_exit_button);
     
     return button_panel;
+  }
+
+  private void createExitButton() {
+    my_exit_button = new JButton(new AbstractAction("Exit") {
+      @Override
+      public void actionPerformed(final ActionEvent the_event) {
+        my_application_frame.dispose();
+      }
+    });
+  }
+
+  /**
+   * 
+   */
+  private void createAuctionsButton() {
+    my_auctions_button = new JButton(new AbstractAction("Auctions") {
+      @Override
+      public void actionPerformed(final ActionEvent the_event) {
+        my_application_frame.showAuctionList();
+      }
+    });
+  }
+  
+  /**
+   * 
+   */
+  private void createCalendarButton() {
+    my_calendar_button = new JButton(new AbstractAction("Calendar") {
+      @Override
+      public void actionPerformed(final ActionEvent the_event) {
+        my_application_frame.showCalender();
+      }
+    });
   }
 
   /**

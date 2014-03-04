@@ -67,7 +67,7 @@ public final class ApplicationFrame extends JFrame {
   public ApplicationFrame(final User a_user) {
     super("Auction Central");
     my_content_panel = new JPanel();
-    my_menu_panel = new MenuPanel(a_user);
+    my_menu_panel = new MenuPanel(a_user, this);
 
     setup();
   }
