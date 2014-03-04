@@ -16,7 +16,7 @@ final class AuctionDateTester {
   /**
    * The solution of the tester.
    */
-  private static String my_solution = "";
+  private static String my_error_message = "";
   
   /**
    * The list of the current Auction list.
@@ -34,8 +34,8 @@ final class AuctionDateTester {
    * This method get the solution of the test.
    * @param an_auction the new auction would be added
    * @param an_auction_list the current auction list
-   * @return the solution of the test, true if the new Auction can be added,
-   *  false if the new Auction can not be added
+   * @return the solution of the test, null if the new Auction can be added,
+   *  error message if the new Auction can not be added
    */
   public static String getSolution(final Auction an_auction,
       final List<Auction> an_auction_list) {
@@ -47,35 +47,35 @@ final class AuctionDateTester {
     //business rule #1
     if (my_auction.size() > 25) { //no more than 25 auctions
       //too much auction
-      my_solution = "No more than 25 auctions may be schedule into the future!";
+      my_error_message = "No more than 25 auctions may be schedule into the future!";
     }  else if (today.compareTo(auction_date) > 0
         || (today.get(Calendar.YEAR) == auction_date.get(Calendar.YEAR)
         && today.get(Calendar.DAY_OF_YEAR) == auction_date.get(Calendar.DAY_OF_YEAR))) {
       //auction date is before today or is today
-      my_solution = "you can only schedule Auction in the future!";
+      my_error_message = "you can only schedule Auction in the future!";
     } else if (!testIn3Month(today, auction_date)) {
       //business rule #2
       //true if in 3 month
       //false if out of than 3 month
-      my_solution = "An auction may not be scheduled more"
+      my_error_message = "An auction may not be scheduled more"
           + " than 3 months from the current date!";
     } else if (test7DayFull(an_auction)) {
       //business rule #3
       //true if 7 day is full
       //false if 7 day is available
-      my_solution = "No more than 5 auctions may be"
+      my_error_message = "No more than 5 auctions may be"
           + " scheduled for any 7 day period!";
     } else if (test1DayFull(an_auction)) {
       //business rule #4
       //true if same day is full
       //false if same day is available
-      my_solution = "No more than 2 auctions can be scheduled"
+      my_error_message = "No more than 2 auctions can be scheduled"
           + " on the same day, and the start time of the second"
           + " can be no earlier than 2 hours after the end time"
           + " of the first!";
     }
     
-    return my_solution;
+    return my_error_message;
   }
   
   /**

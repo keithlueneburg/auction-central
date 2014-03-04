@@ -56,7 +56,7 @@ public class AuctionCentralSystem {
   /**
    * This method add a new Auction to the auction list.
    * @param an_auction the new auction would be added to the list
-   * @return true if the new auction was successfully added, else false
+   * @return null if the new auction was successfully added, else the error message
    */
   public String addAuction(final Auction an_auction) {
     String error_message = null;
