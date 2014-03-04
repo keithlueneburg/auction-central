@@ -7,7 +7,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -64,17 +63,6 @@ public class MenuPanel extends JPanel {
    */
   private static final String LOGO_IMAGE_PATH = "images/logo.gif";
 
-  //TODO: Remove button size constant if not used.
-  /**
-   * Default button width.
-   */
-  private static final int BUTTON_WIDTH = 300;
-
-  /**
-   * Default button height.
-   */
-  private static final int BUTTON_HEIGHT = 45;
-
   /**
    * Height of the button panel.
    */
@@ -95,9 +83,15 @@ public class MenuPanel extends JPanel {
    */
   private JButton my_calendar_button;
 
-  private ApplicationFrame my_application_frame;
-
+  /**
+   * Button for exiting program.
+   */
   private JButton my_exit_button;
+  
+  /**
+   * The parent container of this panel.
+   */
+  private ApplicationFrame my_application_frame;
 
   /**
    * Instantiate a new menu panel object.
@@ -144,15 +138,11 @@ public class MenuPanel extends JPanel {
     
     final JPanel button_panel = new JPanel();
     button_panel.setPreferredSize(new Dimension(DEFAULT_WIDTH, BUTTON_PANEL_HEIGHT));
-    //button_panel.setLayout(new BoxLayout(button_panel, BoxLayout.Y_AXIS));
     button_panel.setLayout(new GridLayout(MAX_BUTTON_SLOTS, 1));
     
     createAuctionsButton();
     createCalendarButton();
     createExitButton();
-    
-    //my_calendar_button.setAlignmentX(Component.CENTER_ALIGNMENT);
-    //my_calendar_button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));        
     
     button_panel.add(my_calendar_button);
     button_panel.add(my_auctions_button);
@@ -162,6 +152,10 @@ public class MenuPanel extends JPanel {
     return button_panel;
   }
 
+  /**
+   * Initializes the exit button. 
+   */
+  @SuppressWarnings("serial")
   private void createExitButton() {
     my_exit_button = new JButton(new AbstractAction("Exit") {
       @Override
@@ -172,8 +166,9 @@ public class MenuPanel extends JPanel {
   }
 
   /**
-   * 
+   * Initializes the auctions button.
    */
+  @SuppressWarnings("serial")
   private void createAuctionsButton() {
     my_auctions_button = new JButton(new AbstractAction("Auctions") {
       @Override
@@ -184,8 +179,9 @@ public class MenuPanel extends JPanel {
   }
   
   /**
-   * 
+   * Initializes calender button.
    */
+  @SuppressWarnings("serial")
   private void createCalendarButton() {
     my_calendar_button = new JButton(new AbstractAction("Calendar") {
       @Override

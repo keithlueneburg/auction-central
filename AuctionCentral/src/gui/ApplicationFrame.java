@@ -4,6 +4,7 @@ import auction.Auction;
 import auction.Item;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -34,17 +35,20 @@ public final class ApplicationFrame extends JFrame {
    */
   private static final long serialVersionUID = -716727811602146864L;
 
-
   /**
-   * Default witdth of the program frame. 
+   * Default witdth of the program frame.
    */
   private static final int DEFAULT_FRAME_WIDTH = 1024;
 
-  
   /**
-   * Default height of the program frame. 
+   * Default height of the program frame.
    */
   private static final int DEFAULT_FRAME_HEIGHT = 680;
+
+  /**
+   * Default witdth of the content panel.
+   */
+  private static final int DEFAULT_CONTENT_PANEL_WIDTH = 824;
 
   /**
    * The panel used for displaying different views (Auction, item, inventory
@@ -78,17 +82,11 @@ public final class ApplicationFrame extends JFrame {
   private void setup() {
     setSize(DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
     setResizable(false);
-    
-    setLocationByPlatform(true);
-    
-    //my_menu_panel.setBackground(Color.GRAY);
-    
 
-    // TODO: Possibly remove this default color..
-    //my_content_panel.setBackground(Color.LIGHT_GRAY);
+    setLocationByPlatform(true);
 
     add(my_menu_panel, BorderLayout.WEST);
-    add(my_content_panel, BorderLayout.CENTER);
+    replaceContentPanel(my_content_panel);
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
@@ -103,10 +101,19 @@ public final class ApplicationFrame extends JFrame {
   /**
    * Display the provided JPanel in the content area.
    * 
-   * @param a_panel The panel to display in the content area.
+   * @param a_panel
+   *          The panel to display in the content area.
    */
   public void replaceContentPanel(final JPanel a_panel) {
+    remove(my_content_panel);
+    
     my_content_panel = a_panel;
+    
+    my_content_panel.setPreferredSize(new Dimension(DEFAULT_CONTENT_PANEL_WIDTH,
+        DEFAULT_FRAME_HEIGHT));
+    add(my_content_panel, BorderLayout.CENTER);
+    pack();
+    repaint();
   }
 
   /**
@@ -115,11 +122,12 @@ public final class ApplicationFrame extends JFrame {
   public void showAuctionList() {
     replaceContentPanel(new AuctionListPanel());
   }
-  
+
   /**
    * Display an auction info panel in the content area, for the given auction.
    * 
-   * @param an_auction The auction to display the auction info panel for.
+   * @param an_auction
+   *          The auction to display the auction info panel for.
    */
   public void showAuctionInfo(final Auction an_auction) {
     replaceContentPanel(new AuctionPanel(an_auction));
@@ -128,7 +136,8 @@ public final class ApplicationFrame extends JFrame {
   /**
    * Display an inventory info panel in the content area, for the given auction.
    * 
-   * @param an_auction The auction to display the inventory for.
+   * @param an_auction
+   *          The auction to display the inventory for.
    */
   public void showInventory(final Auction an_auction) {
     replaceContentPanel(new InventoryPanel(an_auction));
@@ -137,7 +146,8 @@ public final class ApplicationFrame extends JFrame {
   /**
    * Display an item info panel in the content area, for the given item.
    * 
-   * @param an_item The item to display the info for.
+   * @param an_item
+   *          The item to display the info for.
    */
   public void showItem(final Item an_item) {
     replaceContentPanel(new ItemPanel(an_item));
