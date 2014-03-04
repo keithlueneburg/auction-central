@@ -8,6 +8,7 @@ import java.util.List;
 
 
 
+
 import user.AbstractUser;
 import user.NonProfitUser;
 
@@ -38,8 +39,36 @@ public class AuctionCentralSystem {
    * in check-in5 manually set the current user is a non-profit user
    */
   public AuctionCentralSystem() {
-    my_current_user = new NonProfitUser("username", "password", "Tom", "Smith", "non-profit");
+    
     my_auction = new ArrayList<Auction>();
+    my_users = new ArrayList<AbstractUser>();
+    
+    //*****************************
+    //for demo and test
+    final List<Calendar> demo_calendar = new ArrayList<Calendar>();
+    for (int i = 0; i < 15; i++) {
+      
+      //add 15 non-profit users
+      my_users.add(new NonProfitUser("username" + i, "password" + i, "first name" + i,
+          "last name" + i, "non-profit" + i));
+      
+      //add 15 auctions form 2014-4-1, 3, 5, 7, 9......29
+      //from 9:00 everyday, duration 2 hours
+      final Calendar current = Calendar.getInstance();
+      current.set(2014, 3, 1 + (i * 2), 9, 0);
+      demo_calendar.add(current);
+      
+      final Auction demo_auction = new Auction("auction name" + i, "contact person" + i,
+          "phone number" + i, "intake person" + i, demo_calendar.get(i), 2, "comments" + i);
+      
+      my_auction.add(demo_auction);
+    }
+    
+    my_current_user = my_users.get(1);
+    //for demo and test
+    //*****************************
+    
+    
   }
   
   /**
