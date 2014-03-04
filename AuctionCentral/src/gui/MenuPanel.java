@@ -247,7 +247,4 @@ public class MenuPanel extends JPanel {
       my_calendar_button.setVisible(false);
     }
   }
-
-  
-
 }

@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import system.AuctionCentralSystem;
 import user.User;
 
 /**
@@ -29,7 +30,7 @@ import user.User;
  * @version 3/2/2014
  */
 public final class ApplicationFrame extends JFrame {
-
+  
   /**
    * Required for extended Serializable class JFrame.
    */
@@ -51,6 +52,11 @@ public final class ApplicationFrame extends JFrame {
   private static final int DEFAULT_CONTENT_PANEL_WIDTH = 824;
 
   /**
+   * Back end system for the program.
+   */
+  private final AuctionCentralSystem my_system;
+
+  /**
    * The panel used for displaying different views (Auction, item, inventory
    * info).
    */
@@ -70,6 +76,8 @@ public final class ApplicationFrame extends JFrame {
    */
   public ApplicationFrame(final User a_user) {
     super("Auction Central");
+    my_system = new AuctionCentralSystem();
+    
     my_content_panel = new JPanel();
     my_menu_panel = new MenuPanel(a_user, this);
 
@@ -98,6 +106,15 @@ public final class ApplicationFrame extends JFrame {
     setVisible(true);
   }
 
+  /**
+   * Get the back end AuctionCentralSystem.
+   * 
+   * @return The back end system.
+   */
+  public AuctionCentralSystem getSystem() {
+    return my_system;
+  }
+  
   /**
    * Display the provided JPanel in the content area.
    * 
