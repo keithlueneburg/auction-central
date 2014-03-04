@@ -58,6 +58,14 @@ public class NonProfitUser extends AbstractUser {
   }
   
   /**
+   * This method add a new auction to this non-profit user.
+   * @param an_auction a new auction
+   */
+  public void addAuction(final Auction an_auction) {
+    my_auction.add(an_auction);
+  }
+  
+  /**
    * This method refresh the auction list, remove all the auctions before or on today.
    * <dt><b>Postconditions:</b><dd>
    * All Auctions in the list are in the future
