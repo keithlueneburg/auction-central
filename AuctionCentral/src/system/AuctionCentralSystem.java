@@ -43,7 +43,7 @@ public class AuctionCentralSystem {
     my_auction = new ArrayList<Auction>();
     my_users = new ArrayList<AbstractUser>();
     
-    //*****************************
+    //*************************************
     //for demo and test
     final List<Calendar> demo_calendar = new ArrayList<Calendar>();
     for (int i = 0; i < 15; i++) {
@@ -66,7 +66,7 @@ public class AuctionCentralSystem {
     
     my_current_user = my_users.get(1);
     //for demo and test
-    //*****************************
+    //************************************
     
     
   }
