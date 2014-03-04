@@ -16,7 +16,7 @@ final class AuctionDateTester {
   /**
    * The solution of the tester.
    */
-  private static String my_error_message = "";
+  private static String my_error_message = null;
   
   /**
    * The list of the current Auction list.

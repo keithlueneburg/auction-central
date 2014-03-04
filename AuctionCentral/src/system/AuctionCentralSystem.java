@@ -81,6 +81,14 @@ public class AuctionCentralSystem {
     refreshAuction();
     return my_auction;
   }
+  
+  /**
+   * This method returns the current user.
+   * @return the current user
+   */
+  public AbstractUser getCurrentUser() {
+    return my_current_user;
+  }
    
   /**
    * This method add a new Auction to the auction list.
@@ -146,5 +154,11 @@ public class AuctionCentralSystem {
     }
   }
   
+  /**
+   * Just for my Junit test, DO NOT USE!!!
+   */
+  public void setUser(final int an_index) {
+    my_current_user = my_users.get(an_index);
+  }
   
 }
