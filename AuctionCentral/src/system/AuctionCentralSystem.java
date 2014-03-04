@@ -62,6 +62,8 @@ public class AuctionCentralSystem {
       my_auction.add(demo_auction);
     }
     
+    //add 8 auctions form 2014-5-1, 3, 5, 7, 9......17
+    //from 9:00 everyday, duration 2 hours
     for (int i = 0; i < 8; i++) {
       final Calendar current = Calendar.getInstance();
       current.set(2014, 4, 1 + (i * 2), 9, 0);
@@ -71,12 +73,13 @@ public class AuctionCentralSystem {
       my_auction.add(demo_auction);
     }
     
+    //add last auction on 2014-4-30 used to test BR #3
     final Calendar current_4_30 = Calendar.getInstance();
     current_4_30.set(2014, 3, 30, 9, 0);
     final Auction demo_auction_4_30 = new Auction("auction name 4/30", "contact person4/30",
         "phone number 4/30", "intake person 4/30", current_4_30, 2, "comments 4/30");
     my_auction.add(demo_auction_4_30);
-    
+    //add one auction on the last user used to test BR #5
     ((NonProfitUser) my_users.get(14)).getAuction().add(demo_auction_4_30);
     
     my_current_user = my_users.get(0);
