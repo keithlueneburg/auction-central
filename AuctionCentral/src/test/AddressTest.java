@@ -2,9 +2,10 @@ package test;
 
 import static org.junit.Assert.*;
 
+import bidding.Address;
+
 import org.junit.Test;
 
-import bidding.Address;
 
 /**
  * Class: AddressTest
@@ -18,44 +19,44 @@ import bidding.Address;
  * Winter 2014
  * 
  * Instructor: Dr. Adwoa Donyina
- * 
+ * @version 1.0
  * @author Casey Morrison
  */
 public class AddressTest {
 
   /** First address. */
-  private Address one = new Address("123", 1, "k", "p", 123, null);
+  private Address my_one = new Address("123", 1, "k", "p", 123, null);
 
   /** Second address. */
-  private Address two = new Address("123", 1, "k", "p", 123, null);
+  private Address my_two = new Address("123", 1, "k", "p", 123, null);
 
   /** Third address. */
-  private Address three = new Address("1234", 2, "p", "k", 22, null);
+  private Address my_three = new Address("1234", 2, "p", "k", 22, null);
 
-  @Test
   /**
    * A class is equal to itself.
    */
+  @Test
   public void testEqualToSelf() {
 
-    assertTrue("Class equal to itself.", one.equals(one));
+    assertTrue("Class equal to itself.", my_one.equals(my_one));
   }
 
   /**
-   * one.equals(WrongType) must return false;
+   * one.equals(WrongType) must return false.
    */
   @Test
   public void testPassIncompatibleType() {
     assertFalse("Passing incompatible object to equals should return false",
-        one.equals("string"));
+        my_one.equals("string"));
   }
 
   /**
-   * one.equals(null) must return false;
+   * one.equals(null) must return false.
    */
   @Test
   public void testNullReference() {
-    assertFalse("Passing null to equals should return false", one.equals(null));
+    assertFalse("Passing null to equals should return false", my_one.equals(null));
   }
 
   /**
@@ -63,8 +64,8 @@ public class AddressTest {
    */
   @Test
   public void testEquals() {
-    assertTrue("Not the same.", one.equals(two));
-    assertTrue("Not the same.", two.equals(one));
+    assertTrue("Not the same.", my_one.equals(my_two));
+    assertTrue("Not the same.", my_two.equals(my_one));
   }
 
   /**
@@ -72,7 +73,7 @@ public class AddressTest {
    */
   @Test
   public void testDifferent() {
-    assertFalse("Should not be the same.", one.equals(three));
-    assertFalse("Should not be the same.", two.equals(three));
+    assertFalse("Should not be the same.", my_one.equals(my_three));
+    assertFalse("Should not be the same.", my_two.equals(my_three));
   }
 }

@@ -25,11 +25,14 @@ public final class Address {
    */
   private static final String LINE_SEPARATOR = "\n";
   
+  /** Empty space for adding in a string. */
+  private static final String LINE_SPACE = " ";
+  
   /** The Street number. */
   private String my_street;
 
   /** The Apartment number. */
-  private int my_apt = 0;
+  private int my_apt;
 
   /** The City name. */
   private String my_city;
@@ -45,17 +48,21 @@ public final class Address {
   private List<String> my_state_list;
 
   /**
-   * @param a_street
-   * @param an_apt
-   * @param a_city
-   * @param a_state
-   * @param a_zip
-   * @param a_state_list
+   * @param a_street - the street.
+   * @param an_apt - the apt number.
+   * @param a_city - the city.
+   * @param a_state - the state.
+   * @param a_zip - the zipcode.
+   * @param a_state_list - the list of states.
    */
   public Address(final String a_street, final int an_apt, final String a_city, 
       final String a_state, final int a_zip, final List<String> a_state_list) {
     my_street = a_street;
-    my_apt = an_apt;
+    if (an_apt != 0) {
+      my_apt = an_apt;
+    } else {
+      my_apt = 0;
+    }
     my_city = a_city;
     my_state = a_state;
     my_zip = a_zip;
@@ -192,6 +199,23 @@ public final class Address {
     }
     return is_equal;
   }
+  
+  /**
+   * Hash code for address.
+   * <p>
+   * <dt><b> Precondition: Address has been initialized. </b>
+   * <dd>
+   * <dt><b> Postcondition: The Address has not been changed. </b>
+   * <dd>
+   * 
+   * @return the address's hash code
+   * 
+   * @author Casey Morrison
+   */
+  @Override
+  public int hashCode() {
+    return my_street.hashCode() + my_apt + my_city.hashCode();
+  }
 
   /**
    * Get a String representation of the Address.
@@ -210,9 +234,9 @@ public final class Address {
     sb.append("Address:\n");
     sb.append(my_street);
     if (my_apt > 0) {
-      sb.append(" " + my_apt);
+      sb.append(LINE_SPACE + my_apt);
     }
-    sb.append(LINE_SEPARATOR + my_city + " " + my_state + " ");
+    sb.append(LINE_SEPARATOR + my_city + LINE_SPACE + my_state + LINE_SPACE);
     sb.append(my_zip);
     sb.append(LINE_SEPARATOR);
 
