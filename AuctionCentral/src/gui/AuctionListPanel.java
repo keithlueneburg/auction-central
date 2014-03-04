@@ -86,7 +86,7 @@ public class AuctionListPanel extends JPanel {
       }
     });
     my_ButtonPanel.add(editButton);
-    my_ButtonPanel.add(new JButton("Create"));
+    my_ButtonPanel.add(createButton);
   }
   
   private class ListPanel extends JPanel {
