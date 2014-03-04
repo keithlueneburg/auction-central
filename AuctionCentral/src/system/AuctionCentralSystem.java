@@ -45,7 +45,6 @@ public class AuctionCentralSystem {
     
     //*************************************
     //for demo and test
-    final List<Calendar> demo_calendar = new ArrayList<Calendar>();
     for (int i = 0; i < 15; i++) {
       
       //add 15 non-profit users
@@ -56,15 +55,31 @@ public class AuctionCentralSystem {
       //from 9:00 everyday, duration 2 hours
       final Calendar current = Calendar.getInstance();
       current.set(2014, 3, 1 + (i * 2), 9, 0);
-      demo_calendar.add(current);
       
       final Auction demo_auction = new Auction("auction name" + i, "contact person" + i,
-          "phone number" + i, "intake person" + i, demo_calendar.get(i), 2, "comments" + i);
+          "phone number" + i, "intake person" + i, current, 2, "comments" + i);
       
       my_auction.add(demo_auction);
     }
     
-    my_current_user = my_users.get(1);
+    for (int i = 0; i < 8; i++) {
+      final Calendar current = Calendar.getInstance();
+      current.set(2014, 4, 1 + (i * 2), 9, 0);
+      final Auction demo_auction = new Auction("auction name" + i + 16,
+          "contact person" + i + 16, "phone number" + i + 16,
+          "intake person" + i + 16, current, 2, "comments" + i + 16);
+      my_auction.add(demo_auction);
+    }
+    
+    final Calendar current_4_30 = Calendar.getInstance();
+    current_4_30.set(2014, 3, 30, 9, 0);
+    final Auction demo_auction_4_30 = new Auction("auction name 4/30", "contact person4/30",
+        "phone number 4/30", "intake person 4/30", current_4_30, 2, "comments 4/30");
+    my_auction.add(demo_auction_4_30);
+    
+    ((NonProfitUser) my_users.get(14)).getAuction().add(demo_auction_4_30);
+    
+    my_current_user = my_users.get(0);
     //for demo and test
     //************************************
     

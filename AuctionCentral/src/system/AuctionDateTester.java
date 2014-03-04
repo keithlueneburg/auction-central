@@ -40,12 +40,13 @@ final class AuctionDateTester {
   public static String getSolution(final Auction an_auction,
       final List<Auction> an_auction_list) {
     my_auction = an_auction_list;
+    my_error_message = null;
     
     final Calendar today = Calendar.getInstance();
     final Calendar auction_date = an_auction.getAuctionDate();
     
     //business rule #1
-    if (my_auction.size() > 25) { //no more than 25 auctions
+    if (my_auction.size() >= 25) { //no more than 25 auctions
       //too much auction
       my_error_message = "No more than 25 auctions may be schedule into the future!";
     }  else if (today.compareTo(auction_date) > 0
