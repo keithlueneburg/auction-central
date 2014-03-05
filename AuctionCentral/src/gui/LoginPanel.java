@@ -14,7 +14,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
+/**
+ * Creates a login Panel
+ * 
+ * @author Josh Hammer
+ *
+ */
 public class LoginPanel extends JFrame{
 
 
@@ -24,7 +29,7 @@ public class LoginPanel extends JFrame{
 	/** The default width of the frame. */
 	private static final int DEFAULT_WIDTH = 824;
 
-	/** The default size for this JPanel. */
+	/** The default size for this JFrame. */
 	private static final Dimension DEFAULT_SIZE = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
 	/**
