@@ -486,8 +486,12 @@ public class AuctionPanel extends JPanel {
     my_auction.setAuctionDuration(i);    
     my_auction.setComments(my_auction_comments.getText().trim());
     
-    my_system.addAuction(my_auction);
-    my_app_frame.showAuctionList();
+    String is_success = my_system.addAuction(my_auction);
+    if (is_success == null) {
+      my_app_frame.showAuctionList();
+    } else {
+      
+    }
   }
   
   /**
