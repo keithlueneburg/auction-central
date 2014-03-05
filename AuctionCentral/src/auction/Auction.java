@@ -12,6 +12,7 @@ public class Auction {
 
   // Used only when adding/removing items
   private int my_next_item;
+  private int my_number;
 
   private String my_auction_name;
   private String my_contact_person;
@@ -30,6 +31,7 @@ public class Auction {
     my_next_item = 1;
     
     AUCTION_NUMBER++;
+    my_number = AUCTION_NUMBER;
 
     my_auction_name = the_auction_name;
     my_contact_person = the_contact_person;
@@ -81,6 +83,7 @@ public class Auction {
     return my_auction_name;
   }
   
+  
   /**
    * Returns the auction number.
    * Added to show which auction we are using.
@@ -90,7 +93,7 @@ public class Auction {
   public String getAuctionNumber() {
     StringBuilder sb = new StringBuilder();
     sb.append("");
-    sb.append(AUCTION_NUMBER);
+    sb.append(my_number);
     String strI = sb.toString();
     return strI;
   }

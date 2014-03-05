@@ -1,5 +1,7 @@
 package gui;
 
+import auction.Auction;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,15 +18,12 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import auction.Auction;
 
 
 /**
@@ -40,7 +39,7 @@ import auction.Auction;
  * @author Casey Morrison
  * @version 1.0 Winter 2014
  */
-public class AuctionPanel extends JPanel implements ActionListener {
+public class AuctionPanel extends JPanel {
   
   /**
    * Required for serializable class (extends JPanel).
@@ -136,10 +135,7 @@ public class AuctionPanel extends JPanel implements ActionListener {
   
   /** The text area used to go add comments. */
   private final JTextField my_text = new JTextField(20);
-  
-//  /** The text area used to go add comments. */
-//  private final JTextArea my_text_area = new JTextArea();
-  
+ 
   /**
    * A reference to the main application frame.
    */
@@ -151,24 +147,56 @@ public class AuctionPanel extends JPanel implements ActionListener {
   /** The label that shows the auction's number. */
   private final JLabel my_number;
   
+  /** The name of the auction. */
   private String my_name;
+  
+  /** The name of the contact. */
   private String my_contact_p;
+  
+  /** The contact phone number of the auction. */
   private String my_contact_num;
+  
+  /** The intake person of the auction. */
   private String my_intake;
+  
+  /** The date of the auction. */
   private Calendar my_date;
+  
+  /** The duration of the auction. */
   private int my_duration;
+  
+  /** The comment of the auction. */
   private String my_comment;
+  
+  /** The items of the auction. */
   private int my_items;
   
   //Fields for data entry
+  /** The name of the auction input. */
   private JFormattedTextField my_auction_name_input = new JFormattedTextField();
+  
+  /** The contact person input. */
   private JFormattedTextField my_contact_person_input = new JFormattedTextField();
+  
+  /** The contact phone input. */
   private JFormattedTextField my_contact_phone_input = new JFormattedTextField();
+  
+  /** The intake person input. */
   private JFormattedTextField my_intake_person_input = new JFormattedTextField();
+  
+  /** The date input. */
   private JFormattedTextField my_auction_date_input = new JFormattedTextField();
+  
+  /** The start time input. */
   private JFormattedTextField my_start_time_input = new JFormattedTextField();
+  
+  /** The duration input. */
   private JFormattedTextField my_duration_input = new JFormattedTextField();
+  
+  /** The current input. */
   private JFormattedTextField my_current_input = new JFormattedTextField();
+  
+  /** The anticipated input. */
   private JFormattedTextField my_anticipated_input = new JFormattedTextField();
   
   /**
@@ -187,7 +215,6 @@ public class AuctionPanel extends JPanel implements ActionListener {
     final String temp = the_auction.getAuctionNumber();
     my_number = new JLabel(temp);
     
-    
     createAuction();
     setupEditButton();
     setupSaveButton();
@@ -200,19 +227,26 @@ public class AuctionPanel extends JPanel implements ActionListener {
     allowEdits(false);
   }
   
-  private void allowEdits(final boolean my_edit_flag) {
-    my_auction_name_input.setEditable(my_edit_flag);
-    my_contact_person_input.setEditable(my_edit_flag);
-    my_contact_phone_input.setEditable(my_edit_flag);
-    my_intake_person_input.setEditable(my_edit_flag);
-    my_auction_date_input.setEditable(my_edit_flag);
-    my_start_time_input.setEditable(my_edit_flag);
-    my_duration_input.setEditable(my_edit_flag);
-    my_current_input.setEditable(my_edit_flag);
-    my_anticipated_input.setEditable(my_edit_flag);
+  /**
+   * Allows the inputs to be editable fields. 
+   * @param the_edit_flag - true if editable.
+   */
+  private void allowEdits(final boolean the_edit_flag) {
+    my_auction_name_input.setEditable(the_edit_flag);
+    my_contact_person_input.setEditable(the_edit_flag);
+    my_contact_phone_input.setEditable(the_edit_flag);
+    my_intake_person_input.setEditable(the_edit_flag);
+    my_auction_date_input.setEditable(the_edit_flag);
+    my_start_time_input.setEditable(the_edit_flag);
+    my_duration_input.setEditable(the_edit_flag);
+    my_current_input.setEditable(the_edit_flag);
+    my_anticipated_input.setEditable(the_edit_flag);
     
   }
 
+  /**
+   * Creates the auction used for editing.
+   */
   private void createAuction() {
     my_name = my_auction.getAuctionName();
     my_contact_p = my_auction.getContactPerson();
@@ -225,6 +259,9 @@ public class AuctionPanel extends JPanel implements ActionListener {
     initializeInput();
   }
   
+  /**
+   * Initializes the input entries.
+   */
   private void initializeInput() {
     my_auction_name_input.setText(my_name);
     my_contact_person_input.setText(my_contact_p);
@@ -314,6 +351,9 @@ public class AuctionPanel extends JPanel implements ActionListener {
     setBorder(titleborder);
   }
   
+  /**
+   * Sets up the input entries.
+   */
   private void setupInput() {
     //Tell accessibility tools about label/textfield pairs.
     my_auction_name.setLabelFor(my_auction_name_input);
@@ -325,33 +365,6 @@ public class AuctionPanel extends JPanel implements ActionListener {
     my_duration_time.setLabelFor(my_duration_input);
     my_current_items.setLabelFor(my_current_input);
     my_anticipated_items.setLabelFor(my_anticipated_input);
-    
-//    my_auction_name_input.setActionCommand(textFieldString);
-//    my_auction_name_input.addActionListener(this);
-//    
-//    my_contact_person_input.setActionCommand(textFieldString);
-//    my_contact_person_input.addActionListener(this);
-//    
-//    my_contact_phone_input.setActionCommand(textFieldString);
-//    my_contact_phone_input.addActionListener(this);
-//    
-//    my_intake_person_input.setActionCommand(textFieldString);
-//    my_intake_person_input.addActionListener(this);
-//  
-//    my_auction_date_input.setActionCommand(textFieldString);
-//    my_auction_date_input.addActionListener(this);
-//  
-//    my_duration_input.setActionCommand(textFieldString);
-//    my_duration_input.addActionListener(this);
-//    
-//    my_auction_date_input.setActionCommand(textFieldString);
-//    my_auction_date_input.addActionListener(this);
-//  
-//    my_current_input.setActionCommand(textFieldString);
-//    my_current_input.addActionListener(this);
-//  
-//    my_anticipated_input.setActionCommand(textFieldString);
-//    my_anticipated_input.addActionListener(this);
   }
   
   /**
@@ -453,51 +466,59 @@ public class AuctionPanel extends JPanel implements ActionListener {
 
   }
   
-  
+  /**
+   * Saves the new/edited auction.
+   * @return my_auction - the edited auction.
+   */
   private Auction saveAuction() {    // Return an auction    
     my_auction.setAuctionName(my_auction_name_input.getText().trim());
     my_auction.setContactPerson(my_contact_person_input.getText().trim());
     my_auction.setContactPhone(my_contact_phone_input.getText().trim());
     my_auction.setIntakePerson(my_intake_person_input.getText().trim());
-//    my_auction.setAuctionDate(my_auction_date_input.getText().trim());    // not sure how to convert string into calendar...
-//    my_auction.setAuctionDuration(my_duration_input.getText().trim());    // not sure how to convert an input string into an int...
+//    my_auction.setAuctionDate(my_auction_date_input.getText().trim());    
+//     //not sure how to convert string into calendar...
+//    my_auction.setAuctionDuration(my_duration_input.getText().trim());    
+//     //not sure how to convert an input string into an int...
     my_auction.setComments(my_auction_comments.getText().trim());
     
     return my_auction;
   }
   
-  private Boolean editInfo() {       // Return a Boolean
-    final Boolean test = false;
-      // finish
-    return test;
-  }
-  
+  /**
+   * Shows the inventory view.
+   */
   private void viewInventory() {  // Return a List<Items>
     
   }
   
+  /**
+   * Shows the auctions list.
+   */
   private void showAuctions() {
     
   }
   
+  /**
+   * Shows the item panel.
+   */
   private void showItemPanel() {
     
   }
   
+  /**
+   * Shows the user panel.
+   */
   private void showUserPanel() {
     
   }
   
+  /**
+   * Gets the auction info panel.
+   */
   private void getAuctionInfoPanel() {  // Takes an Auction as a parameter
     
   }
-
-  @Override
-  public void actionPerformed(final ActionEvent arg0) {
-    // TODO Auto-generated method stub
-    
-  }
-
+  
   
 }
 
