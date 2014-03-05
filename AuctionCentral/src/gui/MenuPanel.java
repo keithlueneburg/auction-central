@@ -175,8 +175,8 @@ public class MenuPanel extends JPanel {
     my_auctions_button = new JButton(new AbstractAction("Auctions") {
       @Override
       public void actionPerformed(final ActionEvent the_event) {
-        my_application_frame.showAuctionInfo(new Auction("a", "b", "c", "d", null, 1, "A")); // changed to info to test
-        //***************************************************************************
+        my_application_frame.showAuctionList();
+
       }
     });
   }
