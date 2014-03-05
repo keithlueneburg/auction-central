@@ -243,7 +243,8 @@ public class AuctionPanel extends JPanel implements ActionListener {
     my_edit_info.setToolTipText("Edit the Auction Data");
     my_edit_info.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent the_event) {
-        editInfo();
+        //editInfo();
+        allowEdits(true);
       }
     });
   }
