@@ -16,12 +16,12 @@
   <local-check-config name="TCSS 360" location="support_files/tcss305_checkstyle_sameline.xml" type="project" description="">
     <additional-data name="protect-config-file" value="false"/>
   </local-check-config>
-  <fileset name="all" enabled="true" check-config-name="TCSS 360" local="true">
-    <file-match-pattern match-pattern=".java" include-pattern="true"/>
-    <file-match-pattern match-pattern="Test.java" include-pattern="false"/>
-  </fileset>
   <fileset name="test" enabled="true" check-config-name="TCSS 360 test" local="true">
     <file-match-pattern match-pattern="." include-pattern="false"/>
     <file-match-pattern match-pattern="Test.java" include-pattern="true"/>
+  </fileset>
+  <fileset name="all" enabled="true" check-config-name="TCSS 360" local="true">
+    <file-match-pattern match-pattern=".java" include-pattern="true"/>
+    <file-match-pattern match-pattern="Test.java" include-pattern="false"/>
   </fileset>
 </fileset-config>

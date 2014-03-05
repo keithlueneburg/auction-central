@@ -258,6 +258,7 @@ public class AuctionPanel extends JPanel implements ActionListener {
     my_save.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent the_event) {
         saveAuction();
+        allowEdits(false);
       }
     });
   }
