@@ -67,9 +67,9 @@ public class AuctionCentralSystem {
     for (int i = 0; i < 8; i++) {
       final Calendar current = Calendar.getInstance();
       current.set(2014, 4, 1 + (i * 2), 9, 0);
-      final Auction demo_auction = new Auction("auction name" + i + 16,
-          "contact person" + i + 16, "phone number" + i + 16,
-          "intake person" + i + 16, current, 2, "comments" + i + 16);
+      final Auction demo_auction = new Auction("auction name" + (i + 16),
+          "contact person" + (i + 16), "phone number" + (i + 16),
+          "intake person" + (i + 16), current, 2, "comments" + (i + 16));
       my_auction.add(demo_auction);
     }
     
