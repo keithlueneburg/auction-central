@@ -317,7 +317,6 @@ public class AuctionPanel extends JPanel {
     my_save.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent the_event) {
         saveAuction();
-        allowEdits(false);
       }
     });
   }
@@ -489,8 +488,9 @@ public class AuctionPanel extends JPanel {
     String is_success = my_system.addAuction(my_auction);
     if (is_success == null) {
       my_app_frame.showAuctionList();
+      allowEdits(false);
     } else {
-      
+      allowEdits(true);
     }
   }
   
