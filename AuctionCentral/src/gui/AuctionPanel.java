@@ -506,7 +506,7 @@ public class AuctionPanel extends JPanel {
       final int year = Integer.parseInt(tokens[2]);
       
       
-      cal.set(year, month, day, 9, 0);
+      cal.set(year, month + 1, day, 9, 0);
     } catch (final NullPointerException e) {
       JOptionPane.showMessageDialog(null, 
           "Invalid date. Please enter in the style of MM/DD/YYYY.", 
