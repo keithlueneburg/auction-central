@@ -28,7 +28,7 @@ public class CreditCardTest {
   /**
    * Line separator.
    */
-  private static final String LINE_SEPARATOR = "\n";
+  private static final String LINE_DELIM = "\n";
 
   /**
    * Test credit card.
@@ -216,10 +216,10 @@ public class CreditCardTest {
   @Test
   public void testToString() {
     final String test_credit_card_string = "Cardholder: John Smith"
-        + LINE_SEPARATOR + "Card Number: 1234123412341234" + LINE_SEPARATOR
-        + "Expiration Date: 2125" + LINE_SEPARATOR + "CSC: 123"
-        + LINE_SEPARATOR + "Address:" + LINE_SEPARATOR + "123 Main Street"
-        + LINE_SEPARATOR + "Tacoma WA 98501" + LINE_SEPARATOR + LINE_SEPARATOR
+        + LINE_DELIM + "Card Number: 1234123412341234" + LINE_DELIM
+        + "Expiration Date: 2125" + LINE_DELIM + "CSC: 123"
+        + LINE_DELIM + "Address:" + LINE_DELIM + "123 Main Street"
+        + LINE_DELIM + "Tacoma WA 98501" + LINE_DELIM + LINE_DELIM
         + "Bank: Chase";
 
     assertTrue("toString not equal",
