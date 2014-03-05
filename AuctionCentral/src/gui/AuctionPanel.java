@@ -140,6 +140,11 @@ public class AuctionPanel extends JPanel implements ActionListener {
 //  /** The text area used to go add comments. */
 //  private final JTextArea my_text_area = new JTextArea();
   
+  /**
+   * A reference to the main application frame.
+   */
+  private ApplicationFrame my_app_frame;
+  
   /** The auction to display in the panel. */
   private final Auction my_auction;
   
@@ -170,11 +175,13 @@ public class AuctionPanel extends JPanel implements ActionListener {
    * Sets up the Auction Panel.
    * @param the_frame - the frame this panel is attached to.
    */
-  public AuctionPanel(Auction the_auction) {
+  public AuctionPanel(final Auction the_auction, final ApplicationFrame the_frame) {
     super(new BorderLayout());
     setPreferredSize(DEFAULT_SIZE);
     setBorder(BLACK_LINE);
     setFocusable(true);
+    
+    my_app_frame = the_frame;
     
     my_auction = the_auction;
     final String temp = the_auction.getAuctionNumber();
@@ -242,6 +249,11 @@ public class AuctionPanel extends JPanel implements ActionListener {
     my_edit_info.setMnemonic(KeyEvent.VK_E);
     my_edit_info.setToolTipText("Edit the Auction Data");
     my_edit_info.addActionListener(new ActionListener() {
+      /* (non-Javadoc)
+       * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+       * 
+       * Clicking edit button sets all text fields to be editable.
+       */
       public void actionPerformed(final ActionEvent the_event) {
         //editInfo();
         allowEdits(true);
@@ -286,6 +298,7 @@ public class AuctionPanel extends JPanel implements ActionListener {
       public void actionPerformed(final ActionEvent the_event) {
         // go back to previous page
         // needs to be passed a previous page
+        my_app_frame.showAuctionList();
       }
     });
   }
@@ -443,6 +456,12 @@ public class AuctionPanel extends JPanel implements ActionListener {
   
   //***************************************************
   // Might not need this... or the prior.
+//  private Auction saveAuction() {    // Return an auction
+//    final Auction added = new Auction(my_name, my_contact_p, my_contact_num, 
+//        my_intake, my_date, my_duration, my_comment);
+//    return added;
+//  }
+  
   private Auction saveAuction() {    // Return an auction
     final Auction added = new Auction(my_name, my_contact_p, my_contact_num, 
         my_intake, my_date, my_duration, my_comment);
@@ -476,7 +495,7 @@ public class AuctionPanel extends JPanel implements ActionListener {
   }
 
   @Override
-  public void actionPerformed(ActionEvent arg0) {
+  public void actionPerformed(final ActionEvent arg0) {
     // TODO Auto-generated method stub
     
   }
