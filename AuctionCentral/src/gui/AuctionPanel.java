@@ -454,18 +454,16 @@ public class AuctionPanel extends JPanel implements ActionListener {
   }
   
   
-  //***************************************************
-  // Might not need this... or the prior.
-//  private Auction saveAuction() {    // Return an auction
-//    final Auction added = new Auction(my_name, my_contact_p, my_contact_num, 
-//        my_intake, my_date, my_duration, my_comment);
-//    return added;
-//  }
-  
-  private Auction saveAuction() {    // Return an auction
-    final Auction added = new Auction(my_name, my_contact_p, my_contact_num, 
-        my_intake, my_date, my_duration, my_comment);
-    return added;
+  private Auction saveAuction() {    // Return an auction    
+    my_auction.setAuctionName(my_auction_name_input.getText().trim());
+    my_auction.setContactPerson(my_contact_person_input.getText().trim());
+    my_auction.setContactPhone(my_contact_phone_input.getText().trim());
+    my_auction.setIntakePerson(my_intake_person_input.getText().trim());
+//    my_auction.setAuctionDate(my_auction_date_input.getText().trim());    // not sure how to convert string into calendar...
+//    my_auction.setAuctionDuration(my_duration_input.getText().trim());    // not sure how to convert an input string into an int...
+    my_auction.setComments(my_auction_comments.getText().trim());
+    
+    return my_auction;
   }
   
   private Boolean editInfo() {       // Return a Boolean
