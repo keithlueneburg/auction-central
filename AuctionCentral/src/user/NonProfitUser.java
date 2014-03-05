@@ -53,33 +53,7 @@ public class NonProfitUser extends AbstractUser {
    * @return the auction list of this nonprofit user holds
    */
   public List<Auction> getAuction() {
-    refreshAuction();
     return my_auction;
-  }
-
-  /**
-   * This method refresh the auction list, remove all the auctions before or on today.
-   * <dt><b>Postconditions:</b><dd>
-   * All Auctions in the list are in the future
-   */
-  private void refreshAuction() {
-    final Calendar today = Calendar.getInstance();
-    final int today_year = today.get(Calendar.YEAR);
-    final int today_month = today.get(Calendar.MONTH) + 1;
-    final int today_day = today.get(Calendar.DATE);
-    
-    for (Auction each: my_auction) {
-      final Calendar auction_date = each.getAuctionDate();
-      final int auction_year = auction_date.get(Calendar.YEAR);
-      final int auction_month = auction_date.get(Calendar.MONTH) + 1;
-      final int auction_day = auction_date.get(Calendar.DATE);
-      
-      if (today.compareTo(auction_date) > 0 || //if the auction is past
-          (today_year == auction_year && today_month == auction_month
-          && today_day == auction_day)) { // if the auction is on today
-        my_auction.remove(each); //remove the past auction
-      }
-    }
   }
 
 }
