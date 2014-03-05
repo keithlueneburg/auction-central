@@ -190,8 +190,22 @@ public class AuctionPanel extends JPanel implements ActionListener {
     setupInput();
     createAuctionLabels();
     
+    allowEdits(false);
   }
   
+  private void allowEdits(final boolean my_edit_flag) {
+    my_auction_name_input.setEditable(my_edit_flag);
+    my_contact_person_input.setEditable(my_edit_flag);
+    my_contact_phone_input.setEditable(my_edit_flag);
+    my_intake_person_input.setEditable(my_edit_flag);
+    my_auction_date_input.setEditable(my_edit_flag);
+    my_start_time_input.setEditable(my_edit_flag);
+    my_duration_input.setEditable(my_edit_flag);
+    my_current_input.setEditable(my_edit_flag);
+    my_anticipated_input.setEditable(my_edit_flag);
+    
+  }
+
   private void createAuction() {
     my_name = my_auction.getAuctionName();
     my_contact_p = my_auction.getContactPerson();
@@ -217,6 +231,8 @@ public class AuctionPanel extends JPanel implements ActionListener {
     my_current_input.setText(j.toString());
     my_anticipated_input.setText(j.toString());
     my_text.setText(my_comment);
+    
+    allowEdits(false);
   }
   
   /**
