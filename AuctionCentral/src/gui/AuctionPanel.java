@@ -212,7 +212,7 @@ public class AuctionPanel extends JPanel {
    * @param the_system 
    */
   public AuctionPanel(final Auction the_auction, final ApplicationFrame the_frame, 
-      AuctionCentralSystem the_system) {
+      AuctionCentralSystem the_system, final boolean an_editable) {
     super(new BorderLayout());
     setPreferredSize(DEFAULT_SIZE);
     setBorder(BLACK_LINE);
@@ -234,7 +234,7 @@ public class AuctionPanel extends JPanel {
     setupInput();
     createAuctionLabels();
     
-    allowEdits(false);
+    allowEdits(an_editable);
   }
   
   /**

@@ -138,7 +138,7 @@ public class AuctionListPanel extends JPanel {
     edit_button.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent an_event) {
         if (my_index >= 0) {
-          my_app_frame.showAuctionInfo(my_auction_list.get(my_index));
+          my_app_frame.showAuctionInfo(my_auction_list.get(my_index), false);
         }
       }
     });
@@ -150,7 +150,7 @@ public class AuctionListPanel extends JPanel {
     create_button.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent an_event) {
         if (my_auction_list.size() < 25) {
-          my_app_frame.showAuctionInfo(new Auction());
+          my_app_frame.showAuctionInfo(new Auction(), true);
         } else {
           create_button.setEnabled(false);
         }

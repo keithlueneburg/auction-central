@@ -146,8 +146,8 @@ public final class ApplicationFrame extends JFrame {
    * @param an_auction
    *          The auction to display the auction info panel for.
    */
-  public void showAuctionInfo(final Auction an_auction) {
-    replaceContentPanel(new AuctionPanel(an_auction, this, my_system));
+  public void showAuctionInfo(final Auction an_auction, boolean an_editable) {
+    replaceContentPanel(new AuctionPanel(an_auction, this, my_system, an_editable));
   }
 
   /**
