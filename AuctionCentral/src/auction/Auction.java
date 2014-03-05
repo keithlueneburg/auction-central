@@ -6,6 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Auction {
+  
+  /** The auction number, increases per instantiation of an auction class. */
+  private static int AUCTION_NUMBER;
 
   // Used only when adding/removing items
   private int my_next_item;
@@ -25,6 +28,8 @@ public class Auction {
       final String the_intake_person, final Calendar the_auction_date,
       final int the_auction_duration, final String the_comments) {
     my_next_item = 1;
+    
+    AUCTION_NUMBER++;
 
     my_auction_name = the_auction_name;
     my_contact_person = the_contact_person;
@@ -74,6 +79,20 @@ public class Auction {
   // GETTERs
   public String getAuctionName() {
     return my_auction_name;
+  }
+  
+  /**
+   * Returns the auction number.
+   * Added to show which auction we are using.
+   * @return AUCTION_NUMBER - the number of this auction.
+   * @author Casey Morrison
+   */
+  public String getAuctionNumber() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("");
+    sb.append(AUCTION_NUMBER);
+    String strI = sb.toString();
+    return strI;
   }
 
   public String getContactPerson() {
@@ -125,4 +144,5 @@ public class Auction {
 
     return success;
   }
+
 }
