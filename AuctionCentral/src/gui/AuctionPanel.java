@@ -490,7 +490,9 @@ public class AuctionPanel extends JPanel {
       my_app_frame.showAuctionList();
       allowEdits(false);
     } else {
-      allowEdits(true);
+      JOptionPane.showMessageDialog(null, 
+          "error: " + is_success, 
+          "Error", JOptionPane.ERROR_MESSAGE);
     }
   }
   
