@@ -19,10 +19,13 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+
+import system.AuctionCentralSystem;
 
 
 
@@ -101,7 +104,7 @@ public class AuctionPanel extends JPanel {
   private final JLabel my_intake_person = new JLabel("Intake Person: ");
     
   /** The label that shows the auction's name. */
-  private final JLabel my_auction_date = new JLabel("Auction Date: ");
+  private final JLabel my_auction_date = new JLabel("Auction Date: MM/DD/YYYYY");
     
   /** The label that shows the auction's number. */
   private final JLabel my_start_time = new JLabel("Start Time: ");
@@ -199,16 +202,23 @@ public class AuctionPanel extends JPanel {
   /** The anticipated input. */
   private JFormattedTextField my_anticipated_input = new JFormattedTextField();
   
+  /** The auction central system. */
+  private final AuctionCentralSystem my_system;
+  
   /**
    * Sets up the Auction Panel.
    * @param the_frame - the frame this panel is attached to.
+   * @param the_auction - the auction used for display.
+   * @param the_system 
    */
-  public AuctionPanel(final Auction the_auction, final ApplicationFrame the_frame) {
+  public AuctionPanel(final Auction the_auction, final ApplicationFrame the_frame, 
+      AuctionCentralSystem the_system) {
     super(new BorderLayout());
     setPreferredSize(DEFAULT_SIZE);
     setBorder(BLACK_LINE);
     setFocusable(true);
     
+    my_system = the_system;
     my_app_frame = the_frame;
     
     my_auction = the_auction;
@@ -372,7 +382,6 @@ public class AuctionPanel extends JPanel {
    */
   private void createAuctionLabels() {
     final JPanel center = new JPanel(new BorderLayout());
-//    center.setSize(800, 400);
     final JPanel west = new JPanel();
     west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
     final JPanel north = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -380,7 +389,6 @@ public class AuctionPanel extends JPanel {
     final JPanel south = new JPanel(new BorderLayout());
     final JPanel southcomment = new JPanel(new FlowLayout());
     final JPanel southset = new JPanel(new FlowLayout());
-//    south.setSize(800, 200);
     
     AUCTION_TITLE.setFont(new Font(ARIAL, Font.BOLD, MAIN_FONT_SIZE));
     my_auction_number.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
@@ -463,25 +471,49 @@ public class AuctionPanel extends JPanel {
     textinput.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT_TWO)));
     
     add(textinput, BorderLayout.CENTER);
-
   }
   
   /**
    * Saves the new/edited auction.
-   * @return my_auction - the edited auction.
    */
-  private Auction saveAuction() {    // Return an auction    
+  private void saveAuction() {    // Return an auction    
     my_auction.setAuctionName(my_auction_name_input.getText().trim());
     my_auction.setContactPerson(my_contact_person_input.getText().trim());
     my_auction.setContactPhone(my_contact_phone_input.getText().trim());
     my_auction.setIntakePerson(my_intake_person_input.getText().trim());
-//    my_auction.setAuctionDate(my_auction_date_input.getText().trim());    
-//     //not sure how to convert string into calendar...
-//    my_auction.setAuctionDuration(my_duration_input.getText().trim());    
-//     //not sure how to convert an input string into an int...
+    //my_auction.setAuctionDate(createDate());
+    final int i = Integer.parseInt(my_duration_input.getText().trim());
+    my_auction.setAuctionDuration(i);    
     my_auction.setComments(my_auction_comments.getText().trim());
     
-    return my_auction;
+    my_system.addAuction(my_auction);
+  }
+  
+  /**
+   * Creates a date object.
+   * @return - Calendar object.
+   */
+  private Calendar createDate() {
+    //add last auction on 2014-4-30 used to test BR #3
+    final Calendar cal = Calendar.getInstance();
+    final String str = my_intake_person_input.getText().trim();
+    
+    try {
+      final String[] tokens = str.split("/");
+  
+      final int month = Integer.parseInt(tokens[0]);
+      final int day = Integer.parseInt(tokens[1]);
+      final int year = Integer.parseInt(tokens[2]);
+      
+      
+      cal.set(year, month, day, 9, 0);
+    } catch (final NullPointerException e) {
+      JOptionPane.showMessageDialog(null, 
+          "Invalid date. Please enter in the style of MM/DD/YYYY.", 
+          "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    return cal;
   }
   
   /**
