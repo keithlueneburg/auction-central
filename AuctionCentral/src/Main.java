@@ -24,11 +24,11 @@ import user.User;
  */
 public final class Main {
   //TODO: Remove DEFAULT_USER from final build (should be decided by login window)
-  private static User DEFAULT_USER = new AuctionCentralStaff("staff_dude-0101",
-      "password", "John", "Smith");
+//  private static User DEFAULT_USER = new AuctionCentralStaff("staff_dude-0101",
+//      "password", "John", "Smith");
   
-//  private static User DEFAULT_USER = new NonProfitUser("non-profit-guy",
-//      "password", "Bob", "Jones", "Charity group", null);
+  private static User DEFAULT_USER = new NonProfitUser("non-profit-guy",
+      "password", "Bob", "Jones", "Charity group");
   
   /**
    * Private constructor, to prevent instantiation of this class.
