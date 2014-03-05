@@ -153,6 +153,7 @@ public class AuctionPanel extends JPanel implements ActionListener {
   private Calendar my_date;
   private int my_duration;
   private String my_comment;
+  private int my_items;
   
   //Fields for data entry
   private JFormattedTextField my_auction_name_input = new JFormattedTextField();
@@ -176,7 +177,7 @@ public class AuctionPanel extends JPanel implements ActionListener {
     setFocusable(true);
     
     my_auction = the_auction;
-    String temp = the_auction.getAuctionNumber();
+    final String temp = the_auction.getAuctionNumber();
     my_number = new JLabel(temp);
     
     
@@ -199,6 +200,7 @@ public class AuctionPanel extends JPanel implements ActionListener {
     my_date = my_auction.getAuctionDate();
     my_duration = my_auction.getAuctionDuration();
     my_comment = my_auction.getComments();
+    my_items = my_auction.getItemCount();
     initializeInput();
   }
   
@@ -211,8 +213,9 @@ public class AuctionPanel extends JPanel implements ActionListener {
 //    my_start_time_input.setText(my_duration);
     final Integer i = my_duration;
     my_duration_input.setText(i.toString());
-//    my_current_input.setText(my_contact_p);
-//    my_anticipated_input.setText(my_contact_p);
+    final Integer j = my_items;
+    my_current_input.setText(j.toString());
+    my_anticipated_input.setText(j.toString());
     my_text.setText(my_comment);
   }
   
@@ -335,9 +338,6 @@ public class AuctionPanel extends JPanel implements ActionListener {
     final JPanel southset = new JPanel(new FlowLayout());
 //    south.setSize(800, 200);
     
-    
-    // **************************************
-    // some can be combined maybe
     AUCTION_TITLE.setFont(new Font(ARIAL, Font.BOLD, MAIN_FONT_SIZE));
     my_auction_number.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
     my_auction_name.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
@@ -425,12 +425,16 @@ public class AuctionPanel extends JPanel implements ActionListener {
   
   //***************************************************
   // Might not need this... or the prior.
-  private void saveAuction() {    // Return an auction
-    
+  private Auction saveAuction() {    // Return an auction
+    final Auction added = new Auction(my_name, my_contact_p, my_contact_num, 
+        my_intake, my_date, my_duration, my_comment);
+    return added;
   }
   
-  private void editInfo() {       // Return a Boolean
-    
+  private Boolean editInfo() {       // Return a Boolean
+    final Boolean test = false;
+      // finish
+    return test;
   }
   
   private void viewInventory() {  // Return a List<Items>
