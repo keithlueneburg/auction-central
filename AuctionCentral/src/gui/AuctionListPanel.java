@@ -144,10 +144,16 @@ public class AuctionListPanel extends JPanel {
     });
     
     final JButton create_button = new JButton("Create");
+    if (my_auction_list.size() >= 25) {
+      create_button.setEnabled(false);
+    }
     create_button.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent an_event) {
-        my_app_frame.showAuctionInfo(new Auction());
-        
+        if (my_auction_list.size() < 25) {
+          my_app_frame.showAuctionInfo(new Auction());
+        } else {
+          create_button.setEnabled(false);
+        }
       }
     });
     my_button_panel.add(edit_button);

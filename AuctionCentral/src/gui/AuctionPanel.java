@@ -316,6 +316,7 @@ public class AuctionPanel extends JPanel {
     my_save.setToolTipText("Save the Auction Data");
     my_save.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent the_event) {
+        //my_app_frame.
         saveAuction();
         allowEdits(false);
       }
