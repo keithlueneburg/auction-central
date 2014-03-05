@@ -316,7 +316,6 @@ public class AuctionPanel extends JPanel {
     my_save.setToolTipText("Save the Auction Data");
     my_save.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent the_event) {
-        //my_app_frame.
         saveAuction();
         allowEdits(false);
       }
@@ -482,7 +481,7 @@ public class AuctionPanel extends JPanel {
     my_auction.setContactPerson(my_contact_person_input.getText().trim());
     my_auction.setContactPhone(my_contact_phone_input.getText().trim());
     my_auction.setIntakePerson(my_intake_person_input.getText().trim());
-    //my_auction.setAuctionDate(createDate());
+    my_auction.setAuctionDate(createDate());
     final int i = Integer.parseInt(my_duration_input.getText().trim());
     my_auction.setAuctionDuration(i);    
     my_auction.setComments(my_auction_comments.getText().trim());
@@ -497,7 +496,7 @@ public class AuctionPanel extends JPanel {
   private Calendar createDate() {
     //add last auction on 2014-4-30 used to test BR #3
     final Calendar cal = Calendar.getInstance();
-    final String str = my_intake_person_input.getText().trim();
+    final String str = my_auction_date_input.getText().trim();
     
     try {
       final String[] tokens = str.split("/");
@@ -507,7 +506,7 @@ public class AuctionPanel extends JPanel {
       final int year = Integer.parseInt(tokens[2]);
       
       
-      cal.set(year, month + 1, day, 9, 0);
+      cal.set(year, month - 1, day, 9, 0);
     } catch (final NullPointerException e) {
       JOptionPane.showMessageDialog(null, 
           "Invalid date. Please enter in the style of MM/DD/YYYY.", 
