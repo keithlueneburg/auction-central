@@ -81,7 +81,7 @@ public class AuctionListPanel extends JPanel {
     JButton createButton = new JButton("Create");
     createButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        my_aFrame.showAuctionInfo(null);
+        my_aFrame.showAuctionInfo(new Auction());
         
       }
     });

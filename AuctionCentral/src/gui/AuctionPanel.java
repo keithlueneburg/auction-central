@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.Calendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -145,6 +146,14 @@ public class AuctionPanel extends JPanel implements ActionListener {
   /** The label that shows the auction's number. */
   private final JLabel my_number;
   
+  private String my_name;
+  private String my_contact_p;
+  private String my_contact_num;
+  private String my_intake;
+  private Calendar my_date;
+  private int my_duration;
+  private String my_comment;
+  
   //Fields for data entry
   private JFormattedTextField my_auction_name_input = new JFormattedTextField();
   private JFormattedTextField my_contact_person_input = new JFormattedTextField();
@@ -170,6 +179,8 @@ public class AuctionPanel extends JPanel implements ActionListener {
     String temp = the_auction.getAuctionNumber();
     my_number = new JLabel(temp);
     
+    
+    createAuction();
     setupEditButton();
     setupSaveButton();
     setupViewInventoryButton();
@@ -178,6 +189,31 @@ public class AuctionPanel extends JPanel implements ActionListener {
     setupInput();
     createAuctionLabels();
     
+  }
+  
+  private void createAuction() {
+    my_name = my_auction.getAuctionName();
+    my_contact_p = my_auction.getContactPerson();
+    my_contact_num = my_auction.getContactPhone();
+    my_intake = my_auction.getIntakePerson();
+    my_date = my_auction.getAuctionDate();
+    my_duration = my_auction.getAuctionDuration();
+    my_comment = my_auction.getComments();
+    initializeInput();
+  }
+  
+  private void initializeInput() {
+    my_auction_name_input.setText(my_name);
+    my_contact_person_input.setText(my_contact_p);
+    my_contact_phone_input.setText(my_contact_num);
+    my_intake_person_input.setText(my_intake);
+    my_auction_date_input.setText(my_date.getTime().toString());
+//    my_start_time_input.setText(my_duration);
+    final Integer i = my_duration;
+    my_duration_input.setText(i.toString());
+//    my_current_input.setText(my_contact_p);
+//    my_anticipated_input.setText(my_contact_p);
+    my_text.setText(my_comment);
   }
   
   /**
@@ -256,32 +292,32 @@ public class AuctionPanel extends JPanel implements ActionListener {
     my_current_items.setLabelFor(my_current_input);
     my_anticipated_items.setLabelFor(my_anticipated_input);
     
-    my_auction_name_input.setActionCommand(textFieldString);
-    my_auction_name_input.addActionListener(this);
-    
-    my_contact_person_input.setActionCommand(textFieldString);
-    my_contact_person_input.addActionListener(this);
-    
-    my_contact_phone_input.setActionCommand(textFieldString);
-    my_contact_phone_input.addActionListener(this);
-    
-    my_intake_person_input.setActionCommand(textFieldString);
-    my_intake_person_input.addActionListener(this);
-  
-    my_auction_date_input.setActionCommand(textFieldString);
-    my_auction_date_input.addActionListener(this);
-  
-    my_duration_input.setActionCommand(textFieldString);
-    my_duration_input.addActionListener(this);
-    
-    my_auction_date_input.setActionCommand(textFieldString);
-    my_auction_date_input.addActionListener(this);
-  
-    my_current_input.setActionCommand(textFieldString);
-    my_current_input.addActionListener(this);
-  
-    my_anticipated_input.setActionCommand(textFieldString);
-    my_anticipated_input.addActionListener(this);
+//    my_auction_name_input.setActionCommand(textFieldString);
+//    my_auction_name_input.addActionListener(this);
+//    
+//    my_contact_person_input.setActionCommand(textFieldString);
+//    my_contact_person_input.addActionListener(this);
+//    
+//    my_contact_phone_input.setActionCommand(textFieldString);
+//    my_contact_phone_input.addActionListener(this);
+//    
+//    my_intake_person_input.setActionCommand(textFieldString);
+//    my_intake_person_input.addActionListener(this);
+//  
+//    my_auction_date_input.setActionCommand(textFieldString);
+//    my_auction_date_input.addActionListener(this);
+//  
+//    my_duration_input.setActionCommand(textFieldString);
+//    my_duration_input.addActionListener(this);
+//    
+//    my_auction_date_input.setActionCommand(textFieldString);
+//    my_auction_date_input.addActionListener(this);
+//  
+//    my_current_input.setActionCommand(textFieldString);
+//    my_current_input.addActionListener(this);
+//  
+//    my_anticipated_input.setActionCommand(textFieldString);
+//    my_anticipated_input.addActionListener(this);
   }
   
   /**
