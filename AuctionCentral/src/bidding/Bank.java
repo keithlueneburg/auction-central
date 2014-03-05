@@ -69,7 +69,7 @@ public final class Bank {
    *          The card used to pay.
    * @return bill, a Bill used to charge a bidder.
    */
-  public static Bill makePayment(final Item an_item, final double a_price,
+  public Bill makePayment(final Item an_item, final double a_price,
       final CreditCard a_card) {
     final Bill bill = new Bill(an_item, a_price, a_card);
     return bill;
