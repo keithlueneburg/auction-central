@@ -2,9 +2,14 @@ package system;
 
 import auction.Auction;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 
 
@@ -33,6 +38,11 @@ public class AuctionCentralSystem {
    * A list of current user in the system.
    */
   private List<Auction> my_auction;
+  
+  /**
+   * Path to the user input/output data file.
+   */
+  private static final String USER_NAMES_PATH = "data/usernames.txt";
   
   /**
    * The constructor, initialized the system.
@@ -178,6 +188,44 @@ public class AuctionCentralSystem {
    */
   public void setUser(final int an_index) {
     my_current_user = my_users.get(an_index);
+  }
+
+  /**
+   * Checks to see if a given username exists in the system.
+   * 
+   * @param the_username The username to check.
+   * 
+   * @return true if the user name is valid.
+   */
+  public static boolean isValidUser(final String the_username) {
+    // TODO Once i/o is implemented, possibly change this to read from the main user data file.
+   
+    boolean is_valid = false;
+    Scanner sc = null;
+    
+    try {
+      sc = new Scanner(new File(USER_NAMES_PATH));
+    
+      // Check username argument against user name list from disk.
+      while (sc.hasNext()) {
+        if (sc.next().equals(the_username)) {
+          is_valid = true;
+          break;
+        }
+      }
+      
+    } catch (final FileNotFoundException fnfe) {
+      // Show an error message and exit if the file is not found.
+      JOptionPane.showMessageDialog(null,
+          "Database not found. Please check with your system administrator", 
+          "Error", JOptionPane.ERROR_MESSAGE);
+      System.exit(1);
+    } finally {
+      if (sc != null) {
+        sc.close();
+      }
+    }
+    return is_valid;
   }
   
 }

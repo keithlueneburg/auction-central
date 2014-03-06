@@ -2,6 +2,9 @@ import gui.ApplicationFrame;
 
 import java.awt.EventQueue;
 
+import javax.swing.JOptionPane;
+
+import system.AuctionCentralSystem;
 import user.AuctionCentralStaff;
 import user.NonProfitUser;
 import user.User;
@@ -48,6 +51,22 @@ public final class Main {
     {  
       @Override
       public void run() {
+        
+        boolean valid_login = false;
+        
+        while (valid_login == false) {
+          // show a JOptionPane to get the username.
+          String input_username = JOptionPane.showInputDialog(null, "Enter username: ", 
+              "AuctionCentral Login", JOptionPane.QUESTION_MESSAGE);
+          
+          
+          // if JOptionPane clicks 'cancel', exit
+          if (input_username == null) {
+            System.exit(0);
+          } else if (AuctionCentralSystem.isValidUser(input_username)) {
+            valid_login = true;
+          }
+        }
         final ApplicationFrame gui = new ApplicationFrame(DEFAULT_USER);
         gui.start();
       }
