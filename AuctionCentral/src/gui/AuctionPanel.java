@@ -512,7 +512,10 @@ public class AuctionPanel extends JPanel {
         JOptionPane.showMessageDialog(null, 
             "Invalid date. Please enter in the style of MM/DD/YYYY.", 
             "Error", JOptionPane.ERROR_MESSAGE);
+        return Calendar.getInstance();
       }
+      
+      
   
       final int month = Integer.parseInt(tokens[0]);
       final int day = Integer.parseInt(tokens[1]);
@@ -549,6 +552,7 @@ public class AuctionPanel extends JPanel {
         JOptionPane.showMessageDialog(null, 
             "Invalid date. Please enter in the style of MM/DD/YYYY.", 
             "Error", JOptionPane.ERROR_MESSAGE);
+        return Calendar.getInstance();
       }
       
       cal.set(year, month - 1, day, 9, 0);
