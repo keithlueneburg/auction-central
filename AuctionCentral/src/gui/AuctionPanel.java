@@ -507,14 +507,56 @@ public class AuctionPanel extends JPanel {
     
     try {
       final String[] tokens = str.split("/");
+      
+      if (tokens.length != 3) {
+        JOptionPane.showMessageDialog(null, 
+            "Invalid date. Please enter in the style of MM/DD/YYYY.", 
+            "Error", JOptionPane.ERROR_MESSAGE);
+      }
   
       final int month = Integer.parseInt(tokens[0]);
       final int day = Integer.parseInt(tokens[1]);
       final int year = Integer.parseInt(tokens[2]);
       
       
+      boolean is_valid_date = true;
+      
+      if (month <= 0 || month > 12) {
+        is_valid_date = false;
+      }else if (month == 2) {
+        if ((year % 4 == 0 && year % 100 != 0)
+          || year % 400 == 0) {//lead year
+          if (day <= 0 || day >29) { 
+            is_valid_date = false;
+          }
+        } else {
+          if (day <= 0 || day >28) {
+            is_valid_date = false;
+          }
+        }
+      } else if (month == 1 || month == 3 || month == 5 || month == 7
+          || month == 8 || month == 10 || month == 12) {
+        if (day <= 0 || day > 31) {
+          is_valid_date = false;
+        }
+      } else {
+        if (day <= 0 || day > 30) {
+          is_valid_date = false;
+        }
+      }
+      
+      if (is_valid_date == false) {
+        JOptionPane.showMessageDialog(null, 
+            "Invalid date. Please enter in the style of MM/DD/YYYY.", 
+            "Error", JOptionPane.ERROR_MESSAGE);
+      }
+      
       cal.set(year, month - 1, day, 9, 0);
     } catch (final NumberFormatException e) {
+      JOptionPane.showMessageDialog(null, 
+          "Invalid date. Please enter in the style of MM/DD/YYYY.", 
+          "Error", JOptionPane.ERROR_MESSAGE);
+    }catch (final Exception e) {
       JOptionPane.showMessageDialog(null, 
           "Invalid date. Please enter in the style of MM/DD/YYYY.", 
           "Error", JOptionPane.ERROR_MESSAGE);
