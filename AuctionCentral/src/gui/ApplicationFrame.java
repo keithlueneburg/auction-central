@@ -174,6 +174,6 @@ public final class ApplicationFrame extends JFrame {
    * Display the calendar in the content area.
    */
   public void showCalender() {
-    replaceContentPanel(new CalendarPanel());
+    replaceContentPanel(new CalendarPanel(my_system));
   }
 }

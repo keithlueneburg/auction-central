@@ -157,9 +157,6 @@ public class CreditCardTest {
         && card_1.hashCode() == card_1.hashCode());
 
     // Object should equal an identical object with same field values
-    // TODO: This currently fails due to Address and Bank not being
-    // implemented yet.
-
     assertTrue("Fail equals identical", card_1.equals(card_1_duplicate)
         && card_1.hashCode() == card_1_duplicate.hashCode());
 
