@@ -6,9 +6,11 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,7 +27,7 @@ public class CalendarPanel extends JPanel {
 
   static private int CALENDAR_WIDTH = 7;
   
-  static private int CALENDAR_HEIGHT = 5;
+  static private int CALENDAR_HEIGHT = 6;
   
   static private String[] months = {"January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"};
@@ -35,6 +37,12 @@ public class CalendarPanel extends JPanel {
   private int my_current_year;
 
   private AuctionCentralSystem my_system;
+
+  private JPanel my_info_panel;
+
+  private JPanel my_calendar_display_panel;
+
+  private JLabel my_title_label;
   
   
   
@@ -45,11 +53,11 @@ public class CalendarPanel extends JPanel {
     my_current_month = todays_date.get(Calendar.MONTH);
     my_current_year = todays_date.get(Calendar.YEAR);
     
-    JPanel info_panel = getInfoPanel();
-    JPanel calendar_display_panel = getCalendarDisplayPanel(todays_date);
+    my_info_panel = getInfoPanel();
+    my_calendar_display_panel = getCalendarDisplayPanel(todays_date);
     
-    add(info_panel, BorderLayout.NORTH);
-    add(calendar_display_panel, BorderLayout.CENTER);
+    add(my_info_panel, BorderLayout.NORTH);
+    add(my_calendar_display_panel, BorderLayout.CENTER);
     
     
 
@@ -64,10 +72,17 @@ public class CalendarPanel extends JPanel {
     
     calendar.setLayout(new GridLayout(CALENDAR_HEIGHT, CALENDAR_WIDTH));
     
-    int first_day_of_month = the_calendar.getActualMinimum(Calendar.DAY_OF_MONTH);
+    
+    Calendar first_day_of_month = new GregorianCalendar();
+    first_day_of_month.set(Calendar.YEAR, my_current_year);
+    first_day_of_month.set(Calendar.MONTH, my_current_month);
+    first_day_of_month.set(Calendar.DAY_OF_MONTH, 0);
+    
+    int first_day_of_week = first_day_of_month.get(Calendar.DAY_OF_WEEK);
+    
     // TODO: month specific stuff here
     // Add an empty JPanel to the grid, for days before the month starts.
-    for (int i = 0; i < first_day_of_month; i++) {
+    for (int i = 0; i < first_day_of_week; i++) {
       JPanel empty_panel = new JPanel();
       empty_panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
       calendar.add(empty_panel );
@@ -85,7 +100,7 @@ public class CalendarPanel extends JPanel {
     }
     
     // Add empty JPanels for any day after end of month.
-    for (int i = 0; i < CALENDAR_HEIGHT * CALENDAR_WIDTH - first_day_of_month - days_in_month; i++) {
+    for (int i = 0; i < CALENDAR_HEIGHT * CALENDAR_WIDTH - first_day_of_week - days_in_month; i++) {
       JPanel empty_panel = new JPanel();
       empty_panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
       calendar.add(empty_panel);
@@ -125,12 +140,96 @@ public class CalendarPanel extends JPanel {
     info.setPreferredSize(new Dimension(824, 50));
     info.setLayout(new FlowLayout());
     
-    add(new JButton("<"));
+    JButton back_button = new JButton(new AbstractAction("<") {
+      @Override
+      public void actionPerformed(final ActionEvent the_event) {
+        previousMonth();
+      }
+    });
     
-    add(new JLabel(months[my_current_month] + " " + my_current_year));
+    add(back_button);
     
-    add(new JButton(">"));
+    my_title_label = new JLabel();
+    setTitleText();
+    add(my_title_label);
+    
+    
+    JButton next_button = new JButton(new AbstractAction(">") {
+      @Override
+      public void actionPerformed(final ActionEvent the_event) {
+        nextMonth();
+      }
+    });
+    
+    add(next_button);
     
     return info;
+  }
+
+
+
+  private void setTitleText() {
+    // TODO Auto-generated method stub
+    
+    my_title_label.setText(months[my_current_month % 12] + " " + my_current_year);
+  }
+
+
+
+  protected void nextMonth() {
+    // TODO Auto-generated method stub
+    removeCurrentMonth();
+    
+    Calendar current_display_calendar = new GregorianCalendar();
+    
+    my_current_month++;
+    
+    if (my_current_month == 12) {
+      my_current_month = 0;
+      my_current_year++;
+    }
+    
+    // Setting year first allows next line to roll the year over.
+    current_display_calendar.set(Calendar.YEAR, my_current_year);
+    current_display_calendar.set(Calendar.MONTH, my_current_month);
+    
+    setTitleText();
+    add(getCalendarDisplayPanel(current_display_calendar), BorderLayout.CENTER);
+    
+    repaint();
+  }
+
+
+
+  protected void previousMonth() {
+ // TODO Auto-generated method stub
+    removeCurrentMonth();
+    
+    Calendar current_display_calendar = new GregorianCalendar();
+    
+    my_current_month--;
+    
+    if(my_current_month == -1) {
+      my_current_month = 11;
+      my_current_year--;
+    }
+    
+    
+    // Setting year first allows next line to roll the year over.
+    current_display_calendar.set(Calendar.YEAR, my_current_year);
+    current_display_calendar.set(Calendar.MONTH, my_current_month);
+    
+    setTitleText();
+    
+    add(getCalendarDisplayPanel(current_display_calendar), BorderLayout.CENTER);
+    
+    repaint();
+  }
+
+
+
+  private void removeCurrentMonth() {
+    // TODO Auto-generated method stub
+    remove(my_calendar_display_panel);
   }
 }
