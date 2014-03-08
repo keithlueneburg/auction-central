@@ -58,6 +58,8 @@ public class AuctionCentralSystem {
     my_auction = new ArrayList<Auction>();
     my_users = new ArrayList<AbstractUser>();
     
+    loadingData();
+    
     //*************************************
     //for demo and test
     for (int i = 0; i < 15; i++) {
@@ -101,6 +103,20 @@ public class AuctionCentralSystem {
     //for demo and test
     //************************************
     
+    
+  }
+  
+  /**
+   * This method load all the data after starting the system
+   */
+  public void loadingData() {
+    
+  }
+  
+  /**
+   * This method save all the data before closing the system 
+   */
+  public void savingData() {
     
   }
   
