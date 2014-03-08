@@ -189,12 +189,13 @@ public class CalendarPanel extends JPanel {
       my_current_year++;
     }
     
-    // Setting year first allows next line to roll the year over.
+    
     current_display_calendar.set(Calendar.YEAR, my_current_year);
     current_display_calendar.set(Calendar.MONTH, my_current_month);
     
     setTitleText();
-    add(getCalendarDisplayPanel(current_display_calendar), BorderLayout.CENTER);
+    my_calendar_display_panel = getCalendarDisplayPanel(current_display_calendar);
+    add(my_calendar_display_panel, BorderLayout.CENTER);
     
     repaint();
   }
@@ -215,13 +216,13 @@ public class CalendarPanel extends JPanel {
     }
     
     
-    // Setting year first allows next line to roll the year over.
+
     current_display_calendar.set(Calendar.YEAR, my_current_year);
     current_display_calendar.set(Calendar.MONTH, my_current_month);
     
     setTitleText();
-    
-    add(getCalendarDisplayPanel(current_display_calendar), BorderLayout.CENTER);
+    my_calendar_display_panel = getCalendarDisplayPanel(current_display_calendar);
+    add(my_calendar_display_panel, BorderLayout.CENTER);
     
     repaint();
   }
