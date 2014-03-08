@@ -137,8 +137,8 @@ public class InventoryPanel extends JPanel {
    
    /**
     * This is the specific panel that will hold the list of Auctions.
-    * @author Kevin Alexander
-    * @version 3/4/2014
+    * @author Kaiyuan Shi
+    * @version 3/8/2014
     */
    private class ListPanel extends JPanel {
      /**
