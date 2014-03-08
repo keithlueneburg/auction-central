@@ -27,11 +27,11 @@ import user.User;
  */
 public final class Main {
   //TODO: Remove DEFAULT_USER from final build (should be decided by login window)
-//  private static User DEFAULT_USER = new AuctionCentralStaff("staff_dude-0101",
-//      "password", "John", "Smith");
+  private static User DEFAULT_USER = new AuctionCentralStaff("staff_dude-0101",
+      "password", "John", "Smith");
   
-  private static User DEFAULT_USER = new NonProfitUser("non-profit-guy",
-      "password", "Bob", "Jones", "Charity group");
+//  private static User DEFAULT_USER = new NonProfitUser("non-profit-guy",
+//      "password", "Bob", "Jones", "Charity group");
   
   /**
    * Private constructor, to prevent instantiation of this class.
@@ -51,15 +51,11 @@ public final class Main {
     {  
       @Override
       public void run() {
-        
         boolean valid_login = false;
-        
-        while (valid_login == false) {
+        while (!valid_login) {
           // show a JOptionPane to get the username.
-          String input_username = JOptionPane.showInputDialog(null, "Enter username: ", 
+          final String input_username = JOptionPane.showInputDialog(null, "Enter username: ", 
               "AuctionCentral Login", JOptionPane.QUESTION_MESSAGE);
-          
-          
           // if JOptionPane clicks 'cancel', exit
           if (input_username == null) {
             System.exit(0);
