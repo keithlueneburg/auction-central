@@ -35,9 +35,14 @@ public class AuctionCentralSystem {
   private AbstractUser my_current_user;
   
   /**
-   * A list of current user in the system.
+   * A list of current auction in the system.
    */
   private List<Auction> my_auction;
+  
+  /**
+   * A list of past auction in the system.
+   */
+  private List<Auction> my_past_auction;
   
   /**
    * Path to the user input/output data file.
@@ -178,6 +183,8 @@ public class AuctionCentralSystem {
       if (today.compareTo(auction_date) > 0 || //if the auction is past
           (today_year == auction_year && today_month == auction_month
           && today_day == auction_day)) { // if the auction is on today
+        
+        my_past_auction.add(each);
         my_auction.remove(each); //remove the past auction
       }
     }

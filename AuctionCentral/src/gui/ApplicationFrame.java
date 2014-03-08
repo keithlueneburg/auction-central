@@ -26,8 +26,8 @@ import user.User;
  * 
  * Instructor: Dr. Adwoa Donyina
  * 
- * @author Keith Lueneburg
- * @version 3/2/2014
+ * @author Kaiyuan Shi
+ * @version 3/8/2014
  */
 public final class ApplicationFrame extends JFrame {
   
@@ -146,7 +146,7 @@ public final class ApplicationFrame extends JFrame {
    * @param an_auction
    *          The auction to display the auction info panel for.
    */
-  public void showAuctionInfo(final Auction an_auction, boolean an_editable) {
+  public void showAuctionInfo(final Auction an_auction, final boolean an_editable) {
     replaceContentPanel(new AuctionPanel(an_auction, this, my_system, an_editable));
   }
 
@@ -157,7 +157,7 @@ public final class ApplicationFrame extends JFrame {
    *          The auction to display the inventory for.
    */
   public void showInventory(final Auction an_auction) {
-    replaceContentPanel(new InventoryPanel(an_auction));
+    replaceContentPanel(new InventoryPanel(this, an_auction));
   }
 
   /**
@@ -166,7 +166,7 @@ public final class ApplicationFrame extends JFrame {
    * @param an_item
    *          The item to display the info for.
    */
-  public void showItem(final Item an_item) {
+  public void showItem(final Item an_item, final boolean an_editable) {
     replaceContentPanel(new ItemPanel(an_item));
   }
 

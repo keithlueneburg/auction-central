@@ -216,6 +216,10 @@ public class Auction {
   public int getItemCount() {
     return my_auction_items.size();
   }
+  
+  public List<Item> getItems() {
+    return my_auction_items;
+  }
 
   // METHODS
   /**
