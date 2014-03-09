@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -108,7 +109,7 @@ public class AuctionPanel extends JPanel {
   private final JLabel my_auction_date = new JLabel("Auction Date: MM/DD/YYYY");
     
   /** The label that shows the auction's number. */
-  private final JLabel my_start_time = new JLabel("Start Time: ");
+  private final JLabel my_start_time = new JLabel("Start Time:               (0 - 23)");
     
   /** The label that shows the auction's name. */
   private final JLabel my_duration_time = new JLabel("Duration (Hours): ");
@@ -257,7 +258,7 @@ public class AuctionPanel extends JPanel {
     my_auction_date_input.setEditable(the_edit_flag);
     my_start_time_input.setEditable(the_edit_flag);
     my_duration_input.setEditable(the_edit_flag);
-    my_current_input.setEditable(the_edit_flag);
+    
     my_anticipated_input.setEditable(the_edit_flag);
     my_comments_input.setEditable(the_edit_flag);
     
@@ -292,7 +293,7 @@ public class AuctionPanel extends JPanel {
         + '/' + my_date.get(Calendar.DAY_OF_MONTH) 
         + '/' + my_date.get(Calendar.YEAR);
     my_auction_date_input.setText(formatted_date);
-    my_start_time_input.setText("" + my_date.get(Calendar.HOUR_OF_DAY) + ":00");
+    my_start_time_input.setText("" + my_date.get(Calendar.HOUR_OF_DAY));
     final Integer i = my_duration;
     my_duration_input.setText(i.toString());
     final Integer j = my_items;
@@ -479,6 +480,9 @@ public class AuctionPanel extends JPanel {
     textinput.add(my_duration_input);
     textinput.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT_TWO)));
     textinput.add(my_current_input);
+    
+    my_current_input.setEditable(false);
+    
     textinput.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT_TWO)));
     textinput.add(my_anticipated_input);
     textinput.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT_TWO)));
@@ -494,15 +498,22 @@ public class AuctionPanel extends JPanel {
     final String contact_person = my_contact_person_input.getText().trim();
     final String contact_phone = my_contact_phone_input.getText().trim();
     final String intake_person = my_intake_person_input.getText().trim();
-    final Calendar auction_date = createDate();
+    final String start_time_text = my_start_time_input.getText();
+    final String duration_text = my_duration_input.getText();
     
     int start_time = -1;
-    
     try {
-      String[] stra = my_start_time_input.getText().split(":");
-      start_time = Integer.parseInt(stra[0]);
+      start_time = Integer.parseInt(start_time_text);
     } catch (final NumberFormatException nfe) {
     }
+    
+    int duration = -1;
+    try {
+      duration = Integer.parseInt(duration_text);
+    } catch (final NumberFormatException nfe) {
+    }
+    
+    final Calendar auction_date = createDate(start_time);
     
     // first check for empty strings
     if (auction_name.length() <= 0 || contact_person.length() <= 0 || contact_phone.length() <= 0 
@@ -517,20 +528,31 @@ public class AuctionPanel extends JPanel {
           "Invalid date", 
            "Error", JOptionPane.ERROR_MESSAGE);
     
-    } else if (start_time < 0 && start_time >= 24) {
+      // make sure start time is valid
+    } else if (start_time_text.length() < 1 
+        || my_start_time_input.getText().length() > 2 
+        || ! Character.isDigit(start_time_text.charAt(0))
+        || ! Character.isDigit(start_time_text.charAt(start_time_text.length() - 1))
+        || start_time < 0 
+        || start_time > new GregorianCalendar().getActualMaximum(Calendar.HOUR_OF_DAY)) {
       JOptionPane.showMessageDialog(null, 
           "Start time must be between 0 and 23 hours.", 
            "Error", JOptionPane.ERROR_MESSAGE);
+    
+    // check duration for valid number
+    } else if (duration < 1 || duration > 12) {
+      JOptionPane.showMessageDialog(null, 
+          "Duration must from 0 to 12 hours.", 
+           "Error", JOptionPane.ERROR_MESSAGE);
+    
     // otherwise save the auction
     } else {
-    
       my_auction.setAuctionName(auction_name);
       my_auction.setContactPerson(contact_person);    
       my_auction.setContactPhone(contact_phone);
       my_auction.setIntakePerson(intake_person);
-      my_auction.setAuctionDate(createDate());
-      final int i = Integer.parseInt(my_duration_input.getText().trim());
-      my_auction.setAuctionDuration(i);    
+      my_auction.setAuctionDate(auction_date);
+      my_auction.setAuctionDuration(duration);    
       my_auction.setComments(my_comments_input.getText().trim());
       
       final String is_success = my_system.addAuction(my_auction);
@@ -549,16 +571,13 @@ public class AuctionPanel extends JPanel {
   
   /**
    * Creates a date object.
+   * @param the_start_time TODO
    * @return - Calendar object.
    */
-  private Calendar createDate() {
+  private Calendar createDate(final int the_start_time) {
     //add last auction on 2014-4-30 used to test BR #3
     final Calendar cal = Calendar.getInstance();
     final String str = my_auction_date_input.getText().trim();
-    
-    //TODO: if invalid time entered, defaults to 9:00
-    // default start time to 9:00
-    int start_time = 9;
     
     try {
       final String[] tokens = str.split("/");
@@ -608,7 +627,7 @@ public class AuctionPanel extends JPanel {
         return Calendar.getInstance();
       }
       
-      cal.set(year, month - 1, day, start_time , 0);
+      cal.set(year, month - 1, day, the_start_time , 0);
     } catch (final NumberFormatException e) {
       JOptionPane.showMessageDialog(null, 
           "Invalid date. Please enter in the style of MM/DD/YYYY.", 
