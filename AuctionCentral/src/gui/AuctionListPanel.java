@@ -136,7 +136,7 @@ public class AuctionListPanel extends JPanel {
    * ActionListeners to them that will correctly do what is wanted.
    */
   public void configButtons() {
-    final JButton edit_button = new JButton("Edit");
+    final JButton edit_button = new JButton("View");
     edit_button.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent an_event) {
         if (my_index >= 0) {
