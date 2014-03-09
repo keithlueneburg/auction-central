@@ -77,7 +77,7 @@ public class AuctionCentralSystem implements Observer {
     
     //*************************************
     //for demo and test
-    for (int i = 0; i < 15; i++) {
+    /*for (int i = 0; i < 15; i++) {
       
       //add 15 non-profit users
       my_users.add(new NonProfitUser("username" + i, "password" + i, "first name" + i,
@@ -114,7 +114,7 @@ public class AuctionCentralSystem implements Observer {
     //add one auction on the last user used to test BR #5
     ((NonProfitUser) my_users.get(14)).getAuction().add(demo_auction_4_30);
     
-    my_current_user = my_users.get(0);
+    my_current_user = my_users.get(0);*/
     //for demo and test
     //************************************
     

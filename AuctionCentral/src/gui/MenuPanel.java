@@ -94,11 +94,6 @@ public class MenuPanel extends JPanel {
    * The parent container of this panel.
    */
   private ApplicationFrame my_application_frame;
-  
-  /**
-   * The auction central system
-   */
-  private AuctionCentralSystem my_system;
 
   /**
    * Instantiate a new menu panel object.
@@ -107,8 +102,7 @@ public class MenuPanel extends JPanel {
    *          The user type that is logged in to the program.
    * @param an_application_frame 
    */
-  public MenuPanel(final User a_user, final ApplicationFrame an_application_frame, final AuctionCentralSystem a_system) {
-    my_system = a_system;
+  public MenuPanel(final User a_user, final ApplicationFrame an_application_frame) {
     my_application_frame = an_application_frame;
     setup(a_user);
     setButtonVisibility(a_user);
@@ -168,7 +162,6 @@ public class MenuPanel extends JPanel {
     my_exit_button = new JButton(new AbstractAction("Exit") {
       @Override
       public void actionPerformed(final ActionEvent the_event) {
-        my_system.savingData();
         my_application_frame.dispose();
       }
     });
