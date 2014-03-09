@@ -246,7 +246,7 @@ public class CalendarPanel extends JPanel {
    */
   private List<Auction> getAuctionsOnDay(final Calendar the_date) {
     //TODO: need to check old auctions too
-    final List<Auction> all_auctions = my_system.getAuctionList();
+    final List<Auction> all_auctions = new ArrayList(my_system.getAuctionList());
     all_auctions.addAll(my_system.getPastAuctionList());
     
     final List<Auction> day_auctions = new ArrayList<Auction>();
