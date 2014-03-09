@@ -153,20 +153,20 @@ final class DataSaver {
     for (Item each: my_item_list) {
       String output = "";
       
-      output += each.getItemNumber();
-      output += each.getItemName();
-      output += each.getItemQuantity();
-      output += each.getStartingBid();
-      output += each.getDonor();
-      output += each.getSize();
-      output += each.getStorage();
-      output += each.getCondition();
-      output += each.getComments();
-      output += each.getPhotoLocation();
-      output += each.getSellingPrice();
+      output += each.getItemNumber() + ",";
+      output += each.getItemName() + ",";
+      output += each.getItemQuantity() + ",";
+      output += each.getStartingBid() + ",";
+      output += each.getDonor() + ",";
+      output += each.getSize() + ",";
+      output += each.getStorage() + ",";
+      output += each.getCondition() + ",";
+      output += each.getComments() + ",";
+      output += each.getPhotoLocation() + ",";
+      output += each.getSellingPrice() + ",";
       
       for (Bid each_bid: each.getBids()) {
-        output += "bid" + my_bid_list.size();
+        output += "bid" + my_bid_list.size() + ",";
         my_bid_list.add(each_bid);
       }
       
