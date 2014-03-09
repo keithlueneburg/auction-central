@@ -15,6 +15,11 @@ import auction.Item;
 import bidding.Address;
 import bidding.CreditCard;
 
+/**
+ * This class save all the system data to some txt files
+ * @author Kaiyuan Shi
+ *
+ */
 final class DataSaver {
 
   private static List<AbstractUser> my_user_list;
@@ -63,7 +68,7 @@ final class DataSaver {
     my_card_writer.close();
   }
   
-  
+  //output user.txt
   private static void outputUserLists() {
     for (AbstractUser each: my_user_list) {
       
@@ -71,8 +76,7 @@ final class DataSaver {
       if (each instanceof Bidder) {
         
         output += "Bidder,";
-        
-        printUser(output, each, my_user_writer);
+        output += printUser(output, each, my_user_writer);
         
         //card
         output += "card" + my_card_list.size() + ",";
@@ -90,34 +94,26 @@ final class DataSaver {
         
       } else if (each instanceof AuctionCentralStaff) {
         output += "AuctionCentralStaff,";
-        printUser(output, each, my_user_writer);
+        output += printUser(output, each, my_user_writer);
       } else {
         output += "NonProfitUser,";
-        printUser(output, each, my_user_writer);
+        output += printUser(output, each, my_user_writer);
       }
       my_user_writer.println(output);
     }
     
-    
-    
-    
-    
-    
-    
   }
   
-  /**
-   * This merhod print out the basic message of a user
-   * @param a_user
-   * @param a_writer
-   */
-  private static void printUser(String a_output, AbstractUser a_user, PrintWriter a_writer) {
+  //return out the basic message of a user
+  private static String printUser(String a_output, AbstractUser a_user, PrintWriter a_writer) {
     String username = a_user.getUsername();
     String first_name = a_user.getFirstName();
     String last_name = a_user.getLastName();
     a_output += (username+ "," + first_name+ "," + last_name + ",");
+    return a_output;
   }
   
+  //output auction.txt
   private static void outputAuctionLists() {
     
     for (Auction each: my_auction_list) {
@@ -148,6 +144,8 @@ final class DataSaver {
     }
     
   }
+  
+  //output item.txt
   private static void outputItemLists() {
     
     for (Item each: my_item_list) {
@@ -174,13 +172,39 @@ final class DataSaver {
     }
     
   }
+  
+  //output bid.txt
   private static void outputBidLists() {
+    for (Bid each: my_bid_list) {
+      String output = "";
+      
+      output += each.getItemName() + ",";
+      output += each.getPrice() + ",";
+      output += each.getBidderName() + ",";
+      
+      Calendar bid_time = each.getBidTime();
+      output += bid_time.get(Calendar.MONTH) + "/";
+      output += bid_time.get(Calendar.DAY_OF_MONTH) + "/";
+      output += bid_time.get(Calendar.YEAR) + "/";
+      output += bid_time.get(Calendar.HOUR_OF_DAY) + "/";
+      output += bid_time.get(Calendar.MINUTE) + ",";
+      
+      output += "card" + my_card_list.size() + ",";
+      my_card_list.add(each.getPayment());
+      
+      my_bid_writer.println(output);
+    }
+  }
+  
+  //output card.txt
+  private static void  outputCardLists() {
+    
+    for (CreditCard each: my_card_list)
     
   }
-  private static void  outputCardLists(){
-    
-  }
-  private static void outputAddressLists(){
+  
+  //output address.txt
+  private static void outputAddressLists() {
     
   }
   
