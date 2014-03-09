@@ -155,7 +155,7 @@ public class AuctionCentralSystem implements Observer {
    * All of the past auction would be removed.
    */
   public List<Auction> getAuctionList() {
-    refreshAuction();
+    
     return my_auction;
   }
   
@@ -165,7 +165,7 @@ public class AuctionCentralSystem implements Observer {
    * @author Keith Lueneburg
    */
   public List<Auction> getPastAuctionList() {
-    refreshAuction();
+    
     return my_past_auction;
   }
   

@@ -490,14 +490,31 @@ public class AuctionPanel extends JPanel {
    * Saves the new/edited auction.
    */
   private void saveAuction() {    // Return an auction    
-    my_auction.setAuctionName(my_auction_name_input.getText().trim());
-    my_auction.setContactPerson(my_contact_person_input.getText().trim());
-    my_auction.setContactPhone(my_contact_phone_input.getText().trim());
-    my_auction.setIntakePerson(my_intake_person_input.getText().trim());
-    my_auction.setAuctionDate(createDate());
-    final int i = Integer.parseInt(my_duration_input.getText().trim());
-    my_auction.setAuctionDuration(i);    
-    my_auction.setComments(my_comments_input.getText().trim());
+    final String auction_name = my_auction_name_input.getText().trim();
+    final String contact_person = my_contact_person_input.getText().trim();
+    final String contact_phone = my_contact_phone_input.getText().trim();
+    final String intake_person = my_intake_person_input.getText().trim();
+    
+    if (auction_name.length() > 0 && contact_person.length() > 0 && contact_phone.length() > 0 
+        && intake_person.length() > 0) {
+      
+      my_auction.setAuctionName(auction_name);
+      my_auction.setContactPerson(contact_person);    
+      my_auction.setContactPhone(contact_phone);
+      my_auction.setIntakePerson(intake_person);
+      my_auction.setAuctionDate(createDate());
+      final int i = Integer.parseInt(my_duration_input.getText().trim());
+      my_auction.setAuctionDuration(i);    
+      my_auction.setComments(my_comments_input.getText().trim());
+      
+    } else {
+      JOptionPane.showMessageDialog(null, 
+         "Fields cannot be blank", 
+          "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    
+    
     
     final String is_success = my_system.addAuction(my_auction);
     if (is_success == null) {
@@ -569,7 +586,9 @@ public class AuctionPanel extends JPanel {
         return Calendar.getInstance();
       }
       //TODO: Auction start time should not be hard-coded 9
-      cal.set(year, month - 1, day, 9, 0);
+      
+      int start_time = Integer.parseInt(my_start_time_input.getText());
+      cal.set(year, month - 1, day, start_time , 0);
     } catch (final NumberFormatException e) {
       JOptionPane.showMessageDialog(null, 
           "Invalid date. Please enter in the style of MM/DD/YYYY.", 
