@@ -26,6 +26,7 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
 import system.AuctionCentralSystem;
+import user.NonProfitUser;
 
 
 
@@ -243,8 +244,14 @@ public class AuctionPanel extends JPanel {
    * @param the_edit_flag - true if editable.
    */
   private void allowEdits(final boolean the_edit_flag) {
-    my_auction_name_input.setEditable(the_edit_flag);
-    my_contact_person_input.setEditable(the_edit_flag);
+    if (my_system.getCurrentUser() instanceof NonProfitUser) {
+      my_auction_name_input.setEditable(false);
+      my_contact_person_input.setEditable(false);
+    } else {
+      my_auction_name_input.setEditable(the_edit_flag);
+      my_contact_person_input.setEditable(the_edit_flag);
+    }
+    
     my_contact_phone_input.setEditable(the_edit_flag);
     my_intake_person_input.setEditable(the_edit_flag);
     my_auction_date_input.setEditable(the_edit_flag);
@@ -252,6 +259,7 @@ public class AuctionPanel extends JPanel {
     my_duration_input.setEditable(the_edit_flag);
     my_current_input.setEditable(the_edit_flag);
     my_anticipated_input.setEditable(the_edit_flag);
+    my_comments_input.setEditable(the_edit_flag);
     
     my_save.setVisible(the_edit_flag);
     

@@ -139,7 +139,7 @@ public class Auction {
   public void setAuctionDate(final Calendar the_auction_date) {
     my_auction_date = the_auction_date;
     
-    final String formatted_date = "" + the_auction_date.get(Calendar.MONTH) 
+    final String formatted_date = "" + (the_auction_date.get(Calendar.MONTH) + 1) 
         + '/' + the_auction_date.get(Calendar.DAY_OF_MONTH) 
         + '/' + the_auction_date.get(Calendar.YEAR);
     
