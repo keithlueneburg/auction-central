@@ -36,6 +36,11 @@ final class DataLoader {
   private static Scanner my_address_scanner = null;
   private static Scanner my_card_scanner = null;
   
+  /**
+   * The separator of all the data.
+   */
+  private static final String DATA_SEPARATOR = " ` ";
+  
   public static void loadData(List<AbstractUser> the_user_list,
       List<Auction> the_auction_list) {
     
@@ -73,7 +78,7 @@ final class DataLoader {
   private static void loadAddressList() {
     while (my_address_scanner.hasNextLine()) {
       String line = my_address_scanner.nextLine();
-      String[] address = line.split("`");
+      String[] address = line.split(DATA_SEPARATOR);
       
       my_address_list.add(new Address(address[0],
           Integer.parseInt(address[1]), address[2],
@@ -85,7 +90,7 @@ final class DataLoader {
     
     while (my_card_scanner.hasNextLine()) {
       String line = my_card_scanner.nextLine();
-      String[] card = line.split("`");
+      String[] card = line.split(DATA_SEPARATOR);
       
       String[] exp_string = card[1].split("/");
       Calendar exp_date = Calendar.getInstance();
@@ -101,7 +106,7 @@ final class DataLoader {
   private static void loadBidList() {
     while (my_bid_scanner.hasNextLine()) {
       String line = my_bid_scanner.nextLine();
-      String[] bid = line.split("`");
+      String[] bid = line.split(DATA_SEPARATOR);
       
       String[] bid_string = bid[3].split("/");
       Calendar bid_date = Calendar.getInstance();
@@ -117,7 +122,7 @@ final class DataLoader {
   private static void loadItemList() {
     while (my_item_scanner.hasNextLine()) {
       String line = my_item_scanner.nextLine();
-      String[] item = line.split("`");
+      String[] item = line.split(DATA_SEPARATOR);
       
       Item the_item = new Item(Integer.parseInt(item[0]), item[1],
           Integer.parseInt(item[2]), Double.parseDouble(item[3]),
@@ -137,7 +142,7 @@ final class DataLoader {
   private static void loadAuctionList() {
     while (my_auction_scanner.hasNextLine()) {
       String line = my_auction_scanner.nextLine();
-      String[] auction = line.split("`");
+      String[] auction = line.split(DATA_SEPARATOR);
       
       String[] auction_date_string = auction[4].split("/");
       Calendar auction_date = Calendar.getInstance();
@@ -155,7 +160,7 @@ final class DataLoader {
   private static void loadUserList() {
     while (my_user_scanner.hasNextLine()) {
       String line = my_user_scanner.nextLine();
-      String[] user = line.split("`");
+      String[] user = line.split(DATA_SEPARATOR);
       String username = user[1];
       String password = user[2];
       String first_name = user[3];
