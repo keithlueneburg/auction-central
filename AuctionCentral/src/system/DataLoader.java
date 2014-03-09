@@ -56,12 +56,12 @@ final class DataLoader {
       System.out.println(ex.getMessage());
     }
     
-    loadAddressList();
-    loadCardList();
-    loadBidList();
-    loadItemList();
-    loadAuctionList();
-    loadUserList();
+//    loadAddressList();
+//    loadCardList();
+//    loadBidList();
+//    loadItemList();
+//    loadAuctionList();
+//    loadUserList();
     
     my_user_scanner.close();
     my_auction_scanner.close();

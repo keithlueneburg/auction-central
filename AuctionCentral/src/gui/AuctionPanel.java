@@ -104,7 +104,7 @@ public class AuctionPanel extends JPanel {
   private final JLabel my_intake_person = new JLabel("Intake Person: ");
     
   /** The label that shows the auction's name. */
-  private final JLabel my_auction_date = new JLabel("Auction Date: MM/DD/YYYYY");
+  private final JLabel my_auction_date = new JLabel("Auction Date: MM/DD/YYYY");
     
   /** The label that shows the auction's number. */
   private final JLabel my_start_time = new JLabel("Start Time: ");
@@ -278,7 +278,10 @@ public class AuctionPanel extends JPanel {
     my_contact_person_input.setText(my_contact_p);
     my_contact_phone_input.setText(my_contact_num);
     my_intake_person_input.setText(my_intake);
-    my_auction_date_input.setText(my_date.getTime().toString());
+    final String formatted_date = "" + my_date.get(Calendar.MONTH) 
+        + '/' + my_date.get(Calendar.DAY_OF_MONTH) 
+        + '/' + my_date.get(Calendar.YEAR);
+    my_auction_date_input.setText(formatted_date);
 //    my_start_time_input.setText(my_duration);
     final Integer i = my_duration;
     my_duration_input.setText(i.toString());

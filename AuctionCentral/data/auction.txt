@@ -1,24 +1,24 @@
-auction name0`contact person0`phone number0`intake person0`3/1/2014/9`2`comments0`
-auction name1`contact person1`phone number1`intake person1`3/3/2014/9`2`comments1`
-auction name2`contact person2`phone number2`intake person2`3/5/2014/9`2`comments2`
-auction name3`contact person3`phone number3`intake person3`3/7/2014/9`2`comments3`
-auction name4`contact person4`phone number4`intake person4`3/9/2014/9`2`comments4`
-auction name5`contact person5`phone number5`intake person5`3/11/2014/9`2`comments5`
-auction name6`contact person6`phone number6`intake person6`3/13/2014/9`2`comments6`
-auction name7`contact person7`phone number7`intake person7`3/15/2014/9`2`comments7`
-auction name8`contact person8`phone number8`intake person8`3/17/2014/9`2`comments8`
-auction name9`contact person9`phone number9`intake person9`3/19/2014/9`2`comments9`
-auction name10`contact person10`phone number10`intake person10`3/21/2014/9`2`comments10`
-auction name11`contact person11`phone number11`intake person11`3/23/2014/9`2`comments11`
-auction name12`contact person12`phone number12`intake person12`3/25/2014/9`2`comments12`
-auction name13`contact person13`phone number13`intake person13`3/27/2014/9`2`comments13`
-auction name14`contact person14`phone number14`intake person14`3/29/2014/9`2`comments14`
-auction name16`contact person16`phone number16`intake person16`4/1/2014/9`2`comments16`
-auction name17`contact person17`phone number17`intake person17`4/3/2014/9`2`comments17`
-auction name18`contact person18`phone number18`intake person18`4/5/2014/9`2`comments18`
-auction name19`contact person19`phone number19`intake person19`4/7/2014/9`2`comments19`
-auction name20`contact person20`phone number20`intake person20`4/9/2014/9`2`comments20`
-auction name21`contact person21`phone number21`intake person21`4/11/2014/9`2`comments21`
-auction name22`contact person22`phone number22`intake person22`4/13/2014/9`2`comments22`
-auction name23`contact person23`phone number23`intake person23`4/15/2014/9`2`comments23`
-auction name 4/30`contact person4/30`phone number 4/30`intake person 4/30`3/30/2014/9`2`comments 4/30`
+auction name0 ` contact person0 ` phone number0 ` intake person0 ` 3/1/2014/9 ` 2 ` comments0 ` 
+auction name1 ` contact person1 ` phone number1 ` intake person1 ` 3/3/2014/9 ` 2 ` comments1 ` 
+auction name2 ` contact person2 ` phone number2 ` intake person2 ` 3/5/2014/9 ` 2 ` comments2 ` 
+auction name3 ` contact person3 ` phone number3 ` intake person3 ` 3/7/2014/9 ` 2 ` comments3 ` 
+auction name4 ` contact person4 ` phone number4 ` intake person4 ` 3/9/2014/9 ` 2 ` comments4 ` 
+auction name5 ` contact person5 ` phone number5 ` intake person5 ` 3/11/2014/9 ` 2 ` comments5 ` 
+auction name6 ` contact person6 ` phone number6 ` intake person6 ` 3/13/2014/9 ` 2 ` comments6 ` 
+auction name7 ` contact person7 ` phone number7 ` intake person7 ` 3/15/2014/9 ` 2 ` comments7 ` 
+auction name8 ` contact person8 ` phone number8 ` intake person8 ` 3/17/2014/9 ` 2 ` comments8 ` 
+auction name9 ` contact person9 ` phone number9 ` intake person9 ` 3/19/2014/9 ` 2 ` comments9 ` 
+auction name10 ` contact person10 ` phone number10 ` intake person10 ` 3/21/2014/9 ` 2 ` comments10 ` 
+auction name11 ` contact person11 ` phone number11 ` intake person11 ` 3/23/2014/9 ` 2 ` comments11 ` 
+auction name12 ` contact person12 ` phone number12 ` intake person12 ` 3/25/2014/9 ` 2 ` comments12 ` 
+auction name13 ` contact person13 ` phone number13 ` intake person13 ` 3/27/2014/9 ` 2 ` comments13 ` 
+auction name14 ` contact person14 ` phone number14 ` intake person14 ` 3/29/2014/9 ` 2 ` comments14 ` 
+auction name16 ` contact person16 ` phone number16 ` intake person16 ` 4/1/2014/9 ` 2 ` comments16 ` 
+auction name17 ` contact person17 ` phone number17 ` intake person17 ` 4/3/2014/9 ` 2 ` comments17 ` 
+auction name18 ` contact person18 ` phone number18 ` intake person18 ` 4/5/2014/9 ` 2 ` comments18 ` 
+auction name19 ` contact person19 ` phone number19 ` intake person19 ` 4/7/2014/9 ` 2 ` comments19 ` 
+auction name20 ` contact person20 ` phone number20 ` intake person20 ` 4/9/2014/9 ` 2 ` comments20 ` 
+auction name21 ` contact person21 ` phone number21 ` intake person21 ` 4/11/2014/9 ` 2 ` comments21 ` 
+auction name22 ` contact person22 ` phone number22 ` intake person22 ` 4/13/2014/9 ` 2 ` comments22 ` 
+auction name23 ` contact person23 ` phone number23 ` intake person23 ` 4/15/2014/9 ` 2 ` comments23 ` 
+auction name 4/30 ` contact person4/30 ` phone number 4/30 ` intake person 4/30 ` 3/30/2014/9 ` 2 ` comments 4/30 ` 
