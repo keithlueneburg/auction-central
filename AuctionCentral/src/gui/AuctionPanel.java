@@ -278,7 +278,7 @@ public class AuctionPanel extends JPanel {
     my_contact_person_input.setText(my_contact_p);
     my_contact_phone_input.setText(my_contact_num);
     my_intake_person_input.setText(my_intake);
-    final String formatted_date = "" + my_date.get(Calendar.MONTH) 
+    final String formatted_date = "" + (my_date.get(Calendar.MONTH) + 1) 
         + '/' + my_date.get(Calendar.DAY_OF_MONTH) 
         + '/' + my_date.get(Calendar.YEAR);
     my_auction_date_input.setText(formatted_date);
