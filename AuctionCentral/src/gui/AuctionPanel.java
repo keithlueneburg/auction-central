@@ -124,8 +124,8 @@ public class AuctionPanel extends JPanel {
   /** The label that shows the auction's number. */
   private final JLabel my_auction_comments = new JLabel("Comments: ");
   
-  /** The button to click to edit an auction. */
-  private final JButton my_edit_info = new JButton("Edit");
+//  /** The button to click to edit an auction. */
+//  private final JButton my_edit_info = new JButton("Edit");
   
   /** The button to click to view inventory of the auction. */
   private final JButton my_view_inventory = new JButton("View Inventory");
@@ -227,7 +227,7 @@ public class AuctionPanel extends JPanel {
     my_number = new JLabel(temp);
     
     createAuction();
-    setupEditButton();
+    //setupEditButton();
     setupSaveButton();
     setupViewInventoryButton();
     setupBackButton();
@@ -293,24 +293,24 @@ public class AuctionPanel extends JPanel {
     allowEdits(false);
   }
   
-  /**
-   * Sets up the edit button.
-   */
-  private void setupEditButton() {
-    my_edit_info.setMnemonic(KeyEvent.VK_E);
-    my_edit_info.setToolTipText("Edit the Auction Data");
-    my_edit_info.addActionListener(new ActionListener() {
-      /* (non-Javadoc)
-       * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-       * 
-       * Clicking edit button sets all text fields to be editable.
-       */
-      public void actionPerformed(final ActionEvent the_event) {
-        //editInfo();
-        allowEdits(true);
-      }
-    });
-  }
+//  /**
+//   * Sets up the edit button.
+//   */
+//  private void setupEditButton() {
+//    my_edit_info.setMnemonic(KeyEvent.VK_E);
+//    my_edit_info.setToolTipText("Edit the Auction Data");
+//    my_edit_info.addActionListener(new ActionListener() {
+//      /* (non-Javadoc)
+//       * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+//       * 
+//       * Clicking edit button sets all text fields to be editable.
+//       */
+//      public void actionPerformed(final ActionEvent the_event) {
+//        //editInfo();
+//        allowEdits(true);
+//      }
+//    });
+//  }
   
   /**
    * Sets up the save button.
@@ -440,7 +440,7 @@ public class AuctionPanel extends JPanel {
     southcomment.add(my_save);
     south.add(southcomment, BorderLayout.CENTER);
     
-    southset.add(my_edit_info, BorderLayout.EAST);
+    //southset.add(my_edit_info, BorderLayout.EAST);
     southset.add(my_view_inventory, BorderLayout.CENTER);
     southset.add(my_back, BorderLayout.WEST);
     south.add(southset, BorderLayout.SOUTH);

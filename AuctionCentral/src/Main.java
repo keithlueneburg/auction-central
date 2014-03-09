@@ -27,10 +27,10 @@ import user.User;
  */
 public final class Main {
   //TODO: Remove DEFAULT_USER from final build (should be decided by login window)
-//  private static User DEFAULT_USER = new AuctionCentralStaff("staff_dude-0101",
-//      "password", "John", "Smith");
+  private static User DEFAULT_STAFF_USER = new AuctionCentralStaff("staff_dude-0101",
+      "password", "John", "Smith");
   
-  private static User DEFAULT_USER = new NonProfitUser("non-profit-guy",
+  private static User DEFAULT_NPO_USER = new NonProfitUser("non-profit-guy",
       "password", "Bob", "Jones", "Charity group");
   
   /**
@@ -51,6 +51,11 @@ public final class Main {
     {  
       @Override
       public void run() {
+        
+        AuctionCentralSystem system = new AuctionCentralSystem();
+        
+        User user = DEFAULT_STAFF_USER;
+        
         boolean valid_login = false;
         while (!valid_login) {
           // show a JOptionPane to get the username.
@@ -59,13 +64,19 @@ public final class Main {
           // if JOptionPane clicks 'cancel', exit
           if (input_username == null) {
             System.exit(0);
+          } else if (input_username.equals("staff")) {
+            user = DEFAULT_STAFF_USER;
+          } else if (input_username.equals("nonprofit")) {
+            user = DEFAULT_NPO_USER;
           } else if (AuctionCentralSystem.isValidUser(input_username)) {
+          }
             valid_login = true;
           }
-        }
-        final ApplicationFrame gui = new ApplicationFrame(DEFAULT_USER);
+        final ApplicationFrame gui = new ApplicationFrame(user, system);
         gui.start();
-      }
-    });
+        }
+        
+      });
+    }
   }
-}
+

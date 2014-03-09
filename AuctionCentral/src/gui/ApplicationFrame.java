@@ -75,11 +75,12 @@ public final class ApplicationFrame extends JFrame {
    * 
    * @param a_user
    *          The type of user that is logging in to the program.
+   * @param the_system 
    */
-  public ApplicationFrame(final User a_user) {
+  public ApplicationFrame(final User a_user, final AuctionCentralSystem the_system) {
     super("Auction Central");
-    my_system = new AuctionCentralSystem();
     
+    my_system = the_system;
     my_content_panel = new JPanel();
     my_menu_panel = new MenuPanel(a_user, this, my_system);
 
