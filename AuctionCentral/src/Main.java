@@ -57,9 +57,9 @@ public final class Main {
       @Override
       public void run() {
         
-        AuctionCentralSystem system = new AuctionCentralSystem();
+        final AuctionCentralSystem system = new AuctionCentralSystem();
         
-        User user = DEFAULT_STAFF_USER;
+        final User user = DEFAULT_STAFF_USER;
         User login_user = null;
         
         boolean valid_login = false;
@@ -82,7 +82,7 @@ public final class Main {
 
         }
         
-        RoleNotifier user_type_notifier = new RoleNotifier(system);
+        final RoleNotifier user_type_notifier = new RoleNotifier(system);
         user_type_notifier.changeRole(login_user);
         
         final ApplicationFrame gui = new ApplicationFrame(login_user, system);
@@ -132,7 +132,7 @@ final class RoleNotifier extends Observable {
     addObserver(the_system);
   }
   
-  void changeRole(User the_user) {
+  void changeRole(final User the_user) {
     setChanged();
     notifyObservers(the_user);
   
