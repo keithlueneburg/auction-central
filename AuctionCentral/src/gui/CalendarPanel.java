@@ -255,6 +255,7 @@ public class CalendarPanel extends JPanel {
       if (auction.getAuctionDate().get(Calendar.YEAR) == the_date.get(Calendar.YEAR)
           && auction.getAuctionDate().get(Calendar.MONTH) == the_date.get(Calendar.MONTH)
           && auction.getAuctionDate().get(Calendar.DAY_OF_MONTH) == the_date.get(Calendar.DAY_OF_MONTH)) {
+        
         day_auctions.add(auction);
       }
     }
@@ -315,6 +316,7 @@ public class CalendarPanel extends JPanel {
 
     my_current_month++;
 
+    // increment year, and reset month to 0 (Jan.) if month goes past 11 (Dec.)
     if (my_current_month == 12) {
       my_current_month = 0;
       my_current_year++;
@@ -326,15 +328,12 @@ public class CalendarPanel extends JPanel {
     setTitleText();
     my_calendar_display_panel = getCalendarDisplayPanel(current_display_calendar);
     add(my_calendar_display_panel, BorderLayout.CENTER);
-
-    // repaint();
   }
 
   /**
    * Replace the calendar display with the previous month.
    */
   private void previousMonth() {
-    // TODO Auto-generated method stub
     removeCurrentMonth();
 
     final Calendar current_display_calendar = new GregorianCalendar();
@@ -352,9 +351,7 @@ public class CalendarPanel extends JPanel {
     setTitleText();
     my_calendar_display_panel = getCalendarDisplayPanel(current_display_calendar);
     add(my_calendar_display_panel, BorderLayout.CENTER);
-
-    // repaint();
-  }
+}
 
   /**
    * Removes the current month's display panel.

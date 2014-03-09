@@ -147,6 +147,7 @@ public final class ApplicationFrame extends JFrame {
    * 
    * @param an_auction
    *          The auction to display the auction info panel for.
+   * @param an_editable Make the panel editable or not. 
    */
   public void showAuctionInfo(final Auction an_auction, final boolean an_editable) {
     replaceContentPanel(new AuctionPanel(an_auction, this, my_system, an_editable));
@@ -167,6 +168,7 @@ public final class ApplicationFrame extends JFrame {
    * 
    * @param an_item
    *          The item to display the info for.
+   * @param an_editable Make the panel editable or not. 
    */
   public void showItem(final Item an_item, final boolean an_editable) {
     replaceContentPanel(new ItemPanel(an_item));

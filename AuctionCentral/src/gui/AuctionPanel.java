@@ -209,10 +209,11 @@ public class AuctionPanel extends JPanel {
    * Sets up the Auction Panel.
    * @param the_frame - the frame this panel is attached to.
    * @param the_auction - the auction used for display.
-   * @param the_system 
+   * @param the_system The system instance running behind the program.
+   * @param an_editable Whether or not the fields will be editable initially.
    */
   public AuctionPanel(final Auction the_auction, final ApplicationFrame the_frame, 
-      AuctionCentralSystem the_system, final boolean an_editable) {
+      final AuctionCentralSystem the_system, final boolean an_editable) {
     super(new BorderLayout());
     setPreferredSize(DEFAULT_SIZE);
     setBorder(BLACK_LINE);
@@ -485,7 +486,7 @@ public class AuctionPanel extends JPanel {
     my_auction.setAuctionDuration(i);    
     my_auction.setComments(my_auction_comments.getText().trim());
     
-    String is_success = my_system.addAuction(my_auction);
+    final String is_success = my_system.addAuction(my_auction);
     if (is_success == null) {
       my_app_frame.showAuctionList();
       allowEdits(false);
@@ -526,14 +527,14 @@ public class AuctionPanel extends JPanel {
       
       if (month <= 0 || month > 12) {
         is_valid_date = false;
-      }else if (month == 2) {
+      } else if (month == 2) {
         if ((year % 4 == 0 && year % 100 != 0)
-          || year % 400 == 0) {//lead year
-          if (day <= 0 || day >29) { 
+          || year % 400 == 0) { //lead year
+          if (day <= 0 || day > 29) { 
             is_valid_date = false;
           }
         } else {
-          if (day <= 0 || day >28) {
+          if (day <= 0 || day > 28) {
             is_valid_date = false;
           }
         }
@@ -548,7 +549,7 @@ public class AuctionPanel extends JPanel {
         }
       }
       
-      if (is_valid_date == false) {
+      if (!is_valid_date) {
         JOptionPane.showMessageDialog(null, 
             "Invalid date. Please enter in the style of MM/DD/YYYY.", 
             "Error", JOptionPane.ERROR_MESSAGE);
@@ -560,7 +561,7 @@ public class AuctionPanel extends JPanel {
       JOptionPane.showMessageDialog(null, 
           "Invalid date. Please enter in the style of MM/DD/YYYY.", 
           "Error", JOptionPane.ERROR_MESSAGE);
-    }catch (final Exception e) {
+    } catch (final Exception e) {
       JOptionPane.showMessageDialog(null, 
           "Invalid date. Please enter in the style of MM/DD/YYYY.", 
           "Error", JOptionPane.ERROR_MESSAGE);
