@@ -127,6 +127,7 @@ public class AuctionCentralSystem implements Observer {
   
   public void loadAuction(final List<Auction> an_auction_list) {
     my_auction = an_auction_list;
+    refreshAuction();
   }
   
   
@@ -226,6 +227,7 @@ public class AuctionCentralSystem implements Observer {
     final int today_year = today.get(Calendar.YEAR);
     final int today_month = today.get(Calendar.MONTH) + 1;
     final int today_day = today.get(Calendar.DATE);
+    List<Auction> remove_auction = new ArrayList<Auction>();
     
     for (Auction each: my_auction) {
       final Calendar auction_date = each.getAuctionDate();
@@ -238,9 +240,11 @@ public class AuctionCentralSystem implements Observer {
           && today_day == auction_day)) { // if the auction is on today
         
         my_past_auction.add(each);
-        my_auction.remove(each); //remove the past auction
+        remove_auction.add(each);
       }
     }
+    
+    my_auction.removeAll(remove_auction);
   }
   
   /**
