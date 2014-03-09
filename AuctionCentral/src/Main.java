@@ -63,7 +63,6 @@ public final class Main {
         User login_user = null;
         
         boolean valid_login = false;
-
         
         while (!valid_login) {
           // show a JOptionPane to get the username.
@@ -88,10 +87,7 @@ public final class Main {
         final ApplicationFrame gui = new ApplicationFrame(login_user, system);
         gui.start();
         
-        
-        
-        
-        
+       
 //      while (!valid_login) {
 //      // show a JOptionPane to get the username.
 //      final String input_username = JOptionPane.showInputDialog(null, "Enter username: ", 
@@ -114,8 +110,6 @@ public final class Main {
         
       });
   }
-  
-  
 }
 
 /**
@@ -126,19 +120,25 @@ public final class Main {
  *
  */
 final class RoleNotifier extends Observable {
-
+  
+  /**
+   * Create a new notifier for the given system.
+   * 
+   * @param the_system The system to notify.
+   */
   public RoleNotifier(final AuctionCentralSystem the_system) {
     // TODO Auto-generated constructor stub
     addObserver(the_system);
   }
   
+  /**
+   * Change the access role to the specified user.
+   * 
+   * @param the_user The user to give access to.
+   */
   void changeRole(final User the_user) {
     setChanged();
     notifyObservers(the_user);
-  
-  
-  
-}
-  
+  }
 }
 

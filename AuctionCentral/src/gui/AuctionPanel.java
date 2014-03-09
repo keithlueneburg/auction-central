@@ -282,7 +282,7 @@ public class AuctionPanel extends JPanel {
         + '/' + my_date.get(Calendar.DAY_OF_MONTH) 
         + '/' + my_date.get(Calendar.YEAR);
     my_auction_date_input.setText(formatted_date);
-//    my_start_time_input.setText(my_duration);
+    my_start_time_input.setText("" + my_date.get(Calendar.HOUR_OF_DAY) + ":00");
     final Integer i = my_duration;
     my_duration_input.setText(i.toString());
     final Integer j = my_items;
