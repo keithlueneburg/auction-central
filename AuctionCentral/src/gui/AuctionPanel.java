@@ -496,19 +496,34 @@ public class AuctionPanel extends JPanel {
     final String intake_person = my_intake_person_input.getText().trim();
     final Calendar auction_date = createDate();
     
+    int start_time = -1;
     
+    try {
+      String[] stra = my_start_time_input.getText().split(":");
+      start_time = Integer.parseInt(stra[0]);
+    } catch (final NumberFormatException nfe) {
+    }
+    
+    // first check for empty strings
     if (auction_name.length() <= 0 || contact_person.length() <= 0 || contact_phone.length() <= 0 
         || intake_person.length() <= 0) {
       JOptionPane.showMessageDialog(null, 
           "Fields cannot be blank", 
            "Error", JOptionPane.ERROR_MESSAGE);
+      
+    // then check for a bad date
     } else if (auction_date == null) {
       JOptionPane.showMessageDialog(null, 
           "Invalid date", 
            "Error", JOptionPane.ERROR_MESSAGE);
+    
+    } else if (start_time < 0 && start_time >= 24) {
+      JOptionPane.showMessageDialog(null, 
+          "Start time must be between 0 and 23 hours.", 
+           "Error", JOptionPane.ERROR_MESSAGE);
+    // otherwise save the auction
     } else {
-      
-      
+    
       my_auction.setAuctionName(auction_name);
       my_auction.setContactPerson(contact_person);    
       my_auction.setContactPhone(contact_phone);
@@ -544,12 +559,6 @@ public class AuctionPanel extends JPanel {
     //TODO: if invalid time entered, defaults to 9:00
     // default start time to 9:00
     int start_time = 9;
-    
-    try {
-      String[] stra = my_start_time_input.getText().split(":");
-      start_time = Integer.parseInt(stra[0]);
-    } catch (final NumberFormatException nfe) {
-    }
     
     try {
       final String[] tokens = str.split("/");
