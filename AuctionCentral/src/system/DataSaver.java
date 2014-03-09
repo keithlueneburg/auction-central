@@ -43,12 +43,13 @@ final class DataSaver {
     my_auction_list = an_auction_list;
     
     try {
-      my_user_writer = new PrintWriter(new FileOutputStream("output/user.txt"));
-      my_auction_writer = new PrintWriter(new FileOutputStream("output/auction.txt"));
-      my_item_writer = new PrintWriter(new FileOutputStream("output/item.txt"));
-      my_bid_writer = new PrintWriter(new FileOutputStream("output/bid.txt"));
-      my_address_writer = new PrintWriter(new FileOutputStream("output/address.txt"));
-      my_card_writer = new PrintWriter(new FileOutputStream("output/card.txt"));
+      my_user_writer = new PrintWriter(new FileOutputStream("data/user.txt"));
+      my_auction_writer = new PrintWriter(new FileOutputStream("data/auction.txt"));
+      my_item_writer = new PrintWriter(new FileOutputStream("data/item.txt"));
+      my_bid_writer = new PrintWriter(new FileOutputStream("data/bid.txt"));
+      my_card_writer = new PrintWriter(new FileOutputStream("data/card.txt"));
+      my_address_writer = new PrintWriter(new FileOutputStream("data/address.txt"));
+      
     } catch (FileNotFoundException ex) {
       System.out.println(ex.getMessage());
     }
@@ -77,7 +78,7 @@ final class DataSaver {
       if (each instanceof Bidder) {
         
         output += "Bidder`";
-        printUser(output, each, my_user_writer);
+        output += printUser(output, each, my_user_writer);
         
         //card
         output += my_card_list.size() + "`";
@@ -95,10 +96,10 @@ final class DataSaver {
         
       } else if (each instanceof AuctionCentralStaff) {
         output += "AuctionCentralStaff`";
-        printUser(output, each, my_user_writer);
+        output += printUser(output, each, my_user_writer);
       } else {
         output += "NonProfitUser`";
-        printUser(output, each, my_user_writer);
+        output += printUser(output, each, my_user_writer);
       }
       my_user_writer.println(output);
     }
@@ -106,13 +107,14 @@ final class DataSaver {
   }
   
   //return out the basic message of a user
-  private static void printUser(String a_output, AbstractUser a_user, PrintWriter a_writer) {
+  private static String printUser(String a_output, AbstractUser a_user, PrintWriter a_writer) {
     String username = a_user.getUsername();
     String password = a_user.getPassword();
     String first_name = a_user.getFirstName();
     String last_name = a_user.getLastName();
     a_output += (username+ "`" + password + "`");
     a_output += (first_name+ "`" + last_name + "`");
+    return a_output;
   }
   
   //output auction.txt

@@ -40,12 +40,13 @@ final class DataLoader {
       List<Auction> the_auction_list) {
     
     try {
-      my_user_scanner = new Scanner(new FileInputStream("input/user.txt"));
-      my_auction_scanner = new Scanner(new FileInputStream("input/auction.txt"));
-      my_item_scanner = new Scanner(new FileInputStream("input/item.txt"));
-      my_bid_scanner = new Scanner(new FileInputStream("input/bid.txt"));
-      my_address_scanner = new Scanner(new FileInputStream("input/address.txt"));
-      my_card_scanner = new Scanner(new FileInputStream("input/card.txt"));
+      my_user_scanner = new Scanner(new FileInputStream("data/user.txt"));
+      my_auction_scanner = new Scanner(new FileInputStream("data/auction.txt"));
+      my_item_scanner = new Scanner(new FileInputStream("data/item.txt"));
+      my_bid_scanner = new Scanner(new FileInputStream("data/bid.txt"));
+      my_card_scanner = new Scanner(new FileInputStream("data/card.txt"));
+      my_address_scanner = new Scanner(new FileInputStream("data/address.txt"));
+      
     } catch (FileNotFoundException ex) {
       System.out.println(ex.getMessage());
     }
