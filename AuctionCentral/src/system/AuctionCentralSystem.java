@@ -127,7 +127,7 @@ public class AuctionCentralSystem {
    */
   public void savingData() {
     
-    DataSaver.saveData(a_user_list, an_auction_list);
+    DataSaver.saveData(my_users, my_auction);
     
   }
   
