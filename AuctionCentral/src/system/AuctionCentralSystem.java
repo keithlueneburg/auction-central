@@ -64,6 +64,7 @@ public class AuctionCentralSystem {
   public AuctionCentralSystem() {
     
     my_auction = new ArrayList<Auction>();
+    my_past_auction = new ArrayList<Auction>();
     my_users = new ArrayList<AbstractUser>();
     
     loadingData();
