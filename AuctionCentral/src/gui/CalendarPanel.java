@@ -232,6 +232,7 @@ public class CalendarPanel extends JPanel {
       });
       auction_button.setPreferredSize(new Dimension(AUCTION_BUTTON_WIDTH, 
           AUCTION_BUTTON_HEIGHT));
+      auction_button.setToolTipText(auction.getAuctionName());
       day_panel.add(auction_button, BorderLayout.CENTER);
     }
 
