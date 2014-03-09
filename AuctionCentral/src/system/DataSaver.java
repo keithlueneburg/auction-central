@@ -76,28 +76,28 @@ final class DataSaver {
       String output = "";
       if (each instanceof Bidder) {
         
-        output += "Bidder,";
+        output += "Bidder`";
         output += printUser(output, each, my_user_writer);
         
         //card
-        output += my_card_list.size() + ",";
+        output += my_card_list.size() + "`";
         my_card_list.add(((Bidder) each).getCard());
         
         //address
-        output += my_address_list.size() + ",";
+        output += my_address_list.size() + "`";
         my_address_list.add(((Bidder) each).getAddress());
         
         //bids
         for (Bid each_bid: ((Bidder) each).getBids()) {
-          output += my_bid_list.size() + ",";
+          output += my_bid_list.size() + "`";
           my_bid_list.add(each_bid);
         }
         
       } else if (each instanceof AuctionCentralStaff) {
-        output += "AuctionCentralStaff,";
+        output += "AuctionCentralStaff`";
         output += printUser(output, each, my_user_writer);
       } else {
-        output += "NonProfitUser,";
+        output += "NonProfitUser`";
         output += printUser(output, each, my_user_writer);
       }
       my_user_writer.println(output);
@@ -110,7 +110,7 @@ final class DataSaver {
     String username = a_user.getUsername();
     String first_name = a_user.getFirstName();
     String last_name = a_user.getLastName();
-    a_output += (username+ "," + first_name+ "," + last_name + ",");
+    a_output += (username+ "`" + first_name+ "`" + last_name + "`");
     return a_output;
   }
   
@@ -120,23 +120,23 @@ final class DataSaver {
     for (Auction each: my_auction_list) {
       String output = "";
       
-      output += each.getAuctionNumber() + ",";
-      output += each.getAuctionName() + ",";
-      output += each.getContactPerson() + ",";
-      output += each.getContactPhone() + ",";
-      output += each.getIntakePerson() + ",";
+      output += each.getAuctionNumber() + "`";
+      output += each.getAuctionName() + "`";
+      output += each.getContactPerson() + "`";
+      output += each.getContactPhone() + "`";
+      output += each.getIntakePerson() + "`";
       
       Calendar auction_date = each.getAuctionDate();  
       output += auction_date.get(Calendar.MONTH) + "/";
       output += auction_date.get(Calendar.DAY_OF_MONTH) + "/";
       output += auction_date.get(Calendar.YEAR) + "/";
-      output += auction_date.get(Calendar.HOUR_OF_DAY) + ",";
+      output += auction_date.get(Calendar.HOUR_OF_DAY) + "`";
       
-      output += each.getAuctionDuration() + ",";
-      output += each.getComments() + ",";
+      output += each.getAuctionDuration() + "`";
+      output += each.getComments() + "`";
       
       for (Item each_item: each.getItems()) {
-        output += my_item_list.size() + ",";
+        output += my_item_list.size() + "`";
         my_item_list.add(each_item);
       }
       
@@ -152,20 +152,20 @@ final class DataSaver {
     for (Item each: my_item_list) {
       String output = "";
       
-      output += each.getItemNumber() + ",";
-      output += each.getItemName() + ",";
-      output += each.getItemQuantity() + ",";
-      output += each.getStartingBid() + ",";
-      output += each.getDonor() + ",";
-      output += each.getSize() + ",";
-      output += each.getStorage() + ",";
-      output += each.getCondition() + ",";
-      output += each.getComments() + ",";
-      output += each.getPhotoLocation() + ",";
-      output += each.getSellingPrice() + ",";
+      output += each.getItemNumber() + "`";
+      output += each.getItemName() + "`";
+      output += each.getItemQuantity() + "`";
+      output += each.getStartingBid() + "`";
+      output += each.getDonor() + "`";
+      output += each.getSize() + "`";
+      output += each.getStorage() + "`";
+      output += each.getCondition() + "`";
+      output += each.getComments() + "`";
+      output += each.getPhotoLocation() + "`";
+      output += each.getSellingPrice() + "`";
       
       for (Bid each_bid: each.getBids()) {
-        output += my_bid_list.size() + ",";
+        output += my_bid_list.size() + "`";
         my_bid_list.add(each_bid);
       }
       
@@ -179,18 +179,18 @@ final class DataSaver {
     for (Bid each: my_bid_list) {
       String output = "";
       
-      output += each.getItemName() + ",";
-      output += each.getPrice() + ",";
-      output += each.getBidderName() + ",";
+      output += each.getItemName() + "`";
+      output += each.getPrice() + "`";
+      output += each.getBidderName() + "`";
       
       Calendar bid_time = each.getBidTime();
       output += bid_time.get(Calendar.MONTH) + "/";
       output += bid_time.get(Calendar.DAY_OF_MONTH) + "/";
       output += bid_time.get(Calendar.YEAR) + "/";
       output += bid_time.get(Calendar.HOUR_OF_DAY) + "/";
-      output += bid_time.get(Calendar.MINUTE) + ",";
+      output += bid_time.get(Calendar.MINUTE) + "`";
       
-      output += my_card_list.size() + ",";
+      output += my_card_list.size() + "`";
       my_card_list.add(each.getPayment());
       
       my_bid_writer.println(output);
@@ -203,19 +203,19 @@ final class DataSaver {
     for (CreditCard each: my_card_list) {
       String output = "";
       
-      output += each.getCardNum() + ",";
+      output += each.getCardNum() + "`";
       
       Calendar exp_date = each.getExpDate();
       output += exp_date.get(Calendar.MONTH) + "/";
-      output += exp_date.get(Calendar.YEAR) + ",";
+      output += exp_date.get(Calendar.YEAR) + "`";
       
-      output += each.getCSC() + ",";
-      output += each.getCardHolder() + ",";
+      output += each.getCSC() + "`";
+      output += each.getCardHolder() + "`";
       
-      output += my_address_list.size() + ",";
+      output += my_address_list.size() + "`";
       my_address_list.add(each.getAddress());
       
-      output += each.getBank() + ",";
+      output += each.getBank() + "`";
       
       my_card_writer.println(output);
     }
@@ -227,11 +227,11 @@ final class DataSaver {
     for (Address each: my_address_list) {
       String output = "";
       
-      output += each.getMyStreet() + ",";
-      output += each.getMyApt() + ",";
-      output += each.getMyCity() + ",";
-      output += each.getMyState() + ",";
-      output += each.getMyZip() + ",";
+      output += each.getMyStreet() + "`";
+      output += each.getMyApt() + "`";
+      output += each.getMyCity() + "`";
+      output += each.getMyState() + "`";
+      output += each.getMyZip() + "`";
       
       my_address_writer.println(output);
     }

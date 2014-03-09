@@ -72,7 +72,7 @@ final class DataLoader {
   private static void loadAddressList() {
     while (my_user_scanner.hasNextLine()) {
       String line = my_user_scanner.nextLine();
-      String[] address = line.split(",");
+      String[] address = line.split("|");
       
       my_address_list.add(new Address(address[0],
           Integer.parseInt(address[1]), address[2],
@@ -84,7 +84,7 @@ final class DataLoader {
     
     while (my_card_scanner.hasNextLine()) {
       String line = my_card_scanner.nextLine();
-      String[] card = line.split(",");
+      String[] card = line.split("|");
       
       String[] exp_string = card[1].split("/");
       Calendar exp_date = Calendar.getInstance();
@@ -98,10 +98,34 @@ final class DataLoader {
   }
   
   private static void loadBidList() {
-    
+    while (my_bid_scanner.hasNextLine()) {
+      String line = my_bid_scanner.nextLine();
+      String[] bid = line.split("|");
+      
+      String[] bid_string = bid[3].split("/");
+      Calendar bid_date = Calendar.getInstance();
+      bid_date.set(Integer.parseInt(bid_string[0]),
+          Integer.parseInt(bid_string[2]), Integer.parseInt(bid_string[3]),
+          Integer.parseInt(bid_string[4]), Integer.parseInt(bid_string[5]));
+      
+      my_bid_list.add(new Bid(bid[0], Double.parseDouble(bid[1]),
+          bid[2], bid_date, my_card_list.get(Integer.parseInt(bid[4]))));
+    }
   }
   
   private static void loadItemList() {
+    while (my_item_scanner.hasNextLine()) {
+      String line = my_item_scanner.nextLine();
+      String[] item = line.split("|");
+      
+      Item the_item = new Item(item[0], Double.parseDouble(item[1]), 
+          item[2], item[3], item[4], 
+          item[5], item[6], item[7], item[8], item[9]);
+      
+      
+      
+      
+    }
     
   }
   
