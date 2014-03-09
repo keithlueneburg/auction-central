@@ -155,7 +155,6 @@ public class AuctionCentralSystem implements Observer {
    * All of the past auction would be removed.
    */
   public List<Auction> getAuctionList() {
-    
     return my_auction;
   }
   
@@ -165,7 +164,6 @@ public class AuctionCentralSystem implements Observer {
    * @author Keith Lueneburg
    */
   public List<Auction> getPastAuctionList() {
-    
     return my_past_auction;
   }
   
@@ -223,11 +221,12 @@ public class AuctionCentralSystem implements Observer {
    * All Auctions in the list are in the future
    */
   private void refreshAuction() {
+
     final Calendar today = Calendar.getInstance();
     final int today_year = today.get(Calendar.YEAR);
     final int today_month = today.get(Calendar.MONTH) + 1;
     final int today_day = today.get(Calendar.DATE);
-    List<Auction> remove_auction = new ArrayList<Auction>();
+    final List<Auction> remove_auction = new ArrayList<Auction>();
     
     for (Auction each: my_auction) {
       final Calendar auction_date = each.getAuctionDate();
@@ -239,7 +238,8 @@ public class AuctionCentralSystem implements Observer {
           (today_year == auction_year && today_month == auction_month
           && today_day == auction_day)) { // if the auction is on today
         
-        my_past_auction.add(each);
+        Auction past = each;
+        my_past_auction.add(past);
         remove_auction.add(each);
       }
     }
