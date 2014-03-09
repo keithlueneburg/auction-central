@@ -55,8 +55,10 @@ public final class Address {
    * @param a_zip - the zipcode.
    * @param a_state_list - the list of states.
    */
-  public Address(final String a_street, final int an_apt, final String a_city, 
-      final String a_state, final int a_zip, final List<String> a_state_list) {
+  //public Address(final String a_street, final int an_apt, final String a_city, 
+     //final String a_state, final int a_zip, final List<String> a_state_list) {
+    public Address(final String a_street, final int an_apt, final String a_city, 
+      final String a_state, final int a_zip) {
     my_street = a_street;
     if (an_apt != 0) {
       my_apt = an_apt;
@@ -66,7 +68,7 @@ public final class Address {
     my_city = a_city;
     my_state = a_state;
     my_zip = a_zip;
-    my_state_list = a_state_list;
+    //my_state_list = a_state_list;
   }
 
   /**

@@ -119,7 +119,7 @@ public class AuctionCentralSystem {
    * This method load all the data after starting the system
    */
   public void loadingData() {
-    
+    DataLoader.loadData(my_users, my_auction);
   }
   
   /**

@@ -22,6 +22,11 @@ import javax.swing.ListCellRenderer;
 import auction.Auction;
 import auction.Item;
 
+/**
+ * 
+ * @author Kaiyuan Shi
+ *
+ */
 public class InventoryPanel extends JPanel {
 
   List<Item> my_item_list;

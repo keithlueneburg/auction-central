@@ -68,7 +68,7 @@ public final class CreditCard {
   /**
    * The bank this card belongs to.
    */
-  private Bank my_bank;
+  private String my_bank;
 
   /**
    * Create a new CreditCard object.
@@ -96,7 +96,7 @@ public final class CreditCard {
    */
   public CreditCard(final long a_card_num, final Calendar an_exp_date,
       final int a_csc, final String a_card_holder, final Address an_address,
-      final Bank a_bank) throws IllegalArgumentException {
+      final String a_bank) throws IllegalArgumentException {
 
     // Validation is handled by individual setters
     setCardNum(a_card_num);
@@ -149,7 +149,7 @@ public final class CreditCard {
   /**
    * @return The bank.
    */
-  public Bank getBank() {
+  public String getBank() {
     return my_bank;
   }
 
@@ -244,7 +244,7 @@ public final class CreditCard {
    * @throws IllegalArgumentException
    *           Throws exception in the case of invalid parameters.
    */
-  private void setBank(final Bank a_bank) throws IllegalArgumentException {
+  private void setBank(final String a_bank) throws IllegalArgumentException {
     if (a_bank == null) {
       throw new IllegalArgumentException("Bank cannot be null.");
     } else {

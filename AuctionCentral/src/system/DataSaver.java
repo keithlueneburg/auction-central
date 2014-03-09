@@ -3,6 +3,7 @@ package system;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -22,12 +23,12 @@ import bidding.CreditCard;
  */
 final class DataSaver {
 
-  private static List<AbstractUser> my_user_list;
-  private static List<Auction> my_auction_list;
-  private static List<Item> my_item_list;
-  private static List<Bid> my_bid_list;
-  private static List<Address> my_address_list;
-  private static List<CreditCard> my_card_list;
+  private static List<AbstractUser> my_user_list = new ArrayList<AbstractUser>();
+  private static List<Auction> my_auction_list = new ArrayList<Auction>();
+  private static List<Item> my_item_list = new ArrayList<Item>();
+  private static List<Bid> my_bid_list = new ArrayList<Bid>();
+  private static List<Address> my_address_list = new ArrayList<Address>();
+  private static List<CreditCard> my_card_list = new ArrayList<CreditCard>();
   
   private static PrintWriter my_user_writer = null;
   private static PrintWriter my_auction_writer = null;
@@ -79,16 +80,16 @@ final class DataSaver {
         output += printUser(output, each, my_user_writer);
         
         //card
-        output += "card" + my_card_list.size() + ",";
+        output += my_card_list.size() + ",";
         my_card_list.add(((Bidder) each).getCard());
         
         //address
-        output += "address" + my_address_list.size() + ",";
+        output += my_address_list.size() + ",";
         my_address_list.add(((Bidder) each).getAddress());
         
         //bids
         for (Bid each_bid: ((Bidder) each).getBids()) {
-          output += "bid" + my_bid_list.size() + ",";
+          output += my_bid_list.size() + ",";
           my_bid_list.add(each_bid);
         }
         
@@ -135,7 +136,7 @@ final class DataSaver {
       output += each.getComments() + ",";
       
       for (Item each_item: each.getItems()) {
-        output += "item" + my_item_list.size() + ",";
+        output += my_item_list.size() + ",";
         my_item_list.add(each_item);
       }
       
@@ -164,7 +165,7 @@ final class DataSaver {
       output += each.getSellingPrice() + ",";
       
       for (Bid each_bid: each.getBids()) {
-        output += "bid" + my_bid_list.size() + ",";
+        output += my_bid_list.size() + ",";
         my_bid_list.add(each_bid);
       }
       
@@ -189,7 +190,7 @@ final class DataSaver {
       output += bid_time.get(Calendar.HOUR_OF_DAY) + "/";
       output += bid_time.get(Calendar.MINUTE) + ",";
       
-      output += "card" + my_card_list.size() + ",";
+      output += my_card_list.size() + ",";
       my_card_list.add(each.getPayment());
       
       my_bid_writer.println(output);
@@ -210,10 +211,11 @@ final class DataSaver {
       
       output += each.getCSC() + ",";
       output += each.getCardHolder() + ",";
-      output += each.getBank() + ",";
       
-      output += "address" + my_address_list.size() + ",";
+      output += my_address_list.size() + ",";
       my_address_list.add(each.getAddress());
+      
+      output += each.getBank() + ",";
       
       my_card_writer.println(output);
     }
