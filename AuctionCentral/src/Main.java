@@ -55,8 +55,28 @@ public final class Main {
         AuctionCentralSystem system = new AuctionCentralSystem();
         
         User user = DEFAULT_STAFF_USER;
+        User login_user = null;
         
         boolean valid_login = false;
+//        while (!valid_login) {
+//          // show a JOptionPane to get the username.
+//          final String input_username = JOptionPane.showInputDialog(null, "Enter username: ", 
+//              "AuctionCentral Login", JOptionPane.QUESTION_MESSAGE);
+//          // if JOptionPane clicks 'cancel', exit
+//          if (input_username == null) {
+//            System.exit(0);
+//          } else if (input_username.equals("staff")) {
+//            user = DEFAULT_STAFF_USER;
+//          } else if (input_username.equals("nonprofit")) {
+//            user = DEFAULT_NPO_USER;
+//          } else if (AuctionCentralSystem.isValidUser_static(input_username)) {
+//          }
+//            valid_login = true;
+//          }
+//        final ApplicationFrame gui = new ApplicationFrame(user, system);
+//        gui.start();
+//        }
+        
         while (!valid_login) {
           // show a JOptionPane to get the username.
           final String input_username = JOptionPane.showInputDialog(null, "Enter username: ", 
@@ -64,15 +84,16 @@ public final class Main {
           // if JOptionPane clicks 'cancel', exit
           if (input_username == null) {
             System.exit(0);
-          } else if (input_username.equals("staff")) {
-            user = DEFAULT_STAFF_USER;
-          } else if (input_username.equals("nonprofit")) {
-            user = DEFAULT_NPO_USER;
-          } else if (AuctionCentralSystem.isValidUser(input_username)) {
+          } else {
+            login_user = system.isValidUser(input_username);
+          
+            if (login_user != null) {
+              valid_login = true;
+            }
           }
-            valid_login = true;
-          }
-        final ApplicationFrame gui = new ApplicationFrame(user, system);
+            
+        }
+        final ApplicationFrame gui = new ApplicationFrame(login_user, system);
         gui.start();
         }
         
