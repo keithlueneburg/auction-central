@@ -77,7 +77,7 @@ final class DataSaver {
       if (each instanceof Bidder) {
         
         output += "Bidder`";
-        output += printUser(output, each, my_user_writer);
+        printUser(output, each, my_user_writer);
         
         //card
         output += my_card_list.size() + "`";
@@ -95,10 +95,10 @@ final class DataSaver {
         
       } else if (each instanceof AuctionCentralStaff) {
         output += "AuctionCentralStaff`";
-        output += printUser(output, each, my_user_writer);
+        printUser(output, each, my_user_writer);
       } else {
         output += "NonProfitUser`";
-        output += printUser(output, each, my_user_writer);
+        printUser(output, each, my_user_writer);
       }
       my_user_writer.println(output);
     }
@@ -106,12 +106,13 @@ final class DataSaver {
   }
   
   //return out the basic message of a user
-  private static String printUser(String a_output, AbstractUser a_user, PrintWriter a_writer) {
+  private static void printUser(String a_output, AbstractUser a_user, PrintWriter a_writer) {
     String username = a_user.getUsername();
+    String password = a_user.getPassword();
     String first_name = a_user.getFirstName();
     String last_name = a_user.getLastName();
-    a_output += (username+ "`" + first_name+ "`" + last_name + "`");
-    return a_output;
+    a_output += (username+ "`" + password + "`");
+    a_output += (first_name+ "`" + last_name + "`");
   }
   
   //output auction.txt
@@ -120,7 +121,6 @@ final class DataSaver {
     for (Auction each: my_auction_list) {
       String output = "";
       
-      output += each.getAuctionNumber() + "`";
       output += each.getAuctionName() + "`";
       output += each.getContactPerson() + "`";
       output += each.getContactPhone() + "`";

@@ -83,4 +83,8 @@ public abstract class AbstractUser implements User {
   public String getUsername() {
     return my_username;
   }
+  
+  public String getPassword() {
+    return my_password;
+  }
 }

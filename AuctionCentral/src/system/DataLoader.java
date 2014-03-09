@@ -2,7 +2,6 @@ package system;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -11,6 +10,7 @@ import java.util.Scanner;
 import bidding.Address;
 import bidding.CreditCard;
 import user.AbstractUser;
+import user.Bidder;
 import auction.Auction;
 import auction.Bid;
 import auction.Item;
@@ -70,9 +70,9 @@ final class DataLoader {
   }
   
   private static void loadAddressList() {
-    while (my_user_scanner.hasNextLine()) {
-      String line = my_user_scanner.nextLine();
-      String[] address = line.split("|");
+    while (my_address_scanner.hasNextLine()) {
+      String line = my_address_scanner.nextLine();
+      String[] address = line.split("`");
       
       my_address_list.add(new Address(address[0],
           Integer.parseInt(address[1]), address[2],
@@ -84,7 +84,7 @@ final class DataLoader {
     
     while (my_card_scanner.hasNextLine()) {
       String line = my_card_scanner.nextLine();
-      String[] card = line.split("|");
+      String[] card = line.split("`");
       
       String[] exp_string = card[1].split("/");
       Calendar exp_date = Calendar.getInstance();
@@ -100,7 +100,7 @@ final class DataLoader {
   private static void loadBidList() {
     while (my_bid_scanner.hasNextLine()) {
       String line = my_bid_scanner.nextLine();
-      String[] bid = line.split("|");
+      String[] bid = line.split("`");
       
       String[] bid_string = bid[3].split("/");
       Calendar bid_date = Calendar.getInstance();
@@ -116,24 +116,68 @@ final class DataLoader {
   private static void loadItemList() {
     while (my_item_scanner.hasNextLine()) {
       String line = my_item_scanner.nextLine();
-      String[] item = line.split("|");
+      String[] item = line.split("`");
       
-      Item the_item = new Item(item[0], Double.parseDouble(item[1]), 
-          item[2], item[3], item[4], 
-          item[5], item[6], item[7], item[8], item[9]);
+      Item the_item = new Item(Integer.parseInt(item[0]), item[1],
+          Integer.parseInt(item[2]), Double.parseDouble(item[3]),
+          item[4], item[5], item[6], item[7], item[8], item[9]);
       
+      the_item.setSellingPrice(Double.parseDouble(item[10]));
       
+      for (int i = 11; i < item.length; i ++) {
+        the_item.addBid(my_bid_list.get(Integer.parseInt(item[i])));
+      }
       
-      
+      my_item_list.add(the_item);   
     }
     
   }
   
   private static void loadAuctionList() {
-    
+    while (my_auction_scanner.hasNextLine()) {
+      String line = my_auction_scanner.nextLine();
+      String[] auction = line.split("`");
+      
+      String[] auction_date_string = auction[4].split("/");
+      Calendar auction_date = Calendar.getInstance();
+      auction_date.set(Calendar.MONTH, Integer.parseInt(auction_date_string[0]));
+      auction_date.set(Calendar.DAY_OF_MONTH, Integer.parseInt(auction_date_string[1]));
+      auction_date.set(Calendar.YEAR, Integer.parseInt(auction_date_string[2]));
+      auction_date.set(Calendar.HOUR_OF_DAY, Integer.parseInt(auction_date_string[3]));
+      
+      my_auction_list.add(new Auction(auction[0], auction[1],
+          auction[2], auction[3], auction_date,
+          Integer.parseInt(auction[5]), auction[6]));  
+    }
   }
   
   private static void loadUserList() {
-    
+    while (my_user_scanner.hasNextLine()) {
+      String line = my_user_scanner.nextLine();
+      String[] user = line.split("`");
+      String username = user[1];
+      String password = user[2];
+      String first_name = user[3];
+      String last_name = user[4];
+      
+      if (user[0].equals("Bidder")) {
+        Bidder the_bidder = new Bidder(username, password, first_name, 
+            last_name, my_card_list.get(Integer.parseInt(user[5])), 
+                my_address_list.get(Integer.parseInt(user[6])));
+        
+        for (int i = 7; i < user.length; i++) {
+          the_bidder.addBid(my_bid_list.get(Integer.parseInt(user[i])));
+        }
+        
+      } else if (user[0].equals("AuctionCentralStaff")) {
+        
+      } else {
+        
+      }
+      
+      
+      
+      
+    }
   }
 }
