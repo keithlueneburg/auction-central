@@ -142,6 +142,16 @@ public class AuctionCentralSystem {
   }
   
   /**
+   * This method get the List of the past Auctions.
+   * @return a list of the past Auction
+   * @author Keith Lueneburg
+   */
+  public List<Auction> getPastAuctionList() {
+    refreshAuction();
+    return my_past_auction;
+  }
+  
+  /**
    * This method returns the current user.
    * @return the current user
    */
