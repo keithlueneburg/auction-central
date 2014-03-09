@@ -189,7 +189,7 @@ public class MenuPanel extends JPanel {
     my_calendar_button = new JButton(new AbstractAction("Calendar") {
       @Override
       public void actionPerformed(final ActionEvent the_event) {
-        my_application_frame.showCalender();
+        my_application_frame.showCalendar();
       }
     });
   }

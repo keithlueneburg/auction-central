@@ -27,6 +27,8 @@ import user.User;
  * Instructor: Dr. Adwoa Donyina
  * 
  * @author Kaiyuan Shi
+ * @author Keith Lueneburg
+ * 
  * @version 3/8/2014
  */
 public final class ApplicationFrame extends JFrame {
@@ -173,7 +175,7 @@ public final class ApplicationFrame extends JFrame {
   /**
    * Display the calendar in the content area.
    */
-  public void showCalender() {
-    replaceContentPanel(new CalendarPanel(my_system));
+  public void showCalendar() {
+    replaceContentPanel(new CalendarPanel(my_system, this));
   }
 }

@@ -1,23 +1,47 @@
+//TODO: Need to track past auctions too
+
 package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import auction.Auction;
+
 import system.AuctionCentralSystem;
 
+/**
+ * Class: CalendarPanel
+ * 
+ * The JPanel that contains the calendar view for the AuctionCentral program.
+ * 
+ * TCSS 360 - Software Development and Quality Assurance
+ * 
+ * University of Washington, Tacoma
+ * 
+ * Winter 2014
+ * 
+ * Instructor: Dr. Adwoa Donyina
+ * 
+ * @author Keith Lueneburg
+ * 
+ * @version 3/8/2014
+ */
 public class CalendarPanel extends JPanel {
 
   /**
@@ -43,11 +67,14 @@ public class CalendarPanel extends JPanel {
   private JPanel my_calendar_display_panel;
 
   private JLabel my_title_label;
+
+  private ApplicationFrame my_app_frame;
   
   
   
-  public CalendarPanel(final AuctionCentralSystem the_system) {
+  public CalendarPanel(final AuctionCentralSystem the_system, final ApplicationFrame the_app_frame) {
     my_system = the_system;
+    my_app_frame = the_app_frame;
     
     Calendar todays_date = Calendar.getInstance();
     my_current_month = todays_date.get(Calendar.MONTH);
@@ -58,12 +85,7 @@ public class CalendarPanel extends JPanel {
     
     add(my_info_panel, BorderLayout.NORTH);
     add(my_calendar_display_panel, BorderLayout.CENTER);
-    
-    
-
   }
-
-
 
   private JPanel getCalendarDisplayPanel(final Calendar the_calendar) {
     JPanel calendar = new JPanel();
@@ -83,9 +105,9 @@ public class CalendarPanel extends JPanel {
     // TODO: month specific stuff here
     // Add an empty JPanel to the grid, for days before the month starts.
     for (int i = 0; i < first_day_of_week; i++) {
-      JPanel empty_panel = new JPanel();
+      final JPanel empty_panel = new JPanel();
       empty_panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-      calendar.add(empty_panel );
+      calendar.add(empty_panel);
     }
     
     
@@ -124,19 +146,43 @@ public class CalendarPanel extends JPanel {
     
     day_panel.add(label_panel, BorderLayout.NORTH);
     
-    day_panel.add(new JButton("Auction1"), BorderLayout.CENTER);
-    day_panel.add(new JButton("Auction2"), BorderLayout.CENTER);
-    //for (Auction a : my_system.getAuctionsForDay(the_date))
+    List<Auction> auctions_on_this_day = getAuctionsOnDay(the_date);
     
-    
+    for (final Auction the_auction : auctions_on_this_day) {
+      JButton auction_button = new JButton((new AbstractAction(the_auction.getAuctionName()) {
+        @Override
+        public void actionPerformed(final ActionEvent the_event) {
+          my_app_frame.showAuctionInfo(the_auction, false);
+        }
+      }));
+      auction_button.setPreferredSize(new Dimension(95, 20));
+      day_panel.add((auction_button), BorderLayout.CENTER);
+    }
     
     return day_panel;
   }
 
 
 
+  private List<Auction> getAuctionsOnDay(final Calendar the_date) {
+    final List<Auction> all_auctions = my_system.getAuctionList();
+    
+    final List<Auction> day_auctions = new ArrayList<Auction>();
+    
+    for (Auction auction : all_auctions) {
+      if (auction.getAuctionDate().get(Calendar.YEAR) == the_date.get(Calendar.YEAR) 
+          && auction.getAuctionDate().get(Calendar.MONTH) == the_date.get(Calendar.MONTH)
+          && auction.getAuctionDate().get(Calendar.DAY_OF_MONTH) == the_date.get(Calendar.DAY_OF_MONTH)) {
+        day_auctions.add(auction);
+      }
+    }
+    return day_auctions;
+  }
+
+
+
   private JPanel getInfoPanel() {
-    JPanel info = new JPanel();
+    final JPanel info = new JPanel();
     info.setPreferredSize(new Dimension(824, 50));
     info.setLayout(new FlowLayout());
     
@@ -189,7 +235,6 @@ public class CalendarPanel extends JPanel {
       my_current_year++;
     }
     
-    
     current_display_calendar.set(Calendar.YEAR, my_current_year);
     current_display_calendar.set(Calendar.MONTH, my_current_month);
     
@@ -197,26 +242,25 @@ public class CalendarPanel extends JPanel {
     my_calendar_display_panel = getCalendarDisplayPanel(current_display_calendar);
     add(my_calendar_display_panel, BorderLayout.CENTER);
     
-    repaint();
+    //repaint();
   }
 
-
-
-  protected void previousMonth() {
+  /**
+   * Replace the calendar display with the previous month. 
+   */
+  private void previousMonth() {
  // TODO Auto-generated method stub
     removeCurrentMonth();
     
-    Calendar current_display_calendar = new GregorianCalendar();
+    final Calendar current_display_calendar = new GregorianCalendar();
     
     my_current_month--;
     
-    if(my_current_month == -1) {
-      my_current_month = 11;
+    if (my_current_month == -1) {
+      my_current_month = Calendar.DECEMBER;
       my_current_year--;
     }
     
-    
-
     current_display_calendar.set(Calendar.YEAR, my_current_year);
     current_display_calendar.set(Calendar.MONTH, my_current_month);
     
@@ -224,13 +268,13 @@ public class CalendarPanel extends JPanel {
     my_calendar_display_panel = getCalendarDisplayPanel(current_display_calendar);
     add(my_calendar_display_panel, BorderLayout.CENTER);
     
-    repaint();
+    //repaint();
   }
 
-
-
+  /**
+   * Removes the current month's display panel.
+   */
   private void removeCurrentMonth() {
-    // TODO Auto-generated method stub
     remove(my_calendar_display_panel);
   }
 }
