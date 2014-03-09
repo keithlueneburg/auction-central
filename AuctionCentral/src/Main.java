@@ -1,6 +1,7 @@
 import gui.ApplicationFrame;
 
 import java.awt.EventQueue;
+import java.util.Observable;
 
 import javax.swing.JOptionPane;
 
@@ -58,24 +59,7 @@ public final class Main {
         User login_user = null;
         
         boolean valid_login = false;
-//        while (!valid_login) {
-//          // show a JOptionPane to get the username.
-//          final String input_username = JOptionPane.showInputDialog(null, "Enter username: ", 
-//              "AuctionCentral Login", JOptionPane.QUESTION_MESSAGE);
-//          // if JOptionPane clicks 'cancel', exit
-//          if (input_username == null) {
-//            System.exit(0);
-//          } else if (input_username.equals("staff")) {
-//            user = DEFAULT_STAFF_USER;
-//          } else if (input_username.equals("nonprofit")) {
-//            user = DEFAULT_NPO_USER;
-//          } else if (AuctionCentralSystem.isValidUser_static(input_username)) {
-//          }
-//            valid_login = true;
-//          }
-//        final ApplicationFrame gui = new ApplicationFrame(user, system);
-//        gui.start();
-//        }
+
         
         while (!valid_login) {
           // show a JOptionPane to get the username.
@@ -93,11 +77,61 @@ public final class Main {
           }
             
         }
+        
+        RoleNotifier user_type_notifier = new RoleNotifier(system);
+        user_type_notifier.changeRole(login_user);
+        
         final ApplicationFrame gui = new ApplicationFrame(login_user, system);
         gui.start();
-        }
+        
+        
+        
+        
+        
+//      while (!valid_login) {
+//      // show a JOptionPane to get the username.
+//      final String input_username = JOptionPane.showInputDialog(null, "Enter username: ", 
+//          "AuctionCentral Login", JOptionPane.QUESTION_MESSAGE);
+//      // if JOptionPane clicks 'cancel', exit
+//      if (input_username == null) {
+//        System.exit(0);
+//      } else if (input_username.equals("staff")) {
+//        user = DEFAULT_STAFF_USER;
+//      } else if (input_username.equals("nonprofit")) {
+//        user = DEFAULT_NPO_USER;
+//      } else if (AuctionCentralSystem.isValidUser_static(input_username)) {
+//      }
+//        valid_login = true;
+//      }
+//    final ApplicationFrame gui = new ApplicationFrame(user, system);
+//    gui.start();
+//    }
+      }
         
       });
-    }
   }
+  
+  
+}
+
+/**
+ * Changes the user role currently logged in to the system.
+ * 
+ * @author Keith Lueneburg
+ * @version 3/9/2014
+ *
+ */
+final class RoleNotifier extends Observable {
+
+  public RoleNotifier(final AuctionCentralSystem the_system) {
+    // TODO Auto-generated constructor stub
+    addObserver(the_system);
+  }
+  
+  void changeRole(User the_user) {
+    setChanged();
+    notifyObservers(the_user);
+  }
+  
+}
 

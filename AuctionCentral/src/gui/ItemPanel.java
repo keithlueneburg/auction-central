@@ -24,6 +24,7 @@ import javax.swing.border.Border;
 import auction.Auction;
 import system.AuctionCentralSystem;
 import user.Bidder;
+import user.User;
 import auction.Item;
 
 public class ItemPanel extends JPanel {

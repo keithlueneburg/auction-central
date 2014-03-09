@@ -11,9 +11,13 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+
+
 
 
 
@@ -32,7 +36,7 @@ import user.User;
  * @author Kaiyuan Shi
  * @version Win. 2014
  */
-public class AuctionCentralSystem {
+public class AuctionCentralSystem implements Observer {
   
   /**
    * The list of users in the system.
@@ -42,7 +46,7 @@ public class AuctionCentralSystem {
   /**
    * The current user who use the system.
    */
-  private AbstractUser my_current_user;
+  private User my_current_user;
   
   /**
    * A list of current auction in the system.
@@ -168,7 +172,7 @@ public class AuctionCentralSystem {
    * This method returns the current user.
    * @return the current user
    */
-  public AbstractUser getCurrentUser() {
+  public User getCurrentUser() {
     return my_current_user;
   }
    
@@ -304,6 +308,14 @@ public class AuctionCentralSystem {
       }
     }
     return is_valid;
+  }
+
+  @Override
+  public void update(final Observable the_observable, final Object the_arg) {
+    // TODO Auto-generated method stub
+    if (the_arg instanceof User) {
+      my_current_user = (User) the_arg;
+    }
   }
   
 }
