@@ -137,7 +137,7 @@ public class AuctionPanel extends JPanel {
   private final JButton my_back = new JButton("Back");
   
   /** The text area used to go add comments. */
-  private final JTextField my_text = new JTextField(20);
+  private final JTextField my_comments_input = new JTextField(20);
  
   /**
    * A reference to the main application frame.
@@ -253,6 +253,8 @@ public class AuctionPanel extends JPanel {
     my_current_input.setEditable(the_edit_flag);
     my_anticipated_input.setEditable(the_edit_flag);
     
+    my_save.setVisible(the_edit_flag);
+    
   }
 
   /**
@@ -288,7 +290,7 @@ public class AuctionPanel extends JPanel {
     final Integer j = my_items;
     my_current_input.setText(j.toString());
     my_anticipated_input.setText(j.toString());
-    my_text.setText(my_comment);
+    my_comments_input.setText(my_comment);
     
     allowEdits(false);
   }
@@ -436,7 +438,7 @@ public class AuctionPanel extends JPanel {
     center.add(west, BorderLayout.CENTER);
 
     southcomment.add(my_auction_comments);
-    southcomment.add(my_text);
+    southcomment.add(my_comments_input);
     southcomment.add(my_save);
     south.add(southcomment, BorderLayout.CENTER);
     
@@ -487,7 +489,7 @@ public class AuctionPanel extends JPanel {
     my_auction.setAuctionDate(createDate());
     final int i = Integer.parseInt(my_duration_input.getText().trim());
     my_auction.setAuctionDuration(i);    
-    my_auction.setComments(my_auction_comments.getText().trim());
+    my_auction.setComments(my_comments_input.getText().trim());
     
     final String is_success = my_system.addAuction(my_auction);
     if (is_success == null) {
@@ -558,7 +560,7 @@ public class AuctionPanel extends JPanel {
             "Error", JOptionPane.ERROR_MESSAGE);
         return Calendar.getInstance();
       }
-      
+      //TODO: Auction start time should not be hard-coded 9
       cal.set(year, month - 1, day, 9, 0);
     } catch (final NumberFormatException e) {
       JOptionPane.showMessageDialog(null, 
