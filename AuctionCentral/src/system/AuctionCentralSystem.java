@@ -68,7 +68,6 @@ public class AuctionCentralSystem {
     my_users = new ArrayList<AbstractUser>();
     
     loadingData();
-    System.out.println(my_users.size());
     
     //*************************************
     //for demo and test
