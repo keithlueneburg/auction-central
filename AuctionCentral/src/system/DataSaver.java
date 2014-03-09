@@ -96,6 +96,12 @@ final class DataSaver {
   private static final String CALENDAR_SEPARATOR = "/";
   
   /**
+   * The location of all the calendar data.
+   */
+  //private static final String DATA_LOCATION = "data/";
+  private static final String DATA_LOCATION = "databackup/";
+  
+  /**
    * The default constructor that can not be called.
    */
   private DataSaver() { }
@@ -115,12 +121,12 @@ final class DataSaver {
     my_auction_list = an_auction_list;
     
     try {
-      my_user_writer = new PrintWriter(new FileOutputStream("data/user.txt"));
-      my_auction_writer = new PrintWriter(new FileOutputStream("data/auction.txt"));
-      my_item_writer = new PrintWriter(new FileOutputStream("data/item.txt"));
-      my_bid_writer = new PrintWriter(new FileOutputStream("data/bid.txt"));
-      my_card_writer = new PrintWriter(new FileOutputStream("data/card.txt"));
-      my_address_writer = new PrintWriter(new FileOutputStream("data/address.txt"));
+      my_user_writer = new PrintWriter(new FileOutputStream(DATA_LOCATION + "user.txt"));
+      my_auction_writer = new PrintWriter(new FileOutputStream(DATA_LOCATION + "auction.txt"));
+      my_item_writer = new PrintWriter(new FileOutputStream(DATA_LOCATION + "item.txt"));
+      my_bid_writer = new PrintWriter(new FileOutputStream(DATA_LOCATION + "bid.txt"));
+      my_card_writer = new PrintWriter(new FileOutputStream(DATA_LOCATION + "card.txt"));
+      my_address_writer = new PrintWriter(new FileOutputStream(DATA_LOCATION + "address.txt"));
       
     } catch (final FileNotFoundException ex) {
       System.out.println(ex.getMessage());
