@@ -84,7 +84,7 @@ public final class ApplicationFrame extends JFrame {
     
     my_system = the_system;
     my_content_panel = new JPanel();
-    my_menu_panel = new MenuPanel(a_user, this);
+    my_menu_panel = new MenuPanel(a_user, this, the_system);
     
     addWindowListener(new MyWindowListener());
 
