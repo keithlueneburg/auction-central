@@ -534,7 +534,7 @@ public class AuctionPanel extends JPanel {
         is_valid_date = false;
       } else if (month == 2) {
         if ((year % 4 == 0 && year % 100 != 0)
-          || year % 400 == 0) { //lead year
+          || year % 400 == 0) { //leap year
           if (day <= 0 || day > 29) { 
             is_valid_date = false;
           }

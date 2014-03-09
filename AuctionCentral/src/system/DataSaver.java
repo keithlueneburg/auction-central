@@ -220,6 +220,7 @@ final class DataSaver {
     
     for (Auction each: my_auction_list) {
       String output = "";
+      String comments = each.getComments();
       
       output += each.getAuctionName() + DATA_SEPARATOR;
       output += each.getContactPerson() + DATA_SEPARATOR;
@@ -233,7 +234,11 @@ final class DataSaver {
       output += auction_date.get(Calendar.HOUR_OF_DAY) + DATA_SEPARATOR;
       
       output += each.getAuctionDuration() + DATA_SEPARATOR;
-      output += each.getComments() + DATA_SEPARATOR;
+      
+      if ("".equals(comments)) {
+        comments = " ";
+      }
+      output += comments + DATA_SEPARATOR;
       
       for (Item each_item: each.getItems()) {
         output += my_item_list.size() + DATA_SEPARATOR;

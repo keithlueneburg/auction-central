@@ -157,7 +157,7 @@ public class ItemPanel extends JPanel {
    */
   public ItemPanel(final Item the_item, final ApplicationFrame the_frame,
       final Auction the_auction, final AuctionCentralSystem the_system,
-      final boolean an_editable) {	
+      final boolean an_editable) {
     super(new BorderLayout());
 
     my_system = the_system;
