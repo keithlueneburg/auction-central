@@ -118,7 +118,7 @@ public class CalendarPanel extends JPanel {
     JPanel label_panel = new JPanel();
     label_panel.setLayout(new FlowLayout());
     
-    JLabel day_label = new JLabel(new Integer(the_date.get(Calendar.DAY_OF_MONTH)).toString());
+    JLabel day_label = new JLabel(" " + new Integer(the_date.get(Calendar.DAY_OF_MONTH)).toString() + " ");
     
     label_panel.add(day_label);
     
