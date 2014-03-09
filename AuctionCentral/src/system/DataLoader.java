@@ -1,5 +1,11 @@
 package system;
 
+import auction.Auction;
+import auction.Bid;
+import auction.Item;
+import bidding.Address;
+import bidding.CreditCard;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -7,42 +13,99 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
-import bidding.Address;
-import bidding.CreditCard;
 import user.AbstractUser;
+import user.AuctionCentralStaff;
 import user.Bidder;
-import auction.Auction;
-import auction.Bid;
-import auction.Item;
+import user.NonProfitUser;
+
 
 /**
- * This class load the data txt files to the system
+ * This class load the data txt files to the system.
  * @author kaiyuan Shi
- *
+ * @version Win. 2014
  */
 final class DataLoader {
   
+  /**
+   * The user list that would be saved.
+   */
   private static List<AbstractUser> my_user_list = new ArrayList<AbstractUser>();
+  
+  /**
+   * The auction list that would be saved.
+   */
   private static List<Auction> my_auction_list = new ArrayList<Auction>();
+  
+  /**
+   * The item list that would be saved.
+   */
   private static List<Item> my_item_list = new ArrayList<Item>();
+  
+  /**
+   * The bid list that would be saved.
+   */
   private static List<Bid> my_bid_list = new ArrayList<Bid>();
+  
+  /**
+   * The address list that would be saved.
+   */
   private static List<Address> my_address_list = new ArrayList<Address>();
+  
+  /**
+   * The card list that would be saved.
+   */
   private static List<CreditCard> my_card_list = new ArrayList<CreditCard>();
   
-  private static Scanner my_user_scanner = null;
-  private static Scanner my_auction_scanner = null;
-  private static Scanner my_item_scanner = null;
-  private static Scanner my_bid_scanner = null;
-  private static Scanner my_address_scanner = null;
-  private static Scanner my_card_scanner = null;
+  /**
+   * The user.txt scanner.
+   */
+  private static Scanner my_user_scanner;
+  
+  /**
+   * The auction.txt scanner.
+   */
+  private static Scanner my_auction_scanner;
+  
+  /**
+   * The item.txt scanner.
+   */
+  private static Scanner my_item_scanner;
+  
+  /**
+   * The bid.txt scanner.
+   */
+  private static Scanner my_bid_scanner;
+  
+  /**
+   * The address.txt scanner.
+   */
+  private static Scanner my_address_scanner;
+  
+  /**
+   * The card.txt scanner.
+   */
+  private static Scanner my_card_scanner;
   
   /**
    * The separator of all the data.
    */
   private static final String DATA_SEPARATOR = " ` ";
   
-  public static void loadData(List<AbstractUser> the_user_list,
-      List<Auction> the_auction_list) {
+  /**
+   * The separator of all the calendar data.
+   */
+  private static final String CALENDAR_SEPARATOR = "/";
+  
+  /**
+   * The default constructor that can not be called.
+   */
+  private DataLoader() { }
+  
+  /**
+   * The static method that be called to read the data from txt files to the system.
+   * @param a_system the system that would be loaded
+   */
+  public static void loadData(final AuctionCentralSystem a_system) {
     
     try {
       my_user_scanner = new Scanner(new FileInputStream("data/user.txt"));
@@ -52,7 +115,7 @@ final class DataLoader {
       my_card_scanner = new Scanner(new FileInputStream("data/card.txt"));
       my_address_scanner = new Scanner(new FileInputStream("data/address.txt"));
       
-    } catch (FileNotFoundException ex) {
+    } catch (final FileNotFoundException ex) {
       System.out.println(ex.getMessage());
     }
     
@@ -70,15 +133,18 @@ final class DataLoader {
     my_address_scanner.close();
     my_card_scanner.close();
     
-    the_user_list = my_user_list;
-    the_auction_list = my_auction_list;
+    a_system.loadUser(my_user_list);
+    a_system.loadAuction(my_auction_list);
     
   }
   
+  /**
+   * This method load the address list from an address.txt file.
+   */
   private static void loadAddressList() {
     while (my_address_scanner.hasNextLine()) {
-      String line = my_address_scanner.nextLine();
-      String[] address = line.split(DATA_SEPARATOR);
+      final String line = my_address_scanner.nextLine();
+      final String[] address = line.split(DATA_SEPARATOR);
       
       my_address_list.add(new Address(address[0],
           Integer.parseInt(address[1]), address[2],
@@ -86,14 +152,17 @@ final class DataLoader {
     }
   }
   
+  /**
+   * This method load the credit card list from an card.txt file.
+   */
   private static void loadCardList() {
     
     while (my_card_scanner.hasNextLine()) {
-      String line = my_card_scanner.nextLine();
-      String[] card = line.split(DATA_SEPARATOR);
+      final String line = my_card_scanner.nextLine();
+      final String[] card = line.split(DATA_SEPARATOR);
       
-      String[] exp_string = card[1].split("/");
-      Calendar exp_date = Calendar.getInstance();
+      final String[] exp_string = card[1].split(CALENDAR_SEPARATOR);
+      final Calendar exp_date = Calendar.getInstance();
       exp_date.set(Calendar.MONTH, Integer.parseInt(exp_string[0]));
       exp_date.set(Calendar.YEAR, Integer.parseInt(exp_string[1]));
       
@@ -103,13 +172,16 @@ final class DataLoader {
     }
   }
   
+  /**
+   * This method load the bid list from an bid.txt file.
+   */
   private static void loadBidList() {
     while (my_bid_scanner.hasNextLine()) {
-      String line = my_bid_scanner.nextLine();
-      String[] bid = line.split(DATA_SEPARATOR);
+      final String line = my_bid_scanner.nextLine();
+      final String[] bid = line.split(DATA_SEPARATOR);
       
-      String[] bid_string = bid[3].split("/");
-      Calendar bid_date = Calendar.getInstance();
+      final String[] bid_string = bid[3].split(CALENDAR_SEPARATOR);
+      final Calendar bid_date = Calendar.getInstance();
       bid_date.set(Integer.parseInt(bid_string[0]),
           Integer.parseInt(bid_string[2]), Integer.parseInt(bid_string[3]),
           Integer.parseInt(bid_string[4]), Integer.parseInt(bid_string[5]));
@@ -119,33 +191,39 @@ final class DataLoader {
     }
   }
   
+  /**
+   * This method load the item list from an item.txt file.
+   */
   private static void loadItemList() {
     while (my_item_scanner.hasNextLine()) {
-      String line = my_item_scanner.nextLine();
-      String[] item = line.split(DATA_SEPARATOR);
+      final String line = my_item_scanner.nextLine();
+      final String[] item = line.split(DATA_SEPARATOR);
       
-      Item the_item = new Item(Integer.parseInt(item[0]), item[1],
+      final Item this_item = new Item(Integer.parseInt(item[0]), item[1],
           Integer.parseInt(item[2]), Double.parseDouble(item[3]),
           item[4], item[5], item[6], item[7], item[8], item[9]);
       
-      the_item.setSellingPrice(Double.parseDouble(item[10]));
+      this_item.setSellingPrice(Double.parseDouble(item[10]));
       
-      for (int i = 11; i < item.length; i ++) {
-        the_item.addBid(my_bid_list.get(Integer.parseInt(item[i])));
+      for (int i = 11; i < item.length; i++) {
+        this_item.addBid(my_bid_list.get(Integer.parseInt(item[i])));
       }
       
-      my_item_list.add(the_item);   
+      my_item_list.add(this_item);   
     }
     
   }
   
+  /**
+   * This method load the auction list from an adauctiondress.txt file.
+   */
   private static void loadAuctionList() {
     while (my_auction_scanner.hasNextLine()) {
-      String line = my_auction_scanner.nextLine();
-      String[] auction = line.split(DATA_SEPARATOR);
+      final String line = my_auction_scanner.nextLine();
+      final String[] auction = line.split(DATA_SEPARATOR);
       
-      String[] auction_date_string = auction[4].split("/");
-      Calendar auction_date = Calendar.getInstance();
+      final String[] auction_date_string = auction[4].split(CALENDAR_SEPARATOR);
+      final Calendar auction_date = Calendar.getInstance();
       auction_date.set(Calendar.MONTH, Integer.parseInt(auction_date_string[0]));
       auction_date.set(Calendar.DAY_OF_MONTH, Integer.parseInt(auction_date_string[1]));
       auction_date.set(Calendar.YEAR, Integer.parseInt(auction_date_string[2]));
@@ -157,33 +235,36 @@ final class DataLoader {
     }
   }
   
+  /**
+   * This method load the user list from an user.txt file.
+   */
   private static void loadUserList() {
     while (my_user_scanner.hasNextLine()) {
-      String line = my_user_scanner.nextLine();
-      String[] user = line.split(DATA_SEPARATOR);
-      String username = user[1];
-      String password = user[2];
-      String first_name = user[3];
-      String last_name = user[4];
+      final String line = my_user_scanner.nextLine();
+      final String[] user = line.split(DATA_SEPARATOR);
+      final String username = user[1];
+      final String password = user[2];
+      final String first_name = user[3];
+      final String last_name = user[4];
       
-      if (user[0].equals("Bidder")) {
-        Bidder the_bidder = new Bidder(username, password, first_name, 
+      if ("Bidder".equals(user[0])) {
+        final Bidder this_bidder = new Bidder(username, password, first_name, 
             last_name, my_card_list.get(Integer.parseInt(user[5])), 
                 my_address_list.get(Integer.parseInt(user[6])));
         
         for (int i = 7; i < user.length; i++) {
-          the_bidder.addBid(my_bid_list.get(Integer.parseInt(user[i])));
+          this_bidder.addBid(my_bid_list.get(Integer.parseInt(user[i])));
         }
         
-      } else if (user[0].equals("AuctionCentralStaff")) {
+        my_user_list.add(this_bidder);
         
+      } else if ("AuctionCentralStaff".equals(user[0])) {
+        my_user_list.add(new AuctionCentralStaff(username, password, 
+            first_name, last_name));
       } else {
-        
-      }
-      
-      
-      
-      
+        my_user_list.add(new NonProfitUser(username, password, 
+            first_name, last_name, user[5]));
+      }   
     }
   }
 }

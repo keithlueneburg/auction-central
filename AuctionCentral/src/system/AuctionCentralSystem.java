@@ -68,10 +68,11 @@ public class AuctionCentralSystem {
     my_users = new ArrayList<AbstractUser>();
     
     loadingData();
+    System.out.println(my_users.size());
     
     //*************************************
     //for demo and test
-    for (int i = 0; i < 15; i++) {
+    /*for (int i = 0; i < 15; i++) {
       
       //add 15 non-profit users
       my_users.add(new NonProfitUser("username" + i, "password" + i, "first name" + i,
@@ -108,18 +109,28 @@ public class AuctionCentralSystem {
     //add one auction on the last user used to test BR #5
     ((NonProfitUser) my_users.get(14)).getAuction().add(demo_auction_4_30);
     
-    my_current_user = my_users.get(0);
+    my_current_user = my_users.get(0);*/
     //for demo and test
     //************************************
     
     
   }
   
+  public void loadUser(final List<AbstractUser> an_user_list) {
+    my_users = an_user_list;
+  }
+  
+  public void loadAuction(final List<Auction> an_auction_list) {
+    my_auction = an_auction_list;
+  }
+  
+  
+  
   /**
    * This method load all the data after starting the system
    */
   public void loadingData() {
-    DataLoader.loadData(my_users, my_auction);
+    DataLoader.loadData(this);
   }
   
   /**

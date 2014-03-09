@@ -3,7 +3,6 @@ package system;
 import auction.Auction;
 import auction.Bid;
 import auction.Item;
-
 import bidding.Address;
 import bidding.CreditCard;
 
@@ -17,6 +16,7 @@ import java.util.List;
 import user.AbstractUser;
 import user.AuctionCentralStaff;
 import user.Bidder;
+import user.NonProfitUser;
 
 /**
  * This class save all the system data to some txt files.
@@ -91,14 +91,23 @@ final class DataSaver {
   private static final String DATA_SEPARATOR = " ` ";
   
   /**
+   * The separator of all the calendar data.
+   */
+  private static final String CALENDAR_SEPARATOR = "/";
+  
+  /**
    * The default constructor that can not be called.
    */
   private DataSaver() { }
 
   /**
-   * The static method that be called to save the data to txt files.
+   * The static method that be called to save the data from the system to txt files.
    * @param a_user_list the user list that would be saved
    * @param an_auction_list the auction list that would be saved
+   * <dt><b>Preconditions:</b><dd>
+   * The data in the system should meet all the business rules.
+   * <dt><b>Postconditions:</b><dd>
+   * All of the data would be saved into 6 txt files.
    */
   public static void saveData(final List<AbstractUser> a_user_list,
       final List<Auction> an_auction_list) {
@@ -134,7 +143,10 @@ final class DataSaver {
   }
   
   /**
+   * This method save the user list to an user.txt file.
+   * <dt><b>Preconditions:</b><dd>
    * 
+   * <dt><b>Postconditions:</b><dd>
    */
   private static void outputUserLists() {
     for (AbstractUser each: my_user_list) {
@@ -143,7 +155,7 @@ final class DataSaver {
       if (each instanceof Bidder) {
         
         output += "Bidder" + DATA_SEPARATOR;
-        output += printUser(output, each, my_user_writer);
+        output += printUser(each);
         
         //card
         output += my_card_list.size() + DATA_SEPARATOR;
@@ -161,28 +173,43 @@ final class DataSaver {
         
       } else if (each instanceof AuctionCentralStaff) {
         output += "AuctionCentralStaff" + DATA_SEPARATOR;
-        output += printUser(output, each, my_user_writer);
+        output += printUser(each);
       } else {
         output += "NonProfitUser" + DATA_SEPARATOR;
-        output += printUser(output, each, my_user_writer);
+        output += printUser(each);
+        output += ((NonProfitUser) each).getOrganization();
       }
       my_user_writer.println(output);
     }
     
   }
   
-  //return out the basic message of a user
-  private static String printUser(String a_output, AbstractUser a_user, PrintWriter a_writer) {
-    String username = a_user.getUsername();
-    String password = a_user.getPassword();
-    String first_name = a_user.getFirstName();
-    String last_name = a_user.getLastName();
-    a_output += (username+ DATA_SEPARATOR + password + DATA_SEPARATOR);
-    a_output += (first_name+ DATA_SEPARATOR + last_name + DATA_SEPARATOR);
-    return a_output;
+  /**
+   * This method add the user name, password, first name
+   * and last name information to the output string.
+   * @param a_output the output string
+   * @param a_user the user that would be output
+   * @return a output string that the user name, password, first name
+   *  and last name information have been added
+   * <dt><b>Preconditions:</b><dd>
+   * <dt><b>Postconditions:</b><dd>
+   */
+  private static String printUser(final  AbstractUser a_user) {
+    String ret = "";
+    final String username = a_user.getUsername();
+    final String password = a_user.getPassword();
+    final String first_name = a_user.getFirstName();
+    final  String last_name = a_user.getLastName();
+    ret += username + DATA_SEPARATOR + password + DATA_SEPARATOR;
+    ret += first_name + DATA_SEPARATOR + last_name + DATA_SEPARATOR;
+    return ret;
   }
   
-  //output auction.txt
+  /**
+   * This method save the auction list to an auction.txt file.
+   * <dt><b>Preconditions:</b><dd>
+   * <dt><b>Postconditions:</b><dd>
+   */
   private static void outputAuctionLists() {
     
     for (Auction each: my_auction_list) {
@@ -193,10 +220,10 @@ final class DataSaver {
       output += each.getContactPhone() + DATA_SEPARATOR;
       output += each.getIntakePerson() + DATA_SEPARATOR;
       
-      Calendar auction_date = each.getAuctionDate();  
-      output += auction_date.get(Calendar.MONTH) + "/";
-      output += auction_date.get(Calendar.DAY_OF_MONTH) + "/";
-      output += auction_date.get(Calendar.YEAR) + "/";
+      final Calendar auction_date = each.getAuctionDate();  
+      output += auction_date.get(Calendar.MONTH) + CALENDAR_SEPARATOR;
+      output += auction_date.get(Calendar.DAY_OF_MONTH) + CALENDAR_SEPARATOR;
+      output += auction_date.get(Calendar.YEAR) + CALENDAR_SEPARATOR;
       output += auction_date.get(Calendar.HOUR_OF_DAY) + DATA_SEPARATOR;
       
       output += each.getAuctionDuration() + DATA_SEPARATOR;
@@ -213,7 +240,11 @@ final class DataSaver {
     
   }
   
-  //output item.txt
+  /**
+   * This method save the item list to an item.txt file.
+   * <dt><b>Preconditions:</b><dd>
+   * <dt><b>Postconditions:</b><dd>
+   */
   private static void outputItemLists() {
     
     for (Item each: my_item_list) {
@@ -241,7 +272,11 @@ final class DataSaver {
     
   }
   
-  //output bid.txt
+  /**
+   * This method save the bid list to an bid.txt file.
+   * <dt><b>Preconditions:</b><dd>
+   * <dt><b>Postconditions:</b><dd>
+   */
   private static void outputBidLists() {
     for (Bid each: my_bid_list) {
       String output = "";
@@ -250,11 +285,11 @@ final class DataSaver {
       output += each.getPrice() + DATA_SEPARATOR;
       output += each.getBidderName() + DATA_SEPARATOR;
       
-      Calendar bid_time = each.getBidTime();
-      output += bid_time.get(Calendar.MONTH) + "/";
-      output += bid_time.get(Calendar.DAY_OF_MONTH) + "/";
-      output += bid_time.get(Calendar.YEAR) + "/";
-      output += bid_time.get(Calendar.HOUR_OF_DAY) + "/";
+      final Calendar bid_time = each.getBidTime();
+      output += bid_time.get(Calendar.MONTH) + CALENDAR_SEPARATOR;
+      output += bid_time.get(Calendar.DAY_OF_MONTH) + CALENDAR_SEPARATOR;
+      output += bid_time.get(Calendar.YEAR) + CALENDAR_SEPARATOR;
+      output += bid_time.get(Calendar.HOUR_OF_DAY) + CALENDAR_SEPARATOR;
       output += bid_time.get(Calendar.MINUTE) + DATA_SEPARATOR;
       
       output += my_card_list.size() + DATA_SEPARATOR;
@@ -264,16 +299,20 @@ final class DataSaver {
     }
   }
   
-  //output card.txt
-  private static void  outputCardLists() {
+  /**
+   * This method save the credit card list to an card.txt file.
+   * <dt><b>Preconditions:</b><dd>
+   * <dt><b>Postconditions:</b><dd>
+   */
+  private static void outputCardLists() {
     
     for (CreditCard each: my_card_list) {
       String output = "";
       
       output += each.getCardNum() + DATA_SEPARATOR;
       
-      Calendar exp_date = each.getExpDate();
-      output += exp_date.get(Calendar.MONTH) + "/";
+      final Calendar exp_date = each.getExpDate();
+      output += exp_date.get(Calendar.MONTH) + CALENDAR_SEPARATOR;
       output += exp_date.get(Calendar.YEAR) + DATA_SEPARATOR;
       
       output += each.getCSC() + DATA_SEPARATOR;
@@ -289,7 +328,11 @@ final class DataSaver {
     
   }
   
-  //output address.txt
+  /**
+   * This method save the address list to an address.txt file.
+   * <dt><b>Preconditions:</b><dd>
+   * <dt><b>Postconditions:</b><dd>
+   */
   private static void outputAddressLists() {
     for (Address each: my_address_list) {
       String output = "";
