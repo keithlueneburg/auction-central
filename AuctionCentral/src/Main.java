@@ -1,12 +1,11 @@
 import gui.ApplicationFrame;
 
 import java.awt.EventQueue;
-<<<<<<< .mine
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-=======
+
 import java.util.Observable;
->>>>>>> .r119
 
 import javax.swing.JOptionPane;
 
