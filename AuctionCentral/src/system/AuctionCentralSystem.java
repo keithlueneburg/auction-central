@@ -22,8 +22,10 @@ import javax.swing.JOptionPane;
 
 
 
+
 import user.AbstractUser;
 import user.NonProfitUser;
+import user.User;
 
 /**
  * This class is the core system of the Auction Central System.
@@ -251,7 +253,29 @@ public class AuctionCentralSystem {
    * 
    * @return true if the user name is valid.
    */
-  public static boolean isValidUser(final String the_username) {
+  public User isValidUser(final String the_username) {
+    // TODO Once i/o is implemented, possibly change this to read from the main user data file.
+   
+    User valid_user = null;
+        
+    for (User u : my_users) {
+      if (u.getUsername().equals(the_username)) {
+        valid_user = u;
+        break;
+      }
+    }
+    
+    return valid_user;
+  }
+  
+  /**
+   * Checks to see if a given username exists in the system.
+   * 
+   * @param the_username The username to check.
+   * 
+   * @return true if the user name is valid.
+   */
+  public static boolean isValidUser_static(final String the_username) {
     // TODO Once i/o is implemented, possibly change this to read from the main user data file.
    
     boolean is_valid = false;
