@@ -1,7 +1,12 @@
 import gui.ApplicationFrame;
 
 import java.awt.EventQueue;
+<<<<<<< .mine
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+=======
 import java.util.Observable;
+>>>>>>> .r119
 
 import javax.swing.JOptionPane;
 
@@ -75,7 +80,7 @@ public final class Main {
               valid_login = true;
             }
           }
-            
+
         }
         
         RoleNotifier user_type_notifier = new RoleNotifier(system);
@@ -131,7 +136,10 @@ final class RoleNotifier extends Observable {
   void changeRole(User the_user) {
     setChanged();
     notifyObservers(the_user);
-  }
+  
+  
+  
+}
   
 }
 
