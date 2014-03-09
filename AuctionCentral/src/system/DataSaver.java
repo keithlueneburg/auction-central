@@ -199,12 +199,41 @@ final class DataSaver {
   //output card.txt
   private static void  outputCardLists() {
     
-    for (CreditCard each: my_card_list)
+    for (CreditCard each: my_card_list) {
+      String output = "";
+      
+      output += each.getCardNum() + ",";
+      
+      Calendar exp_date = each.getExpDate();
+      output += exp_date.get(Calendar.MONTH) + "/";
+      output += exp_date.get(Calendar.YEAR) + ",";
+      
+      output += each.getCSC() + ",";
+      output += each.getCardHolder() + ",";
+      output += each.getBank() + ",";
+      
+      output += "address" + my_address_list.size() + ",";
+      my_address_list.add(each.getAddress());
+      
+      my_card_writer.println(output);
+    }
     
   }
   
   //output address.txt
   private static void outputAddressLists() {
+    for (Address each: my_address_list) {
+      String output = "";
+      
+      output += each.getMyStreet() + ",";
+      output += each.getMyApt() + ",";
+      output += each.getMyCity() + ",";
+      output += each.getMyState() + ",";
+      output += each.getMyZip() + ",";
+      
+      my_address_writer.println(output);
+    }
+    
     
   }
   

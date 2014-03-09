@@ -110,14 +110,14 @@ public final class CreditCard {
   /**
    * @return The card number.
    */
-  private long getCardNum() {
+  public long getCardNum() {
     return my_card_num;
   }
 
   /**
    * @return The expiration date.
    */
-  private Calendar getExpDate() {
+  public Calendar getExpDate() {
 
     // TODO : return a defensive copy here
     return my_expiration_date;
@@ -126,21 +126,21 @@ public final class CreditCard {
   /**
    * @return The CSC code.
    */
-  private int getCSC() {
+  public int getCSC() {
     return my_csc;
   }
 
   /**
    * @return The card holder name.
    */
-  private String getCardHolder() {
+  public String getCardHolder() {
     return my_card_holder;
   }
 
   /**
    * @return The address.
    */
-  private Address getAddress() {
+  public Address getAddress() {
 
     // TODO : return a defensive copy once Address is complete.
     return my_address;
@@ -149,7 +149,7 @@ public final class CreditCard {
   /**
    * @return The bank.
    */
-  private Bank getBank() {
+  public Bank getBank() {
     return my_bank;
   }
 
