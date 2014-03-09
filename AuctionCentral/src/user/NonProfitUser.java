@@ -49,15 +49,6 @@ public class NonProfitUser extends AbstractUser {
   }
   
   /**
-   * Get the String representing the user's non-profit organization.
-   * 
-   * @return The organization.
-   */
-  public String getOrganization() {
-    return my_organization;
-  }
-  
-  /**
    * This method gets all the Auction this nonprofit user holds.
    * @return the auction list of this nonprofit user holds
    */
