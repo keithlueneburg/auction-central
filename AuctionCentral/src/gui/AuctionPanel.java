@@ -494,9 +494,20 @@ public class AuctionPanel extends JPanel {
     final String contact_person = my_contact_person_input.getText().trim();
     final String contact_phone = my_contact_phone_input.getText().trim();
     final String intake_person = my_intake_person_input.getText().trim();
+    final Calendar auction_date = createDate();
     
-    if (auction_name.length() > 0 && contact_person.length() > 0 && contact_phone.length() > 0 
-        && intake_person.length() > 0) {
+    
+    if (auction_name.length() <= 0 || contact_person.length() <= 0 || contact_phone.length() <= 0 
+        || intake_person.length() <= 0) {
+      JOptionPane.showMessageDialog(null, 
+          "Fields cannot be blank", 
+           "Error", JOptionPane.ERROR_MESSAGE);
+    } else if (auction_date == null) {
+      JOptionPane.showMessageDialog(null, 
+          "Invalid date", 
+           "Error", JOptionPane.ERROR_MESSAGE);
+    } else {
+      
       
       my_auction.setAuctionName(auction_name);
       my_auction.setContactPerson(contact_person);    
@@ -507,24 +518,18 @@ public class AuctionPanel extends JPanel {
       my_auction.setAuctionDuration(i);    
       my_auction.setComments(my_comments_input.getText().trim());
       
-    } else {
-      JOptionPane.showMessageDialog(null, 
-         "Fields cannot be blank", 
-          "Error", JOptionPane.ERROR_MESSAGE);
+      final String is_success = my_system.addAuction(my_auction);
+      if (is_success == null) {
+        my_app_frame.showAuctionList();
+        allowEdits(false);
+      } else {
+        JOptionPane.showMessageDialog(null, 
+            "error: " + is_success, 
+            "Error", JOptionPane.ERROR_MESSAGE);
+      }
     }
     
     
-    
-    
-    final String is_success = my_system.addAuction(my_auction);
-    if (is_success == null) {
-      my_app_frame.showAuctionList();
-      allowEdits(false);
-    } else {
-      JOptionPane.showMessageDialog(null, 
-          "error: " + is_success, 
-          "Error", JOptionPane.ERROR_MESSAGE);
-    }
   }
   
   /**
@@ -535,6 +540,16 @@ public class AuctionPanel extends JPanel {
     //add last auction on 2014-4-30 used to test BR #3
     final Calendar cal = Calendar.getInstance();
     final String str = my_auction_date_input.getText().trim();
+    
+    //TODO: if invalid time entered, defaults to 9:00
+    // default start time to 9:00
+    int start_time = 9;
+    
+    try {
+      String[] stra = my_start_time_input.getText().split(":");
+      start_time = Integer.parseInt(stra[0]);
+    } catch (final NumberFormatException nfe) {
+    }
     
     try {
       final String[] tokens = str.split("/");
@@ -585,9 +600,7 @@ public class AuctionPanel extends JPanel {
             "Error", JOptionPane.ERROR_MESSAGE);
         return Calendar.getInstance();
       }
-      //TODO: Auction start time should not be hard-coded 9
       
-      int start_time = Integer.parseInt(my_start_time_input.getText());
       cal.set(year, month - 1, day, start_time , 0);
     } catch (final NumberFormatException e) {
       JOptionPane.showMessageDialog(null, 
