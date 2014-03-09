@@ -1,6 +1,10 @@
 package system;
 
 import auction.Auction;
+import auction.Bid;
+import auction.Item;
+import bidding.Address;
+import bidding.CreditCard;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,6 +14,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+
+
+
+
 
 
 
@@ -117,6 +125,8 @@ public class AuctionCentralSystem {
    * This method save all the data before closing the system 
    */
   public void savingData() {
+    
+    DataSaver.saveData(a_user_list, an_auction_list);
     
   }
   
