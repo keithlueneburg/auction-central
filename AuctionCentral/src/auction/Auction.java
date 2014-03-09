@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
+
+import user.NonProfitUser;
 /**
  * 
  * @author Kevin Alexander
@@ -93,6 +95,14 @@ public class Auction {
     this("", "", "", "", new GregorianCalendar(), 0, "");
   }
 
+  /**
+   * Creates an auction assigned to the given user and their organization. 
+   */
+  public Auction(final NonProfitUser the_user) {
+    this(the_user.getOrganization(), the_user.getFirstName() + ' ' + the_user.getLastName(), "", "",
+        new GregorianCalendar(), 0, "");
+  }
+  
   // SETTERS
   /**
    * 

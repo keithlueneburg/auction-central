@@ -12,7 +12,6 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.util.List;
 
 import javax.swing.JButton;
@@ -21,6 +20,9 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
+
+import user.NonProfitUser;
+import user.User;
 
 /**
  * 
@@ -150,7 +152,14 @@ public class AuctionListPanel extends JPanel {
     create_button.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent an_event) {
         if (my_auction_list.size() < 25) {
-          my_app_frame.showAuctionInfo(new Auction(), true);
+          User current_user = my_app_frame.getSystem().getCurrentUser();
+          
+          // If current user is NPO user, make the new auction tied to the user/organization
+          if (current_user instanceof NonProfitUser) {
+            my_app_frame.showAuctionInfo(new Auction((NonProfitUser) current_user), true);
+          } else {
+            my_app_frame.showAuctionInfo(new Auction(), true);
+          }
         } else {
           create_button.setEnabled(false);
         }
