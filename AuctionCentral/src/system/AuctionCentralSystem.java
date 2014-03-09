@@ -144,6 +144,7 @@ public class AuctionCentralSystem implements Observer {
    */
   public void savingData() {
     
+    my_auction.addAll(my_past_auction);
     DataSaver.saveData(my_users, my_auction);
     
   }

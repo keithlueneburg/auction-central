@@ -183,7 +183,7 @@ final class DataSaver {
       } else {
         output += "NonProfitUser" + DATA_SEPARATOR;
         output += printUser(each);
-        output += ((NonProfitUser) each).getOrganization();
+        output += ((NonProfitUser) each).getOrganization() + DATA_SEPARATOR;
       }
       my_user_writer.println(output);
     }

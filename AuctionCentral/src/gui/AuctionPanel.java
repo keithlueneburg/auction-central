@@ -570,8 +570,6 @@ public class AuctionPanel extends JPanel {
         return Calendar.getInstance();
       }
       
-      
-  
       final int month = Integer.parseInt(tokens[0]);
       final int day = Integer.parseInt(tokens[1]);
       final int year = Integer.parseInt(tokens[2]);
