@@ -97,6 +97,12 @@ final class DataLoader {
   private static final String CALENDAR_SEPARATOR = "/";
   
   /**
+   * The location of all the calendar data.
+   */
+  //private static final String DATA_LOCATION = "data/";
+  private static final String DATA_LOCATION = "databackup/";
+  
+  /**
    * The default constructor that can not be called.
    */
   private DataLoader() { }
@@ -108,12 +114,12 @@ final class DataLoader {
   public static void loadData(final AuctionCentralSystem a_system) {
     
     try {
-      my_user_scanner = new Scanner(new FileInputStream("data/user.txt"));
-      my_auction_scanner = new Scanner(new FileInputStream("data/auction.txt"));
-      my_item_scanner = new Scanner(new FileInputStream("data/item.txt"));
-      my_bid_scanner = new Scanner(new FileInputStream("data/bid.txt"));
-      my_card_scanner = new Scanner(new FileInputStream("data/card.txt"));
-      my_address_scanner = new Scanner(new FileInputStream("data/address.txt"));
+      my_user_scanner = new Scanner(new FileInputStream(DATA_LOCATION + "user.txt"));
+      my_auction_scanner = new Scanner(new FileInputStream(DATA_LOCATION + "auction.txt"));
+      my_item_scanner = new Scanner(new FileInputStream(DATA_LOCATION + "item.txt"));
+      my_bid_scanner = new Scanner(new FileInputStream(DATA_LOCATION + "bid.txt"));
+      my_card_scanner = new Scanner(new FileInputStream(DATA_LOCATION + "card.txt"));
+      my_address_scanner = new Scanner(new FileInputStream(DATA_LOCATION + "address.txt"));
       
     } catch (final FileNotFoundException ex) {
       System.out.println(ex.getMessage());

@@ -5,6 +5,8 @@ import auction.Item;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -83,6 +85,8 @@ public final class ApplicationFrame extends JFrame {
     my_system = the_system;
     my_content_panel = new JPanel();
     my_menu_panel = new MenuPanel(a_user, this, my_system);
+    
+    addWindowListener(new MyWindowListener());
 
     setup();
   }
@@ -98,7 +102,7 @@ public final class ApplicationFrame extends JFrame {
 
     add(my_menu_panel, BorderLayout.WEST);
     replaceContentPanel(my_content_panel);
-
+    
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
@@ -180,5 +184,13 @@ public final class ApplicationFrame extends JFrame {
    */
   public void showCalendar() {
     replaceContentPanel(new CalendarPanel(my_system, this));
+  }
+  
+  
+  private class MyWindowListener extends WindowAdapter {
+    public void windowClosing(WindowEvent e) {
+      my_system.savingData();
+      System.exit(0);
+    }
   }
 }
