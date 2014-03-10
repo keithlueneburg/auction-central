@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
 
+import user.User;
 import auction.Auction;
 import auction.Item;
 
@@ -70,7 +71,9 @@ public class InventoryPanel extends JPanel {
   
   private Auction my_auction;
   
-  public InventoryPanel(final ApplicationFrame the_jframe, final Auction an_auction) {
+  private User my_user;
+  
+  public InventoryPanel(final ApplicationFrame the_jframe, final Auction an_auction, User a_user) {
     super();
     
     my_auction = an_auction;
@@ -78,6 +81,7 @@ public class InventoryPanel extends JPanel {
     my_app_frame = the_jframe;
     my_button_panel = new JPanel();
     my_label_panel = new JPanel();
+    my_user = a_user;
     
     configPanel();
     configLabels();
@@ -129,7 +133,17 @@ public class InventoryPanel extends JPanel {
      edit_button.addActionListener(new ActionListener() {
        public void actionPerformed(final ActionEvent an_event) {
          if (my_index >= 0) {
-           my_app_frame.showItem(my_item_list.get(my_index), my_auction, true);
+           
+           boolean editable = false;
+           String user_name = my_user.getFirstName() + " ";
+           user_name += my_user.getLastName();
+           
+           if (user_name.equals(my_auction.getContactPerson())) {
+             editable = true;
+           }
+           
+           my_app_frame.showItem(my_item_list.get(my_index), my_auction, editable);
+           
          }
        }
      });

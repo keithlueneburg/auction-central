@@ -161,7 +161,7 @@ public final class ApplicationFrame extends JFrame {
    *          The auction to display the inventory for.
    */
   public void showInventory(final Auction an_auction) {
-    replaceContentPanel(new InventoryPanel(this, an_auction));
+    replaceContentPanel(new InventoryPanel(this, an_auction, my_system.getCurrentUser()));
   }
 
   /**
