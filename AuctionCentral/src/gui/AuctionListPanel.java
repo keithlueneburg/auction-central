@@ -146,7 +146,10 @@ public class AuctionListPanel extends JPanel {
     });
     
     final JButton create_button = new JButton("Create");
-    if (my_auction_list.size() >= 25) {
+    // If too many auctions already or current user is not NPO user,
+    //make the new auction tied to the user/organization
+    if (my_auction_list.size() >= 25 
+        || !(my_app_frame.getSystem().getCurrentUser() instanceof NonProfitUser) ) {
       create_button.setEnabled(false);
     }
     create_button.addActionListener(new ActionListener() {
@@ -154,12 +157,8 @@ public class AuctionListPanel extends JPanel {
         if (my_auction_list.size() < 25) {
           User current_user = my_app_frame.getSystem().getCurrentUser();
           
-          // If current user is NPO user, make the new auction tied to the user/organization
-          if (current_user instanceof NonProfitUser) {
-            my_app_frame.showAuctionInfo(new Auction((NonProfitUser) current_user), true);
-          } else {
-            my_app_frame.showAuctionInfo(new Auction(), true);
-          }
+          my_app_frame.showAuctionInfo(new Auction((NonProfitUser) current_user), true);
+          
         } else {
           create_button.setEnabled(false);
         }
