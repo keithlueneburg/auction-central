@@ -298,6 +298,7 @@ public class ItemPanel extends JPanel {
         saveItem();
         if (!my_auction.getItems().contains(my_item)) {
           my_auction.addItem(my_item);
+          my_app_frame.showInventory(my_auction);
         }
       }
     });
@@ -322,7 +323,7 @@ public class ItemPanel extends JPanel {
    */	
   private void setButtonVisibility(final User a_user) {	
     if (!(a_user instanceof Bidder)) {	
-      my_bid_button.setVisible(false);	
+      my_bid_button.setVisible(false);
     }	
   }	
   
@@ -430,6 +431,7 @@ public class ItemPanel extends JPanel {
     my_item.setStorage(my_storage_input.getText().trim());
     my_item.setCondition(my_condition_input.getText().trim());
     my_item.setComments(my_text.getText().trim());
+    
     
   }
 }
