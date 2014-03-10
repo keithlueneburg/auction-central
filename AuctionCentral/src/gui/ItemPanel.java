@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.Calendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -20,11 +21,14 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import bidding.CreditCard;
 import auction.Auction;
+import auction.Bid;
 import system.AuctionCentralSystem;
 import user.AuctionCentralStaff;
 import user.Bidder;
@@ -154,6 +158,7 @@ public class ItemPanel extends JPanel {
   
   private final JButton my_bid_button = new JButton("Bid");
   
+  /** The button used to unseal the bid. */
   private final JButton my_unseal_button = new JButton("Unseal");
   
   private JFormattedTextField my_auction_name_input = new JFormattedTextField();
@@ -215,6 +220,7 @@ public class ItemPanel extends JPanel {
     createItem();
     setupSaveButton();
     setupBackButton();
+    setupUnsealButton();
     configurePanel(a_user);
     createItemLabels();
     allowEdits(an_editable);
@@ -315,6 +321,69 @@ public class ItemPanel extends JPanel {
         my_app_frame.showInventory(my_auction);
       }
     });
+  }
+  
+  private void setupUnsealButton() {
+    my_unseal_button.setMnemonic(KeyEvent.VK_U);
+    my_unseal_button.setToolTipText("Unseal the bids of this item");
+    my_unseal_button.addActionListener(new ActionListener() {
+      public void actionPerformed(final ActionEvent the_event) {
+        
+        Calendar unseal_time = (Calendar) my_auction.getAuctionDate().clone();
+        unseal_time.set(Calendar.HOUR_OF_DAY, 
+            unseal_time.get(Calendar.HOUR_OF_DAY) + my_auction.getAuctionDuration());
+        Calendar current = Calendar.getInstance();
+        
+        String message;
+        
+        if (current.compareTo(unseal_time) <= 0) {
+          //not the time
+          
+          message = "You can not unseal the bid unitl ";
+          message += (unseal_time.get(Calendar.MONTH) + 1) + "/";
+          message += unseal_time.get(Calendar.DAY_OF_MONTH) + "/";
+          message += unseal_time.get(Calendar.YEAR) + " ";
+          message += unseal_time.get(Calendar.HOUR_OF_DAY) + ":";
+          message += String.format("%02d", unseal_time.get(Calendar.MINUTE)) + "!";
+        } else {
+          
+          Bid win_bid = my_item.unsealBid();
+          
+          if (win_bid == null) {
+            //no win bid
+            message = "No one bid for this item.";
+          } else {
+            
+            //show win bid
+            CreditCard win_card = win_bid.getPayment();
+            Calendar card_exp = win_card.getExpDate();
+            String card_exp_str = (card_exp.get(Calendar.MONTH) + 1) + "/";
+            card_exp_str += card_exp.get(Calendar.YEAR);
+            
+            message = "Winner: " + win_bid.getBidderName() + "\n";
+            message += "Price: " + win_bid.getPrice() + "\n";
+            message += "Bid time: " + win_bid.getBidTime() + "\n";
+            message += "Credit Card #: " + win_card.getCardNum() + "\n";
+            message += "Exp Date: " + card_exp_str + "\n";
+            message += "Card CSC: " + win_card.getCSC();
+            
+          }
+          
+          
+        }
+        showMessage(message);
+        
+        
+        
+        
+        
+        
+      }
+    });
+  }
+  
+  private void showMessage(String a_message) {
+    JOptionPane.showMessageDialog(this, a_message);
   }
   
   /**	

@@ -237,6 +237,8 @@ final class DataLoader {
       auction_date.set(Calendar.DAY_OF_MONTH, Integer.parseInt(auction_date_string[1]));
       auction_date.set(Calendar.YEAR, Integer.parseInt(auction_date_string[2]));
       auction_date.set(Calendar.HOUR_OF_DAY, Integer.parseInt(auction_date_string[3]));
+      auction_date.set(Calendar.MINUTE, 0);
+      auction_date.set(Calendar.SECOND, 0);
       
       if (" ".equals(auction[6])) {
         auction[6] = "";

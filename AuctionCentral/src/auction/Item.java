@@ -364,7 +364,7 @@ public class Item {
    *          The password that is being entered.
    * @return Returns the highest bid.
    */
-  public Bid unsealBid(final String the_username, final String the_password) {
+  /*public Bid unsealBid(final String the_username, final String the_password) {
     Scanner input;
     Bid return_bid = null;
 
@@ -387,7 +387,7 @@ public class Item {
     return return_bid;
   }
 
-  /**
+  *//**
    * This is a private method that is used in the unsealBid() method. It takes
    * in a String containing the file location and attempts to assign a Scanner
    * object to it. The Scanner object is then returned. Precondition: The String
@@ -399,7 +399,7 @@ public class Item {
    *          A String object containing the file path of the username and
    *          password.
    * @return A Scanner object if the file was found and null otherwise.
-   */
+   *//*
   private Scanner getScanner(final String the_file_name) {
     Scanner temp = null;
 
@@ -410,7 +410,7 @@ public class Item {
     }
 
     return temp;
-  }
+  }*/
   
   /**
    * another verision of unseal bid
