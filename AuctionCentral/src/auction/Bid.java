@@ -7,7 +7,7 @@ import java.util.Date;
 
 import user.Bidder;
 
-public class Bid {
+public class Bid implements Comparable<Bid>{
   /**
    * Line separator.
    */
@@ -47,7 +47,18 @@ public class Bid {
   public CreditCard getPayment() {
     return my_payment;
   }
-  
+
+  @Override
+  public int compareTo(final Bid an_another_bid) {
+    if ((my_price - an_another_bid.getPrice()) < 0.01){
+      return my_bid_time.compareTo(an_another_bid.getBidTime());
+    } else if (my_price > an_another_bid.getPrice()) {
+      return -1;
+    } else {
+      return 1;
+    }
+  }
+
   //@Override
   /*public String toString() {
     String ret = "a bid has been made by: ";

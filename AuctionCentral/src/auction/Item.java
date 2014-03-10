@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -37,7 +39,7 @@ public class Item {
 
   private double my_selling_price;
 
-  private List<Bid> my_bids;
+  private Queue<Bid> my_bids;
 
   // //////////////////////////////////////////////////////////////////
   // CONSTRUCTORS
@@ -83,7 +85,8 @@ public class Item {
     my_photo_loc = the_photo_loc;
     my_selling_price = 0.0;
 
-    my_bids = new LinkedList<Bid>();
+    //my_bids = new LinkedList<Bid>();
+    my_bids = new PriorityQueue<Bid>();
   }
 
   /**
@@ -314,7 +317,7 @@ public class Item {
    * 
    * @return myBids The list of Bids.
    */
-  public List<Bid> getBids() {
+  public Queue<Bid> getBids() {
     return my_bids;
   }
 
@@ -419,7 +422,7 @@ public class Item {
    */
   public Bid unsealBid() {
     
-    Bid win_bid = null;
+    /*Bid win_bid = null;
     
     for (Bid each: my_bids) {
       if (win_bid == null
@@ -429,6 +432,10 @@ public class Item {
     }
     
     return win_bid;
+  }*/
+    
+    
+    return my_bids.poll();
   }
 
 }
