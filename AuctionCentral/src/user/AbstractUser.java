@@ -84,6 +84,11 @@ public abstract class AbstractUser implements User {
     return my_username;
   }
   
+  /**
+   * Returns the user's password.
+   * 
+   * @return my_password.
+   */
   public String getPassword() {
     return my_password;
   }

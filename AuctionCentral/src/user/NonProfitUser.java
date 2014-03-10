@@ -3,7 +3,6 @@ package user;
 import auction.Auction;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 
@@ -61,7 +60,7 @@ public class NonProfitUser extends AbstractUser {
    * organization name of this non-profit user.
    * @return the organization name of this non-profit user
    */
-  public String getOrganization () {
+  public String getOrganization() {
     return my_organization;
   }
 

@@ -512,11 +512,12 @@ public class AuctionPanel extends JPanel {
     final Calendar auction_date = createDate(start_time);
     
     // first check for empty strings
-    if (auction_name.length() <= 0 || contact_person.length() <= 0 || contact_phone.length() <= 0 
+    if (auction_name.length() <= 0 || contact_person.length() <= 0 
+        || contact_phone.length() <= 0 
         || intake_person.length() <= 0) {
       JOptionPane.showMessageDialog(null, 
           "Fields cannot be blank", 
-           "Error", JOptionPane.ERROR_MESSAGE);
+          "Error", JOptionPane.ERROR_MESSAGE);
       
     // then check for a bad date
     } else if (auction_date == null) {
@@ -527,8 +528,8 @@ public class AuctionPanel extends JPanel {
       // make sure start time is valid
     } else if (start_time_text.length() < 1 
         || my_start_time_input.getText().length() > 2 
-        || ! Character.isDigit(start_time_text.charAt(0))
-        || ! Character.isDigit(start_time_text.charAt(start_time_text.length() - 1))
+        || !Character.isDigit(start_time_text.charAt(0))
+        || !Character.isDigit(start_time_text.charAt(start_time_text.length() - 1))
         || start_time < 0 
         || start_time > new GregorianCalendar().getActualMaximum(Calendar.HOUR_OF_DAY)) {
       JOptionPane.showMessageDialog(null, 

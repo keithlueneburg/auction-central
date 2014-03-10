@@ -22,6 +22,7 @@ import javax.swing.border.Border;
 import system.AuctionCentralSystem;
 import auction.Auction;
 
+@SuppressWarnings("serial")
 public class RegistrationPanel extends JPanel {
   /** The default height of the panel. */
   private static final int DEFAULT_HEIGHT = 680;
@@ -35,17 +36,11 @@ public class RegistrationPanel extends JPanel {
   /** The default font for the labels. */
   private static final String ARIAL = "Arial";
   
-  /** The number 10. */
-  private static final int TEN = 10;
-  
   /** The default font size for the instruction labels. */
   private static final int INSTRUCTION_FONT_SIZE = 12;
   
   /** The default font size for the instruction labels. */
   private static final int MAIN_FONT_SIZE = 24;
-  
-  /** The default box height. */
-  private static final int BOX_HEIGHT = 45;
   
   /** The default box height for input spacing. */
   private static final int BOX_HEIGHT_TWO = 35;
@@ -65,8 +60,8 @@ public class RegistrationPanel extends JPanel {
   /** Label for creditcard CSC field. */
   private final JLabel my_csc_label = new JLabel("CSC: ");
     
-  /** Label for creditcard expiration date field. */
-  private final JLabel my_exp_date_label= new JLabel("Contact Person: ");
+  /** Label for contact person name. */
+  private final JLabel my_exp_date_label = new JLabel("Contact Person: ");
 
   
   /** The card number input field. */
