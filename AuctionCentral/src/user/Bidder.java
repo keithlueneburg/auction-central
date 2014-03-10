@@ -17,18 +17,17 @@ import java.util.List;
  *
  */
 public class Bidder extends AbstractUser {
+  private boolean my_is_register = false;
   private CreditCard my_card;
   private Address my_address;
   private List<Bid> my_bids;
 
   public Bidder(final String a_user_name, final String a_password, final String a_first_name,
-      final String a_last_name, final CreditCard a_card, final Address an_address) {
+      final String a_last_name) {
     super(a_user_name, a_password, a_first_name, a_last_name);
-    my_card = a_card;
-    my_address = an_address;
     my_bids = new ArrayList<Bid>();
   }
-
+  
   public CreditCard getCard() {
     return my_card;
   }
@@ -51,5 +50,16 @@ public class Bidder extends AbstractUser {
 
   public void addBid(final Bid a_bid) {
     my_bids.add(a_bid);
+  }
+  
+  public boolean isRegisiter() {
+    return my_is_register;
+  }
+  
+  public boolean regisiter(final CreditCard a_card, final Address an_address) {
+    my_card = a_card;
+    my_address = an_address;
+    my_is_register = true;
+    return my_is_register;
   }
 }

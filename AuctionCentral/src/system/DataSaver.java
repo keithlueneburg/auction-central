@@ -163,18 +163,23 @@ final class DataSaver {
         output += "Bidder" + DATA_SEPARATOR;
         output += printUser(each);
         
-        //card
-        output += my_card_list.size() + DATA_SEPARATOR;
-        my_card_list.add(((Bidder) each).getCard());
+        if (((Bidder) each).isRegisiter() == false) {
+          continue;
+        } else {
         
-        //address
-        output += my_address_list.size() + DATA_SEPARATOR;
-        my_address_list.add(((Bidder) each).getAddress());
-        
-        //bids
-        for (Bid each_bid: ((Bidder) each).getBids()) {
-          output += my_bid_list.size() + DATA_SEPARATOR;
-          my_bid_list.add(each_bid);
+          //card
+          output += my_card_list.size() + DATA_SEPARATOR;
+          my_card_list.add(((Bidder) each).getCard());
+          
+          //address
+          output += my_address_list.size() + DATA_SEPARATOR;
+          my_address_list.add(((Bidder) each).getAddress());
+          
+          //bids
+          for (Bid each_bid: ((Bidder) each).getBids()) {
+            output += my_bid_list.size() + DATA_SEPARATOR;
+            my_bid_list.add(each_bid);
+          }
         }
         
       } else if (each instanceof AuctionCentralStaff) {

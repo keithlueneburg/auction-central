@@ -261,16 +261,20 @@ final class DataLoader {
       final String first_name = user[3];
       final String last_name = user[4];
       
-      if ("Bidder".equals(user[0])) {
+      if ("Bidder".equals(user[5])) {
         final Bidder this_bidder = new Bidder(username, password, first_name, 
-            last_name, my_card_list.get(Integer.parseInt(user[5])), 
-                my_address_list.get(Integer.parseInt(user[6])));
+            last_name);
         
-        for (int i = 7; i < user.length; i++) {
-          this_bidder.addBid(my_bid_list.get(Integer.parseInt(user[i])));
+        if ("true".equals(user[5])) {
+        
+          this_bidder.regisiter(my_card_list.get(Integer.parseInt(user[6])), 
+                my_address_list.get(Integer.parseInt(user[7])));
+          for (int i = 8; i < user.length; i++) {
+            this_bidder.addBid(my_bid_list.get(Integer.parseInt(user[i])));
+          }
         }
         
-        my_user_list.add(this_bidder);
+        my_user_list.add(this_bidder); 
         
       } else if ("AuctionCentralStaff".equals(user[0])) {
         my_user_list.add(new AuctionCentralStaff(username, password, 
