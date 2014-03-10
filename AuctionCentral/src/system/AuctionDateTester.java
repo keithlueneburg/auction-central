@@ -2,6 +2,7 @@ package system;
 
 import auction.Auction;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -39,7 +40,7 @@ final class AuctionDateTester {
    */
   public static String getSolution(final Auction an_auction,
       final List<Auction> an_auction_list) {
-    my_auction = an_auction_list;
+    my_auction = new ArrayList<Auction>(an_auction_list);
     my_error_message = null;
     
     final Calendar today = Calendar.getInstance();
