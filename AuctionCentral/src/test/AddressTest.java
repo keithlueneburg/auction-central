@@ -25,13 +25,13 @@ import org.junit.Test;
 public class AddressTest {
 
   /** First address. */
-  private Address my_one = new Address("123", 1, "k", "p", 123, null);
+  private Address my_one = new Address("123", 1, "k", "p", 123);
 
   /** Second address. */
-  private Address my_two = new Address("123", 1, "k", "p", 123, null);
+  private Address my_two = new Address("123", 1, "k", "p", 123);
 
   /** Third address. */
-  private Address my_three = new Address("1234", 2, "p", "k", 22, null);
+  private Address my_three = new Address("1234", 2, "p", "k", 22);
 
   /**
    * A class is equal to itself.

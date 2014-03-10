@@ -29,10 +29,10 @@ import org.junit.Test;
 public class BankTest {
 
   /** First bank. */
-  private Bank my_one = new Bank("YoloBro");
+  private Bank my_one = new Bank("two");
   
   /** Second bank. */
-  private Bank my_two = new Bank("Twerk-Team");
+  private Bank my_two = new Bank("one");
   
   /** Third bank. */
   private Bank my_three = new Bank("");
