@@ -1,6 +1,8 @@
 package test;
 
 import java.math.BigInteger;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import user.AbstractUser;
 import user.Bidder;
@@ -28,7 +30,11 @@ public class TestSystem
 		String aState = "Washington";
 		int aZip = 98402;
 		
-		BigInteger aCardNum = new BigInteger("1234567890123456");
+		Address address = new Address(aStreet, 0, aCity, aState, aZip);
+		
+		Calendar my_calendar = new GregorianCalendar();
+		
+		Long aCardNum = new Long("1234567890123456");
 		String aCardHolder = "John White";
 		int anExpDate = 816;
 		String aBank = "US Bank";
@@ -36,8 +42,8 @@ public class TestSystem
 		
 		
 		Address anAddress = new Address(aStreet, anApt, aCity, aState, aZip);
-		CreditCard aCard = new CreditCard(aCardNum, aCardHolder, anExpDate, anAddress, aBank, aCSC);
-		Bidder aBidder = new Bidder("JohnW.", "12345", "John", "White", aCard, anAddress);
+		CreditCard aCard = new CreditCard(aCardNum, my_calendar, anExpDate, "holder", address, "bank");
+		Bidder aBidder = new Bidder("JohnW.", "12345", "John", "White");
 		Item anItem = new Item(1, "cell phone", 100, 1000.0,
 				"Donor", "10*5*5 in.", "in the box",
 				"good", "comments", "pic");
@@ -64,8 +70,9 @@ public class TestSystem
 	{
 		if (myCurrentUser instanceof Bidder)
 		{
+	    Calendar my_calendar = new GregorianCalendar();
 			Bidder aBidder = (Bidder) myCurrentUser;
-			Bid aBid = new Bid(anItem, aPrice, aBidder, aBidder.getCard());
+			Bid aBid = new Bid("item", aPrice, "james", my_calendar, aBidder.getCard());
 			aBidder.addBid(aBid);
 			anItem.addBid(aBid);
 			System.out.println(aBid);

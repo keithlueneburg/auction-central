@@ -59,9 +59,9 @@ public class ItemTest {
    */
   @Test
   public void testAddBid() {
-    testItem.addBid(new Bid("Bid1"));
-    testItem.addBid(new Bid("Bid2"));
-    testItem.addBid(new Bid("Bid3"));
+    testItem.addBid(new Bid("Bid1", 5, "me", null, null));
+    testItem.addBid(new Bid("Bid2", 5, "me", null, null));
+    testItem.addBid(new Bid("Bid3", 5, "me", null, null));
 
     assertTrue(testItem.getBids() != null);
   }
@@ -71,9 +71,9 @@ public class ItemTest {
    */
   @Test
   public void testRemoveBid() {
-    Bid bid1 = new Bid("Bid1");
-    Bid bid2 = new Bid("Bid2");
-    Bid bid3 = new Bid("Bid3");
+    final Bid bid1 = new Bid("Bid1", 5, "me", null, null);
+    final Bid bid2 = new Bid("Bid2", 5, "me", null, null);
+    final Bid bid3 = new Bid("Bid3", 5, "me", null, null);
 
     testItem.addBid(bid1);
     testItem.addBid(bid2);
@@ -92,23 +92,23 @@ public class ItemTest {
    */
   @Test
   public void testUnsealBid() {
-    Bid bid1 = new Bid("Bid1");
-    Bid bid2 = new Bid("Bid2");
+    final Bid bid1 = new Bid("Bid1", 6, null, null, null);
+    final Bid bid2 = new Bid("Bid2", 9, null, null, null);
     
-    int correctOutcomes = 0;
+    int correctoutcomes = 0;
 
     testItem.addBid(bid1);
     testItem.addBid(bid2);
 
-    if (testItem.unsealBid("admin", "password") == bid1) {
-      correctOutcomes++;
+    if (testItem.unsealBid() == bid1) {
+      correctoutcomes++;
     }
 
-    if (testItem.unsealBid("admin", "passwrd") == null) {
-      correctOutcomes++;
+    if (testItem.unsealBid() == null) {
+      correctoutcomes++;
     }
 
-    assertEquals(2, correctOutcomes);
+    assertEquals(2, correctoutcomes);
   }
 
 }

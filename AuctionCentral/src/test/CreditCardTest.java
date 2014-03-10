@@ -47,12 +47,12 @@ public class CreditCardTest {
   public void setup() {
 
     card_1 = new CreditCard(1234123412341234L, new GregorianCalendar(2015, 1, 15),
-        123, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), 
-        new Bank("Chase"));
+        123, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501), 
+        "Chase");
 
     card_1_duplicate = new CreditCard(1234123412341234L, new GregorianCalendar(2015, 1, 15), 
-        123, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501, null), 
-        new Bank("Chase"));
+        123, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501), 
+        "Chase");
   }
 
   /**
@@ -65,8 +65,8 @@ public class CreditCardTest {
   public void testCreditCardInvalidCardNumber() {
     final CreditCard bad_param_card = new CreditCard(1234L,
         new GregorianCalendar(2015, 1, 15), 123, "John Smith", new Address(
-            "123 Main Street", 0, "Tacoma", "WA", 98501, null), 
-            new Bank("Chase"));
+            "123 Main Street", 0, "Tacoma", "WA", 98501), 
+            "Chase");
   }
 
   /**
@@ -79,7 +79,7 @@ public class CreditCardTest {
   public void testCreditCardExpirationDateNull() {
     final CreditCard bad_param_card = new CreditCard(1234123412341234L, null,
         123, "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA",
-            98501, null), new Bank("Chase"));
+            98501), "Chase");
   }
 
   /**
@@ -92,7 +92,7 @@ public class CreditCardTest {
   public void testCreditCardExpiredCard() {
     final CreditCard bad_param_card = new CreditCard(1234123412341234L,
         new GregorianCalendar(2012, 1, 15), 123, "John Smith", new Address(
-            "123 Main Street", 0, "Tacoma", "WA", 98501, null), new Bank("Chase"));
+            "123 Main Street", 0, "Tacoma", "WA", 98501), "Chase");
   }
 
   /**
@@ -105,7 +105,7 @@ public class CreditCardTest {
   public void testCreditCardInvalidCSC() {
     final CreditCard bad_param_card = new CreditCard(1234123412341234L,
         new GregorianCalendar(2015, 1, 15), 5, "John Smith", new Address(
-            "123 Main Street", 0, "Tacoma", "WA", 98501, null), new Bank("Chase"));
+            "123 Main Street", 0, "Tacoma", "WA", 98501), "Chase");
   }
 
   /**
@@ -118,7 +118,7 @@ public class CreditCardTest {
   public void testCreditCardNoCardHolderName() {
     final CreditCard bad_param_card = new CreditCard(1234123412341234L,
         new GregorianCalendar(2015, 1, 15), 123, "", new Address(
-            "123 Main Street", 0, "Tacoma", "WA", 98501, null), new Bank("Chase"));
+            "123 Main Street", 0, "Tacoma", "WA", 98501), "Chase");
   }
 
   /**
@@ -130,8 +130,8 @@ public class CreditCardTest {
   @Test(expected = IllegalArgumentException.class)
   public void testCreditCardNullAddress() {
     final CreditCard bad_param_card = new CreditCard(1234123412341234L,
-        new GregorianCalendar(2015, 1, 15), 123, "John Smith", null, new Bank(
-            "Chase"));
+        new GregorianCalendar(2015, 1, 15), 123, "John Smith", null, 
+            "Chase");
   }
 
   /**
@@ -144,7 +144,7 @@ public class CreditCardTest {
   public void testCreditCardNullBank() {
     final CreditCard bad_param_card = new CreditCard(1234123412341234L,
         new GregorianCalendar(2015, 1, 15), 123, "John Smith", new Address(
-            "123 Main Street", 0, "Tacoma", "WA", 98501, null), null);
+            "123 Main Street", 0, "Tacoma", "WA", 98501), null);
   }
 
   /**
@@ -173,38 +173,34 @@ public class CreditCardTest {
     // Different card number:
     assertFalse("Fail different card number", card_1.equals(new CreditCard(
         4567123412341234L, new GregorianCalendar(2015, 1, 15), 123,
-        "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501,
-            null), new Bank("Chase"))));
+        "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501), 
+        "Chase")));
 
     // Different expiration date:
     assertFalse("Fail different expiration date", card_1.equals(new CreditCard(
         1234123412341234L, new GregorianCalendar(2238, 1, 15), 123,
-        "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501,
-            null), new Bank("Chase"))));
+        "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501), "Chase")));
 
     // Different CSC
     assertFalse("Fail different CSC", card_1.equals(new CreditCard(
         1234123412341234L, new GregorianCalendar(2015, 1, 15), 456,
-        "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501,
-            null), new Bank("Chase"))));
+        "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501), "Chase")));
 
     // Different name
     assertFalse("Fail different name", card_1.equals(new CreditCard(
         1234123412341234L, new GregorianCalendar(2015, 1, 15), 123,
-        "Dave Jones", new Address("123 Main Street", 0, "Tacoma", "WA", 98501,
-            null), new Bank("Chase"))));
+        "Dave Jones", new Address("123 Main Street", 0, "Tacoma", "WA", 98501), "Chase")));
 
     // Different Address
     assertFalse("Fail different address", card_1.equals(new CreditCard(
         1234123412341234L, new GregorianCalendar(2015, 1, 15), 123,
-        "John Smith", new Address("255 Broadway", 0, "Tacoma", "WA", 98501,
-            null), new Bank("Chase"))));
+        "John Smith", new Address("255 Broadway", 0, "Tacoma", "WA", 98501), "Chase")));
 
     // Different Bank
     assertFalse("Fail different bank", card_1.equals(new CreditCard(
         1234123412341234L, new GregorianCalendar(2015, 1, 15), 123,
-        "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501,
-            null), new Bank("Bank of America"))));
+        "John Smith", new Address("123 Main Street", 0, "Tacoma", "WA", 98501), 
+        "Bank of America")));
   }
 
   /**
