@@ -105,14 +105,29 @@ public class InventoryPanel extends JPanel {
     * Auctions.
     */
    public void configLabels() {
-     final GridLayout g_layout = new GridLayout();
+     /*final GridLayout g_layout = new GridLayout();
      g_layout.setColumns(2);
      g_layout.setRows(2);
      my_label_panel.setLayout(g_layout);
      my_label_panel.add(new JLabel(""));
      my_label_panel.add(new JLabel(""));
      my_label_panel.add(new JLabel("     Inventory:"));
+     my_label_panel.add(new JLabel(""));*/
+     
+     my_label_panel.setLayout(new GridLayout(4, 3));
      my_label_panel.add(new JLabel(""));
+     my_label_panel.add(new JLabel(""));
+     my_label_panel.add(new JLabel(""));
+     my_label_panel.add(new JLabel("       Inventory:"));
+     my_label_panel.add(new JLabel(""));
+     my_label_panel.add(new JLabel(""));
+     my_label_panel.add(new JLabel(""));
+     my_label_panel.add(new JLabel(""));
+     my_label_panel.add(new JLabel(""));
+     my_label_panel.add(new JLabel("       Item#"));
+     my_label_panel.add(new JLabel("    Item"));
+     my_label_panel.add(new JLabel(" Quentity"));
+     
    }
    /**
     * This method configures the JPanels to their desired location in the 

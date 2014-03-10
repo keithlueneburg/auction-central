@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
 
+import user.AbstractUser;
 import user.NonProfitUser;
 import user.User;
 
@@ -77,13 +78,17 @@ public class AuctionListPanel extends JPanel {
    */
   private ApplicationFrame my_app_frame;
   /**
+   * 
+   */
+  private User my_user;
+  /**
    * The constructor takes in two parameters: an ApplicationFrame and a list of Auctions.
    * It then initializes the frame and configures the panels.
    * @param the_jframe The main ApplicationFrame.
    * @param the_auctions The list of Auctions.
    */
   public AuctionListPanel(final ApplicationFrame the_jframe, 
-      final List<Auction> the_auctions) {
+      final List<Auction> the_auctions, final User the_user) {
     
     super();
     my_app_frame = the_jframe;
@@ -91,6 +96,7 @@ public class AuctionListPanel extends JPanel {
     my_index = -1;
     my_button_panel = new JPanel();
     my_label_panel = new JPanel();
+    my_user = the_user;
     
     configPanel();
     configLabels();
@@ -111,14 +117,24 @@ public class AuctionListPanel extends JPanel {
    * Auctions.
    */
   public void configLabels() {
-    final GridLayout g_layout = new GridLayout();
-    g_layout.setColumns(2);
-    g_layout.setRows(2);
-    my_label_panel.setLayout(g_layout);
+
+    my_label_panel.setLayout(new GridLayout(4, 4));
     my_label_panel.add(new JLabel(""));
     my_label_panel.add(new JLabel(""));
-    my_label_panel.add(new JLabel("     Auctions:"));
     my_label_panel.add(new JLabel(""));
+    my_label_panel.add(new JLabel(""));
+    my_label_panel.add(new JLabel("        Auctions:"));
+    my_label_panel.add(new JLabel(""));
+    my_label_panel.add(new JLabel(""));
+    my_label_panel.add(new JLabel(""));
+    my_label_panel.add(new JLabel(""));
+    my_label_panel.add(new JLabel(""));
+    my_label_panel.add(new JLabel(""));
+    my_label_panel.add(new JLabel(""));
+    my_label_panel.add(new JLabel("        Auction name"));
+    my_label_panel.add(new JLabel(" Intake person"));
+    my_label_panel.add(new JLabel("               Date"));
+    my_label_panel.add(new JLabel("Number of items"));
   }
   /**
    * This method configures the JPanels to their desired location in the 
@@ -170,7 +186,10 @@ public class AuctionListPanel extends JPanel {
       }
     });
     my_button_panel.add(edit_button);
-    my_button_panel.add(create_button);
+    
+    if (my_user instanceof NonProfitUser) {
+      my_button_panel.add(create_button);
+    }
   }
   
   /**
@@ -297,7 +316,8 @@ public class AuctionListPanel extends JPanel {
       String _name = ((Auction) value).getAuctionName();
       String _checkname = ((Auction) value).getIntakePerson();
       String _date = ((Auction) value).getAuctionDate().getTime().toString();
-      String _num = Integer.toString(((Auction) value).getItemCount());
+      String _num = "               ";
+      _num += Integer.toString(((Auction) value).getItemCount());
       
       my_name.setText(_name);
       my_checkname.setText(_checkname);
