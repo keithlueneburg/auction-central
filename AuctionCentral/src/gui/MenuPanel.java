@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -34,11 +35,8 @@ import user.User;
  * @author Keith Lueneburg
  * @version 3/2/2014
  */
+@SuppressWarnings("serial")
 public class MenuPanel extends JPanel {
-  /**
-   * Required for extended Serializable class JPanel.
-   */
-  private static final long serialVersionUID = 3756153799427907645L;
 
   /**
    * Default width of the menu panel.
@@ -100,6 +98,8 @@ public class MenuPanel extends JPanel {
    */
   private AuctionCentralSystem my_system;
 
+  private JButton my_register_button;
+
   /**
    * Instantiate a new menu panel object.
    * 
@@ -150,11 +150,13 @@ public class MenuPanel extends JPanel {
     
     createAuctionsButton();
     createCalendarButton();
+    createRegisterButton();
     createExitButton();
     
     button_panel.add(my_calendar_button);
     button_panel.add(my_auctions_button);
-    button_panel.add(new JPanel());
+    //button_panel.add(new JPanel());
+    button_panel.add(my_register_button);
     button_panel.add(my_exit_button);
     
     return button_panel;
@@ -189,7 +191,7 @@ public class MenuPanel extends JPanel {
   }
   
   /**
-   * Initializes calender button.
+   * Initializes calendar button.
    */
   @SuppressWarnings("serial")
   private void createCalendarButton() {
@@ -200,7 +202,20 @@ public class MenuPanel extends JPanel {
       }
     });
   }
-
+  
+  /**
+   * Initializes register button.
+   */
+  @SuppressWarnings("serial")
+  private void createRegisterButton() {
+    my_register_button = new JButton(new AbstractAction("Register") {
+      @Override
+      public void actionPerformed(final ActionEvent the_event) {
+        my_application_frame.showRegistration();
+      }
+    });
+  }
+  
   /**
    * Gets the JPanel containing the user info labels.
    * 

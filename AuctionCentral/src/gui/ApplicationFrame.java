@@ -33,12 +33,8 @@ import user.User;
  * 
  * @version 3/8/2014
  */
+@SuppressWarnings("serial")
 public final class ApplicationFrame extends JFrame {
-  
-  /**
-   * Required for extended Serializable class JFrame.
-   */
-  private static final long serialVersionUID = -716727811602146864L;
 
   /**
    * Default witdth of the program frame.
@@ -186,6 +182,9 @@ public final class ApplicationFrame extends JFrame {
     replaceContentPanel(new CalendarPanel(my_system, this));
   }
   
+  public void showRegistration() {
+    replaceContentPanel(new RegistrationPanel(my_system, this)); 
+  }
   
   private class MyWindowListener extends WindowAdapter {
     public void windowClosing(WindowEvent e) {
@@ -193,4 +192,7 @@ public final class ApplicationFrame extends JFrame {
       System.exit(0);
     }
   }
+
+
+  
 }

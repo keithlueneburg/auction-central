@@ -261,7 +261,7 @@ final class DataLoader {
       final String first_name = user[3];
       final String last_name = user[4];
       
-      if ("Bidder".equals(user[5])) {
+      if ("Bidder".equals(user[0])) {
         final Bidder this_bidder = new Bidder(username, password, first_name, 
             last_name);
         

@@ -44,13 +44,9 @@ import user.NonProfitUser;
  * @author Casey Morrison
  * @version 1.0 Winter 2014
  */
+@SuppressWarnings("serial")
 public class AuctionPanel extends JPanel {
-  
-  /**
-   * Required for serializable class (extends JPanel).
-   */
-  private static final long serialVersionUID = 6765841635915082438L;
-  
+    
   // Global variables ----------------------------------
   /** The default height of the panel. */
   private static final int DEFAULT_HEIGHT = 680;
