@@ -12,6 +12,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -137,6 +138,8 @@ public class AuctionListPanel extends JPanel {
    */
   public void configButtons() {
     final JButton edit_button = new JButton("View");
+    edit_button.setMnemonic(KeyEvent.VK_V);
+    edit_button.setToolTipText("view the auction information");
     edit_button.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent an_event) {
         if (my_index >= 0) {
@@ -146,6 +149,8 @@ public class AuctionListPanel extends JPanel {
     });
     
     final JButton create_button = new JButton("Create");
+    create_button.setMnemonic(KeyEvent.VK_C);
+    create_button.setToolTipText("Create a new auction");
     // If too many auctions already or current user is not NPO user,
     //make the new auction tied to the user/organization
     if (my_auction_list.size() >= 25 

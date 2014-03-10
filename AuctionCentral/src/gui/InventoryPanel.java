@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
 
+import user.NonProfitUser;
 import user.User;
 import auction.Auction;
 import auction.Item;
@@ -133,7 +134,7 @@ public class InventoryPanel extends JPanel {
      final JButton view_button = new JButton("View");
      
      view_button.setMnemonic(KeyEvent.VK_V);
-     view_button.setToolTipText("View this item");
+     view_button.setToolTipText("View this item information");
      view_button.addActionListener(new ActionListener() {
        public void actionPerformed(final ActionEvent an_event) {
          if (my_index >= 0) {
@@ -160,8 +161,27 @@ public class InventoryPanel extends JPanel {
            my_app_frame.showItem(new Item(), my_auction, true);
        }
      });
+     
+     final JButton back_button = new JButton("Back");
+     back_button.setMnemonic(KeyEvent.VK_B);
+     back_button.setToolTipText("Back to the auction");
+     back_button.addActionListener(new ActionListener() {
+       public void actionPerformed(final ActionEvent an_event) {
+         my_app_frame.showAuctionInfo(my_auction, false);;
+       }
+     });
+     
+     
      my_button_panel.add(view_button);
-     my_button_panel.add(add_button);
+     
+
+     String user_name = my_user.getFirstName() + " ";
+     user_name += my_user.getLastName();
+     if (user_name.equals(my_auction.getContactPerson())) {
+       my_button_panel.add(add_button);
+     }
+     
+     my_button_panel.add(back_button);
    }
    
    /**
