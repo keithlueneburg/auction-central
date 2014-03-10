@@ -205,6 +205,10 @@ final class DataLoader {
       final String line = my_item_scanner.nextLine();
       final String[] item = line.split(DATA_SEPARATOR);
       
+      if (" ".equals(item[8])) {
+        item[8] = "";
+      }
+      
       final Item this_item = new Item(Integer.parseInt(item[0]), item[1],
           Integer.parseInt(item[2]), Double.parseDouble(item[3]),
           item[4], item[5], item[6], item[7], item[8], item[9]);

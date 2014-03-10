@@ -260,6 +260,7 @@ final class DataSaver {
     
     for (Item each: my_item_list) {
       String output = "";
+      String comments = each.getComments();
       
       output += each.getItemNumber() + DATA_SEPARATOR;
       output += each.getItemName() + DATA_SEPARATOR;
@@ -269,7 +270,12 @@ final class DataSaver {
       output += each.getSize() + DATA_SEPARATOR;
       output += each.getStorage() + DATA_SEPARATOR;
       output += each.getCondition() + DATA_SEPARATOR;
-      output += each.getComments() + DATA_SEPARATOR;
+      
+      if ("".equals(comments)) {
+        comments = " ";
+      }
+      
+      output += comments + DATA_SEPARATOR;
       output += each.getPhotoLocation() + DATA_SEPARATOR;
       output += each.getSellingPrice() + DATA_SEPARATOR;
       
