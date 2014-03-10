@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 import auction.Auction;
 import system.AuctionCentralSystem;
 import user.AuctionCentralStaff;
+import user.Bidder;
 import user.User;
 
 /**
@@ -270,6 +271,10 @@ public class MenuPanel extends JPanel {
   private void setButtonVisibility(final User a_user) {
     if (!(a_user instanceof AuctionCentralStaff)) {
       my_calendar_button.setVisible(false);
+    }
+    
+    if (!(a_user instanceof Bidder)) {
+      my_register_button.setVisible(false);
     }
   }
 }

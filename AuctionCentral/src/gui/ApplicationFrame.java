@@ -82,6 +82,8 @@ public final class ApplicationFrame extends JFrame {
     my_content_panel = new JPanel();
     my_menu_panel = new MenuPanel(a_user, this, the_system);
     
+    // This WindowListener allows program to save persistent data when
+    // the window's 'X' button is clicked.
     addWindowListener(new MyWindowListener());
 
     setup();
@@ -128,9 +130,9 @@ public final class ApplicationFrame extends JFrame {
     remove(my_content_panel);
     
     my_content_panel = a_panel;
-    
     my_content_panel.setPreferredSize(new Dimension(DEFAULT_CONTENT_PANEL_WIDTH,
         DEFAULT_FRAME_HEIGHT));
+    
     add(my_content_panel, BorderLayout.CENTER);
     pack();
     repaint();
@@ -192,7 +194,4 @@ public final class ApplicationFrame extends JFrame {
       System.exit(0);
     }
   }
-
-
-  
 }
