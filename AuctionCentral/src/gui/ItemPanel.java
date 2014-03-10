@@ -261,14 +261,17 @@ public class ItemPanel extends JPanel {
       my_number = 1;
     } else if (my_item.getItemNumber() == 0) { // new item
       my_number = my_auction.getItemCount() + 1;
+      my_item.setItemQuantity(1);
+      my_quantity = 1;
     } else { // not a new number
       my_number = my_item.getItemNumber();
+      my_quantity = my_item.getItemQuantity();
     }
     my_name = my_item.getItemName();
     my_donor = my_item.getDonor();
     my_size = my_item.getSize();
     my_price = my_item.getSellingPrice();
-    my_quantity = my_item.getItemQuantity();
+    
     my_minimum_bid = my_item.getStartingBid();
     my_storage = my_item.getStorage();
     my_condition = my_item.getCondition();
