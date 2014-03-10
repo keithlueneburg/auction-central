@@ -141,10 +141,11 @@ public class RegistrationPanel extends JPanel {
     
     FORM_TITLE.setFont(new Font(ARIAL, Font.BOLD, MAIN_FONT_SIZE));
     my_card_num_label.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
-    my_csc_label.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
-    my_exp_date_label.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
-        
+    my_csc_label.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
+    my_exp_date_label.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
+    
     north.add(FORM_TITLE, BorderLayout.CENTER);
+   
     
 //    final JPanel auctionnum = new JPanel(new FlowLayout());
 //    auctionnum.add(my_auction_number, BorderLayout.CENTER);
@@ -152,11 +153,10 @@ public class RegistrationPanel extends JPanel {
 //    east.add(auctionnum);
     
     west.add(my_card_num_label);
-    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT)));
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, 172)));
     west.add(my_csc_label);
-    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT)));
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, 172)));
     west.add(my_exp_date_label);
-    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT)));
     
     center.add(west, BorderLayout.CENTER);
 
