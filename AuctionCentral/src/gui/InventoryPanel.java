@@ -10,6 +10,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -129,8 +130,11 @@ public class InventoryPanel extends JPanel {
     * ActionListeners to them that will correctly do what is wanted.
     */
    public void configButtons() {
-     final JButton edit_button = new JButton("Edit");
-     edit_button.addActionListener(new ActionListener() {
+     final JButton view_button = new JButton("View");
+     
+     view_button.setMnemonic(KeyEvent.VK_V);
+     view_button.setToolTipText("View this item");
+     view_button.addActionListener(new ActionListener() {
        public void actionPerformed(final ActionEvent an_event) {
          if (my_index >= 0) {
            
@@ -148,14 +152,16 @@ public class InventoryPanel extends JPanel {
        }
      });
      
-     final JButton create_button = new JButton("Create");
-     create_button.addActionListener(new ActionListener() {
+     final JButton add_button = new JButton("Add");
+     add_button.setMnemonic(KeyEvent.VK_A);
+     add_button.setToolTipText("Add more items");
+     add_button.addActionListener(new ActionListener() {
        public void actionPerformed(final ActionEvent an_event) {
            my_app_frame.showItem(new Item(), my_auction, true);
        }
      });
-     my_button_panel.add(edit_button);
-     my_button_panel.add(create_button);
+     my_button_panel.add(view_button);
+     my_button_panel.add(add_button);
    }
    
    /**
