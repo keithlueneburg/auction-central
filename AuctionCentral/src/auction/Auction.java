@@ -236,6 +236,10 @@ public class Auction {
   public List<Item> getItems() {
     return my_auction_items;
   }
+  
+  public void setItems(final List<Item> an_item_list) {
+    my_auction_items = an_item_list;
+  }
 
   // METHODS
   /**

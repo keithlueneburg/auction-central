@@ -26,6 +26,7 @@ import javax.swing.border.Border;
 
 import auction.Auction;
 import system.AuctionCentralSystem;
+import user.AuctionCentralStaff;
 import user.Bidder;
 import user.User;
 import auction.Item;
@@ -152,6 +153,8 @@ public class ItemPanel extends JPanel {
   private final JButton my_back_button = new JButton("Back");
   
   private final JButton my_bid_button = new JButton("Bid");
+  
+  private final JButton my_unseal_button = new JButton("Unseal");
   
   private JFormattedTextField my_auction_name_input = new JFormattedTextField();
   
@@ -324,7 +327,11 @@ public class ItemPanel extends JPanel {
   private void setButtonVisibility(final User a_user) {	
     if (!(a_user instanceof Bidder)) {	
       my_bid_button.setVisible(false);
-    }	
+    }
+    
+    if (!(a_user instanceof AuctionCentralStaff)) {
+      my_unseal_button.setVisible(false);
+    }
   }	
   
   private void createItemLabels() {
@@ -411,6 +418,7 @@ public class ItemPanel extends JPanel {
     
     southset.add(my_bid_button, BorderLayout.CENTER);
     southset.add(my_back_button, BorderLayout.WEST);
+    southset.add(my_unseal_button, BorderLayout.WEST);
     
     south.add(southset, BorderLayout.SOUTH);
     

@@ -411,5 +411,24 @@ public class Item {
 
     return temp;
   }
+  
+  /**
+   * another verision of unseal bid
+   * @author Kaiyuan Shi
+   * @return the win bid
+   */
+  public Bid unsealBid() {
+    
+    Bid win_bid = null;
+    
+    for (Bid each: my_bids) {
+      if (win_bid == null
+          || each.getPrice() > win_bid.getPrice()) {
+        win_bid = each;
+      }
+    }
+    
+    return win_bid;
+  }
 
 }

@@ -221,7 +221,6 @@ final class DataLoader {
       
       my_item_list.add(this_item);   
     }
-    
   }
   
   /**
@@ -243,10 +242,21 @@ final class DataLoader {
         auction[6] = "";
       }
       
-      my_auction_list.add(new Auction(auction[0], auction[1],
+      Auction current_auction = new Auction(auction[0], auction[1],
           auction[2], auction[3], auction_date,
-          Integer.parseInt(auction[5]), auction[6]));  
+          Integer.parseInt(auction[5]), auction[6]);
+      
+      List<Item> auction_bids= new ArrayList<Item>();
+      for (int i = 7; i < auction.length; i++) {
+        auction_bids.add(my_item_list.get(Integer.parseInt(auction[i])));
+      }
+      
+      current_auction.setItems(auction_bids);
+      
+      my_auction_list.add(current_auction);
     }
+    
+    
   }
   
   /**
