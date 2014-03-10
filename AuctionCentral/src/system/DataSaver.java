@@ -163,10 +163,10 @@ final class DataSaver {
         output += "Bidder" + DATA_SEPARATOR;
         output += printUser(each);
         
-        if (((Bidder) each).isRegisiter() == false) {
-          continue;
-        } else {
+        if (((Bidder) each).isRegisiter() == true) {
         
+          output += true + DATA_SEPARATOR;
+          
           //card
           output += my_card_list.size() + DATA_SEPARATOR;
           my_card_list.add(((Bidder) each).getCard());
@@ -180,6 +180,8 @@ final class DataSaver {
             output += my_bid_list.size() + DATA_SEPARATOR;
             my_bid_list.add(each_bid);
           }
+        } else {
+          output += false + DATA_SEPARATOR;
         }
         
       } else if (each instanceof AuctionCentralStaff) {
