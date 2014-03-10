@@ -1,24 +1,27 @@
 package gui;
 
+
 /**
  * @author Josh Hammer
  */
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-
-
-
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import auction.Auction;
@@ -26,6 +29,7 @@ import system.AuctionCentralSystem;
 import user.Bidder;
 import user.User;
 import auction.Item;
+import user.User;
 
 public class ItemPanel extends JPanel {
 
@@ -37,6 +41,7 @@ public class ItemPanel extends JPanel {
 
   /** The default size for this JPanel. */
   private static final Dimension DEFAULT_SIZE = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+  
 
   /** The default font for the labels. */
   private static final String ARIAL = "Arial";
@@ -63,7 +68,7 @@ public class ItemPanel extends JPanel {
   private static final Border BLACK_LINE = BorderFactory.createLineBorder(Color.BLACK, 3);
 
   /** The label that shows the item's name. */
-  private static final JLabel ITEM_TITLE = new JLabel("Item Information:");
+  private static final JLabel ITEM_TITLE = new JLabel("Auction Inventory Item");
 
   /**
    * Required for serialization.
@@ -82,7 +87,7 @@ public class ItemPanel extends JPanel {
   private final Item my_item;
 
   /** The label that shows the item's number. */
-  private final JLabel my_number;
+  private int my_number;
   
   /** The selling price of the item.*/
   private  double my_price;
@@ -110,12 +115,47 @@ public class ItemPanel extends JPanel {
 
   /** The name of the item. */
   private String my_name;
+  
+  // The JLabels for Item Information - Kevin
+  
+  private JLabel my_num_lab = new JLabel();
+  
+  private final JLabel my_inum_lab = new JLabel("Item #");
+  
+  private final JLabel my_sellprice_lab = new JLabel("Selling Price:");
+  
+  private final JLabel my_aname_lab = new JLabel("Auction Name:");
+  
+  private final JLabel my_iname_lab = new JLabel("Item Name:");
+  
+  private final JLabel my_qty_lab = new JLabel("QTY:");
+  
+  private final JLabel my_minbid_lab = new JLabel("Min. Bid:");
+  
+  private final JLabel my_donor_lab = new JLabel("Donor:");
+  
+  private final JLabel my_size_lab = new JLabel("Size:");
+  
+  private final JLabel my_storage_lab = new JLabel("Storage:");
+  
+  private final JLabel my_cond_lab = new JLabel("Condition:");
+  
+  private final JLabel my_comm_lab = new JLabel("Comments:");
+  
+  // Picture panel
+  private final JPanel my_pic = new JPanel();
 
   /** The button used to save the item information. */
-  private final JButton my_save = new JButton("Save");
+  private final JButton my_save_button = new JButton("Save");
   
   /** The button used to go back. */
-  private final JButton my_back = new JButton("Back");
+  private final JButton my_back_button = new JButton("Back");
+  
+  private final JButton my_bid_button = new JButton("Bid");
+  
+  private JFormattedTextField my_auction_name_input = new JFormattedTextField();
+  
+  private JFormattedTextField my_item_number_input = new JFormattedTextField();
   
   /** The name of the item input. */
   private JFormattedTextField my_item_name_input = new JFormattedTextField();
@@ -143,6 +183,8 @@ public class ItemPanel extends JPanel {
 
   /**The comments on the item.*/
   private JFormattedTextField my_comment_input = new JFormattedTextField();
+  
+  private JTextField my_text = new JTextField(20);
 
   /** The auction central system. */
   private final AuctionCentralSystem my_system;
@@ -156,22 +198,26 @@ public class ItemPanel extends JPanel {
    * @param an_editable
    */
   public ItemPanel(final Item the_item, final ApplicationFrame the_frame,
-      final Auction the_auction, final AuctionCentralSystem the_system,
-      final boolean an_editable) {
+      final Auction the_auction, 
+      final boolean an_editable, User a_user) {	
     super(new BorderLayout());
-
-    my_system = the_system;
+    
     my_app_frame = the_frame;
+    my_system = my_app_frame.getSystem();
     my_auction = the_auction;
     my_item = the_item;
+    
     final String temp = "" + my_item.getItemNumber();
-    my_number = new JLabel(temp);
 
+    createItem();
+    setupSaveButton();
+    setupBackButton();
+    configurePanel(a_user);
+    createItemLabels();
     allowEdits(an_editable);
-    configurePanel();
   }	
 
-  private void configurePanel(){	
+  private void configurePanel(final User a_user){	
     setButtonVisibility(a_user);
     setPreferredSize(DEFAULT_SIZE);
     setBorder(BLACK_LINE);
@@ -185,6 +231,8 @@ public class ItemPanel extends JPanel {
    * @param the_edit_flag - true if editable.
    */
   private void allowEdits(final boolean the_edit_flag) {
+    my_auction_name_input.setEditable(false);
+    my_item_number_input.setEnabled(false);
     my_item_name_input.setEditable(the_edit_flag);
     my_donor_input.setEditable(the_edit_flag);
     my_size_input.setEditable(the_edit_flag);
@@ -200,6 +248,13 @@ public class ItemPanel extends JPanel {
    * Creates the auction used for editing.
    */
   private void createItem() {
+    if (my_auction.getItemCount() == 0) { // first item
+      my_number = 1;
+    } else if (my_item.getItemNumber() == 0) { // new item
+      my_number = my_auction.getItemCount() + 1;
+    } else { // not a new number
+      my_number = my_item.getItemNumber();
+    }
     my_name = my_item.getItemName();
     my_donor = my_item.getDonor();
     my_size = my_item.getSize();
@@ -216,6 +271,9 @@ public class ItemPanel extends JPanel {
    * Initializes the input entries.
    */
   private void initializeInput() {
+    my_num_lab.setText(String.valueOf(my_number));
+    my_auction_name_input.setText(my_auction.getAuctionName());
+    my_item_number_input.setText("" + my_number);
     my_item_name_input.setText(my_name);
     my_donor_input.setText(my_donor);
     my_size_input.setText(my_size);
@@ -224,7 +282,7 @@ public class ItemPanel extends JPanel {
     my_minimum_bid_input.setText("" + my_minimum_bid);
     my_storage_input.setText(my_storage);
     my_condition_input.setText(my_condition);
-    my_comment_input.setText(my_comment);
+    my_text.setText(my_comment);
     
     allowEdits(false);
   }
@@ -233,11 +291,24 @@ public class ItemPanel extends JPanel {
    * Sets up the save button.
    */
   private void setupSaveButton() {
-    my_save.setMnemonic(KeyEvent.VK_S);
-    my_save.setToolTipText("Save the Item Data");
-    my_save.addActionListener(new ActionListener() {
+    my_save_button.setMnemonic(KeyEvent.VK_S);
+    my_save_button.setToolTipText("Save the Item Data");
+    my_save_button.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent the_event) {
         saveItem();
+        if (!my_auction.getItems().contains(my_item)) {
+          my_auction.addItem(my_item);
+        }
+      }
+    });
+  }
+  
+  private void setupBackButton() {
+    my_back_button.setMnemonic(KeyEvent.VK_B);
+    my_back_button.setToolTipText("Go Back to the Inventory Screen");
+    my_back_button.addActionListener(new ActionListener() {
+      public void actionPerformed(final ActionEvent the_event) {
+        my_app_frame.showInventory(my_auction);
       }
     });
   }
@@ -254,4 +325,111 @@ public class ItemPanel extends JPanel {
       my_bid_button.setVisible(false);	
     }	
   }	
-}	
+  
+  private void createItemLabels() {
+    
+    final JPanel center = new JPanel(new BorderLayout());
+    final JPanel west = new JPanel();
+    west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
+    final JPanel north = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    final JPanel east = new JPanel(new GridLayout(0, 1));
+    final JPanel south = new JPanel(new BorderLayout());
+    final JPanel southcomment = new JPanel(new FlowLayout());
+    final JPanel southset = new JPanel(new FlowLayout());
+    
+    ITEM_TITLE.setFont(new Font(ARIAL, Font.BOLD, MAIN_FONT_SIZE));
+    my_inum_lab.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
+    my_aname_lab.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
+    my_sellprice_lab.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
+    my_iname_lab.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
+    my_qty_lab.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
+    my_minbid_lab.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
+    my_donor_lab.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
+    my_size_lab.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
+    my_storage_lab.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
+    my_cond_lab.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
+    my_comm_lab.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
+    
+    north.add(ITEM_TITLE, BorderLayout.CENTER);
+    
+    JPanel eastFlow = new JPanel(new FlowLayout());
+    eastFlow.add(my_inum_lab);
+    eastFlow.add(my_num_lab);
+    east.add(eastFlow);
+    
+    east.add(my_pic);
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, 10)));
+    
+    west.add(my_aname_lab);
+    
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + 10)));
+    west.add(my_iname_lab);
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + 10)));
+    west.add(my_qty_lab);
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + 10)));
+    west.add(my_minbid_lab);
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + 10)));
+    west.add(my_donor_lab);
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + 10)));
+    west.add(my_size_lab);
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + 10)));
+    west.add(my_storage_lab);
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + 10)));
+    west.add(my_cond_lab);
+    
+    
+    final JPanel textInput = new JPanel();
+    textInput.setLayout(new BoxLayout(textInput, BoxLayout.Y_AXIS));
+    textInput.add(my_auction_name_input);
+    textInput.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT_TWO)));
+    textInput.add(my_item_name_input);
+    textInput.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT_TWO)));
+    textInput.add(my_quantity_input);
+    textInput.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT_TWO)));
+    textInput.add(my_minimum_bid_input);
+    textInput.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT_TWO)));
+    textInput.add(my_donor_input);
+    textInput.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT_TWO)));
+    textInput.add(my_size_input);
+    textInput.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT_TWO)));
+    textInput.add(my_storage_input);
+    textInput.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT_TWO)));
+    textInput.add(my_condition_input);
+    textInput.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT_TWO)));
+    
+    
+    
+    southcomment.add(my_comm_lab);
+    
+    southcomment.add(my_text);
+    
+    
+    southcomment.add(my_save_button);
+    
+    south.add(southcomment, BorderLayout.CENTER);
+    
+    southset.add(my_bid_button, BorderLayout.CENTER);
+    southset.add(my_back_button, BorderLayout.WEST);
+    
+    south.add(southset, BorderLayout.SOUTH);
+    
+    add(north, BorderLayout.NORTH);
+    add(east, BorderLayout.EAST);
+    add(west, BorderLayout.WEST);
+    add(textInput, BorderLayout.CENTER);
+    add(south, BorderLayout.SOUTH);
+    
+  }
+  
+  private void saveItem() {
+    my_item.setItemName(my_item_name_input.getText().trim());
+    my_item.setItemQuantity(Integer.parseInt(my_quantity_input.getText().trim()));
+    my_item.setStartingBid(Double.parseDouble(my_minimum_bid_input.getText()));
+    my_item.setDonor(my_donor_input.getText().trim());
+    my_item.setSize(my_size_input.getText().trim());
+    my_item.setStorage(my_storage_input.getText().trim());
+    my_item.setCondition(my_condition_input.getText().trim());
+    my_item.setComments(my_text.getText().trim());
+    
+  }
+}

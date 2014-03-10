@@ -645,6 +645,7 @@ public class AuctionPanel extends JPanel {
    * Shows the inventory view.
    */
   private void viewInventory() {  // Return a List<Items>
+    my_app_frame.showInventory(my_auction);
     
   }
   

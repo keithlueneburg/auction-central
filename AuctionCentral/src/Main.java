@@ -32,7 +32,12 @@ import user.User;
  */
 public final class Main {
   //TODO: Remove DEFAULT_USER from final build (should be decided by login window)
-  //  f
+  private static User DEFAULT_STAFF_USER = new AuctionCentralStaff("staff_dude-0101",
+      "password", "John", "Smith");
+  
+  private static User DEFAULT_NPO_USER = new NonProfitUser("non-profit-guy",
+      "password", "Bob", "Jones", "Charity group");
+  
   /**
    * Private constructor, to prevent instantiation of this class.
    */
@@ -51,14 +56,14 @@ public final class Main {
     {  
       @Override
       public void run() {
-
+        
         final AuctionCentralSystem system = new AuctionCentralSystem();
-
-        //final User user = DEFAULT_STAFF_USER;
+        
+        final User user = DEFAULT_STAFF_USER;
         User login_user = null;
-
+        
         boolean valid_login = false;
-
+        
         while (!valid_login) {
           // show a JOptionPane to get the username.
           final String input_username = JOptionPane.showInputDialog(null, "Enter username: ", 
@@ -67,44 +72,43 @@ public final class Main {
           if (input_username == null) {
             System.exit(0);
           } else {
-            // get the User object corresponding to the String username
             login_user = system.isValidUser(input_username);
-            // if User is null, the username was not valid
+          
             if (login_user != null) {
               valid_login = true;
             }
           }
-        }
 
-        // create a new notifier to tell system which user logs in
+        }
+        
         final RoleNotifier user_type_notifier = new RoleNotifier(system);
         user_type_notifier.changeRole(login_user);
-
-        //start the gui
+        
         final ApplicationFrame gui = new ApplicationFrame(login_user, system);
         gui.start();
-
-        //      while (!valid_login) {
-        //      // show a JOptionPane to get the username.
-        //      final String input_username = JOptionPane.showInputDialog(null, "Enter username: ", 
-        //          "AuctionCentral Login", JOptionPane.QUESTION_MESSAGE);
-        //      // if JOptionPane clicks 'cancel', exit
-        //      if (input_username == null) {
-        //        System.exit(0);
-        //      } else if (input_username.equals("staff")) {
-        //        user = DEFAULT_STAFF_USER;
-        //      } else if (input_username.equals("nonprofit")) {
-        //        user = DEFAULT_NPO_USER;
-        //      } else if (AuctionCentralSystem.isValidUser_static(input_username)) {
-        //      }
-        //        valid_login = true;
-        //      }
-        //    final ApplicationFrame gui = new ApplicationFrame(user, system);
-        //    gui.start();
-        //    }
+        
+       
+//      while (!valid_login) {
+//      // show a JOptionPane to get the username.
+//      final String input_username = JOptionPane.showInputDialog(null, "Enter username: ", 
+//          "AuctionCentral Login", JOptionPane.QUESTION_MESSAGE);
+//      // if JOptionPane clicks 'cancel', exit
+//      if (input_username == null) {
+//        System.exit(0);
+//      } else if (input_username.equals("staff")) {
+//        user = DEFAULT_STAFF_USER;
+//      } else if (input_username.equals("nonprofit")) {
+//        user = DEFAULT_NPO_USER;
+//      } else if (AuctionCentralSystem.isValidUser_static(input_username)) {
+//      }
+//        valid_login = true;
+//      }
+//    final ApplicationFrame gui = new ApplicationFrame(user, system);
+//    gui.start();
+//    }
       }
-
-    });
+        
+      });
   }
 }
 
@@ -116,6 +120,7 @@ public final class Main {
  *
  */
 final class RoleNotifier extends Observable {
+  
   /**
    * Create a new notifier for the given system.
    * 
@@ -125,7 +130,7 @@ final class RoleNotifier extends Observable {
     // TODO Auto-generated constructor stub
     addObserver(the_system);
   }
-
+  
   /**
    * Change the access role to the specified user.
    * 

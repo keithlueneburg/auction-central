@@ -68,8 +68,12 @@ public class InventoryPanel extends JPanel {
    */
   private ApplicationFrame my_app_frame;
   
+  private Auction my_auction;
+  
   public InventoryPanel(final ApplicationFrame the_jframe, final Auction an_auction) {
     super();
+    
+    my_auction = an_auction;
     my_item_list = an_auction.getItems();
     my_app_frame = the_jframe;
     my_button_panel = new JPanel();
@@ -125,7 +129,7 @@ public class InventoryPanel extends JPanel {
      edit_button.addActionListener(new ActionListener() {
        public void actionPerformed(final ActionEvent an_event) {
          if (my_index >= 0) {
-           my_app_frame.showItem(my_item_list.get(my_index), false);
+           my_app_frame.showItem(my_item_list.get(my_index), my_auction, true);
          }
        }
      });
@@ -133,7 +137,7 @@ public class InventoryPanel extends JPanel {
      final JButton create_button = new JButton("Create");
      create_button.addActionListener(new ActionListener() {
        public void actionPerformed(final ActionEvent an_event) {
-           my_app_frame.showItem(new Item(), true);
+           my_app_frame.showItem(new Item(), my_auction, true);
        }
      });
      my_button_panel.add(edit_button);
@@ -196,7 +200,7 @@ public class InventoryPanel extends JPanel {
       */
      private void configList() {
        
-       my_jlist.setListData((Item[]) my_item_list.toArray());
+       my_jlist.setListData( my_item_list.toArray());
        my_jlist.setCellRenderer(new MyCellRenderer());
      }
    }

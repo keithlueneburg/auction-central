@@ -2,10 +2,11 @@ package auction;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 
 /**
@@ -403,9 +404,9 @@ public class Item {
     Scanner temp = null;
 
     try {
-      temp = new Scanner(new File(the_file_name));
+      temp = new Scanner(new File(the_file_name)); 
     } catch (final FileNotFoundException e) {
-
+      JOptionPane.showMessageDialog(null, e.getMessage());
     }
 
     return temp;
