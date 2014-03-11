@@ -227,6 +227,15 @@ public class AuctionPanel extends JPanel {
     final String temp = the_auction.getAuctionNumber();
     my_number = new JLabel(temp);
     
+    start(an_editable);
+  }
+  
+  /** 
+   * Initiates through constructor.
+   * 
+   * @param an_editable - the editable boolean.
+   */
+  private void start(final boolean an_editable) {
     createAuction();
     //setupEditButton();
     setupSaveButton();
@@ -235,7 +244,6 @@ public class AuctionPanel extends JPanel {
     setTheBorder();
     setupInput();
     createAuctionLabels();
-    
     allowEdits(an_editable);
   }
   
@@ -391,18 +399,9 @@ public class AuctionPanel extends JPanel {
   }
   
   /**
-   * Creates the labels that display the controls.
+   * Sets the fonts of the labels.
    */
-  private void createAuctionLabels() {
-    final JPanel center = new JPanel(new BorderLayout());
-    final JPanel west = new JPanel();
-    west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
-    final JPanel north = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    final JPanel east = new JPanel(new GridLayout(0, 1));
-    final JPanel south = new JPanel(new BorderLayout());
-    final JPanel southcomment = new JPanel(new FlowLayout());
-    final JPanel southset = new JPanel(new FlowLayout());
-    
+  private void setFonts() {
     AUCTION_TITLE.setFont(new Font(ARIAL, Font.BOLD, MAIN_FONT_SIZE));
     my_auction_number.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
     my_auction_name.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
@@ -416,6 +415,22 @@ public class AuctionPanel extends JPanel {
     my_current_items.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
     my_anticipated_items.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
     my_auction_comments.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
+  }
+  
+  /**
+   * Creates the labels that display the controls.
+   */
+  private void createAuctionLabels() {
+    final JPanel center = new JPanel(new BorderLayout());
+    final JPanel west = new JPanel();
+    west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
+    final JPanel north = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    final JPanel east = new JPanel(new GridLayout(0, 1));
+    final JPanel south = new JPanel(new BorderLayout());
+    final JPanel southcomment = new JPanel(new FlowLayout());
+    final JPanel southset = new JPanel(new FlowLayout());
+    
+    setFonts();
     
     north.add(AUCTION_TITLE, BorderLayout.CENTER);
     
@@ -689,7 +704,6 @@ public class AuctionPanel extends JPanel {
   private void getAuctionInfoPanel() {  // Takes an Auction as a parameter
     
   }
-  
   
 }
 
