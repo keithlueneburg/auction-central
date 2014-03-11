@@ -200,7 +200,11 @@ public class RegistrationPanel extends JPanel {
     west.add(my_last_name_label);
     west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT)));
 
-   
+    west.add(my_card_num_label);
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT)));
+    west.add(my_csc_label);
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT)));
+    west.add(my_exp_date_label);
     
 //    final JPanel auctionnum = new JPanel(new FlowLayout());
 //    auctionnum.add(my_auction_number, BorderLayout.CENTER);
@@ -208,11 +212,7 @@ public class RegistrationPanel extends JPanel {
 //    east.add(auctionnum);
     
 
-    west.add(my_card_num_label);
-    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, 172)));
-    west.add(my_csc_label);
-    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, 172)));
-    west.add(my_exp_date_label);
+    
     
     center.add(west, BorderLayout.CENTER);
 
