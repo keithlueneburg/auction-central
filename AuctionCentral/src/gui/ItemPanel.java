@@ -195,9 +195,9 @@ public class ItemPanel extends JPanel {
   private JFormattedTextField my_condition_input = new JFormattedTextField();
 
   /**The comments on the item.*/
-  private JFormattedTextField my_comment_input = new JFormattedTextField();
+  //private JFormattedTextField my_comment_input = new JFormattedTextField();
   
-  private JTextField my_text = new JTextField(20);
+  private JTextField my_comment_input = new JTextField(20);
 
   /** The auction central system. */
   private final AuctionCentralSystem my_system;
@@ -257,7 +257,13 @@ public class ItemPanel extends JPanel {
     my_minimum_bid_input.setEditable(the_edit_flag);
     my_storage_input.setEditable(the_edit_flag);
     my_condition_input.setEditable(the_edit_flag);
-    my_comment_input.setEditable(the_edit_flag);
+    //my_comment_input.setEditable(the_edit_flag);
+    
+    if (my_system.getCurrentUser() instanceof Bidder) {
+      my_comment_input.setEditable(the_edit_flag); 
+    } else {
+      my_comment_input.setEditable(the_edit_flag);
+    }
   }
   
   /**
@@ -301,7 +307,7 @@ public class ItemPanel extends JPanel {
     my_minimum_bid_input.setText("" + my_minimum_bid);
     my_storage_input.setText(my_storage);
     my_condition_input.setText(my_condition);
-    my_text.setText(my_comment);
+    my_comment_input.setText(my_comment);
     
     allowEdits(false);
   }
@@ -332,9 +338,9 @@ public class ItemPanel extends JPanel {
             || my_size_input.getText().contains(SYSTEM_RESERVED)
             || my_storage_input.getText().contains(SYSTEM_RESERVED)
             || my_condition_input.getText().contains(SYSTEM_RESERVED)
-            || my_text.getText().contains(SYSTEM_RESERVED)) {     
+            || my_comment_input.getText().contains(SYSTEM_RESERVED)) {     
           JOptionPane.showMessageDialog(null, 
-              "Invalied Character: " + SYSTEM_RESERVED, 
+              "Invalid Character: " + SYSTEM_RESERVED, 
                "Error", JOptionPane.ERROR_MESSAGE);
         } else {
           try {
@@ -492,7 +498,7 @@ public class ItemPanel extends JPanel {
     
     if (a_user instanceof Bidder || a_user instanceof Guest) {
       my_save_button.setEnabled(false);
-      my_comment_input.setEditable(false);
+      //TODO my_comment_input.setEditable(false);
     }
         
     if (!(a_user instanceof AuctionCentralStaff)) {
@@ -575,7 +581,7 @@ public class ItemPanel extends JPanel {
     
     southcomment.add(my_comm_lab);
     
-    southcomment.add(my_text);
+    southcomment.add(my_comment_input);
     
     
     southcomment.add(my_save_button);
@@ -611,7 +617,7 @@ public class ItemPanel extends JPanel {
     my_item.setSize(my_size_input.getText().trim());
     my_item.setStorage(my_storage_input.getText().trim());
     my_item.setCondition(my_condition_input.getText().trim());
-    my_item.setComments(my_text.getText().trim());
+    my_item.setComments(my_comment_input.getText().trim());
     my_item.setSellingPrice(0.0);
     
     
