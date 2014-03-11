@@ -251,6 +251,9 @@ public class InventoryPanel extends JPanel {
     if (my_app_frame.getSystem().getCurrentUser() instanceof Bidder) {
       my_button_panel.add(bid_button);
     }
+    if (my_item_list.size() == 0) {
+      bid_button.setVisible(false);
+    }
     my_button_panel.add(back_button);
   }
 
