@@ -125,7 +125,7 @@ public class AuctionPanel extends JPanel {
   private final JLabel my_contact_person = new JLabel("Contact Person: ");
     
   /** The label that shows the auction's name. */
-  private final JLabel my_contact_phone = new JLabel("Contact Phone: ");
+  private final JLabel my_contact_phone = new JLabel("Contact Phone: ###-###_####");
     
   /** The label that shows the auction's number. */
   private final JLabel my_intake_person = new JLabel("Intake Person: ");
@@ -615,6 +615,9 @@ public class AuctionPanel extends JPanel {
           "Fields cannot be blank", 
           ERROR, JOptionPane.ERROR_MESSAGE);
       
+    } else if (!testPhone(contact_phone)) {
+      JOptionPane.showMessageDialog(null, 
+          "invalid phone number", ERROR, JOptionPane.ERROR_MESSAGE);
     // then check for a bad date
     } else if (auction_date == null) {
       JOptionPane.showMessageDialog(null, 
@@ -659,6 +662,28 @@ public class AuctionPanel extends JPanel {
     }
     
     
+  }
+  
+  /**
+   * test if a string is a valid phone unmber
+   * @param a_phone
+   * @return
+   */
+  private boolean testPhone(String a_phone) {
+    boolean is_valid = true;
+    String[] phone = a_phone.split("-");
+    if (a_phone.length() != 12 || phone.length != 3) {
+      is_valid = false;
+    } else {
+      try {
+        Integer.parseInt(phone[0]);
+        Integer.parseInt(phone[1]);
+        Integer.parseInt(phone[2]);
+      } catch (NumberFormatException ex){
+        is_valid = false;
+      }
+    }
+    return is_valid;
   }
   
   /**
