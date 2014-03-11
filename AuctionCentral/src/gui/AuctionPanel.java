@@ -113,6 +113,8 @@ public class AuctionPanel extends JPanel {
   
   /** The label that shows the auction's name. */
   private static final JLabel AUCTION_TITLE = new JLabel("Auction Information:");
+
+  private static final String RESERVED_CHARACTER = "`";
   
   // Non global variable -----------------------------
     
@@ -614,7 +616,15 @@ public class AuctionPanel extends JPanel {
           "Fields cannot be blank", 
           ERROR, JOptionPane.ERROR_MESSAGE);
       
+      // check to see if system reserved character is used
+    } else if (intake_person.contains(RESERVED_CHARACTER)
+        || my_comments_input.getText().contains(RESERVED_CHARACTER)) {
+      JOptionPane.showMessageDialog(null, 
+          "Invalid character: " + RESERVED_CHARACTER, 
+          ERROR, JOptionPane.ERROR_MESSAGE);
+      
     } else if (!testPhone(contact_phone)) {
+    
       JOptionPane.showMessageDialog(null, 
           "invalid phone number", ERROR, JOptionPane.ERROR_MESSAGE);
     // then check for a bad date

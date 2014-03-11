@@ -299,7 +299,6 @@ public class MenuPanel extends JPanel {
   }
 
   public void disableRegistration() {
-    // TODO Auto-generated method stub
     my_register_button.setEnabled(false);
   }
 }

@@ -71,6 +71,11 @@ public class RegistrationPanel extends JPanel {
   /** The label that shows the auction's name. */
   private static final JLabel FORM_TITLE = new JLabel("Registration:");
 
+  /**
+   * System reserved character. Strings should not contain this. 
+   */
+  private static final String RESERVED_CHARACTER = "`";
+  
   /////////LABELS////////
   
   /** Label for username field. */
@@ -82,16 +87,16 @@ public class RegistrationPanel extends JPanel {
   /** Label for first name field. */
   private final JLabel my_first_name_label = new JLabel("First name: ");
 
-  /** Label for last namefield. */
+  /** Label for last name field. */
   private final JLabel my_last_name_label = new JLabel("Last name: ");
   
-  /** Label for creditcard number field. */
+  /** Label for credit card number field. */
   private final JLabel my_card_num_label = new JLabel("Card # ");
     
-  /** Label for creditcard CSC field. */
+  /** Label for credit card CSC field. */
   private final JLabel my_csc_label = new JLabel("CSC: ");
     
-  /** Label for creditcard expiration date field. */
+  /** Label for credit card expiration date field. */
   private final JLabel my_exp_date_label = new JLabel("Expiration date:     ");
 
   /////////TEXT FIELDS////////
@@ -362,7 +367,16 @@ public class RegistrationPanel extends JPanel {
           "Fields cannot be blank", 
           "Error", JOptionPane.ERROR_MESSAGE);
     
+    } else if (username.contains(RESERVED_CHARACTER)
+        || password.contains(RESERVED_CHARACTER)
+        || first_name.contains(RESERVED_CHARACTER)
+        || last_name.contains(RESERVED_CHARACTER)) {
+      
+      JOptionPane.showMessageDialog(null, 
+          "Invalid character: `", 
+          "Error", JOptionPane.ERROR_MESSAGE);
     } else if (!is_valid_date) {
+    
       JOptionPane.showMessageDialog(null, 
           "Invalid date. Must be in the style of MM/YYYY, and after the current month.", 
           "Error", JOptionPane.ERROR_MESSAGE);
