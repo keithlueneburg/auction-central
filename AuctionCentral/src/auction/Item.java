@@ -502,12 +502,13 @@ public class Item {
     //show quantity
     if (my_quantity <= 0) {
       //nothing left
-      my_quantity = 0;
       JOptionPane.showMessageDialog(null, "no inventory left");
     } else {
       //something left
       JOptionPane.showMessageDialog(null, "there are " + my_quantity + " inventory left.");
     }
+    
+    my_quantity += my_win_list.size();
   }
 
 }
