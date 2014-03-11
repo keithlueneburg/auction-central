@@ -3,6 +3,7 @@ import gui.ApplicationFrame;
 import java.awt.EventQueue;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.Observable;
 
 import javax.swing.JLabel;
@@ -34,6 +35,8 @@ import user.User;
  * @version 3/2/2014
  */
 public final class Main {
+  
+  private static AuctionCentralSystem my_system;
 
   /**
    * A guest user for registration online
@@ -59,9 +62,11 @@ public final class Main {
     {  
       @Override
       public void run() {
-        
-        final AuctionCentralSystem system = new AuctionCentralSystem();
-        
+        try {
+          my_system = new AuctionCentralSystem();
+        } catch (IOException ex) {
+          System.exit(0);
+        }
         User login_user = null;
         
         boolean valid_login = false;
@@ -83,7 +88,7 @@ public final class Main {
             login_user = DEFAULT_GUEST_USER;
             valid_login = true;
           } else {
-            login_user = system.isValidUser(login_text_field.getText());
+            login_user = my_system.isValidUser(login_text_field.getText());
           
             if (login_user != null) {
               valid_login = true;
@@ -92,10 +97,10 @@ public final class Main {
 
         }
         
-        final RoleNotifier user_type_notifier = new RoleNotifier(system);
+        final RoleNotifier user_type_notifier = new RoleNotifier(my_system);
         user_type_notifier.changeRole(login_user);
         
-        final ApplicationFrame gui = new ApplicationFrame(login_user, system);
+        final ApplicationFrame gui = new ApplicationFrame(login_user, my_system);
         gui.start();
         
        
