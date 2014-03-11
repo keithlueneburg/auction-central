@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
@@ -55,7 +56,7 @@ public class AuctionPanel extends JPanel {
   /** Number 12. */
   private static final int TWELVE = 12;
   
-  /** Number 12. */
+  /** Number 3. */
   private static final int THREE = 3;
   
   /** Number 5. */
@@ -125,13 +126,13 @@ public class AuctionPanel extends JPanel {
   private final JLabel my_contact_person = new JLabel("Contact Person: ");
     
   /** The label that shows the auction's name. */
-  private final JLabel my_contact_phone = new JLabel("Contact Phone: ###-###_####");
+  private final JLabel my_contact_phone = new JLabel("Contact Phone: ###-###_####  ");
     
   /** The label that shows the auction's number. */
   private final JLabel my_intake_person = new JLabel("Intake Person: ");
     
   /** The label that shows the auction's name. */
-  private final JLabel my_auction_date = new JLabel("Auction Date: MM/DD/YYYY");
+  private final JLabel my_auction_date = new JLabel("Auction Date: MM/DD/YYYY  ");
     
   /** The label that shows the auction's number. */
   private final JLabel my_start_time = new JLabel("Start Time:               (0 - 23)");
@@ -169,9 +170,7 @@ public class AuctionPanel extends JPanel {
   /** The text area used to go add comments. */
   private final JTextField my_comments_input = new JTextField(20);
  
-  /**
-   * A reference to the main application frame.
-   */
+  /** A reference to the main application frame. */
   private ApplicationFrame my_app_frame;
   
   /** The auction to display in the panel. */

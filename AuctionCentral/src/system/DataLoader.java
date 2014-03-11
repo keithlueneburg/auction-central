@@ -27,6 +27,15 @@ import user.User;
  */
 final class DataLoader {
   
+  /** Number 3. */
+  private static final int THREE = 3;
+  
+  /** Number 4. */
+  private static final int FOUR = 4;
+  
+  /** Number 5. */
+  private static final int FIVE = 5;
+  
   /**
    * The user list that would be saved.
    */
@@ -155,7 +164,7 @@ final class DataLoader {
       
       my_address_list.add(new Address(address[0],
           Integer.parseInt(address[1]), address[2],
-          address[3], Integer.parseInt(address[4])));     
+          address[THREE], Integer.parseInt(address[FOUR])));     
     }
   }
   
@@ -174,8 +183,8 @@ final class DataLoader {
       exp_date.set(Calendar.YEAR, Integer.parseInt(exp_string[1]));
       
       my_card_list.add(new CreditCard(Long.parseLong(card[0]),
-          exp_date, Integer.parseInt(card[2]), card[3], 
-          my_address_list.get(Integer.parseInt(card[4])), card[5]));
+          exp_date, Integer.parseInt(card[2]), card[THREE], 
+          my_address_list.get(Integer.parseInt(card[FOUR])), card[FIVE]));
     }
   }
   
@@ -187,14 +196,14 @@ final class DataLoader {
       final String line = my_bid_scanner.nextLine();
       final String[] bid = line.split(DATA_SEPARATOR);
       
-      final String[] bid_string = bid[3].split(CALENDAR_SEPARATOR);
+      final String[] bid_string = bid[THREE].split(CALENDAR_SEPARATOR);
       final Calendar bid_date = Calendar.getInstance();
       bid_date.set(Integer.parseInt(bid_string[0]),
-          Integer.parseInt(bid_string[2]), Integer.parseInt(bid_string[3]),
-          Integer.parseInt(bid_string[4]), Integer.parseInt(bid_string[5]));
+          Integer.parseInt(bid_string[2]), Integer.parseInt(bid_string[THREE]),
+          Integer.parseInt(bid_string[FOUR]), Integer.parseInt(bid_string[FIVE]));
       
       my_bid_list.add(new Bid(bid[0], Double.parseDouble(bid[1]),
-          bid[2], bid_date, my_card_list.get(Integer.parseInt(bid[4]))));
+          bid[2], bid_date, my_card_list.get(Integer.parseInt(bid[FOUR]))));
     }
   }
   
@@ -211,8 +220,8 @@ final class DataLoader {
       }
       
       final Item this_item = new Item(Integer.parseInt(item[0]), item[1],
-          Integer.parseInt(item[2]), Double.parseDouble(item[3]),
-          item[4], item[5], item[6], item[7], item[8]);
+          Integer.parseInt(item[2]), Double.parseDouble(item[THREE]),
+          item[FOUR], item[FIVE], item[6], item[7], item[8]);
       
       this_item.setSellingPrice(Double.parseDouble(item[9]));
       
@@ -232,12 +241,12 @@ final class DataLoader {
       final String line = my_auction_scanner.nextLine();
       final String[] auction = line.split(DATA_SEPARATOR);
       
-      final String[] auction_date_string = auction[4].split(CALENDAR_SEPARATOR);
+      final String[] auction_date_string = auction[FOUR].split(CALENDAR_SEPARATOR);
       final Calendar auction_date = Calendar.getInstance();
       auction_date.set(Calendar.MONTH, Integer.parseInt(auction_date_string[0]));
       auction_date.set(Calendar.DAY_OF_MONTH, Integer.parseInt(auction_date_string[1]));
       auction_date.set(Calendar.YEAR, Integer.parseInt(auction_date_string[2]));
-      auction_date.set(Calendar.HOUR_OF_DAY, Integer.parseInt(auction_date_string[3]));
+      auction_date.set(Calendar.HOUR_OF_DAY, Integer.parseInt(auction_date_string[THREE]));
       auction_date.set(Calendar.MINUTE, 0);
       auction_date.set(Calendar.SECOND, 0);
       
@@ -246,8 +255,8 @@ final class DataLoader {
       }
       
       final Auction current_auction = new Auction(auction[0], auction[1],
-          auction[2], auction[3], auction_date,
-          Integer.parseInt(auction[5]), auction[6]);
+          auction[2], auction[THREE], auction_date,
+          Integer.parseInt(auction[FIVE]), auction[6]);
       
       final List<Item> auction_bids = new ArrayList<Item>();
       for (int i = 7; i < auction.length; i++) {
@@ -271,14 +280,14 @@ final class DataLoader {
       final String[] user = line.split(DATA_SEPARATOR);
       final String username = user[1];
       final String password = user[2];
-      final String first_name = user[3];
-      final String last_name = user[4];
+      final String first_name = user[THREE];
+      final String last_name = user[FOUR];
       
       if ("Bidder".equals(user[0])) {
         final Bidder this_bidder = new Bidder(username, password, first_name, 
             last_name);
         
-        if ("true".equals(user[5])) {
+        if ("true".equals(user[FIVE])) {
         
           this_bidder.regisiter(my_card_list.get(Integer.parseInt(user[6])), 
                 my_address_list.get(Integer.parseInt(user[7])));
@@ -294,11 +303,10 @@ final class DataLoader {
             first_name, last_name));
       } else {
         my_user_list.add(new NonProfitUser(username, password, 
-            first_name, last_name, user[5]));
+            first_name, last_name, user[FIVE]));
       }   
     }
   }
-  
   
   
 }
