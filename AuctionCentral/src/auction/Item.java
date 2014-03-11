@@ -427,22 +427,17 @@ public class Item {
    */
   public void unsealBid() {
     
-    if (my_bids.size() >= my_quantity) {
-      for (int i = 0; i < my_quantity; i ++) {
-        my_win_list.add(my_bids.poll());
-      }
-    } else {
-      int bid_num = my_bids.size();
-      for (int i = 0; i < bid_num; i ++) {
-        my_win_list.add(my_bids.poll());
-      }
+    int bid_num = Math.min( my_bids.size(), my_quantity);
+    
+    for (int i = 0; i < bid_num; i ++) {
+      my_win_list.add(my_bids.poll());
     }
     
     my_bids.addAll(my_win_list);
     
     my_quantity -= my_win_list.size();
-    
     showwinMessage();
+    my_quantity += my_win_list.size();
   }
   
   private void showwinMessage() {
@@ -507,8 +502,6 @@ public class Item {
       //something left
       JOptionPane.showMessageDialog(null, "there are " + my_quantity + " inventory left.");
     }
-    
-    my_quantity += my_win_list.size();
   }
 
 }
