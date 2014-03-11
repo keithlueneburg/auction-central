@@ -204,7 +204,22 @@ public class AuctionCentralSystem implements Observer {
     error_message = AuctionDateTester.getSolution(an_auction, my_auction);
     
     //Test Business Rule #5
-    final List<Auction> current_user_list = ((NonProfitUser) my_current_user).getAuction();
+    final List<Auction> current_user_list = new ArrayList<Auction>();
+    
+    for (Auction each: my_auction) {
+      if ((my_current_user.getFirstName() + " " + my_current_user.getLastName()).equals(
+          each.getContactPerson())) {
+        current_user_list.add(each);
+      }
+    }
+    
+    for (Auction each: my_past_auction) {
+      if ((my_current_user.getFirstName() + " " + my_current_user.getLastName()).equals(
+          each.getContactPerson())) {
+        current_user_list.add(each);
+      }
+    }
+    
     for (Auction each: current_user_list) {
       if (each.getAuctionDate().get(Calendar.YEAR)
           == an_auction.getAuctionDate().get(Calendar.YEAR)) {
@@ -215,7 +230,6 @@ public class AuctionCentralSystem implements Observer {
     
     if (error_message == null) {
       my_auction.add(an_auction);
-      ((NonProfitUser) my_current_user).getAuction().add(an_auction);
     }
     
     
