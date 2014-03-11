@@ -230,20 +230,20 @@ public class AuctionCentralSystem implements Observer {
   private void refreshAuction() {
 
     final Calendar today = Calendar.getInstance();
-    final int today_year = today.get(Calendar.YEAR);
-    final int today_month = today.get(Calendar.MONTH) + 1;
-    final int today_day = today.get(Calendar.DATE);
     final List<Auction> remove_auction = new ArrayList<Auction>();
     
     for (Auction each: my_auction) {
+      final Calendar auction_end = Calendar.getInstance();
       final Calendar auction_date = each.getAuctionDate();
       final int auction_year = auction_date.get(Calendar.YEAR);
-      final int auction_month = auction_date.get(Calendar.MONTH) + 1;
+      final int auction_month = auction_date.get(Calendar.MONTH);
       final int auction_day = auction_date.get(Calendar.DATE);
+      final int auction_hour = auction_date.get(Calendar.HOUR);
+      auction_end.set(auction_year, auction_month, auction_day,
+          auction_hour + each.getAuctionDuration(), 0, 0);
       
-      if (today.compareTo(auction_date) > 0 || //if the auction is past
-          (today_year == auction_year && today_month == auction_month
-          && today_day == auction_day)) { // if the auction is on today
+      
+      if (today.compareTo(auction_end) > 0 ) { 
         
         final Auction past = each;
         my_past_auction.add(past);

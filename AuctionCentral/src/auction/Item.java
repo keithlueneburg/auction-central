@@ -1,8 +1,15 @@
 package auction;
 
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
+
+import javax.swing.JOptionPane;
+
+import bidding.CreditCard;
 
 
 
@@ -19,6 +26,8 @@ import java.util.Queue;
  * 
  */
 public class Item {
+
+  private static final String NEW_LINE = "\n";
 
   // //////////////////////////////////////////////////////////////////
   // FIELDS
@@ -55,6 +64,9 @@ public class Item {
 
   /**The bids on the item.*/
   private Queue<Bid> my_bids;
+  
+  /**Win bid list. */
+  private List<Bid> my_win_list;
 
   // //////////////////////////////////////////////////////////////////
   // CONSTRUCTORS
@@ -96,6 +108,7 @@ public class Item {
     my_comments = the_comments;
 
     my_bids = new PriorityQueue<Bid>();
+    my_win_list = new ArrayList<Bid>();
   }
 
   /**
@@ -412,8 +425,87 @@ public class Item {
    * @author Kaiyuan Shi
    * @return the win bid
    */
-  public Bid unsealBid() {
-    return my_bids.peek();
+  public void unsealBid() {
+    
+    if (my_bids.size() >= my_quantity) {
+      for (int i = 0; i < my_quantity; i ++) {
+        my_win_list.add(my_bids.poll());
+      }
+    } else {
+      int bid_num = my_bids.size();
+      for (int i = 0; i < bid_num; i ++) {
+        my_win_list.add(my_bids.poll());
+      }
+    }
+    
+    my_quantity -= my_win_list.size();
+    
+    showwinMessage();
+  }
+  
+  private void showwinMessage() {
+    
+    /*if (win_bid == null) {
+    //no win bid
+    message = "No one bid for this item.";
+  } else {
+    
+    //show win bid
+    CreditCard win_card = win_bid.getPayment();
+    Calendar card_exp = win_card.getExpDate();
+    String card_exp_str = (card_exp.get(Calendar.MONTH) + 1) + "/";
+    card_exp_str += card_exp.get(Calendar.YEAR);
+    
+    message = "Winner: " + win_bid.getBidderName() + NEW_LINE;
+    message += "Price: " + win_bid.getPrice() + NEW_LINE;
+    message += "Bid time: " + win_bid.getBidTime().get(Calendar.MONTH) + "/";
+    message += win_bid.getBidTime().get(Calendar.DAY_OF_MONTH) + "/";
+    message += win_bid.getBidTime().get(Calendar.YEAR) + "/ ";
+    message += win_bid.getBidTime().get(Calendar.HOUR_OF_DAY) + ":";
+    message += win_bid.getBidTime().get(Calendar.MINUTE) + NEW_LINE;
+    message += "Credit Card #: " + win_card.getCardNum() + NEW_LINE;
+    message += "Exp Date: " + card_exp_str + NEW_LINE;
+    message += "Card CSC: " + win_card.getCSC();
+    
+  }*/
+    
+    if (my_win_list.size() == 0) {
+      JOptionPane.showMessageDialog(null, "No one bid for this item.");
+    } else {
+      String message = "";
+      for (int i = 0; i < my_win_list.size(); i++) {
+        Bid win_bid = my_win_list.get(i);
+        CreditCard win_card = win_bid.getPayment();
+        Calendar card_exp = win_card.getExpDate();
+        String card_exp_str = (card_exp.get(Calendar.MONTH) + 1) + "/";
+        card_exp_str += card_exp.get(Calendar.YEAR);
+        
+        message = "Winner: " + win_bid.getBidderName() + NEW_LINE;
+        message += "Price: " + win_bid.getPrice() + NEW_LINE;
+        message += "Bid time: " + win_bid.getBidTime().get(Calendar.MONTH) + "/";
+        message += win_bid.getBidTime().get(Calendar.DAY_OF_MONTH) + "/";
+        message += win_bid.getBidTime().get(Calendar.YEAR) + "/ ";
+        message += win_bid.getBidTime().get(Calendar.HOUR_OF_DAY) + ":";
+        message += win_bid.getBidTime().get(Calendar.MINUTE) + NEW_LINE;
+        message += "Credit Card #: " + win_card.getCardNum() + NEW_LINE;
+        message += "Exp Date: " + card_exp_str + NEW_LINE;
+        message += "Card CSC: " + win_card.getCSC();
+        
+        //show winner
+        JOptionPane.showMessageDialog(null, message,
+            "Winner #" + (i + 1), JOptionPane.PLAIN_MESSAGE);
+      }
+    }
+    
+    //show quantity
+    if (my_quantity <= 0) {
+      //nothing left
+      my_quantity = 0;
+      JOptionPane.showMessageDialog(null, "no inventory left");
+    } else {
+      //something left
+      JOptionPane.showMessageDialog(null, "there are " + my_quantity + " inventory left.");
+    }
   }
 
 }

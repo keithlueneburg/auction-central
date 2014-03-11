@@ -449,22 +449,21 @@ public class ItemPanel extends JPanel {
             unseal_time.get(Calendar.HOUR_OF_DAY) + my_auction.getAuctionDuration());
         Calendar current = Calendar.getInstance();
         
-        String message;
-        
         if (current.compareTo(unseal_time) <= 0) {
           //not the time
-          
+          String message;
           message = "You can not unseal the bid unitl ";
           message += (unseal_time.get(Calendar.MONTH) + 1) + "/";
           message += unseal_time.get(Calendar.DAY_OF_MONTH) + "/";
           message += unseal_time.get(Calendar.YEAR) + " ";
           message += unseal_time.get(Calendar.HOUR_OF_DAY) + ":";
           message += String.format("%02d", unseal_time.get(Calendar.MINUTE)) + "!";
+          JOptionPane.showMessageDialog(null, message);
         } else {
           
-          Bid win_bid = my_item.unsealBid();
+          my_item.unsealBid();
           
-          if (win_bid == null) {
+          /*if (win_bid == null) {
             //no win bid
             message = "No one bid for this item.";
           } else {
@@ -486,18 +485,13 @@ public class ItemPanel extends JPanel {
             message += "Exp Date: " + card_exp_str + NEW_LINE;
             message += "Card CSC: " + win_card.getCSC();
             
-          }
+          }*/
           
           
-        }
-        showMessage(message);      
+        }  
         
       }
     });
-  }
-  
-  private void showMessage(String a_message) {
-    JOptionPane.showMessageDialog(this, a_message);
   }
   
   /**	
