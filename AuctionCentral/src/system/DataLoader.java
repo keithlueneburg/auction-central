@@ -214,7 +214,7 @@ final class DataLoader {
           Integer.parseInt(item[2]), Double.parseDouble(item[3]),
           item[4], item[5], item[6], item[7], item[8]);
       
-      this_item.setSellingPrice(Double.parseDouble(item[10]));
+      this_item.setSellingPrice(Double.parseDouble(item[9]));
       
       for (int i = 11; i < item.length; i++) {
         this_item.addBid(my_bid_list.get(Integer.parseInt(item[i])));
