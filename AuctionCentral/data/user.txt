@@ -20,3 +20,63 @@ AuctionCentralStaff ` Kaiyuan ` password0 ` Kaiyuan ` S `
 AuctionCentralStaff ` Kevin ` password0 ` Kevin ` X ` 
 AuctionCentralStaff ` Casey ` password0 ` Casey ` X ` 
 NonProfitUser ` Steve ` password0 ` Steve ` Jones ` Goodwill ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username0 ` password0 ` first name0 ` last name0 ` non-profit0 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username1 ` password1 ` first name1 ` last name1 ` non-profit1 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username2 ` password2 ` first name2 ` last name2 ` non-profit2 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username3 ` password3 ` first name3 ` last name3 ` non-profit3 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username4 ` password4 ` first name4 ` last name4 ` non-profit4 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username5 ` password5 ` first name5 ` last name5 ` non-profit5 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username6 ` password6 ` first name6 ` last name6 ` non-profit6 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username7 ` password7 ` first name7 ` last name7 ` non-profit7 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username8 ` password8 ` first name8 ` last name8 ` non-profit8 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username9 ` password9 ` first name9 ` last name9 ` non-profit9 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username10 ` password10 ` first name10 ` last name10 ` non-profit10 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username11 ` password11 ` first name11 ` last name11 ` non-profit11 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username12 ` password12 ` first name12 ` last name12 ` non-profit12 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username13 ` password13 ` first name13 ` last name13 ` non-profit13 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username14 ` password14 ` first name14 ` last name14 ` non-profit14 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username0 ` password0 ` first name0 ` last name0 ` non-profit0 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username1 ` password1 ` first name1 ` last name1 ` non-profit1 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username2 ` password2 ` first name2 ` last name2 ` non-profit2 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username3 ` password3 ` first name3 ` last name3 ` non-profit3 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username4 ` password4 ` first name4 ` last name4 ` non-profit4 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username5 ` password5 ` first name5 ` last name5 ` non-profit5 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username6 ` password6 ` first name6 ` last name6 ` non-profit6 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username7 ` password7 ` first name7 ` last name7 ` non-profit7 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username8 ` password8 ` first name8 ` last name8 ` non-profit8 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username9 ` password9 ` first name9 ` last name9 ` non-profit9 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username10 ` password10 ` first name10 ` last name10 ` non-profit10 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username11 ` password11 ` first name11 ` last name11 ` non-profit11 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username12 ` password12 ` first name12 ` last name12 ` non-profit12 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username13 ` password13 ` first name13 ` last name13 ` non-profit13 ` 
+Bidder ` bidder0 ` password0 ` bob ` dole ` false ` 
+NonProfitUser ` username14 ` password14 ` first name14 ` last name14 ` non-profit14 ` 
