@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import user.AbstractUser;
-import user.Administrator;
+import user.Guest;
 import user.AuctionCentralStaff;
 import user.NonProfitUser;
 
@@ -58,7 +58,7 @@ public class TestSystemTest {
 	 */
 	@Test
 	public void testAdminMakeBid() {
-		testPerson = new Administrator("admin", "12345", "Admin", "User");
+		testPerson = new Guest("admin", "12345", "Admin", "User");
 		mySystem.setCurrentUser(testPerson);
 		assertEquals("Administrator shouldn't make a bid successfully!", false, mySystem.makeBid(cellPhone, 100.23));
 	}

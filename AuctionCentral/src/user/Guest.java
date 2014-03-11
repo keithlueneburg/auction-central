@@ -9,7 +9,7 @@ package user;
  * 
  * @version 3/2/2014
  */
-public class Administrator extends AbstractUser {
+public class Guest extends AbstractUser {
 
   /**
    * Initializes the administrator.
@@ -23,7 +23,7 @@ public class Administrator extends AbstractUser {
    * @param the_last_name
    *          the intended last name
    */
-  public Administrator(final String the_username, final String the_password,
+  public Guest(final String the_username, final String the_password,
       final String the_first_name, final String the_last_name) {
     super(the_username, the_password, the_first_name, the_last_name);
   }

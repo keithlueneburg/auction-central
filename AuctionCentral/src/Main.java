@@ -1,18 +1,21 @@
 import gui.ApplicationFrame;
 
 import java.awt.EventQueue;
-
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import java.util.Observable;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.Icon;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import system.AuctionCentralSystem;
 import user.AuctionCentralStaff;
 import user.NonProfitUser;
 import user.User;
+import user.Guest;
 
 /**
  * Class: Main
@@ -38,6 +41,7 @@ public final class Main {
   private static User DEFAULT_NPO_USER = new NonProfitUser("non-profit-guy",
       "password", "Bob", "Jones", "Charity group");
   
+  private static User DEFAULT_GUEST_USER = new Guest("Guest", "password", "guest", "guest");
   /**
    * Private constructor, to prevent instantiation of this class.
    */
@@ -63,16 +67,24 @@ public final class Main {
         User login_user = null;
         
         boolean valid_login = false;
-        
         while (!valid_login) {
           // show a JOptionPane to get the username.
-          final String input_username = JOptionPane.showInputDialog(null, "Enter username: ", 
-              "AuctionCentral Login", JOptionPane.QUESTION_MESSAGE);
+          final Object[] options = {"Ok", "Cancel", "Guest"};
+          final JPanel login_panel = new JPanel();
+          login_panel.add(new JLabel("Enter username:"));
+          final JTextField login_text_field = new JTextField(10);
+          login_panel.add(login_text_field);
+          final int input_username = JOptionPane.showOptionDialog(null, login_panel, 
+              "AuctionCentral Login", JOptionPane.YES_NO_CANCEL_OPTION,
+              JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
           // if JOptionPane clicks 'cancel', exit
-          if (input_username == null) {
+          if (input_username == JOptionPane.NO_OPTION 
+              || input_username == -1) {
             System.exit(0);
+          } else if (input_username == JOptionPane.CANCEL_OPTION) {
+            System.out.println("TEAM FROYO RULES!");
           } else {
-            login_user = system.isValidUser(input_username);
+            login_user = system.isValidUser(login_text_field.getText());
           
             if (login_user != null) {
               valid_login = true;
