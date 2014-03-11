@@ -51,6 +51,27 @@ public class AuctionPanel extends JPanel {
   /** The default height of the panel. */
   private static final int DEFAULT_HEIGHT = 680;
   
+  /** Number 12. */
+  private static final int TWELVE = 12;
+  
+  /** Number 12. */
+  private static final int THREE = 3;
+  
+  /** Number 5. */
+  private static final int FIVE = 5;
+  
+  /** Number 7. */
+  private static final int SEVEN = 7;
+  
+  /** Number 8. */
+  private static final int EIGHT = 8;
+  
+  /** Number 30. */
+  private static final int THIRTY = 30;
+  
+  /** Number 400. */
+  private static final int FOUR_HUNDRED = 400;
+  
   /** The error message. */
   private static final String ERROR = "Error";
   
@@ -568,10 +589,10 @@ public class AuctionPanel extends JPanel {
         || start_time > new GregorianCalendar().getActualMaximum(Calendar.HOUR_OF_DAY)) {
       JOptionPane.showMessageDialog(null, 
           "Start time must be between 0 and 23 hours.", 
-           ERROR, JOptionPane.ERROR_MESSAGE);
+           ERROR, JOptionPane.ERROR_MESSAGE);      
     
     // check duration for valid number
-    } else if (duration < 1 || duration > 12) {
+    } else if (duration < 1 || duration > TWELVE) {
       JOptionPane.showMessageDialog(null, 
           "Duration must from 0 to 12 hours.", 
            ERROR, JOptionPane.ERROR_MESSAGE);
@@ -626,26 +647,30 @@ public class AuctionPanel extends JPanel {
       
       boolean is_valid_date = true;
       
-      if (month <= 0 || month > 12) {
+      if (month <= 0 || month > TWELVE) {
         is_valid_date = false;
       } else if (month == 2) {
-        if ((year % 4 == 0 && year % 100 != 0)
-          || year % 400 == 0) { //leap year
-          if (day <= 0 || day > 29) { 
+        if ((year % (FIVE - 1) == 0 && year % (TEN * TEN) != 0)
+          || year % FOUR_HUNDRED == 0) { //leap year
+          // 29 Days
+          if (day <= 0 || day > (THIRTY - 1)) { 
             is_valid_date = false;
           }
         } else {
-          if (day <= 0 || day > 28) {
+          // 28 Days
+          if (day <= 0 || day > (THIRTY - 2)) {
             is_valid_date = false;
           }
         }
-      } else if (month == 1 || month == 3 || month == 5 || month == 7
-          || month == 8 || month == 10 || month == 12) {
-        if (day <= 0 || day > 31) {
+      } else if (month == 1 || month == THREE || month == FIVE || month == SEVEN
+          || month == EIGHT || month == TEN || month == TWELVE) {
+        // 31 Days
+        if (day <= 0 || day > (THIRTY + 1)) {
           is_valid_date = false;
         }
       } else {
-        if (day <= 0 || day > 30) {
+        // 30 Days
+        if (day <= 0 || day > THIRTY) {
           is_valid_date = false;
         }
       }
@@ -660,7 +685,7 @@ public class AuctionPanel extends JPanel {
     } catch (final NumberFormatException e) {
       JOptionPane.showMessageDialog(null, 
           DATE_ERROR, ERROR, JOptionPane.ERROR_MESSAGE);
-    } catch (final Exception e) {
+    } catch (final IllegalArgumentException ex) {
       JOptionPane.showMessageDialog(null, 
           DATE_ERROR, ERROR, JOptionPane.ERROR_MESSAGE);
     }
