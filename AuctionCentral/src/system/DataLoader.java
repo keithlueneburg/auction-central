@@ -17,6 +17,7 @@ import user.AbstractUser;
 import user.AuctionCentralStaff;
 import user.Bidder;
 import user.NonProfitUser;
+import user.User;
 
 
 /**
@@ -29,7 +30,7 @@ final class DataLoader {
   /**
    * The user list that would be saved.
    */
-  private static List<AbstractUser> my_user_list = new ArrayList<AbstractUser>();
+  private static List<User> my_user_list = new ArrayList<User>();
   
   /**
    * The auction list that would be saved.

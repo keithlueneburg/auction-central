@@ -17,6 +17,7 @@ import user.AbstractUser;
 import user.AuctionCentralStaff;
 import user.Bidder;
 import user.NonProfitUser;
+import user.User;
 
 /**
  * This class save all the system data to some txt files.
@@ -28,7 +29,7 @@ final class DataSaver {
   /**
    * The user list that would be saved.
    */
-  private static List<AbstractUser> my_user_list = new ArrayList<AbstractUser>();
+  private static List<User> my_user_list = new ArrayList<User>();
   
   /**
    * The auction list that would be saved.
@@ -115,7 +116,7 @@ final class DataSaver {
    * <dt><b>Postconditions:</b><dd>
    * All of the data would be saved into 6 txt files.
    */
-  public static void saveData(final List<AbstractUser> a_user_list,
+  public static void saveData(final List<User> a_user_list,
       final List<Auction> an_auction_list) {
     my_user_list = a_user_list;
     my_auction_list = an_auction_list;
@@ -155,7 +156,7 @@ final class DataSaver {
    * <dt><b>Postconditions:</b><dd>
    */
   private static void outputUserLists() {
-    for (AbstractUser each: my_user_list) {
+    for (User each: my_user_list) {
       
       String output = "";
       if (each instanceof Bidder) {
@@ -207,7 +208,7 @@ final class DataSaver {
    * <dt><b>Preconditions:</b><dd>
    * <dt><b>Postconditions:</b><dd>
    */
-  private static String printUser(final  AbstractUser a_user) {
+  private static String printUser(final  User a_user) {
     String ret = "";
     final String username = a_user.getUsername();
     final String password = a_user.getPassword();

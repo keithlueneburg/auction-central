@@ -39,4 +39,11 @@ public interface User {
    * @return the username.
    */
   String getUsername();
+
+  /**
+   * Returns the user's password.
+   * 
+   * @return the password.
+   */
+  String getPassword();
 }

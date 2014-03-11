@@ -41,7 +41,7 @@ public class AuctionCentralSystem implements Observer {
   /**
    * The list of users in the system.
    */
-  private List<AbstractUser> my_users;
+  private List<User> my_users;
   
   /**
    * The current user who use the system.
@@ -71,7 +71,7 @@ public class AuctionCentralSystem implements Observer {
     
     my_auction = new ArrayList<Auction>();
     my_past_auction = new ArrayList<Auction>();
-    my_users = new ArrayList<AbstractUser>();
+    my_users = new ArrayList<User>();
     
     loadingData();
     
@@ -122,7 +122,7 @@ public class AuctionCentralSystem implements Observer {
     
   }
   
-  public void loadUser(final List<AbstractUser> an_user_list) {
+  public void loadUser(final List<User> an_user_list) {
     my_users = an_user_list;
   }
   
