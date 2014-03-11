@@ -462,17 +462,17 @@ public class AuctionPanel extends JPanel {
   private void setFonts() {
     AUCTION_TITLE.setFont(new Font(ARIAL, Font.BOLD, MAIN_FONT_SIZE));
     my_auction_number.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
-    my_auction_name.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
-    my_contact_person.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
-    my_contact_phone.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
-    my_intake_person.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
-    my_auction_date.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
-    my_start_time.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
-    my_duration_time.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
-    my_number_of_items.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
-    my_current_items.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
-    my_anticipated_items.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
-    my_auction_comments.setFont(new Font(ARIAL, Font.PLAIN, INSTRUCTION_FONT_SIZE));
+    my_auction_name.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
+    my_contact_person.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
+    my_contact_phone.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
+    my_intake_person.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
+    my_auction_date.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
+    my_start_time.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
+    my_duration_time.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
+    my_number_of_items.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
+    my_current_items.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
+    my_anticipated_items.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
+    my_auction_comments.setFont(new Font(ARIAL, Font.BOLD, INSTRUCTION_FONT_SIZE));
   }
   
   /**
@@ -665,14 +665,14 @@ public class AuctionPanel extends JPanel {
   }
   
   /**
-   * test if a string is a valid phone unmber
+   * test if a string is a valid phone number.
    * @param a_phone
    * @return
    */
   private boolean testPhone(String a_phone) {
     boolean is_valid = true;
     String[] phone = a_phone.split("-");
-    if (a_phone.length() != 12 || phone.length != 3) {
+    if (a_phone.length() != 12 || phone.length != THREE) {
       is_valid = false;
     } else {
       try {
