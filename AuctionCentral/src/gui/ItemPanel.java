@@ -385,33 +385,45 @@ public class ItemPanel extends JPanel {
     my_bid_button.setToolTipText("Bid on an item");
     my_bid_button.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent the_event) {
+        boolean has_bid = false;
         boolean success_bid = false;
         Bidder the_bidder = ((Bidder) my_app_frame.getSystem().getCurrentUser());
         double bid_price = 0.0;
-        do{
-          String bet_string =
-          JOptionPane.showInputDialog(null, "Bid price: ", "$0.00");
-          try {
-            bid_price = Double.parseDouble(bet_string);
-          } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Wrong input!", "ERROR", JOptionPane.WARNING_MESSAGE);
+        for (Bid a_bid : the_bidder.getBids()) {
+          if (my_item.getBids().contains(a_bid)) {
+            has_bid = true;
+            break;
           }
-          if (bid_price != 0.0) {
-            
-            //final Item the_item = my_item_list.get(my_index);
-            if (bid_price > my_item.getStartingBid()) {
+        }
+        if (has_bid) {
+          JOptionPane.showMessageDialog(null, "You already have a bid for that item!", "Bid Already Made", 
+              JOptionPane.WARNING_MESSAGE);
+        } else {
+          do{
+            String bet_string =
+            JOptionPane.showInputDialog(null, "Bid price: ", "$0.00");
+            try {
+              bid_price = Double.parseDouble(bet_string);
+            } catch (NumberFormatException e) {
+              JOptionPane.showMessageDialog(null, "Wrong input!", "ERROR", JOptionPane.WARNING_MESSAGE);
+            } catch (NullPointerException e) {
+              success_bid = true;
+            }
+              
+              //final Item the_item = my_item_list.get(my_index);
+            if (bid_price >= my_item.getStartingBid()) {
               success_bid = true;
               Bid temp_bid = new Bid(my_item.getItemName(), bid_price, the_bidder.getUsername(),
                   new GregorianCalendar(), the_bidder.getCard());
               
               the_bidder.addBid(temp_bid);
               my_item.addBid(temp_bid);
-            } else {
+            } else if (!success_bid) {
               JOptionPane.showMessageDialog(null, "Bid Too Low!", "Bid Too Low",
                   JOptionPane.WARNING_MESSAGE);
             }
-          }
-        } while (!success_bid);
+          } while (!success_bid);
+        }
       }
     });
   }

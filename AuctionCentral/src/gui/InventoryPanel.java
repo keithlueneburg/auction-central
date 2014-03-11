@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Queue;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -218,36 +219,54 @@ public class InventoryPanel extends JPanel {
     bid_button.setToolTipText("Bid on an item");
     bid_button.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent the_event) {
+        
         if (my_index >= 0) {
-          boolean success_bid = false;
-          Bidder the_bidder = ((Bidder) my_app_frame.getSystem().getCurrentUser());
-          double bid_price = 0.0;
-          do{
-            String bet_string =
-            JOptionPane.showInputDialog(null, "Bid price: ", "$0.00");
-            try {
-              bid_price = Double.parseDouble(bet_string);
-            } catch (NumberFormatException e) {
-              JOptionPane.showMessageDialog(null, "Wrong input!", "ERROR", JOptionPane.WARNING_MESSAGE);
-            } catch (NullPointerException e) {
-            //do nothing
-              success_bid = true;
-          	}
-            
-            final Item the_item = my_item_list.get(my_index);
-            if (bid_price >= the_item.getStartingBid()) {
-              success_bid = true;
-              Bid temp_bid = new Bid(the_item.getItemName(), bid_price, the_bidder.getUsername(),
-                  new GregorianCalendar(), the_bidder.getCard());
-              
-              the_bidder.addBid(temp_bid);
-              the_item.addBid(temp_bid);
-            } else {
-              JOptionPane.showMessageDialog(null, "Bid Too Low!", "Bid Too Low",
-                  JOptionPane.WARNING_MESSAGE);
+          
+          boolean has_bid = false;
+          Item temp_item = my_item_list.get(my_index);
+          List<Bid> bid_q = ((Bidder) my_user).getBids();
+          for (Bid a_bid : bid_q) {
+            if (temp_item.getItemName().equals(a_bid.getItemName())) {
+              has_bid = true;
+              break;
             }
+          }
+          System.out.println(has_bid);
+          if (has_bid) {
+            JOptionPane.showMessageDialog(null, "You already have a bid for that item!", "Bid Already Made", 
+                JOptionPane.WARNING_MESSAGE);
+          } else {
             
-          } while (!success_bid);
+            boolean success_bid = false;
+            Bidder the_bidder = ((Bidder) my_app_frame.getSystem().getCurrentUser());
+            double bid_price = 0.0;
+            do{
+              String bet_string =
+              JOptionPane.showInputDialog(null, "Bid price: ", "$0.00");
+              try {
+                bid_price = Double.parseDouble(bet_string);
+              } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Wrong input!", "ERROR", JOptionPane.WARNING_MESSAGE);
+              } catch (NullPointerException e) {
+              //do nothing
+                success_bid = true;
+            	}
+              
+              final Item the_item = my_item_list.get(my_index);
+              if (bid_price >= the_item.getStartingBid()) {
+                success_bid = true;
+                Bid temp_bid = new Bid(the_item.getItemName(), bid_price, the_bidder.getUsername(),
+                    new GregorianCalendar(), the_bidder.getCard());
+                
+                the_bidder.addBid(temp_bid);
+                the_item.addBid(temp_bid);
+              } else if (!success_bid) {
+                JOptionPane.showMessageDialog(null, "Bid Too Low!", "Bid Too Low",
+                    JOptionPane.WARNING_MESSAGE);
+              }
+              
+            } while (!success_bid);
+          }
         }
       }
     });
