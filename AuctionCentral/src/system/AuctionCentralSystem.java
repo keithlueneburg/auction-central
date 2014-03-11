@@ -8,6 +8,7 @@ import bidding.CreditCard;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.Observer;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+
 
 
 
@@ -68,7 +70,7 @@ public class AuctionCentralSystem implements Observer {
    * The constructor, initialized the system.
    * in check-in5 manually set the current user is a non-profit user
    */
-  public AuctionCentralSystem() {
+  public AuctionCentralSystem() throws IOException{
     
     my_auction = new ArrayList<Auction>();
     my_past_auction = new ArrayList<Auction>();
@@ -139,7 +141,7 @@ public class AuctionCentralSystem implements Observer {
   /**
    * This method load all the data after starting the system.
    */
-  public void loadingData() {
+  public void loadingData() throws IOException{
     DataLoader.loadData(this);
   }
   

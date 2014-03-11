@@ -8,10 +8,14 @@ import bidding.CreditCard;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.PatternSyntaxException;
+
+import javax.swing.JOptionPane;
 
 import user.AbstractUser;
 import user.AuctionCentralStaff;
@@ -121,7 +125,7 @@ final class DataLoader {
    * The static method that be called to read the data from txt files to the system.
    * @param a_system the system that would be loaded
    */
-  public static void loadData(final AuctionCentralSystem a_system) {
+  public static void loadData(final AuctionCentralSystem a_system) throws IOException{
     
     try {
       my_user_scanner = new Scanner(new FileInputStream(DATA_LOCATION + "user.txt"));
@@ -131,16 +135,26 @@ final class DataLoader {
       my_card_scanner = new Scanner(new FileInputStream(DATA_LOCATION + "card.txt"));
       my_address_scanner = new Scanner(new FileInputStream(DATA_LOCATION + "address.txt"));
       
+      loadAddressList();
+      loadCardList();
+      loadBidList();
+      loadItemList();
+      loadAuctionList();
+      loadUserList();
+      
     } catch (final FileNotFoundException ex) {
-      System.out.println(ex.getMessage());
-    }
+      damagedFile();
+    } catch (PatternSyntaxException ex) {
+      damagedFile();
+    } catch (ArrayIndexOutOfBoundsException ex) {
+      damagedFile();
+    } catch (NullPointerException ex) {
+      damagedFile();
+    } catch (NumberFormatException ex) {
+      damagedFile();
+    } 
     
-    loadAddressList();
-    loadCardList();
-    loadBidList();
-    loadItemList();
-    loadAuctionList();
-    loadUserList();
+    
     
     my_user_scanner.close();
     my_auction_scanner.close();
@@ -152,6 +166,15 @@ final class DataLoader {
     a_system.loadUser(my_user_list);
     a_system.loadAuction(my_auction_list);
     
+  }
+  
+  /**
+   * Show error message;
+   */
+  private static void damagedFile() throws IOException{
+    JOptionPane.showMessageDialog(null,
+        "Input file damaged, loading failure!", "error", JOptionPane.ERROR_MESSAGE);
+    throw new IOException("loading error");
   }
   
   /**
