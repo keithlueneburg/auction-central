@@ -199,6 +199,8 @@ public class ItemPanel extends JPanel {
 
   /** The auction central system. */
   private final AuctionCentralSystem my_system;
+  
+  private static String SYSTEM_RESERVED = "`";
 
   /**
    * 
@@ -321,7 +323,17 @@ public class ItemPanel extends JPanel {
           JOptionPane.showMessageDialog(null, 
               "Fields cannot be blank.", 
                "Error", JOptionPane.ERROR_MESSAGE);
-        } else  {
+        } else if (my_item_name_input.getText().contains(SYSTEM_RESERVED)
+            || my_quantity_input.getText().contains(SYSTEM_RESERVED)
+            || my_minimum_bid_input.getText().contains(SYSTEM_RESERVED)
+            || my_donor_input.getText().contains(SYSTEM_RESERVED)
+            || my_size_input.getText().contains(SYSTEM_RESERVED)
+            || my_storage_input.getText().contains(SYSTEM_RESERVED)
+            || my_condition_input.getText().contains(SYSTEM_RESERVED)) {     
+          JOptionPane.showMessageDialog(null, 
+              "Invalied Character:" + SYSTEM_RESERVED, 
+               "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
           try {
             
             //System.out.println(my_item_number_input.getText());
