@@ -228,6 +228,8 @@ public class InventoryPanel extends JPanel {
             bid_price = Double.parseDouble(bet_string);
           } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Wrong input!", "ERROR", JOptionPane.WARNING_MESSAGE);
+          } catch (NullPointerException e) {
+            //do nothing
           }
           if (bid_price != 0.0) {
             
