@@ -236,8 +236,26 @@ public class InventoryPanel extends JPanel {
             do{
               String bet_string =
               JOptionPane.showInputDialog(null, "Bid price: ", "$0.00");
+              
+              if (bet_string.length() != 0 && bet_string.charAt(0) == '$') {
+                bet_string = bet_string.substring(1);
+              }
+              
               try {
                 bid_price = Double.parseDouble(bet_string);
+                
+                final Item the_item = my_item_list.get(my_index);
+                if (bid_price >= the_item.getStartingBid()) {
+                  success_bid = true;
+                  Bid temp_bid = new Bid(the_item.getItemName(), bid_price, the_bidder.getUsername(),
+                      new GregorianCalendar(), the_bidder.getCard());
+                  
+                  the_bidder.addBid(temp_bid);
+                  the_item.addBid(temp_bid);
+                } else if (!success_bid) {
+                  JOptionPane.showMessageDialog(null, "Bid Too Low!", "Bid Too Low",
+                      JOptionPane.WARNING_MESSAGE);
+                }
               } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Wrong input!", "ERROR", JOptionPane.WARNING_MESSAGE);
               } catch (NullPointerException e) {
@@ -245,18 +263,7 @@ public class InventoryPanel extends JPanel {
                 success_bid = true;
             	}
               
-              final Item the_item = my_item_list.get(my_index);
-              if (bid_price >= the_item.getStartingBid()) {
-                success_bid = true;
-                Bid temp_bid = new Bid(the_item.getItemName(), bid_price, the_bidder.getUsername(),
-                    new GregorianCalendar(), the_bidder.getCard());
-                
-                the_bidder.addBid(temp_bid);
-                the_item.addBid(temp_bid);
-              } else if (!success_bid) {
-                JOptionPane.showMessageDialog(null, "Bid Too Low!", "Bid Too Low",
-                    JOptionPane.WARNING_MESSAGE);
-              }
+              
               
             } while (!success_bid);
           }
