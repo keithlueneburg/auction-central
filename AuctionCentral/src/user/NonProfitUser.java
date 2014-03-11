@@ -22,11 +22,6 @@ public class NonProfitUser extends AbstractUser {
   private String my_organization;
 
   /**
-   * The Auction of the nonprofit user.
-   */
-  private List<Auction> my_auction = new ArrayList<Auction>();
-
-  /**
    * Initializes the nonprofituser.
    * 
    * @param the_username
@@ -45,14 +40,6 @@ public class NonProfitUser extends AbstractUser {
     super(the_username, the_password, the_first_name, the_last_name);
     my_organization = the_organization;
     //my_auction = the_auction;
-  }
-  
-  /**
-   * This method gets all the Auction this nonprofit user holds.
-   * @return the auction list of this nonprofit user holds
-   */
-  public List<Auction> getAuction() {
-    return my_auction;
   }
   
   /**
