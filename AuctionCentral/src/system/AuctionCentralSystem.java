@@ -260,6 +260,14 @@ public class AuctionCentralSystem implements Observer {
   }
 
   /**
+   * Adds a user to the list of users.
+   * @param a_user the user to be added to the list of users
+   */
+  public void addUser(final User a_user) {
+    my_users.add(a_user);
+  }
+  
+  /**
    * Checks to see if a given username exists in the system.
    * 
    * @param the_username The username to check.

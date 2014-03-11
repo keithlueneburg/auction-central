@@ -247,7 +247,7 @@ public class CalendarPanel extends JPanel {
    */
   private List<Auction> getAuctionsOnDay(final Calendar the_date) {
     //TODO: need to check old auctions too
-    final List<Auction> all_auctions = new ArrayList(my_system.getAuctionList());
+    final List<Auction> all_auctions = new ArrayList<Auction>(my_system.getAuctionList());
     all_auctions.addAll(my_system.getPastAuctionList());
     
     final List<Auction> day_auctions = new ArrayList<Auction>();
@@ -255,7 +255,8 @@ public class CalendarPanel extends JPanel {
     for (Auction auction : all_auctions) {
       if (auction.getAuctionDate().get(Calendar.YEAR) == the_date.get(Calendar.YEAR)
           && auction.getAuctionDate().get(Calendar.MONTH) == the_date.get(Calendar.MONTH)
-          && auction.getAuctionDate().get(Calendar.DAY_OF_MONTH) == the_date.get(Calendar.DAY_OF_MONTH)) {
+          && auction.getAuctionDate().get(Calendar.DAY_OF_MONTH) 
+          == the_date.get(Calendar.DAY_OF_MONTH)) {
         
         day_auctions.add(auction);
       }
@@ -268,6 +269,7 @@ public class CalendarPanel extends JPanel {
    * 
    * @return The navigation panel.
    */
+  @SuppressWarnings("serial")
   private JPanel getNavPanel() {
     final JPanel info = new JPanel();
     info.setPreferredSize(new Dimension(CALENDAR_DISPLAY_WIDTH, NAV_PANEL_HEIGHT));
@@ -352,7 +354,7 @@ public class CalendarPanel extends JPanel {
     setTitleText();
     my_calendar_display_panel = getCalendarDisplayPanel(current_display_calendar);
     add(my_calendar_display_panel, BorderLayout.CENTER);
-}
+  }
 
   /**
    * Removes the current month's display panel.

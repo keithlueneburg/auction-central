@@ -4,6 +4,7 @@ import auction.Auction;
 import auction.Item;
 
 import static org.junit.Assert.*;
+
 import java.util.GregorianCalendar;
 
 import org.junit.After;

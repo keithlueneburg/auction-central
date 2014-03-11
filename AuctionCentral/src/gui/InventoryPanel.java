@@ -187,7 +187,7 @@ public class InventoryPanel extends JPanel {
     back_button.setToolTipText("Back to the auction");
     back_button.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent an_event) {
-        my_app_frame.showAuctionInfo(my_auction, false);;
+        my_app_frame.showAuctionInfo(my_auction, false);
       }
     });
 

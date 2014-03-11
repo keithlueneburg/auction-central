@@ -17,7 +17,6 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.*;
 
-import auction.*;
 
 public class BidListPanel extends JPanel {
   
@@ -189,14 +188,18 @@ public class BidListPanel extends JPanel {
                 break;
               }              
             }
-            if (found) 
+            if (found) {
               break;
+            }
           }
-          if (found) 
+          if (found) {
+            
             break;
+          }
         }
         
-        if (new GregorianCalendar().getTimeInMillis() - auct_date.getTimeInMillis() >= 24 * 60 * 60) {
+        if (new GregorianCalendar().getTimeInMillis() - auct_date.getTimeInMillis() 
+            >= 24 * 60 * 60) {
           // delete bid
         }
       }
