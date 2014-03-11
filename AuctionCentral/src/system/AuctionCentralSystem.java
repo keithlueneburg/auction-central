@@ -198,7 +198,7 @@ public class AuctionCentralSystem implements Observer {
       return error_message;
     }
     
-    refreshAuction();
+    //refreshAuction();
     
     //Test Business Rule #1, 2, 3, 4
     error_message = AuctionDateTester.getSolution(an_auction, my_auction);
