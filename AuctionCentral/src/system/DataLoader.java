@@ -208,8 +208,8 @@ final class DataLoader {
       
       final String[] bid_string = bid[3].split(CALENDAR_SEPARATOR);
       final Calendar bid_date = Calendar.getInstance();
-      bid_date.set(Integer.parseInt(bid_string[0]),
-          Integer.parseInt(bid_string[1]), Integer.parseInt(bid_string[2]),
+      bid_date.set(Integer.parseInt(bid_string[2]),
+          Integer.parseInt(bid_string[0]), Integer.parseInt(bid_string[1]),
           Integer.parseInt(bid_string[3]), Integer.parseInt(bid_string[4]));
       
       my_bid_list.add(new Bid(bid[0], Double.parseDouble(bid[1]),
