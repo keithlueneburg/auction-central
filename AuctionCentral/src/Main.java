@@ -12,10 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import system.AuctionCentralSystem;
-import user.AuctionCentralStaff;
-import user.NonProfitUser;
-import user.User;
 import user.Guest;
+import user.User;
+
 
 /**
  * Class: Main
@@ -31,17 +30,17 @@ import user.Guest;
  * Instructor: Dr. Adwoa Donyina
  * 
  * @author Keith Lueneburg
+ * @author Josh Hammer edits on the login screen
  * @version 3/2/2014
  */
 public final class Main {
-  //TODO: Remove DEFAULT_USER from final build (should be decided by login window)
-  private static User DEFAULT_STAFF_USER = new AuctionCentralStaff("staff_dude-0101",
-      "password", "John", "Smith");
+
+  /**
+   * A guest user for registration online
+   */
+  private static User DEFAULT_GUEST_USER = new Guest("New", "password",
+      "guest", "user");
   
-  private static User DEFAULT_NPO_USER = new NonProfitUser("non-profit-guy",
-      "password", "Bob", "Jones", "Charity group");
-  
-  private static User DEFAULT_GUEST_USER = new Guest("Guest", "password", "guest", "guest");
   /**
    * Private constructor, to prevent instantiation of this class.
    */
@@ -63,7 +62,6 @@ public final class Main {
         
         final AuctionCentralSystem system = new AuctionCentralSystem();
         
-        final User user = DEFAULT_STAFF_USER;
         User login_user = null;
         
         boolean valid_login = false;
@@ -82,7 +80,8 @@ public final class Main {
               || input_username == -1) {
             System.exit(0);
           } else if (input_username == JOptionPane.CANCEL_OPTION) {
-            System.out.println("TEAM FROYO RULES!");
+            login_user = DEFAULT_GUEST_USER;
+            valid_login = true;
           } else {
             login_user = system.isValidUser(login_text_field.getText());
           

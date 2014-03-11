@@ -96,7 +96,7 @@ public class MenuPanel extends JPanel {
   private ApplicationFrame my_application_frame;
   
   /**
-   * The auction central system
+   * The auction central system.
    */
   private AuctionCentralSystem my_system;
 
@@ -108,8 +108,10 @@ public class MenuPanel extends JPanel {
    * @param a_user
    *          The user type that is logged in to the program.
    * @param an_application_frame 
+   * @param a_system the system
    */
-  public MenuPanel(final User a_user, final ApplicationFrame an_application_frame, final AuctionCentralSystem a_system) {
+  public MenuPanel(final User a_user, final ApplicationFrame an_application_frame,
+      final AuctionCentralSystem a_system) {
     my_system = a_system;
     my_application_frame = an_application_frame;
     setup(a_user);
@@ -167,7 +169,6 @@ public class MenuPanel extends JPanel {
   /**
    * Initializes the exit button. 
    */
-  @SuppressWarnings("serial")
   private void createExitButton() {
     my_exit_button = new JButton(new AbstractAction("Exit") {
       @Override
@@ -181,7 +182,6 @@ public class MenuPanel extends JPanel {
   /**
    * Initializes the auctions button.
    */
-  @SuppressWarnings("serial")
   private void createAuctionsButton() {
     my_auctions_button = new JButton(new AbstractAction("Auctions") {
       @Override
@@ -195,7 +195,6 @@ public class MenuPanel extends JPanel {
   /**
    * Initializes calendar button.
    */
-  @SuppressWarnings("serial")
   private void createCalendarButton() {
     my_calendar_button = new JButton(new AbstractAction("Calendar") {
       @Override
@@ -208,7 +207,6 @@ public class MenuPanel extends JPanel {
   /**
    * Initializes register button.
    */
-  @SuppressWarnings("serial")
   private void createRegisterButton() {
     my_register_button = new JButton(new AbstractAction("Register") {
       @Override
@@ -270,11 +268,12 @@ public class MenuPanel extends JPanel {
    *          The user that determines what buttons are available.
    */
   private void setButtonVisibility(final User a_user) {
+    my_register_button.setVisible(false);
     if (!(a_user instanceof AuctionCentralStaff)) {
       my_calendar_button.setVisible(false);
     }
-    if (!(a_user instanceof Bidder) || !(a_user instanceof Guest)) {
-      my_register_button.setVisible(false);
+    if ((a_user instanceof Bidder) || (a_user instanceof Guest)) {
+      my_register_button.setVisible(true);
     }
   }
 }

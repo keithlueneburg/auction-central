@@ -142,7 +142,8 @@ public final class ApplicationFrame extends JFrame {
    * Display an auction list panel in the content area.
    */
   public void showAuctionList() {
-    replaceContentPanel(new AuctionListPanel(this, my_system.getAuctionList(), my_system.getCurrentUser()));
+    replaceContentPanel(new AuctionListPanel(this, my_system.getAuctionList(),
+        my_system.getCurrentUser()));
   }
 
   /**
@@ -173,8 +174,10 @@ public final class ApplicationFrame extends JFrame {
    *          The item to display the info for.
    * @param an_editable Make the panel editable or not. 
    */
-  public void showItem(final Item an_item, final Auction an_auction, final boolean an_editable) {
-    replaceContentPanel(new ItemPanel(an_item, this, an_auction, an_editable, my_system.getCurrentUser()));
+  public void showItem(final Item an_item, final Auction an_auction, 
+      final boolean an_editable) {
+    replaceContentPanel(new ItemPanel(an_item, this, an_auction, an_editable,
+        my_system.getCurrentUser()));
   }
 
   /**

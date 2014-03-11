@@ -58,7 +58,8 @@ public class RegistrationPanel extends JPanel {
   private static final int BOX_WIDTH = 5;
   
   /** The default border, a black line. */
-  private static final Border BLACK_LINE = BorderFactory.createLineBorder(new JPanel().getBackground(), 15);
+  private static final Border BLACK_LINE = 
+      BorderFactory.createLineBorder(new JPanel().getBackground(), 15);
   
   /** The label that shows the auction's name. */
   private static final JLabel FORM_TITLE = new JLabel("Registration:");
@@ -84,7 +85,7 @@ public class RegistrationPanel extends JPanel {
   private final JLabel my_csc_label = new JLabel("CSC: ");
     
   /** Label for creditcard expiration date field. */
-  private final JLabel my_exp_date_label= new JLabel("Expiration date:     ");
+  private final JLabel my_exp_date_label = new JLabel("Expiration date:     ");
 
   /////////TEXT FIELDS////////
   
