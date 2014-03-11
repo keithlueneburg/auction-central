@@ -5,16 +5,18 @@ package test;
 
 import static org.junit.Assert.*;
 
+import auction.Item;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import user.AbstractUser;
-import user.Guest;
 import user.AuctionCentralStaff;
+import user.Guest;
 import user.NonProfitUser;
+import user.User;
 
-import auction.Item;
+
 
 /**
  * This class is a JUnit test of makeBid method in System.
@@ -23,11 +25,16 @@ import auction.Item;
  */
 public class TestSystemTest {
 
-  private TestSystem mySystem = new TestSystem();
-  private Item cellPhone = new Item(1, "cell phone", 100, 1000.0,
+  /** The system to test. */
+  private TestSystem my_system = new TestSystem();
+  
+  /** The item to be tested. */
+  private Item my_cellphone = new Item(1, "cell phone", 100, 1000.0,
       "Donor", "10*5*5 in.", "in the box",
       "good", "comments");
-  private AbstractUser testPerson;
+  
+  /** A new user to test. */
+  private AbstractUser my_testperson = new AuctionCentralStaff("B", "C", "O", "P");
 
   /**
    * @throws java.lang.Exception
@@ -49,7 +56,7 @@ public class TestSystemTest {
    */
   @Test
   public void testBidderMakeBid() {
-    assertEquals("Bidder failed make a bid!", true, mySystem.makeBid(cellPhone, 100.23));
+    assertEquals("Bidder failed make a bid!", true, my_system.makeBid(my_cellphone, 100.23));
   }
 
   /**
@@ -58,10 +65,10 @@ public class TestSystemTest {
    */
   @Test
   public void testAdminMakeBid() {
-    testPerson = new Guest("admin", "12345", "Admin", "User");
-    mySystem.setCurrentUser(testPerson);
+    my_testperson = new Guest("admin", "12345", "Admin", "User");
+    my_system.setCurrentUser(my_testperson);
     assertEquals("Administrator shouldn't make a bid successfully!", false,
-        mySystem.makeBid(cellPhone, 100.23));
+        my_system.makeBid(my_cellphone, 100.23));
   }
 
   /**
@@ -70,10 +77,10 @@ public class TestSystemTest {
    */
   @Test
   public void testNonProMakeBid() {
-    testPerson = new NonProfitUser("nonProfit", "54321", "non-pro", "User", "my org.");
-    mySystem.setCurrentUser(testPerson);
+    my_testperson = new NonProfitUser("nonProfit", "54321", "non-pro", "User", "my org.");
+    my_system.setCurrentUser(my_testperson);
     assertEquals("NonProfitUser shouldn't banke a bid successfully!", false,
-        mySystem.makeBid(cellPhone, 100.23));
+        my_system.makeBid(my_cellphone, 100.23));
   }
 
   /**
@@ -82,10 +89,10 @@ public class TestSystemTest {
    */
   @Test
   public void testACStaffMakeBid() {
-    testPerson = new AuctionCentralStaff("Auction", "11111", "Auction Staff", "User");
-    mySystem.setCurrentUser(testPerson);
+    my_testperson = new AuctionCentralStaff("Auction", "11111", "Auction Staff", "User");
+    my_system.setCurrentUser(my_testperson);
     assertEquals("AuctionCentralStaff shouldn't banke a bid successfully!", false,
-        mySystem.makeBid(cellPhone, 100.23));
+        my_system.makeBid(my_cellphone, 100.23));
   }
 
 }
