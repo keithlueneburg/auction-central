@@ -286,12 +286,11 @@ public class MenuPanel extends JPanel {
    *          The user that determines what buttons are available.
    */
   private void setButtonVisibility(final User a_user) {
-    my_register_button.setVisible(false);
     if (!(a_user instanceof AuctionCentralStaff)) {
       my_calendar_button.setVisible(false);
     }
-    if ((a_user instanceof Bidder) || (a_user instanceof Guest)) {
-      my_register_button.setVisible(true);
+    if (!(a_user instanceof Guest)) {
+      my_register_button.setVisible(false);
     }
     if (!(a_user instanceof Bidder)) {
       my_bids_button.setEnabled(false);
