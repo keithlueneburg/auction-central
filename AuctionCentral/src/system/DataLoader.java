@@ -14,6 +14,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import user.AbstractUser;
 import user.AuctionCentralStaff;
 import user.Bidder;
@@ -113,7 +115,7 @@ final class DataLoader {
    * The static method that be called to read the data from txt files to the system.
    * @param a_system the system that would be loaded
    */
-  public static void loadData(final AuctionCentralSystem a_system) {
+  public static void loadData(final AuctionCentralSystem a_system) throws IOException{
     
     try {
       my_user_scanner = new Scanner(new FileInputStream(DATA_LOCATION + "user.txt"));
@@ -123,16 +125,24 @@ final class DataLoader {
       my_card_scanner = new Scanner(new FileInputStream(DATA_LOCATION + "card.txt"));
       my_address_scanner = new Scanner(new FileInputStream(DATA_LOCATION + "address.txt"));
       
+      loadAddressList();
+      loadCardList();
+      loadBidList();
+      loadItemList();
+      loadAuctionList();
+      loadUserList();
+      
     } catch (final FileNotFoundException ex) {
-      System.out.println(ex.getMessage());
+      showError();
+    } catch (final NullPointerException ex) {
+      showError();
+    } catch (final NumberFormatException ex) {
+      showError();
+    } catch (final ArrayIndexOutOfBoundsException ex) {
+      showError();
     }
     
-    loadAddressList();
-    loadCardList();
-    loadBidList();
-    loadItemList();
-    loadAuctionList();
-    loadUserList();
+    
     
     my_user_scanner.close();
     my_auction_scanner.close();
@@ -144,6 +154,12 @@ final class DataLoader {
     a_system.loadUser(my_user_list);
     a_system.loadAuction(my_auction_list);
     
+  }
+    
+  private static void showError() throws IOException{
+    JOptionPane.showMessageDialog(null,
+        "Inpur file damaged, loading failure!", "error", JOptionPane.ERROR);
+    throw new IOException();
   }
   
   /**
