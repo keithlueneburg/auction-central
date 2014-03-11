@@ -13,6 +13,7 @@ NonProfitUser ` username11 ` password11 ` first name11 ` last name11 ` non-profi
 NonProfitUser ` username12 ` password12 ` first name12 ` last name12 ` non-profit12 `
 NonProfitUser ` username13 ` password13 ` first name13 ` last name13 ` non-profit13 `
 NonProfitUser ` username14 ` password14 ` first name14 ` last name14 ` non-profit14 `
+NonProfitUser ` nonprofit ` password ` Kevin ` Alexander ` goodwill ` 
 AuctionCentralStaff ` Keith ` password0 ` Keith ` L ` 
 AuctionCentralStaff ` Josh ` password0 ` Josh ` H ` 
 AuctionCentralStaff ` Kaiyuan ` password0 ` Kaiyuan ` S ` 

@@ -331,9 +331,8 @@ public class BidListPanel extends JPanel {
         boolean isSelected, boolean cellHasFocus) {
       String item_name = ((Bid) value).getItemName();
       NumberFormat nf = NumberFormat.getCurrencyInstance();
-      String bid_price = nf.format(String.valueOf(((Bid) value).getPrice()));
+      String bid_price = nf.format(((Bid) value).getPrice());
       String bid_time = ((Bid) value).getBidTime().getTime().toString();
-      String _num = Integer.toString(((Auction) value).getItemCount());
       
       my_item_name.setText(item_name);
       my_bid_price.setText(bid_price);

@@ -553,14 +553,16 @@ public class ItemPanel extends JPanel {
   }
   
   private void saveItem() {
+    
     my_item.setItemName(my_item_name_input.getText().trim());
     my_item.setItemQuantity(Integer.parseInt(my_quantity_input.getText().trim()));
-    my_item.setStartingBid(Double.parseDouble(my_minimum_bid_input.getText()));
+    my_item.setStartingBid(Double.parseDouble(my_minimum_bid_input.getText().trim()));
     my_item.setDonor(my_donor_input.getText().trim());
     my_item.setSize(my_size_input.getText().trim());
     my_item.setStorage(my_storage_input.getText().trim());
     my_item.setCondition(my_condition_input.getText().trim());
     my_item.setComments(my_text.getText().trim());
+    my_item.setSellingPrice(0.0);
     
     
   }
