@@ -1,7 +1,3 @@
-//TODO: Need to track past auctions too
-
-//TODO: Get rid of my_current_month/year fields, and replace with Calendar field (if time)
-
 package gui;
 
 import auction.Auction;
@@ -171,7 +167,6 @@ public class CalendarPanel extends JPanel {
 
     final int first_day_of_week = first_day_of_month.get(Calendar.DAY_OF_WEEK);
 
-    // TODO: month specific stuff here
     // Add an empty JPanel to the grid, for days before the month starts.
     for (int i = 0; i < first_day_of_week; i++) {
       final JPanel empty_panel = new JPanel();
@@ -246,7 +241,7 @@ public class CalendarPanel extends JPanel {
    * @return The list of auctions.
    */
   private List<Auction> getAuctionsOnDay(final Calendar the_date) {
-    //TODO: need to check old auctions too
+    
     final List<Auction> all_auctions = new ArrayList<Auction>(my_system.getAuctionList());
     all_auctions.addAll(my_system.getPastAuctionList());
     
@@ -312,7 +307,6 @@ public class CalendarPanel extends JPanel {
    * Replace the displayed calendar with the next month's.
    */
   protected void nextMonth() {
-    // TODO Auto-generated method stub
     removeCurrentMonth();
 
     final Calendar current_display_calendar = new GregorianCalendar();

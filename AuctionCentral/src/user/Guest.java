@@ -1,13 +1,11 @@
 package user;
 
-//TODO: Possibly remove this class??
-
 /**
- * Represents an administrator of the system.
+ * Represents a guest user of the system.
  * 
  * @author Josh
  * 
- * @version 3/2/2014
+ * @version 3/10/2014
  */
 public class Guest extends AbstractUser {
 

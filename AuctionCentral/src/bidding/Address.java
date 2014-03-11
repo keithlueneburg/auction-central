@@ -43,7 +43,6 @@ public final class Address {
   /** The Zipcode. */
   private int my_zip;
 
-  //TODO: Should this just be a static class level list?
   /** The list of states. */
   private List<String> my_state_list;
 

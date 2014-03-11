@@ -118,8 +118,6 @@ public final class CreditCard {
    * @return The expiration date.
    */
   public Calendar getExpDate() {
-
-    // TODO : return a defensive copy here
     return my_expiration_date;
   }
 
@@ -141,8 +139,6 @@ public final class CreditCard {
    * @return The address.
    */
   public Address getAddress() {
-
-    // TODO : return a defensive copy once Address is complete.
     return my_address;
   }
 
@@ -181,7 +177,6 @@ public final class CreditCard {
     } else if (an_expiration_date.compareTo(Calendar.getInstance()) <= 0) {
       throw new IllegalArgumentException("Expiration date must be in the future.");
     }
-    // TODO : make defensive copy
     my_expiration_date = an_expiration_date;
   }
 
@@ -232,7 +227,7 @@ public final class CreditCard {
     if (an_address == null) {
       throw new IllegalArgumentException("Address cannot be null.");
     } else {
-      // TODO : make defensive copy
+
       my_address = an_address;
     }
   }
@@ -248,7 +243,7 @@ public final class CreditCard {
     if (a_bank == null) {
       throw new IllegalArgumentException("Bank cannot be null.");
     } else {
-      // TODO : make defensive copy
+
       my_bank = a_bank;
     }
   }

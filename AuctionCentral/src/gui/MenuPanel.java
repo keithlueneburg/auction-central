@@ -151,8 +151,6 @@ public class MenuPanel extends JPanel {
    * @return the button panel.
    */
   private JPanel getButtonPanel() {
-    //TODO: Clean up once menu panel finalized
-    
     final JPanel button_panel = new JPanel();
     button_panel.setPreferredSize(new Dimension(DEFAULT_WIDTH, BUTTON_PANEL_HEIGHT));
     button_panel.setLayout(new GridLayout(MAX_BUTTON_SLOTS, 1));

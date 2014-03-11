@@ -143,7 +143,6 @@ final class RoleNotifier extends Observable {
    * @param the_system The system to notify.
    */
   public RoleNotifier(final AuctionCentralSystem the_system) {
-    // TODO Auto-generated constructor stub
     addObserver(the_system);
   }
   

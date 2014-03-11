@@ -34,6 +34,7 @@ import bidding.CreditCard;
 import system.AuctionCentralSystem;
 import user.AuctionCentralStaff;
 import user.Bidder;
+import user.Guest;
 import user.User;
 
 
@@ -489,6 +490,11 @@ public class ItemPanel extends JPanel {
       my_bid_button.setVisible(false);
     }
     
+    if (a_user instanceof Bidder || a_user instanceof Guest) {
+      my_save_button.setEnabled(false);
+      my_comment_input.setEditable(false);
+    }
+        
     if (!(a_user instanceof AuctionCentralStaff)) {
       my_unseal_button.setVisible(false);
     }
