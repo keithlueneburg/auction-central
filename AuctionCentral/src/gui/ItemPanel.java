@@ -307,10 +307,50 @@ public class ItemPanel extends JPanel {
     my_save_button.setToolTipText("Save the Item Data");
     my_save_button.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent the_event) {
-        saveItem();
-        if (!my_auction.getItems().contains(my_item)) {
-          my_auction.addItem(my_item);
-          my_app_frame.showInventory(my_auction);
+        
+        if (my_item_name_input.getText().length() == 0 
+            || my_quantity_input.getText().length() == 0
+            || my_minimum_bid_input.getText().length() == 0
+            || my_donor_input.getText().length() == 0
+            || my_size_input.getText().length() == 0
+            || my_storage_input.getText().length() == 0
+            || my_condition_input.getText().length() == 0) {     
+          JOptionPane.showMessageDialog(null, 
+              "Fields cannot be blank.", 
+               "Error", JOptionPane.ERROR_MESSAGE);
+        } else  {
+          try {
+            
+            //System.out.println(my_item_number_input.getText());
+            //System.out.println(my_minimum_bid_input.getText());
+            
+            int item_quantity = Integer.parseInt(my_quantity_input.getText());
+            double item_price = Double.parseDouble(my_minimum_bid_input.getText());
+            
+           
+            
+            saveItem();
+            
+            if (item_quantity <= 0) {
+              JOptionPane.showMessageDialog(null, 
+                  "item number must be positive.", 
+                   "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (item_price <= 0) {
+              JOptionPane.showMessageDialog(null, 
+                  "item price must be positive.", 
+                   "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (!my_auction.getItems().contains(my_item)) {
+              my_auction.addItem(my_item);
+              my_app_frame.showInventory(my_auction);
+            } else {
+              my_app_frame.showInventory(my_auction);
+            }
+            
+          } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, 
+                "Invalid number format.", 
+                 "Error", JOptionPane.ERROR_MESSAGE);
+          }
         }
       }
     });
@@ -374,12 +414,7 @@ public class ItemPanel extends JPanel {
           
           
         }
-        showMessage(message);
-        
-        
-        
-        
-        
+        showMessage(message);      
         
       }
     });
@@ -502,7 +537,7 @@ public class ItemPanel extends JPanel {
     
   }
   
-  private void saveItem() {
+  private void saveItem(){
     my_item.setItemName(my_item_name_input.getText().trim());
     my_item.setItemQuantity(Integer.parseInt(my_quantity_input.getText().trim()));
     my_item.setStartingBid(Double.parseDouble(my_minimum_bid_input.getText()));
