@@ -207,13 +207,6 @@ public class InventoryPanel extends JPanel {
     }
     
     
-    if (my_user instanceof NonProfitUser) {
-      /*String org_name = ((NonProfitUser) my_user).getOrganization();
-      
-      if (my_auction.getAuctionName().contains(org_name)) {*/
-        my_button_panel.add(add_button);
-      //}
-    }
     final JButton bid_button = new JButton("Bid");
     bid_button.setMnemonic(KeyEvent.VK_I);
     bid_button.setToolTipText("Bid on an item");

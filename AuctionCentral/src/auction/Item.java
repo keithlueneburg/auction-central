@@ -433,11 +433,11 @@ public class Item {
       my_win_list.add(my_bids.poll());
     }
     
-    my_bids.addAll(my_win_list);
+    my_bids.addAll(new ArrayList<Bid>(my_win_list));
     
     my_quantity -= my_win_list.size();
     showwinMessage();
-    my_quantity += my_win_list.size();
+    
   }
   
   private void showwinMessage() {
@@ -492,6 +492,7 @@ public class Item {
         JOptionPane.showMessageDialog(null, message,
             "Winner #" + (i + 1), JOptionPane.PLAIN_MESSAGE);
       }
+      
     }
     
     //show quantity
@@ -502,6 +503,8 @@ public class Item {
       //something left
       JOptionPane.showMessageDialog(null, "there are " + my_quantity + " inventory left.");
     }
+    my_quantity += my_win_list.size();
+    my_win_list.clear();
   }
 
 }
