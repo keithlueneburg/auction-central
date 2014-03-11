@@ -78,10 +78,10 @@ public class AuctionCentralSystem implements Observer {
     
     //*************************************
     //for demo and test
-    
+    /*
     for (int i = 0; i < 15; i++) {
       
-      my_users.add(new Bidder("bidder0", "password0", "bob", "dole"));
+      //my_users.add(new Bidder("bidder0", "password0", "bob", "dole"));
       
       //add 15 non-profit users
       my_users.add(new NonProfitUser("username" + i, "password" + i, "first name" + i,
@@ -119,7 +119,7 @@ public class AuctionCentralSystem implements Observer {
     ((NonProfitUser) my_users.get(14)).getAuction().add(demo_auction_4_30);
     
     my_current_user = my_users.get(0);
-    //for demo and test
+    //for demo and test*/
     //************************************
     
     
