@@ -126,7 +126,7 @@ public class InventoryPanel extends JPanel {
     my_label_panel.add(new JLabel(""));
     my_label_panel.add(new JLabel("       Item#"));
     my_label_panel.add(new JLabel("    Item"));
-    my_label_panel.add(new JLabel(" Quentity"));
+    my_label_panel.add(new JLabel(" Quantity"));
 
   }
   /**
