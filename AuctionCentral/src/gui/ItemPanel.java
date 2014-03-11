@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -221,7 +222,7 @@ public class ItemPanel extends JPanel {
     my_item = the_item;
     
     final String temp = "" + my_item.getItemNumber();
-
+    
     createItem();
     setupSaveButton();
     setupBackButton();
@@ -368,6 +369,42 @@ public class ItemPanel extends JPanel {
                  "Error", JOptionPane.ERROR_MESSAGE);
           }
         }
+      }
+    });
+  }
+  
+  private void setupBidButton() {
+    my_bid_button.setMnemonic(KeyEvent.VK_I);
+    my_bid_button.setToolTipText("Bid on an item");
+    my_bid_button.addActionListener(new ActionListener() {
+      public void actionPerformed(final ActionEvent the_event) {
+        boolean success_bid = false;
+        Bidder the_bidder = ((Bidder) my_app_frame.getSystem().getCurrentUser());
+        double bid_price = 0.0;
+        do{
+          String bet_string =
+          JOptionPane.showInputDialog(null, "Bid price: ", "$0.00");
+          try {
+            bid_price = Double.parseDouble(bet_string);
+          } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Wrong input!", "ERROR", JOptionPane.WARNING_MESSAGE);
+          }
+          if (bid_price != 0.0) {
+            
+            //final Item the_item = my_item_list.get(my_index);
+            if (bid_price > my_item.getStartingBid()) {
+              success_bid = true;
+              Bid temp_bid = new Bid(my_item.getItemName(), bid_price, the_bidder.getUsername(),
+                  new GregorianCalendar(), the_bidder.getCard());
+              
+              the_bidder.addBid(temp_bid);
+              my_item.addBid(temp_bid);
+            } else {
+              JOptionPane.showMessageDialog(null, "Bid Too Low!", "Bid Too Low",
+                  JOptionPane.WARNING_MESSAGE);
+            }
+          }
+        } while (!success_bid);
       }
     });
   }
@@ -539,7 +576,13 @@ public class ItemPanel extends JPanel {
     
     south.add(southcomment, BorderLayout.CENTER);
     
-    southset.add(my_bid_button, BorderLayout.CENTER);
+
+    
+    if (my_app_frame.getSystem().getCurrentUser() instanceof Bidder) {
+      southset.add(my_bid_button);
+    }
+    
+    //southset.add(my_bid_button, BorderLayout.CENTER);
     southset.add(my_back_button, BorderLayout.WEST);
     southset.add(my_unseal_button, BorderLayout.WEST);
     

@@ -88,7 +88,7 @@ public class InventoryPanel extends JPanel {
     my_button_panel = new JPanel();
     my_label_panel = new JPanel();
     my_user = a_user;
-
+    my_index = -1;
     configPanel();
     configLabels();
     configPanels();
@@ -218,23 +218,24 @@ public class InventoryPanel extends JPanel {
     bid_button.setToolTipText("Bid on an item");
     bid_button.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent the_event) {
-        boolean success_bid = false;
-        Bidder the_bidder = ((Bidder) my_app_frame.getSystem().getCurrentUser());
-        double bid_price = 0.0;
-        do{
-          String bet_string =
-          JOptionPane.showInputDialog(null, "Bid price: ", "$0.00");
-          try {
-            bid_price = Double.parseDouble(bet_string);
-          } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Wrong input!", "ERROR", JOptionPane.WARNING_MESSAGE);
-          } catch (NullPointerException e) {
+        if (my_index >= 0) {
+          boolean success_bid = false;
+          Bidder the_bidder = ((Bidder) my_app_frame.getSystem().getCurrentUser());
+          double bid_price = 0.0;
+          do{
+            String bet_string =
+            JOptionPane.showInputDialog(null, "Bid price: ", "$0.00");
+            try {
+              bid_price = Double.parseDouble(bet_string);
+            } catch (NumberFormatException e) {
+              JOptionPane.showMessageDialog(null, "Wrong input!", "ERROR", JOptionPane.WARNING_MESSAGE);
+            } catch (NullPointerException e) {
             //do nothing
-          }
-          if (bid_price != 0.0) {
+              success_bid = true;
+          	}
             
             final Item the_item = my_item_list.get(my_index);
-            if (bid_price > the_item.getStartingBid()) {
+            if (bid_price >= the_item.getStartingBid()) {
               success_bid = true;
               Bid temp_bid = new Bid(the_item.getItemName(), bid_price, the_bidder.getUsername(),
                   new GregorianCalendar(), the_bidder.getCard());
@@ -245,8 +246,9 @@ public class InventoryPanel extends JPanel {
               JOptionPane.showMessageDialog(null, "Bid Too Low!", "Bid Too Low",
                   JOptionPane.WARNING_MESSAGE);
             }
-          }
-        } while (!success_bid);
+            
+          } while (!success_bid);
+        }
       }
     });
     
