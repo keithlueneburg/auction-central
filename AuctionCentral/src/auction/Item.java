@@ -438,6 +438,8 @@ public class Item {
       }
     }
     
+    my_bids.addAll(my_win_list);
+    
     my_quantity -= my_win_list.size();
     
     showwinMessage();
