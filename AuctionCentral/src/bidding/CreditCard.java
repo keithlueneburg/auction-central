@@ -194,7 +194,7 @@ public final class CreditCard {
    */
   private void setCSC(final int a_csc) throws IllegalArgumentException {
     if ((new Integer(a_csc)).toString().length() != CSC_LENGTH) {
-      throw new IllegalArgumentException("Invalid CSC length");
+      throw new IllegalArgumentException("Invalid CSC length (3 digits)");
     } else {
       my_csc = a_csc;
     }

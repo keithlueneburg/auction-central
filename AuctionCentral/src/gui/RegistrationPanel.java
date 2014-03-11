@@ -9,6 +9,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -16,10 +18,15 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import bidding.Address;
+import bidding.Bank;
+import bidding.CreditCard;
 import system.AuctionCentralSystem;
+import user.Bidder;
 import auction.Auction;
 
 
@@ -281,23 +288,107 @@ public class RegistrationPanel extends JPanel {
 
   private void saveUser() {
 
-    final String username = my_username_field.getText();
-    final String password = my_password_field.getText();
-    final String first_name = my_first_name_field.getText();
-    final String last_name = my_last_name_field.getText();
+    final String username = my_username_field.getText().trim();
+    final String password = my_password_field.getText().trim();
+    final String first_name = my_first_name_field.getText().trim();
+    final String last_name = my_last_name_field.getText().trim();
     
     final String card_num = my_card_num_field.getText();
     final String csc = my_csc_field.getText();
-    final String exp_date = my_exp_date_field.getText();
+    final String exp_date_string = my_exp_date_field.getText();
     
-    /*
-    if (fields are bad) {
-      show an error....
-    } else if () {
+    Address address = new Address("street", 0, "city", "state", 98401);
+    
+    //check usernames
+    // If system returns a user, the username is taken.
+    boolean username_is_taken = my_system.isValidUser(username) != null;
+    
+    //check if first/last name combos are taken
+    boolean name_is_taken = my_system.duplicateFirstLastName(first_name, last_name);
+    
+    ///check if date is valid and in future
+    boolean is_valid_date = true;
+    final Calendar today = Calendar.getInstance();
+    int month = -1;
+    int year = -1;
+    
+    // try to split the date string into tokens
+    try {
+      final String[] tokens = exp_date_string.split("/");
       
-    } else {
-      my_system.addUser();
+      // we should have two tokens (MM/YYYY)
+      if (tokens.length != 2) {
+        is_valid_date = false;
+      } else {
+        month = Integer.parseInt(tokens[0]);
+        year = Integer.parseInt(tokens[1]);
+      }
+      
+      // see if the date is in the future
+      if (!(year >= today.get(Calendar.YEAR) && month > today.get(Calendar.MONTH) + 1)) {
+        is_valid_date = false;
+      // make sure month value is from 1 to 12
+      } else if (month < 1 || month > 12) {
+        is_valid_date = false;
+      }
+    
+    } catch (final Exception e) {
+      is_valid_date = false;
     }
-    */
+    
+    // Create an expiration date if input was valid.
+    Calendar exp_date = Calendar.getInstance();
+    if (is_valid_date) {
+      exp_date.set(Calendar.DAY_OF_MONTH, 1);
+      exp_date.set(Calendar.MONTH, month - 1);
+      exp_date.set(Calendar.YEAR, year);
+    }
+      
+    CreditCard card = null;
+    String card_message = "errrror";
+    try {
+      card = new CreditCard(Long.parseLong(card_num), exp_date, Integer.parseInt(csc),
+          username, address, "Bank");
+    } catch (final NumberFormatException nfe) {
+      card_message = "Fields cannot be blank";
+    } catch (final IllegalArgumentException iae) {
+      card_message = iae.getMessage();
+    } 
+    
+    if (username.length() < 1 || password.length() < 1 || first_name.length() < 1 
+        || last_name.length() < 1) {
+
+      JOptionPane.showMessageDialog(null, 
+          "Fields cannot be blank", 
+          "Error", JOptionPane.ERROR_MESSAGE);
+    
+    } else if (!is_valid_date) {
+      JOptionPane.showMessageDialog(null, 
+          "Invalid date. Must be in the style of MM/YYYY, and after the current month.", 
+          "Error", JOptionPane.ERROR_MESSAGE);
+    } else if (username_is_taken) {
+    
+      JOptionPane.showMessageDialog(null, 
+          "Username is taken.", 
+          "Error", JOptionPane.ERROR_MESSAGE);
+    
+    } else if (name_is_taken) {
+      JOptionPane.showMessageDialog(null, 
+          "This name is already in the database.", 
+          "Error", JOptionPane.ERROR_MESSAGE);
+    
+    } else if (card == null) {
+      JOptionPane.showMessageDialog(null, 
+          card_message, 
+          "Error", JOptionPane.ERROR_MESSAGE);
+    } else {
+      Bidder new_bidder = new Bidder(username, password, first_name, last_name);
+      new_bidder.regisiter(card, address);
+     
+      my_system.addUser(new_bidder);
+      
+      my_back_button.doClick();
+    }
+    
   }
 }
