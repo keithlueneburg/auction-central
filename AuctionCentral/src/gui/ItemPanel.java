@@ -226,6 +226,7 @@ public class ItemPanel extends JPanel {
     
     createItem();
     setupSaveButton();
+    setupBidButton();
     setupBackButton();
     setupUnsealButton();
     configurePanel(a_user);
