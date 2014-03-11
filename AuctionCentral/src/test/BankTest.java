@@ -5,8 +5,6 @@ package test;
 import static org.junit.Assert.*;
 
 import bidding.Bank;
-import bidding.Bill;
-
 import org.junit.Test;
 
 
@@ -51,7 +49,7 @@ public class BankTest {
   @Test
   public void testPassIncompatibleType() {
     assertFalse("Passing incompatible object to equals should return false",
-        my_one.equals("string"));
+        "string".equals(my_one));
   }
   
   /**
@@ -59,7 +57,7 @@ public class BankTest {
    */
   @Test
   public void testNullReference() {
-    assertFalse("Passing null to equals should return false", my_one.equals(null));
+    assertFalse("Passing null to equals should return false", my_one == null);
   }
   
   /**

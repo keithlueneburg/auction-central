@@ -3,15 +3,17 @@ package auction;
 import bidding.CreditCard;
 
 import java.util.Calendar;
-import java.util.Date;
 
-import user.Bidder;
-
+/**
+ * A bid used by bidders to put on an item.
+ * 
+ * @author Team Froyo
+ * @version 1.o
+ */
 public class Bid implements Comparable<Bid> {
-  /**
-   * Line separator.
-   */
-  private static final String LINE_SEPARATOR = "\n";
+  
+  /** Used for compare. */
+  private static final double SMALL = 0.01;
   
   /**The name of the item bid upon.*/
   private String my_item_name;
@@ -87,7 +89,7 @@ public class Bid implements Comparable<Bid> {
 
   @Override
   public int compareTo(final Bid an_another_bid) {
-    if ((my_price - an_another_bid.getPrice()) < 0.01) {
+    if ((my_price - an_another_bid.getPrice()) < SMALL) {
       return my_bid_time.compareTo(an_another_bid.getBidTime());
     } else if (my_price > an_another_bid.getPrice()) {
       return -1;

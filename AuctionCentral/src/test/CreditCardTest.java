@@ -3,7 +3,6 @@ package test;
 import static org.junit.Assert.*;
 
 import bidding.Address;
-import bidding.Bank;
 import bidding.CreditCard;
 
 import java.util.GregorianCalendar;
@@ -132,6 +131,8 @@ public class CreditCardTest {
     final CreditCard bad_param_card = new CreditCard(1234123412341234L,
         new GregorianCalendar(2015, 1, 15), 123, "John Smith", null, 
             "Chase");
+    assertFalse("Passing incompatible object to equals should return false",
+        bad_param_card.getAddress() == null);
   }
 
   /**
@@ -145,6 +146,8 @@ public class CreditCardTest {
     final CreditCard bad_param_card = new CreditCard(1234123412341234L,
         new GregorianCalendar(2015, 1, 15), 123, "John Smith", new Address(
             "123 Main Street", 0, "Tacoma", "WA", 98501), null);
+    assertFalse("Passing incompatible object to equals should return false",
+        bad_param_card == null);
   }
 
   /**

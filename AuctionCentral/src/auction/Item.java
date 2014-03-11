@@ -1,14 +1,11 @@
 package auction;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.LinkedList;
-import java.util.List;
+
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.Scanner;
 
-import javax.swing.JOptionPane;
+
+
 
 
 /**
@@ -97,7 +94,6 @@ public class Item {
     my_storage = the_storage;
     my_condition = the_condition;
     my_comments = the_comments;
-    my_selling_price = 0.0;
 
     my_bids = new PriorityQueue<Bid>();
   }
