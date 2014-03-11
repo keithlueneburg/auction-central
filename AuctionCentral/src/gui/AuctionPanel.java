@@ -53,6 +53,10 @@ public class AuctionPanel extends JPanel {
   
   /** The error message. */
   private static final String ERROR = "Error";
+  
+  /** Date error message. */
+  private static final String DATE_ERROR = "Invalid date. " 
+      + "Please enter in the style of MM/DD/YYYY.";
     
   /** The default width of the panel. */
   private static final int DEFAULT_WIDTH = 824;
@@ -553,8 +557,7 @@ public class AuctionPanel extends JPanel {
     // then check for a bad date
     } else if (auction_date == null) {
       JOptionPane.showMessageDialog(null, 
-          "Invalid date", 
-           ERROR, JOptionPane.ERROR_MESSAGE);
+          DATE_ERROR, ERROR, JOptionPane.ERROR_MESSAGE);
     
       // make sure start time is valid
     } else if (start_time_text.length() < 1 
@@ -612,8 +615,7 @@ public class AuctionPanel extends JPanel {
       
       if (tokens.length != 1 + 1 + 1) {
         JOptionPane.showMessageDialog(null, 
-            "Invalid date. Please enter in the style of MM/DD/YYYY.", 
-            ERROR, JOptionPane.ERROR_MESSAGE);
+            DATE_ERROR, ERROR, JOptionPane.ERROR_MESSAGE);
         return Calendar.getInstance();
       }
       
@@ -650,20 +652,17 @@ public class AuctionPanel extends JPanel {
       
       if (!is_valid_date) {
         JOptionPane.showMessageDialog(null, 
-            "Invalid date. Please enter in the style of MM/DD/YYYY.", 
-            ERROR, JOptionPane.ERROR_MESSAGE);
+            DATE_ERROR, ERROR, JOptionPane.ERROR_MESSAGE);
         return Calendar.getInstance();
       }
       
       cal.set(year, month - 1, day, the_start_time , 0);
     } catch (final NumberFormatException e) {
       JOptionPane.showMessageDialog(null, 
-          "Invalid date. Please enter in the style of MM/DD/YYYY.", 
-          ERROR, JOptionPane.ERROR_MESSAGE);
+          DATE_ERROR, ERROR, JOptionPane.ERROR_MESSAGE);
     } catch (final Exception e) {
       JOptionPane.showMessageDialog(null, 
-          "Invalid date. Please enter in the style of MM/DD/YYYY.", 
-          ERROR, JOptionPane.ERROR_MESSAGE);
+          DATE_ERROR, ERROR, JOptionPane.ERROR_MESSAGE);
     }
 
     return cal;
@@ -675,36 +674,7 @@ public class AuctionPanel extends JPanel {
   private void viewInventory() {  // Return a List<Items>
     my_app_frame.showInventory(my_auction);
     
-  }
-  
-  /**
-   * Shows the auctions list.
-   */
-  private void showAuctions() {
-    
-  }
-  
-  /**
-   * Shows the item panel.
-   */
-  private void showItemPanel() {
-    
-  }
-  
-  /**
-   * Shows the user panel.
-   */
-  private void showUserPanel() {
-    
-  }
-  
-  /**
-   * Gets the auction info panel.
-   */
-  private void getAuctionInfoPanel() {  // Takes an Auction as a parameter
-    
-  }
-  
+  }  
 }
 
 
