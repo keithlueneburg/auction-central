@@ -227,7 +227,7 @@ public class ItemPanel extends JPanel {
     allowEdits(an_editable);
   }	
 
-  private void configurePanel(final User a_user){	
+  private void configurePanel(final User a_user) {	
     setButtonVisibility(a_user);
     setPreferredSize(DEFAULT_SIZE);
     setBorder(BLACK_LINE);
@@ -538,7 +538,7 @@ public class ItemPanel extends JPanel {
     
   }
   
-  private void saveItem(){
+  private void saveItem() {
     my_item.setItemName(my_item_name_input.getText().trim());
     my_item.setItemQuantity(Integer.parseInt(my_quantity_input.getText().trim()));
     my_item.setStartingBid(Double.parseDouble(my_minimum_bid_input.getText()));

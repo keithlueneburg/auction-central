@@ -260,7 +260,7 @@ public class InventoryPanel extends JPanel {
      */
     private void configList() {
 
-      my_jlist.setListData( my_item_list.toArray());
+      my_jlist.setListData(my_item_list.toArray());
       my_jlist.setCellRenderer(new MyCellRenderer());
     }
   }

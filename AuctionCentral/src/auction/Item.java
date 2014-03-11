@@ -26,19 +26,37 @@ public class Item {
   // //////////////////////////////////////////////////////////////////
   // FIELDS
   // //////////////////////////////////////////////////////////////////
+  /** The item's number.*/
   private int my_item_number;
+  
+  /**The item name.*/
   private String my_item_name;
+  
+  /**The quantity of the item.*/
   private int my_quantity;
+  
+  /**The starting bid for the item.*/
   private double my_starting_bid;
+  
+  /**The donor of the item.*/
   private String my_donor;
+  
+  /**The size of the item.*/
   private String my_size;
+  
+  /**The storage of the item.*/
   private String my_storage;
+  
+  /**The condition of the item.*/
   private String my_condition;
+  
+  /**The comments of the item.*/
   private String my_comments;
-  private String my_photo_loc;
 
+  /**The selling price.*/
   private double my_selling_price;
 
+  /**The bids on the item.*/
   private Queue<Bid> my_bids;
 
   // //////////////////////////////////////////////////////////////////
@@ -65,14 +83,11 @@ public class Item {
    *          The condition of the item.
    * @param the_comments
    *          The comments of the item.
-   * @param the_photo_loc
-   *          The file name for the photo of the item.
    */
   public Item(final int the_item_number, final String the_item_name,
       final int the_item_quantity, final double the_starting_bid,
       final String the_donor, final String the_size, final String the_storage,
-      final String the_condition, final String the_comments,
-      final String the_photo_loc) {
+      final String the_condition, final String the_comments) {
     my_item_number = the_item_number;
     my_item_name = the_item_name;
     my_quantity = the_item_quantity;
@@ -82,10 +97,8 @@ public class Item {
     my_storage = the_storage;
     my_condition = the_condition;
     my_comments = the_comments;
-    my_photo_loc = the_photo_loc;
     my_selling_price = 0.0;
 
-    //my_bids = new LinkedList<Bid>();
     my_bids = new PriorityQueue<Bid>();
   }
 
@@ -94,7 +107,7 @@ public class Item {
    * values.
    */
   public Item() {
-    this(0, "", 0, 0.00, "", "", "", "", "", "");
+    this(0, "", 0, 0.00, "", "", "", "", "");
   }
 
   // //////////////////////////////////////////////////////////////////
@@ -190,15 +203,6 @@ public class Item {
     my_comments = the_comments;
   }
 
-  /**
-   * Sets the item's file name to thePhotoLoc.
-   * 
-   * @param the_photo_loc
-   *          A String representing the new photo file name.
-   */
-  public void setPhotoLocation(final String the_photo_loc) {
-    my_photo_loc = the_photo_loc;
-  }
 
   /**
    * Sets the item's selling price to theSellingPrice.
@@ -294,14 +298,6 @@ public class Item {
     return my_comments;
   }
 
-  /**
-   * Returns the file name of a photo of this item.
-   * 
-   * @return A String of the photo's file name.
-   */
-  public String getPhotoLocation() {
-    return my_photo_loc;
-  }
 
   /**
    * Returns the selling price of this item.
@@ -416,7 +412,7 @@ public class Item {
   }*/
   
   /**
-   * another verision of unseal bid
+   * another verision of unseal bid.
    * @author Kaiyuan Shi
    * @return the win bid
    */

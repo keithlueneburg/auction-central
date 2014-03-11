@@ -26,7 +26,7 @@ public class TestSystemTest {
   private TestSystem mySystem = new TestSystem();
   private Item cellPhone = new Item(1, "cell phone", 100, 1000.0,
       "Donor", "10*5*5 in.", "in the box",
-      "good", "comments", "pic");
+      "good", "comments");
   private AbstractUser testPerson;
 
   /**

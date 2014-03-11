@@ -212,7 +212,7 @@ final class DataLoader {
       
       final Item this_item = new Item(Integer.parseInt(item[0]), item[1],
           Integer.parseInt(item[2]), Double.parseDouble(item[3]),
-          item[4], item[5], item[6], item[7], item[8], item[9]);
+          item[4], item[5], item[6], item[7], item[8]);
       
       this_item.setSellingPrice(Double.parseDouble(item[10]));
       

@@ -43,7 +43,7 @@ public class ItemTest {
    */
   @Test
   public void testItemIntStringIntDoubleStringStringStringStringStringString() {
-    assertTrue(new Item(0, "", 0, 0.0, "", "", "", "", "", "") != null);
+    assertTrue(new Item(0, "", 0, 0.0, "", "", "", "", "") != null);
   }
 
   /**

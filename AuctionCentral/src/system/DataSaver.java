@@ -164,7 +164,7 @@ final class DataSaver {
         output += "Bidder" + DATA_SEPARATOR;
         output += printUser(each);
         
-        if (((Bidder) each).isRegisiter() == true) {
+        if (((Bidder) each).isRegisiter()) {
         
           output += true + DATA_SEPARATOR;
           
@@ -284,7 +284,6 @@ final class DataSaver {
       }
       
       output += comments + DATA_SEPARATOR;
-      output += each.getPhotoLocation() + DATA_SEPARATOR;
       output += each.getSellingPrice() + DATA_SEPARATOR;
       
       for (Bid each_bid: each.getBids()) {

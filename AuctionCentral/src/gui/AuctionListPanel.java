@@ -170,7 +170,7 @@ public class AuctionListPanel extends JPanel {
     // If too many auctions already or current user is not NPO user,
     //make the new auction tied to the user/organization
     if (my_auction_list.size() >= 25 
-        || !(my_app_frame.getSystem().getCurrentUser() instanceof NonProfitUser) ) {
+        || !(my_app_frame.getSystem().getCurrentUser() instanceof NonProfitUser)) {
       create_button.setEnabled(false);
     }
     create_button.addActionListener(new ActionListener() {

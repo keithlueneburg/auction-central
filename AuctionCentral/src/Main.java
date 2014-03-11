@@ -38,7 +38,7 @@ public final class Main {
   /**
    * A guest user for registration online
    */
-  private static User DEFAULT_GUEST_USER = new Guest("New", "password",
+  private static User DEFAULT_GUEST_USER = new Guest("New User", "password",
       "guest", "user");
   
   /**
