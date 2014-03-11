@@ -277,8 +277,6 @@ public class AuctionCentralSystem implements Observer {
    * @return true if the user name is valid.
    */
   public User isValidUser(final String the_username) {
-    // TODO Once i/o is implemented, possibly change this to read from the main user data file.
-   
     User valid_user = null;
         
     for (User u : my_users) {
@@ -313,8 +311,6 @@ public class AuctionCentralSystem implements Observer {
    * @return true if the user name is valid.
    */
   public static boolean isValidUser_static(final String the_username) {
-    // TODO Once i/o is implemented, possibly change this to read from the main user data file.
-   
     boolean is_valid = false;
     Scanner sc = null;
     
@@ -345,7 +341,6 @@ public class AuctionCentralSystem implements Observer {
 
   @Override
   public void update(final Observable the_observable, final Object the_arg) {
-    // TODO Auto-generated method stub
     if (the_arg instanceof User) {
       my_current_user = (User) the_arg;
     }
