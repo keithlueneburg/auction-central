@@ -286,6 +286,8 @@ final class DataSaver {
       output += comments + DATA_SEPARATOR;
       output += each.getSellingPrice() + DATA_SEPARATOR;
       
+      System.out.println("saver: " + each.getBids().size());
+      
       for (Bid each_bid: each.getBids()) {
         output += my_bid_list.size() + DATA_SEPARATOR;
         my_bid_list.add(each_bid);

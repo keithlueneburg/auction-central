@@ -327,7 +327,7 @@ public class Item {
    *         to the list or not.
    */
   public boolean addBid(final Bid the_bid) {
-    return my_bids.add(the_bid);
+    return my_bids.offer(the_bid);
   }
 
   /**
@@ -425,7 +425,7 @@ public class Item {
     
     return win_bid;
   }*/
-    
+    System.out.println(my_bids.size());
     
     return my_bids.poll();
   }

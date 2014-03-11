@@ -235,7 +235,7 @@ final class DataLoader {
       
       this_item.setSellingPrice(Double.parseDouble(item[9]));
       
-      for (int i = 11; i < item.length; i++) {
+      for (int i = 10; i < item.length; i++) {
         this_item.addBid(my_bid_list.get(Integer.parseInt(item[i])));
       }
       
