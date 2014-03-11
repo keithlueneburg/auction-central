@@ -114,6 +114,9 @@ public class AuctionPanel extends JPanel {
   /** The label that shows the auction's name. */
   private static final JLabel AUCTION_TITLE = new JLabel("Auction Information:");
 
+  /**
+   * System reserved character. Strings should not contain this.
+   */
   private static final String RESERVED_CHARACTER = "`";
   
   // Non global variable -----------------------------

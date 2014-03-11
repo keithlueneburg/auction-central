@@ -330,7 +330,9 @@ public class RegistrationPanel extends JPanel {
       }
       
       // see if the date is in the future
-      if (!(year >= today.get(Calendar.YEAR) && month > today.get(Calendar.MONTH) + 1)) {
+      if (year < today.get(Calendar.YEAR)
+          || (year == today.get(Calendar.YEAR)
+          && month <= today.get(Calendar.MONTH) + 1)) {
         is_valid_date = false;
       // make sure month value is from 1 to 12
       } else if (month < 1 || month > 12) {
