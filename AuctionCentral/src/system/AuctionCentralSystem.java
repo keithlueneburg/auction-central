@@ -79,7 +79,7 @@ public class AuctionCentralSystem implements Observer {
     //*************************************
     //for demo and test
     /*
-    for (int i = 0; i < 15; i++) {
+    /*for (int i = 0; i < 15; i++) {
       
       //my_users.add(new Bidder("bidder0", "password0", "bob", "dole"));
       
@@ -118,7 +118,7 @@ public class AuctionCentralSystem implements Observer {
     //add one auction on the last user used to test BR #5
     ((NonProfitUser) my_users.get(14)).getAuction().add(demo_auction_4_30);
     
-    my_current_user = my_users.get(0);
+    my_current_user = my_users.get(0);*/
     //for demo and test*/
     //************************************
     
@@ -287,6 +287,20 @@ public class AuctionCentralSystem implements Observer {
     }
     
     return valid_user;
+  }
+  
+  public boolean deleteAuction(Auction an_auction) {
+    Auction delete_auction = null;
+    boolean is_success = false;
+    for (Auction each: my_auction) {
+      if (each.getAuctionName().equals(an_auction.getAuctionName())) {
+        delete_auction = each;
+        is_success = true;
+        break;
+      }
+    }
+    my_auction.remove(delete_auction);
+    return is_success;
   }
   
   /**

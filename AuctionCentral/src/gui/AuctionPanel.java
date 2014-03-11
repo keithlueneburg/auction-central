@@ -28,6 +28,7 @@ import javax.swing.border.TitledBorder;
 
 import system.AuctionCentralSystem;
 import user.NonProfitUser;
+import user.User;
 
 
 
@@ -162,6 +163,9 @@ public class AuctionPanel extends JPanel {
   /** The button used to go back. */
   private final JButton my_back = new JButton("Back");
   
+  /** The button used to go delete. */
+  private final JButton my_delete = new JButton("Delete");
+  
   /** The text area used to go add comments. */
   private final JTextField my_comments_input = new JTextField(20);
  
@@ -231,6 +235,9 @@ public class AuctionPanel extends JPanel {
   /** The auction central system. */
   private final AuctionCentralSystem my_system;
   
+  /** The current user*/
+  private User my_user;
+  
   /**
    * Sets up the Auction Panel.
    * @param the_frame - the frame this panel is attached to.
@@ -247,6 +254,7 @@ public class AuctionPanel extends JPanel {
     
     my_system = the_system;
     my_app_frame = the_frame;
+    my_user = the_system.getCurrentUser();
     
     my_auction = the_auction;
     final String temp = the_auction.getAuctionNumber();
@@ -266,6 +274,7 @@ public class AuctionPanel extends JPanel {
     setupSaveButton();
     setupViewInventoryButton();
     setupBackButton();
+    setupDeleteButton();
     setTheBorder();
     setupInput();
     createAuctionLabels();
@@ -382,6 +391,30 @@ public class AuctionPanel extends JPanel {
   }
   
   /**
+   * Sets up the view inventory button.
+   */
+  private void setupDeleteButton() {
+    my_delete.setMnemonic(KeyEvent.VK_D);
+    my_delete.setToolTipText("Delete this auction");
+    my_delete.addActionListener(new ActionListener() {
+      public void actionPerformed(final ActionEvent the_event) {
+        int confirm = JOptionPane.showConfirmDialog(null, "Do you want to delete this auction?",
+            "message", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+          if (my_system.deleteAuction(my_auction)) {
+            JOptionPane.showMessageDialog(null, "Delete success!",
+                "message", JOptionPane.PLAIN_MESSAGE);
+            my_app_frame.showAuctionList();
+          } else {
+            JOptionPane.showMessageDialog(null, 
+                "Delete fail!", ERROR, JOptionPane.ERROR_MESSAGE);
+          }
+        }
+      }
+    });
+  }
+  
+  /**
    * Sets up the back button.
    */
   private void setupBackButton() {
@@ -492,7 +525,14 @@ public class AuctionPanel extends JPanel {
     
     //southset.add(my_edit_info, BorderLayout.EAST);
     southset.add(my_view_inventory, BorderLayout.CENTER);
+    
+    String user_name = my_user.getFirstName() + " ";
+    user_name += my_user.getLastName();
+    if (user_name.equals(my_auction.getContactPerson())) {
+      southset.add(my_delete, BorderLayout.WEST);
+    } 
     southset.add(my_back, BorderLayout.WEST);
+    
     south.add(southset, BorderLayout.SOUTH);
     
     add(north, BorderLayout.NORTH);
