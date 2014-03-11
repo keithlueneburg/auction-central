@@ -158,7 +158,7 @@ final class DataLoader {
     
   private static void showError() throws IOException{
     JOptionPane.showMessageDialog(null,
-        "Inpur file damaged, loading failure!", "error", JOptionPane.ERROR);
+        "Input file damaged, loading failure!", "error", JOptionPane.ERROR_MESSAGE);
     throw new IOException();
   }
   
