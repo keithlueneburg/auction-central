@@ -168,6 +168,11 @@ public class InventoryPanel extends JPanel {
        }
      });
      
+     if (my_item_list.size() == 0) {
+       view_button.setEnabled(false);
+       view_button.setVisible(false);
+     }
+     
      final JButton add_button = new JButton("Add");
      add_button.setMnemonic(KeyEvent.VK_A);
      add_button.setToolTipText("Add more items");
