@@ -421,35 +421,9 @@ public class Item {
    * @author Kaiyuan Shi
    * @return the win bid
    */
-  public void unsealBid() {
+  public Bid unsealBid() {
     
-    Bid win_bid = my_bids.peek();
-    String message = "";
-    
-    if (win_bid == null) {
-      JOptionPane.showMessageDialog(null, "No one bid for this item",
-          "No bid", JOptionPane.PLAIN_MESSAGE);
-    } else {
-      CreditCard win_card = win_bid.getPayment();
-      Calendar card_exp = win_card.getExpDate();
-      String card_exp_str = (card_exp.get(Calendar.MONTH) + 1) + "/";
-      card_exp_str += card_exp.get(Calendar.YEAR);
-      
-      message = "Winner: " + win_bid.getBidderName() + NEW_LINE;
-      message += "Price: " + win_bid.getPrice() + NEW_LINE;
-      message += "Bid time: " + win_bid.getBidTime().get(Calendar.MONTH) + "/";
-      message += win_bid.getBidTime().get(Calendar.DAY_OF_MONTH) + "/";
-      message += win_bid.getBidTime().get(Calendar.YEAR) + "/ ";
-      message += win_bid.getBidTime().get(Calendar.HOUR_OF_DAY) + ":";
-      message += win_bid.getBidTime().get(Calendar.MINUTE) + NEW_LINE;
-      message += "Credit Card #: " + win_card.getCardNum() + NEW_LINE;
-      message += "Exp Date: " + card_exp_str + NEW_LINE;
-      message += "Card CSC: " + win_card.getCSC();
-      
-      //show winner
-      JOptionPane.showMessageDialog(null, message,
-          "Winner", JOptionPane.PLAIN_MESSAGE);
-    }
+    return my_bids.peek();
     
   }
   

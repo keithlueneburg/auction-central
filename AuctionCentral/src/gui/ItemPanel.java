@@ -470,9 +470,9 @@ public class ItemPanel extends JPanel {
           JOptionPane.showMessageDialog(null, message);
         } else {
           
-          my_item.unsealBid();
-          
-          /*if (win_bid == null) {
+          Bid win_bid = my_item.unsealBid();
+          String message;
+          if (win_bid == null) {
             //no win bid
             message = "No one bid for this item.";
           } else {
@@ -494,9 +494,9 @@ public class ItemPanel extends JPanel {
             message += "Exp Date: " + card_exp_str + NEW_LINE;
             message += "Card CSC: " + win_card.getCSC();
             
-          }*/
+          }
           
-          
+          JOptionPane.showMessageDialog(null, message);
         }  
         
       }
