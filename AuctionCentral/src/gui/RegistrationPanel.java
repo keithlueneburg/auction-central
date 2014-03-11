@@ -387,6 +387,8 @@ public class RegistrationPanel extends JPanel {
      
       my_system.addUser(new_bidder);
       
+      my_app_frame.disableRegistration();
+      
       my_back_button.doClick();
     }
     

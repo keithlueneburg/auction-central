@@ -205,4 +205,9 @@ public final class ApplicationFrame extends JFrame {
       System.exit(0);
     }
   }
+
+  public void disableRegistration() {
+    // TODO Auto-generated method stub
+    ((MenuPanel) my_menu_panel).disableRegistration();
+  }
 }

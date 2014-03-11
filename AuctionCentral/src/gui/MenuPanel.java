@@ -298,4 +298,9 @@ public class MenuPanel extends JPanel {
       my_bids_button.setVisible(false);
     }
   }
+
+  public void disableRegistration() {
+    // TODO Auto-generated method stub
+    my_register_button.setEnabled(false);
+  }
 }
