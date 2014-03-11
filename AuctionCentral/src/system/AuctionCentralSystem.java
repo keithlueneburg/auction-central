@@ -238,7 +238,7 @@ public class AuctionCentralSystem implements Observer {
       final int auction_year = auction_date.get(Calendar.YEAR);
       final int auction_month = auction_date.get(Calendar.MONTH);
       final int auction_day = auction_date.get(Calendar.DATE);
-      final int auction_hour = auction_date.get(Calendar.HOUR);
+      final int auction_hour = auction_date.get(Calendar.HOUR_OF_DAY);
       auction_end.set(auction_year, auction_month, auction_day,
           auction_hour + each.getAuctionDuration(), 0, 0);
       
