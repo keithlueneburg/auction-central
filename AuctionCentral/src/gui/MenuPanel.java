@@ -73,7 +73,7 @@ public class MenuPanel extends JPanel {
   /**
    * Number of buttons to create spots for in menu.
    */
-  private static final int MAX_BUTTON_SLOTS = 4;
+  private static final int MAX_BUTTON_SLOTS = 5;
 
   /**
    * Menu button for displaying auction list.
@@ -84,6 +84,11 @@ public class MenuPanel extends JPanel {
    * Menu button for displaying calendar.
    */
   private JButton my_calendar_button;
+  
+  //////////////////////////////////////
+  /// Bidder Button
+  //////////////////////////////////////
+  private JButton my_bids_button;
 
   /**
    * Button for exiting program.
@@ -154,12 +159,13 @@ public class MenuPanel extends JPanel {
     
     createAuctionsButton();
     createCalendarButton();
+    createBidsButton();
     createRegisterButton();
     createExitButton();
     
     button_panel.add(my_calendar_button);
     button_panel.add(my_auctions_button);
-    //button_panel.add(new JPanel());
+    button_panel.add(my_bids_button);
     button_panel.add(my_register_button);
     button_panel.add(my_exit_button);
     
@@ -200,6 +206,18 @@ public class MenuPanel extends JPanel {
       @Override
       public void actionPerformed(final ActionEvent the_event) {
         my_application_frame.showCalendar();
+      }
+    });
+  }
+  
+  /////////////////////////
+  //////
+  ////////////////////////
+  private void createBidsButton() {
+    my_bids_button = new JButton(new AbstractAction("My Bids") {
+      @Override
+      public void actionPerformed(final ActionEvent the_event) {
+        my_application_frame.showBidList();
       }
     });
   }
@@ -274,6 +292,10 @@ public class MenuPanel extends JPanel {
     }
     if ((a_user instanceof Bidder) || (a_user instanceof Guest)) {
       my_register_button.setVisible(true);
+    }
+    if (!(a_user instanceof Bidder)) {
+      my_bids_button.setEnabled(false);
+      my_bids_button.setVisible(false);
     }
   }
 }

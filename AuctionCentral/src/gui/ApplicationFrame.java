@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import system.AuctionCentralSystem;
 import user.User;
+import user.Bidder;
 
 /**
  * Class: ApplicationFrame
@@ -189,6 +190,13 @@ public final class ApplicationFrame extends JFrame {
   
   public void showRegistration() {
     replaceContentPanel(new RegistrationPanel(my_system, this)); 
+  }
+  
+  ///////////////////////////////////
+  ///////
+  ///////////////////////////////////
+  public void showBidList() {
+    replaceContentPanel(new BidListPanel(this, ((Bidder) my_system.getCurrentUser()).getBids()));
   }
   
   private class MyWindowListener extends WindowAdapter {

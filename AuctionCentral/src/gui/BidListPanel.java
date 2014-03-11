@@ -1,6 +1,7 @@
 package gui;
 
 import user.*;
+import auction.*;
 
 import javax.swing.*;
 
@@ -101,7 +102,7 @@ public class BidListPanel extends JPanel {
     my_label_panel.setLayout(g_layout);
     my_label_panel.add(new JLabel(""));
     my_label_panel.add(new JLabel(""));
-    my_label_panel.add(new JLabel("     Auctions:"));
+    my_label_panel.add(new JLabel("     Bids:"));
     my_label_panel.add(new JLabel(""));
   }
   /**
@@ -120,8 +121,9 @@ public class BidListPanel extends JPanel {
    * This method creates the JButtons with their desired names and sets 
    * ActionListeners to them that will correctly do what is wanted.
    */
-  /*
+  
   public void configButtons() {
+    /*
     final JButton edit_button = new JButton("View");
     edit_button.setMnemonic(KeyEvent.VK_V);
     edit_button.setToolTipText("view the bid information");
@@ -159,10 +161,48 @@ public class BidListPanel extends JPanel {
         }
       }
     });
-    my_button_panel.add(edit_button);
-    my_button_panel.add(create_button);
+    //my_button_panel.add(edit_button);
+    //my_button_panel.add(create_button);
+    */
+    final JButton delete_button = new JButton("Delete");
+    delete_button.setMnemonic(KeyEvent.VK_D);
+    delete_button.setToolTipText("Delete a bid");
+    if (my_bid_list.size() == 0) {
+      delete_button.setEnabled(false);
+      delete_button.setVisible(false);
+    }
+    delete_button.addActionListener(new ActionListener() {
+      public void actionPerformed(final ActionEvent theEvent) {
+        List<Auction> auction_list = my_app_frame.getSystem().getAuctionList();
+        boolean found = false;
+        Bid this_bid = my_bid_list.get(my_index);
+        Calendar auct_date = new GregorianCalendar();
+        
+        for (Auction auction : auction_list) {
+          List<Item> item_list = auction.getItems();
+          for (Item item : item_list) {
+            Queue<Bid> bid_queue = item.getBids();
+            for (Bid bid : bid_queue) {
+              if (bid == this_bid) {
+                found = true;
+                auct_date = auction.getAuctionDate();
+                break;
+              }              
+            }
+            if (found) 
+              break;
+          }
+          if (found) 
+            break;
+        }
+        
+        if (new GregorianCalendar().getTimeInMillis() - auct_date.getTimeInMillis() >= 24 * 60 * 60) {
+          // delete bid
+        }
+      }
+    });
   }
-  */
+  
   
   /**
    * This is the specific panel that will hold the list of Bids.
