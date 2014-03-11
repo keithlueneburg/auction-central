@@ -539,7 +539,7 @@ public class AuctionPanel extends JPanel {
     
     String user_name = my_user.getFirstName() + " ";
     user_name += my_user.getLastName();
-    if (user_name.equals(my_auction.getContactPerson())) {
+    if (user_name.equals(my_auction.getContactPerson()) && !my_editable) {
       southset.add(my_delete, BorderLayout.WEST);
     } 
     southset.add(my_back, BorderLayout.WEST);

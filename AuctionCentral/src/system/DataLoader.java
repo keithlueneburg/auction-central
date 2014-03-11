@@ -140,6 +140,8 @@ final class DataLoader {
       showError();
     } catch (final ArrayIndexOutOfBoundsException ex) {
       showError();
+    } catch (final Exception ex) {
+      showError();
     }
     
     
@@ -165,7 +167,7 @@ final class DataLoader {
   /**
    * This method load the address list from an address.txt file.
    */
-  private static void loadAddressList() {
+  private static void loadAddressList() throws Exception{
     while (my_address_scanner.hasNextLine()) {
       final String line = my_address_scanner.nextLine();
       final String[] address = line.split(DATA_SEPARATOR);
@@ -179,7 +181,7 @@ final class DataLoader {
   /**
    * This method load the credit card list from an card.txt file.
    */
-  private static void loadCardList() {
+  private static void loadCardList() throws Exception{
     
     while (my_card_scanner.hasNextLine()) {
       final String line = my_card_scanner.nextLine();
@@ -199,7 +201,7 @@ final class DataLoader {
   /**
    * This method load the bid list from an bid.txt file.
    */
-  private static void loadBidList() {
+  private static void loadBidList() throws Exception{
     while (my_bid_scanner.hasNextLine()) {
       final String line = my_bid_scanner.nextLine();
       final String[] bid = line.split(DATA_SEPARATOR);
@@ -218,7 +220,7 @@ final class DataLoader {
   /**
    * This method load the item list from an item.txt file.
    */
-  private static void loadItemList() {
+  private static void loadItemList() throws Exception{
     while (my_item_scanner.hasNextLine()) {
       final String line = my_item_scanner.nextLine();
       final String[] item = line.split(DATA_SEPARATOR);
@@ -244,7 +246,7 @@ final class DataLoader {
   /**
    * This method load the auction list from an adauctiondress.txt file.
    */
-  private static void loadAuctionList() {
+  private static void loadAuctionList() throws Exception{
     while (my_auction_scanner.hasNextLine()) {
       final String line = my_auction_scanner.nextLine();
       final String[] auction = line.split(DATA_SEPARATOR);
@@ -282,7 +284,7 @@ final class DataLoader {
   /**
    * This method load the user list from an user.txt file.
    */
-  private static void loadUserList() {
+  private static void loadUserList() throws Exception{
     while (my_user_scanner.hasNextLine()) {
       final String line = my_user_scanner.nextLine();
       final String[] user = line.split(DATA_SEPARATOR);
