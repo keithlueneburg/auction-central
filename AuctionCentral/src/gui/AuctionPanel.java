@@ -50,6 +50,9 @@ public class AuctionPanel extends JPanel {
   // Global variables ----------------------------------
   /** The default height of the panel. */
   private static final int DEFAULT_HEIGHT = 680;
+  
+  /** The error message. */
+  private static final String ERROR = "Error";
     
   /** The default width of the panel. */
   private static final int DEFAULT_WIDTH = 824;
@@ -457,7 +460,14 @@ public class AuctionPanel extends JPanel {
     add(east, BorderLayout.EAST);
     add(south, BorderLayout.SOUTH);
     
-    
+    createInput();
+
+  }
+  
+  /**
+   * Creates the input GUI elements.
+   */
+  private void createInput() {
     final JPanel textinput = new JPanel();
     textinput.setLayout(new BoxLayout(textinput, BoxLayout.Y_AXIS));
     
@@ -501,12 +511,18 @@ public class AuctionPanel extends JPanel {
     try {
       start_time = Integer.parseInt(start_time_text);
     } catch (final NumberFormatException nfe) {
+      JOptionPane.showMessageDialog(null, 
+          "Wrong type of number format or negative number", 
+          ERROR, JOptionPane.ERROR_MESSAGE);
     }
     
     int duration = -1;
     try {
       duration = Integer.parseInt(duration_text);
     } catch (final NumberFormatException nfe) {
+      JOptionPane.showMessageDialog(null, 
+          "Cannot equal negative number or wrong input format", 
+          ERROR, JOptionPane.ERROR_MESSAGE);
     }
     
     final Calendar auction_date = createDate(start_time);
@@ -517,13 +533,13 @@ public class AuctionPanel extends JPanel {
         || intake_person.length() <= 0) {
       JOptionPane.showMessageDialog(null, 
           "Fields cannot be blank", 
-          "Error", JOptionPane.ERROR_MESSAGE);
+          ERROR, JOptionPane.ERROR_MESSAGE);
       
     // then check for a bad date
     } else if (auction_date == null) {
       JOptionPane.showMessageDialog(null, 
           "Invalid date", 
-           "Error", JOptionPane.ERROR_MESSAGE);
+           ERROR, JOptionPane.ERROR_MESSAGE);
     
       // make sure start time is valid
     } else if (start_time_text.length() < 1 
@@ -534,13 +550,13 @@ public class AuctionPanel extends JPanel {
         || start_time > new GregorianCalendar().getActualMaximum(Calendar.HOUR_OF_DAY)) {
       JOptionPane.showMessageDialog(null, 
           "Start time must be between 0 and 23 hours.", 
-           "Error", JOptionPane.ERROR_MESSAGE);
+           ERROR, JOptionPane.ERROR_MESSAGE);
     
     // check duration for valid number
     } else if (duration < 1 || duration > 12) {
       JOptionPane.showMessageDialog(null, 
           "Duration must from 0 to 12 hours.", 
-           "Error", JOptionPane.ERROR_MESSAGE);
+           ERROR, JOptionPane.ERROR_MESSAGE);
     
     // otherwise save the auction
     } else {
@@ -559,7 +575,7 @@ public class AuctionPanel extends JPanel {
       } else {
         JOptionPane.showMessageDialog(null, 
             "error: " + is_success, 
-            "Error", JOptionPane.ERROR_MESSAGE);
+            ERROR, JOptionPane.ERROR_MESSAGE);
       }
     }
     
@@ -579,10 +595,10 @@ public class AuctionPanel extends JPanel {
     try {
       final String[] tokens = str.split("/");
       
-      if (tokens.length != 3) {
+      if (tokens.length != 1 + 1 + 1) {
         JOptionPane.showMessageDialog(null, 
             "Invalid date. Please enter in the style of MM/DD/YYYY.", 
-            "Error", JOptionPane.ERROR_MESSAGE);
+            ERROR, JOptionPane.ERROR_MESSAGE);
         return Calendar.getInstance();
       }
       
@@ -620,7 +636,7 @@ public class AuctionPanel extends JPanel {
       if (!is_valid_date) {
         JOptionPane.showMessageDialog(null, 
             "Invalid date. Please enter in the style of MM/DD/YYYY.", 
-            "Error", JOptionPane.ERROR_MESSAGE);
+            ERROR, JOptionPane.ERROR_MESSAGE);
         return Calendar.getInstance();
       }
       
@@ -628,11 +644,11 @@ public class AuctionPanel extends JPanel {
     } catch (final NumberFormatException e) {
       JOptionPane.showMessageDialog(null, 
           "Invalid date. Please enter in the style of MM/DD/YYYY.", 
-          "Error", JOptionPane.ERROR_MESSAGE);
+          ERROR, JOptionPane.ERROR_MESSAGE);
     } catch (final Exception e) {
       JOptionPane.showMessageDialog(null, 
           "Invalid date. Please enter in the style of MM/DD/YYYY.", 
-          "Error", JOptionPane.ERROR_MESSAGE);
+          ERROR, JOptionPane.ERROR_MESSAGE);
     }
 
     return cal;
