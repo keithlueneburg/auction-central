@@ -239,6 +239,9 @@ public class AuctionPanel extends JPanel {
   /** The current user. */
   private User my_user;
   
+  /** If the information is editable. */
+  private boolean my_editable;
+  
   /**
    * Sets up the Auction Panel.
    * @param the_frame - the frame this panel is attached to.
@@ -255,10 +258,10 @@ public class AuctionPanel extends JPanel {
     my_system = the_system;
     my_app_frame = the_frame;
     my_user = the_system.getCurrentUser();
+    my_editable = an_editable;
     
     my_auction = the_auction;
-    final String temp = the_auction.getAuctionNumber();
-    my_number = new JLabel(temp);
+    my_number = new JLabel(the_auction.getAuctionNumber());
     
     start(an_editable);
   }
@@ -384,6 +387,10 @@ public class AuctionPanel extends JPanel {
   private void setupViewInventoryButton() {
     my_view_inventory.setMnemonic(KeyEvent.VK_V);
     my_view_inventory.setToolTipText("View the Inventory of the Selected Auction");
+    // If you are creating a new auction then you can't view the inventory.
+    if (my_editable) {
+      my_view_inventory.setEnabled(false);
+    }
     my_view_inventory.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent the_event) {
         viewInventory();
