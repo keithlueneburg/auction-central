@@ -413,21 +413,7 @@ public class Item {
    * @return the win bid
    */
   public Bid unsealBid() {
-    
-    /*Bid win_bid = null;
-    
-    for (Bid each: my_bids) {
-      if (win_bid == null
-          || each.getPrice() > win_bid.getPrice()) {
-        win_bid = each;
-      }
-    }
-    
-    return win_bid;
-  }*/
-    System.out.println(my_bids.size());
-    
-    return my_bids.poll();
+    return my_bids.peek();
   }
 
 }

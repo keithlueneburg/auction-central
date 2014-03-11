@@ -477,7 +477,11 @@ public class ItemPanel extends JPanel {
             
             message = "Winner: " + win_bid.getBidderName() + NEW_LINE;
             message += "Price: " + win_bid.getPrice() + NEW_LINE;
-            message += "Bid time: " + win_bid.getBidTime() + NEW_LINE;
+            message += "Bid time: " + win_bid.getBidTime().get(Calendar.MONTH) + "/";
+            message += win_bid.getBidTime().get(Calendar.DAY_OF_MONTH) + "/";
+            message += win_bid.getBidTime().get(Calendar.YEAR) + "/ ";
+            message += win_bid.getBidTime().get(Calendar.HOUR_OF_DAY) + ":";
+            message += win_bid.getBidTime().get(Calendar.MINUTE) + NEW_LINE;
             message += "Credit Card #: " + win_card.getCardNum() + NEW_LINE;
             message += "Exp Date: " + card_exp_str + NEW_LINE;
             message += "Card CSC: " + win_card.getCSC();
