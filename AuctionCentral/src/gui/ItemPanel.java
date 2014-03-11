@@ -329,9 +329,10 @@ public class ItemPanel extends JPanel {
             || my_donor_input.getText().contains(SYSTEM_RESERVED)
             || my_size_input.getText().contains(SYSTEM_RESERVED)
             || my_storage_input.getText().contains(SYSTEM_RESERVED)
-            || my_condition_input.getText().contains(SYSTEM_RESERVED)) {     
+            || my_condition_input.getText().contains(SYSTEM_RESERVED)
+            || my_text.getText().contains(SYSTEM_RESERVED)) {     
           JOptionPane.showMessageDialog(null, 
-              "Invalied Character:" + SYSTEM_RESERVED, 
+              "Invalied Character: " + SYSTEM_RESERVED, 
                "Error", JOptionPane.ERROR_MESSAGE);
         } else {
           try {
