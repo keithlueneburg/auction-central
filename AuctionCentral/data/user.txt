@@ -20,4 +20,3 @@ AuctionCentralStaff ` Kaiyuan ` password0 ` Kaiyuan ` S `
 AuctionCentralStaff ` Kevin ` password0 ` Kevin ` X ` 
 AuctionCentralStaff ` Casey ` password0 ` Casey ` X ` 
 NonProfitUser ` Steve ` password0 ` Steve ` Jones ` Goodwill ` 
-Bidder ` Bidder ` words ` Bid ` der ` false ` 

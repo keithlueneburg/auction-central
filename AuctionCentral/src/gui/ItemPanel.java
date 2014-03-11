@@ -26,15 +26,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-import bidding.CreditCard;
 import auction.Auction;
 import auction.Bid;
+import auction.Item;
+import bidding.CreditCard;
 import system.AuctionCentralSystem;
 import user.AuctionCentralStaff;
 import user.Bidder;
 import user.User;
-import auction.Item;
-import user.User;
+
+
 
 public class ItemPanel extends JPanel {
 

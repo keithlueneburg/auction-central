@@ -37,6 +37,11 @@ import user.User;
  * @version Win. 2014
  */
 public class AuctionCentralSystem implements Observer {
+ 
+  /**
+   * Path to the user input/output data file.
+   */
+  private static final String USER_NAMES_PATH = "data/usernames.txt";
   
   /**
    * The list of users in the system.
@@ -57,12 +62,7 @@ public class AuctionCentralSystem implements Observer {
    * A list of past auction in the system.
    */
   private List<Auction> my_past_auction;
-  
-  /**
-   * Path to the user input/output data file.
-   */
-  private static final String USER_NAMES_PATH = "data/usernames.txt";
-  
+ 
   /**
    * The constructor, initialized the system.
    * in check-in5 manually set the current user is a non-profit user
@@ -134,14 +134,14 @@ public class AuctionCentralSystem implements Observer {
   
   
   /**
-   * This method load all the data after starting the system
+   * This method load all the data after starting the system.
    */
   public void loadingData() {
     DataLoader.loadData(this);
   }
   
   /**
-   * This method save all the data before closing the system 
+   * This method save all the data before closing the system.
    */
   public void savingData() {
     
@@ -240,7 +240,7 @@ public class AuctionCentralSystem implements Observer {
           (today_year == auction_year && today_month == auction_month
           && today_day == auction_day)) { // if the auction is on today
         
-        Auction past = each;
+        final Auction past = each;
         my_past_auction.add(past);
         remove_auction.add(each);
       }
