@@ -48,6 +48,8 @@ public class ItemPanel extends JPanel {
   /** The default size for this JPanel. */
   private static final Dimension DEFAULT_SIZE = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
   
+  /** The new line character. */
+  private static final String NEW_LINE = "\n";
 
   /** The default font for the labels. */
   private static final String ARIAL = "Arial";
@@ -404,11 +406,11 @@ public class ItemPanel extends JPanel {
             String card_exp_str = (card_exp.get(Calendar.MONTH) + 1) + "/";
             card_exp_str += card_exp.get(Calendar.YEAR);
             
-            message = "Winner: " + win_bid.getBidderName() + "\n";
-            message += "Price: " + win_bid.getPrice() + "\n";
-            message += "Bid time: " + win_bid.getBidTime() + "\n";
-            message += "Credit Card #: " + win_card.getCardNum() + "\n";
-            message += "Exp Date: " + card_exp_str + "\n";
+            message = "Winner: " + win_bid.getBidderName() + NEW_LINE;
+            message += "Price: " + win_bid.getPrice() + NEW_LINE;
+            message += "Bid time: " + win_bid.getBidTime() + NEW_LINE;
+            message += "Credit Card #: " + win_card.getCardNum() + NEW_LINE;
+            message += "Exp Date: " + card_exp_str + NEW_LINE;
             message += "Card CSC: " + win_card.getCSC();
             
           }
@@ -474,23 +476,23 @@ public class ItemPanel extends JPanel {
     east.add(eastFlow);
     
     east.add(my_pic);
-    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, 10)));
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, TEN)));
     
     west.add(my_aname_lab);
     
-    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + 10)));
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + TEN)));
     west.add(my_iname_lab);
-    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + 10)));
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + TEN)));
     west.add(my_qty_lab);
-    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + 10)));
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + TEN)));
     west.add(my_minbid_lab);
-    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + 10)));
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + TEN)));
     west.add(my_donor_lab);
-    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + 10)));
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + TEN)));
     west.add(my_size_lab);
-    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + 10)));
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + TEN)));
     west.add(my_storage_lab);
-    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + 10)));
+    west.add(Box.createRigidArea(new Dimension(BOX_WIDTH, BOX_HEIGHT + TEN)));
     west.add(my_cond_lab);
     
     

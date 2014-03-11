@@ -99,7 +99,7 @@ public class AuctionPanel extends JPanel {
   private static final int MAIN_FONT_SIZE = 24;
   
   /** The default box height. */
-  private static final int BOX_HEIGHT = 45;
+  private static final int BOX_HEIGHT = 47;
   
   /** The default box height for input spacing. */
   private static final int BOX_HEIGHT_TWO = 35;
@@ -235,7 +235,7 @@ public class AuctionPanel extends JPanel {
   /** The auction central system. */
   private final AuctionCentralSystem my_system;
   
-  /** The current user*/
+  /** The current user. */
   private User my_user;
   
   /**
@@ -250,7 +250,6 @@ public class AuctionPanel extends JPanel {
     super(new BorderLayout());
     setPreferredSize(DEFAULT_SIZE);
     setBorder(BLACK_LINE);
-    setFocusable(true);
     
     my_system = the_system;
     my_app_frame = the_frame;
@@ -269,6 +268,7 @@ public class AuctionPanel extends JPanel {
    * @param an_editable - the editable boolean.
    */
   private void start(final boolean an_editable) {
+    setFocusable(true);
     createAuction();
     //setupEditButton();
     setupSaveButton();
