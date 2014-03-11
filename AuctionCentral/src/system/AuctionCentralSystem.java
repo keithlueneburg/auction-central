@@ -327,4 +327,26 @@ public class AuctionCentralSystem implements Observer {
     }
   }
   
+  /**
+   * Returns true if there is a user with the same first AND last name.
+   * 
+   * @param the_first_name First name to check.
+   * @param the_last_name Last name to check.
+   * @return Whether the name is a duplicate
+   * 
+   * @author Keith Lueneburg
+   */
+  public boolean duplicateFirstLastName(final String the_first_name,
+      final String the_last_name) {
+    boolean is_duplicate = false;
+    
+    for (User u : my_users) {
+      if (u.getFirstName().equals(the_first_name) && u.getLastName().equals(the_last_name)) {
+        is_duplicate = true;
+        break;
+      }
+    }
+    return is_duplicate;
+  }
+  
 }
