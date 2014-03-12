@@ -27,6 +27,8 @@ import bidding.Bank;
 import bidding.CreditCard;
 import system.AuctionCentralSystem;
 import user.Bidder;
+import user.Guest;
+import user.User;
 import auction.Auction;
 
 
@@ -138,14 +140,20 @@ public class RegistrationPanel extends JPanel {
    */
   private AuctionCentralSystem my_system;
   
+  //modify by Kaiyuan
+  private User my_user;
+  
   /**
    * Sets up the RegistrationPanel.
    * 
    * @param the_frame - the frame this panel is attached to.
    * @param the_system The system instance running behind the program.
+   * <dt><b>Preconditions:</b><dd>
+   * The user can only be Bidder of Guest
+   * If the user is a Bidder, he must not be registered.
    */
   public RegistrationPanel(final AuctionCentralSystem the_system, 
-      final ApplicationFrame the_frame) {
+      final ApplicationFrame the_frame, User a_user) {
     
     super(new BorderLayout());
     setPreferredSize(DEFAULT_SIZE);
@@ -155,12 +163,19 @@ public class RegistrationPanel extends JPanel {
     my_system = the_system;
     my_app_frame = the_frame;
     
+    //modify by Kaiyuan
+    my_user = a_user;
+    
     setupBackButton();
     setupSaveButton();
         
     setupInput();
     createLabels();
     
+    if (my_user instanceof Bidder) {
+      bidderInput();
+      my_back_button.setEnabled(false);
+    }
     
   }
 
@@ -304,12 +319,18 @@ public class RegistrationPanel extends JPanel {
     
     Address address = new Address("street", 0, "city", "state", 98401);
     
-    //check usernames
-    // If system returns a user, the username is taken.
-    boolean username_is_taken = my_system.isValidUser(username) != null;
+    boolean username_is_taken = false;
+    boolean name_is_taken = false;
     
-    //check if first/last name combos are taken
-    boolean name_is_taken = my_system.duplicateFirstLastName(first_name, last_name);
+    //modify by Kaiyuan
+    if (my_user instanceof Guest) {
+      //check usernames
+      // If system returns a user, the username is taken.
+      username_is_taken = my_system.isValidUser(username) != null;
+      
+      //check if first/last name combos are taken
+      name_is_taken = my_system.duplicateFirstLastName(first_name, last_name);
+    }
     
     ///check if date is valid and in future
     boolean is_valid_date = true;
@@ -351,62 +372,88 @@ public class RegistrationPanel extends JPanel {
       exp_date.set(Calendar.YEAR, year);
     }
       
-    CreditCard card = null;
-    String card_message = "errrror";
-    try {
-      card = new CreditCard(Long.parseLong(card_num), exp_date, Integer.parseInt(csc),
-          username, address, "Bank");
-    } catch (final NumberFormatException nfe) {
-      card_message = "Fields cannot be blank";
-    } catch (final IllegalArgumentException iae) {
-      card_message = iae.getMessage();
-    } 
-    
-    if (username.length() < 1 || password.length() < 1 || first_name.length() < 1 
-        || last_name.length() < 1) {
-
-      JOptionPane.showMessageDialog(null, 
-          "Fields cannot be blank", 
-          "Error", JOptionPane.ERROR_MESSAGE);
-    
-    } else if (username.contains(RESERVED_CHARACTER)
-        || password.contains(RESERVED_CHARACTER)
-        || first_name.contains(RESERVED_CHARACTER)
-        || last_name.contains(RESERVED_CHARACTER)) {
-      
-      JOptionPane.showMessageDialog(null, 
-          "Invalid character: `", 
-          "Error", JOptionPane.ERROR_MESSAGE);
-    } else if (!is_valid_date) {
-    
-      JOptionPane.showMessageDialog(null, 
-          "Invalid date. Must be in the style of MM/YYYY, and after the current month.", 
-          "Error", JOptionPane.ERROR_MESSAGE);
-    } else if (username_is_taken) {
-    
-      JOptionPane.showMessageDialog(null, 
-          "Username is taken.", 
-          "Error", JOptionPane.ERROR_MESSAGE);
-    
-    } else if (name_is_taken) {
-      JOptionPane.showMessageDialog(null, 
-          "This name is already in the database.", 
-          "Error", JOptionPane.ERROR_MESSAGE);
-    
-    } else if (card == null) {
-      JOptionPane.showMessageDialog(null, 
-          card_message, 
+    //modify by Kaiyuan
+    if (exp_date.compareTo(Calendar.getInstance()) <= 0) {
+      JOptionPane.showMessageDialog(null, "Expiration date must be in the future.",
           "Error", JOptionPane.ERROR_MESSAGE);
     } else {
-      Bidder new_bidder = new Bidder(username, password, first_name, last_name);
-      new_bidder.regisiter(card, address);
-     
-      my_system.addUser(new_bidder);
+    
+      CreditCard card = null;
+      String card_message = "errrror";
+      try {
+        card = new CreditCard(Long.parseLong(card_num), exp_date, Integer.parseInt(csc),
+            username, address, "Bank");
+      } catch (final NumberFormatException nfe) {
+        card_message = "Fields cannot be blank";
+      } catch (final IllegalArgumentException iae) {
+        card_message = iae.getMessage();
+      }
       
-      my_app_frame.disableRegistration();
+      if (username.length() < 1 || password.length() < 1 || first_name.length() < 1 
+          || last_name.length() < 1) {
+  
+        JOptionPane.showMessageDialog(null, 
+            "Fields cannot be blank", 
+            "Error", JOptionPane.ERROR_MESSAGE);
       
-      my_back_button.doClick();
+      } else if (username.contains(RESERVED_CHARACTER)
+          || password.contains(RESERVED_CHARACTER)
+          || first_name.contains(RESERVED_CHARACTER)
+          || last_name.contains(RESERVED_CHARACTER)) {
+        
+        JOptionPane.showMessageDialog(null, 
+            "Invalid character: `", 
+            "Error", JOptionPane.ERROR_MESSAGE);
+      } else if (!is_valid_date) {
+      
+        JOptionPane.showMessageDialog(null, 
+            "Invalid date. Must be in the style of MM/YYYY, and after the current month.", 
+            "Error", JOptionPane.ERROR_MESSAGE);
+      } else if (username_is_taken) {
+      
+        JOptionPane.showMessageDialog(null, 
+            "Username is taken.", 
+            "Error", JOptionPane.ERROR_MESSAGE);
+      
+      } else if (name_is_taken) {
+        JOptionPane.showMessageDialog(null, 
+            "This name is already in the database.", 
+            "Error", JOptionPane.ERROR_MESSAGE);
+      
+      } else if (card == null) {
+        JOptionPane.showMessageDialog(null, 
+            card_message, 
+            "Error", JOptionPane.ERROR_MESSAGE);
+      } else {
+        
+        if (my_user instanceof Guest) {
+          Bidder new_bidder = new Bidder(username, password, first_name, last_name);
+          new_bidder.regisiter(card, address);
+         
+          my_system.addUser(new_bidder);
+          
+          my_app_frame.disableRegistration();
+          
+          my_back_button.doClick();
+        } else { //modify by Kaiyuan
+          ((Bidder) my_user).regisiter(card, address);
+          my_back_button.setEnabled(true);
+          my_back_button.doClick();
+        }
+      }
     }
     
+  }
+  
+  //modify by Kaiyuan
+  private void bidderInput() {
+    my_username_field.setText(my_user.getUsername());
+    my_username_field.setEditable(false);
+    my_password_field.setText(my_user.getPassword());
+    my_password_field.setEditable(false);
+    my_first_name_field.setText(my_user.getFirstName());
+    my_first_name_field.setEditable(false);
+    my_last_name_field.setText(my_user.getLastName());
+    my_last_name_field.setEditable(false);
   }
 }

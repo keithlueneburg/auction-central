@@ -9,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import system.AuctionCentralSystem;
@@ -56,6 +57,8 @@ public final class ApplicationFrame extends JFrame {
    * Back end system for the program.
    */
   private final AuctionCentralSystem my_system;
+  
+  private User my_user;
 
   /**
    * The panel used for displaying different views (Auction, item, inventory
@@ -67,6 +70,7 @@ public final class ApplicationFrame extends JFrame {
    * Contains a logo and menu buttons for navigating the software.
    */
   private final JPanel my_menu_panel;
+  
 
   /**
    * Instantiate an application frame. Some functionality will depend on the
@@ -80,7 +84,9 @@ public final class ApplicationFrame extends JFrame {
     super("Auction Central");
     
     my_system = the_system;
+    my_user = a_user;
     my_content_panel = new JPanel();
+    
     my_menu_panel = new MenuPanel(a_user, this, the_system);
     
     // This WindowListener allows program to save persistent data when
@@ -88,6 +94,13 @@ public final class ApplicationFrame extends JFrame {
     addWindowListener(new MyWindowListener());
 
     setup();
+    
+    //modify by Kaiyuan
+    if (my_user instanceof Bidder && ((Bidder) my_user).isRegisiter() == false) {
+      JOptionPane.showMessageDialog(null, "Your card has expired, please add a new card!",
+          "Expired card", JOptionPane.ERROR_MESSAGE);
+      showRegistration();
+    }
   }
 
   /**
@@ -188,8 +201,8 @@ public final class ApplicationFrame extends JFrame {
     replaceContentPanel(new CalendarPanel(my_system, this));
   }
   
-  public void showRegistration() {
-    replaceContentPanel(new RegistrationPanel(my_system, this)); 
+  public void showRegistration() { //modify by Kaiyuan
+    replaceContentPanel(new RegistrationPanel(my_system, this, my_user)); 
   }
   
   ///////////////////////////////////

@@ -115,4 +115,10 @@ public class Bidder extends AbstractUser {
     my_is_register = true;
     return my_is_register;
   }
+  
+  public void cardExpired() {
+    my_is_register = false;
+    my_card = null;
+    my_address = null;
+  }
 }

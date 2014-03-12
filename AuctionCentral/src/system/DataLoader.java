@@ -167,7 +167,7 @@ final class DataLoader {
   /**
    * This method load the address list from an address.txt file.
    */
-  private static void loadAddressList() throws Exception{
+  private static void loadAddressList() throws IOException{
     while (my_address_scanner.hasNextLine()) {
       final String line = my_address_scanner.nextLine();
       final String[] address = line.split(DATA_SEPARATOR);
@@ -181,7 +181,7 @@ final class DataLoader {
   /**
    * This method load the credit card list from an card.txt file.
    */
-  private static void loadCardList() throws Exception{
+  private static void loadCardList() throws IOException{
     
     while (my_card_scanner.hasNextLine()) {
       final String line = my_card_scanner.nextLine();
@@ -201,7 +201,7 @@ final class DataLoader {
   /**
    * This method load the bid list from an bid.txt file.
    */
-  private static void loadBidList() throws Exception{
+  private static void loadBidList() throws IOException{
     while (my_bid_scanner.hasNextLine()) {
       final String line = my_bid_scanner.nextLine();
       final String[] bid = line.split(DATA_SEPARATOR);
@@ -220,7 +220,7 @@ final class DataLoader {
   /**
    * This method load the item list from an item.txt file.
    */
-  private static void loadItemList() throws Exception{
+  private static void loadItemList() throws IOException{
     while (my_item_scanner.hasNextLine()) {
       final String line = my_item_scanner.nextLine();
       final String[] item = line.split(DATA_SEPARATOR);
@@ -246,7 +246,7 @@ final class DataLoader {
   /**
    * This method load the auction list from an adauctiondress.txt file.
    */
-  private static void loadAuctionList() throws Exception{
+  private static void loadAuctionList() throws IOException{
     while (my_auction_scanner.hasNextLine()) {
       final String line = my_auction_scanner.nextLine();
       final String[] auction = line.split(DATA_SEPARATOR);
@@ -284,7 +284,8 @@ final class DataLoader {
   /**
    * This method load the user list from an user.txt file.
    */
-  private static void loadUserList() throws Exception{
+  private static void loadUserList() throws IOException{
+    
     while (my_user_scanner.hasNextLine()) {
       final String line = my_user_scanner.nextLine();
       final String[] user = line.split(DATA_SEPARATOR);
@@ -293,17 +294,26 @@ final class DataLoader {
       final String first_name = user[3];
       final String last_name = user[4];
       
-      if ("Bidder".equals(user[0])) {
+      if ("Bidder".equals(user[0])) {   
         final Bidder this_bidder = new Bidder(username, password, first_name, 
             last_name);
         
         if ("true".equals(user[5])) {
-        
-          this_bidder.regisiter(my_card_list.get(Integer.parseInt(user[6])), 
-                my_address_list.get(Integer.parseInt(user[7])));
-          for (int i = 8; i < user.length; i++) {
-            this_bidder.addBid(my_bid_list.get(Integer.parseInt(user[i])));
+     
+          CreditCard card = my_card_list.get(Integer.parseInt(user[6]));
+          Calendar exp_date = card.getExpDate();
+          
+          if (exp_date.compareTo(Calendar.getInstance()) <= 0) {
+            this_bidder.cardExpired();
+          } else {
+            this_bidder.regisiter(card, my_address_list.get(Integer.parseInt(user[7])));
+            for (int i = 8; i < user.length; i++) {
+              this_bidder.addBid(my_bid_list.get(Integer.parseInt(user[i])));
+            }
+            
           }
+          
+          
         }
         
         my_user_list.add(this_bidder); 

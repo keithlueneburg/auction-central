@@ -174,9 +174,9 @@ public final class CreditCard {
   private void setExpDate(final Calendar an_expiration_date) throws IllegalArgumentException {
     if (an_expiration_date == null) {
       throw new IllegalArgumentException("Expiration date cannot be null.");
-    } else if (an_expiration_date.compareTo(Calendar.getInstance()) <= 0) {
+    } /*else if (an_expiration_date.compareTo(Calendar.getInstance()) <= 0) {
       throw new IllegalArgumentException("Expiration date must be in the future.");
-    }
+    }*/ //modify by Kaiyuan
     my_expiration_date = an_expiration_date;
   }
 
