@@ -276,6 +276,7 @@ public class ItemPanel extends JPanel {
     } else if (my_item.getItemNumber() == 0) { // new item
       my_number = my_auction.getItemCount() + 1;
       my_item.setItemQuantity(1);
+      my_item.setItemNumber(my_number);
       my_quantity = 1;
     } else { // not a new number
       my_number = my_item.getItemNumber();
