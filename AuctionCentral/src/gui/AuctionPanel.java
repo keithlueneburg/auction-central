@@ -131,7 +131,7 @@ public class AuctionPanel extends JPanel {
   private final JLabel my_contact_person = new JLabel("Contact Person: ");
     
   /** The label that shows the auction's name. */
-  private final JLabel my_contact_phone = new JLabel("Contact Phone: ###-###_####  ");
+  private final JLabel my_contact_phone = new JLabel("Contact Phone: ###-###-####  ");
     
   /** The label that shows the auction's number. */
   private final JLabel my_intake_person = new JLabel("Intake Person: ");
