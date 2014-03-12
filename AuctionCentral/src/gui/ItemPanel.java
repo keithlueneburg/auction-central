@@ -404,11 +404,14 @@ public class ItemPanel extends JPanel {
             String bet_string =
             JOptionPane.showInputDialog(null, "Bid price: ", "$0.00");
             
-            if (bet_string.length() != 0 && bet_string.charAt(0) == '$') {
-              bet_string = bet_string.substring(1);
-            }
+            
             
             try {
+              
+              if (bet_string.length() != 0 && bet_string.charAt(0) == '$') {
+                bet_string = bet_string.substring(1);
+              }
+              
               bid_price = Double.parseDouble(bet_string);
               
               //final Item the_item = my_item_list.get(my_index);

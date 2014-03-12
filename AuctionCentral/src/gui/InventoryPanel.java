@@ -224,7 +224,7 @@ public class InventoryPanel extends JPanel {
               break;
             }
           }
-          System.out.println(has_bid);
+          //System.out.println(has_bid);
           if (has_bid) {
             JOptionPane.showMessageDialog(null, "You already have a bid for that item!", "Bid Already Made", 
                 JOptionPane.WARNING_MESSAGE);
@@ -237,11 +237,14 @@ public class InventoryPanel extends JPanel {
               String bet_string =
               JOptionPane.showInputDialog(null, "Bid price: ", "$0.00");
               
-              if (bet_string.length() != 0 && bet_string.charAt(0) == '$') {
-                bet_string = bet_string.substring(1);
-              }
+              
               
               try {
+                
+                if (bet_string.length() != 0 && bet_string.charAt(0) == '$') {
+                  bet_string = bet_string.substring(1);
+                }
+                
                 bid_price = Double.parseDouble(bet_string);
                 
                 final Item the_item = my_item_list.get(my_index);
