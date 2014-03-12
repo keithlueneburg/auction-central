@@ -33,6 +33,21 @@ final class DataLoader {
   /** Number 3. */
   private static final int THREE = 3;
   
+  /** Number 4. */
+  private static final int FOUR = 4;
+  
+  /** Number 5. */
+  private static final int FIVE = 5;
+  
+  /** Number 6. */
+  private static final int SIX = 6;
+  
+  /** Number 7. */
+  private static final int SEVEN = 7;
+  
+  /** Number 8. */
+  private static final int EIGHT = 8;
+  
   /**
    * The user list that would be saved.
    */
@@ -177,7 +192,7 @@ final class DataLoader {
       
       my_address_list.add(new Address(address[0],
           Integer.parseInt(address[1]), address[2],
-          address[THREE], Integer.parseInt(address[4])));     
+          address[THREE], Integer.parseInt(address[FOUR])));     
     }
   }
   
@@ -197,7 +212,7 @@ final class DataLoader {
       
       my_card_list.add(new CreditCard(Long.parseLong(card[0]),
           exp_date, Integer.parseInt(card[2]), card[THREE], 
-          my_address_list.get(Integer.parseInt(card[4])), card[5]));
+          my_address_list.get(Integer.parseInt(card[FOUR])), card[FIVE]));
     }
   }
   
@@ -213,10 +228,10 @@ final class DataLoader {
       final Calendar bid_date = Calendar.getInstance();
       bid_date.set(Integer.parseInt(bid_string[2]),
           Integer.parseInt(bid_string[0]), Integer.parseInt(bid_string[1]),
-          Integer.parseInt(bid_string[THREE]), Integer.parseInt(bid_string[4]));
+          Integer.parseInt(bid_string[THREE]), Integer.parseInt(bid_string[FOUR]));
       
       my_bid_list.add(new Bid(bid[0], Double.parseDouble(bid[1]),
-          bid[2], bid_date, my_card_list.get(Integer.parseInt(bid[4]))));
+          bid[2], bid_date, my_card_list.get(Integer.parseInt(bid[FOUR]))));
     }
   }
   
@@ -228,13 +243,13 @@ final class DataLoader {
       final String line = my_item_scanner.nextLine();
       final String[] item = line.split(DATA_SEPARATOR);
       
-      if (" ".equals(item[8])) {
-        item[8] = "";
+      if (" ".equals(item[EIGHT])) {
+        item[EIGHT] = "";
       }
       
       final Item this_item = new Item(Integer.parseInt(item[0]), item[1],
           Integer.parseInt(item[2]), Double.parseDouble(item[THREE]),
-          item[4], item[5], item[6], item[7], item[8]);
+          item[FOUR], item[FIVE], item[SIX], item[SEVEN], item[EIGHT]);
       
       this_item.setSellingPrice(Double.parseDouble(item[9]));
       
@@ -254,7 +269,7 @@ final class DataLoader {
       final String line = my_auction_scanner.nextLine();
       final String[] auction = line.split(DATA_SEPARATOR);
       
-      final String[] auction_date_string = auction[4].split(CALENDAR_SEPARATOR);
+      final String[] auction_date_string = auction[FOUR].split(CALENDAR_SEPARATOR);
       final Calendar auction_date = Calendar.getInstance();
       auction_date.set(Calendar.MONTH, Integer.parseInt(auction_date_string[0]));
       auction_date.set(Calendar.DAY_OF_MONTH, Integer.parseInt(auction_date_string[1]));
@@ -263,16 +278,16 @@ final class DataLoader {
       auction_date.set(Calendar.MINUTE, 0);
       auction_date.set(Calendar.SECOND, 0);
       
-      if (" ".equals(auction[6])) {
-        auction[6] = "";
+      if (" ".equals(auction[SIX])) {
+        auction[SIX] = "";
       }
       
       final Auction current_auction = new Auction(auction[0], auction[1],
           auction[2], auction[THREE], auction_date,
-          Integer.parseInt(auction[5]), auction[6]);
+          Integer.parseInt(auction[FIVE]), auction[SIX]);
       
       final List<Item> auction_bids = new ArrayList<Item>();
-      for (int i = 7; i < auction.length; i++) {
+      for (int i = SEVEN; i < auction.length; i++) {
         auction_bids.add(my_item_list.get(Integer.parseInt(auction[i])));
       }
       
@@ -295,22 +310,22 @@ final class DataLoader {
       final String username = user[1];
       final String password = user[2];
       final String first_name = user[THREE];
-      final String last_name = user[4];
+      final String last_name = user[FOUR];
       
       if ("Bidder".equals(user[0])) {   
         final Bidder this_bidder = new Bidder(username, password, first_name, 
             last_name);
         
-        if ("true".equals(user[5])) {
+        if ("true".equals(user[FIVE])) {
      
-          final CreditCard card = my_card_list.get(Integer.parseInt(user[6]));
+          final CreditCard card = my_card_list.get(Integer.parseInt(user[SIX]));
           final Calendar exp_date = card.getExpDate();
           
           if (exp_date.compareTo(Calendar.getInstance()) <= 0) {
             this_bidder.cardExpired();
           } else {
-            this_bidder.regisiter(card, my_address_list.get(Integer.parseInt(user[7])));
-            for (int i = 8; i < user.length; i++) {
+            this_bidder.regisiter(card, my_address_list.get(Integer.parseInt(user[SEVEN])));
+            for (int i = EIGHT; i < user.length; i++) {
               this_bidder.addBid(my_bid_list.get(Integer.parseInt(user[i])));
             }
             
@@ -326,7 +341,7 @@ final class DataLoader {
             first_name, last_name));
       } else {
         my_user_list.add(new NonProfitUser(username, password, 
-            first_name, last_name, user[5]));
+            first_name, last_name, user[FIVE]));
       }   
     }
   }
