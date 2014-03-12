@@ -401,7 +401,7 @@ public class ItemPanel extends JPanel {
           JOptionPane.showMessageDialog(null, "You already have a bid for that item!", "Bid Already Made", 
               JOptionPane.WARNING_MESSAGE);
         } else {
-          do{
+          do {
             String bet_string =
             JOptionPane.showInputDialog(null, "Bid price: ", "$0.00");
             

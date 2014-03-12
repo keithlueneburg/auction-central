@@ -30,6 +30,9 @@ import user.User;
  */
 final class DataLoader {
   
+  /** Number 3. */
+  private static final int THREE = 3;
+  
   /**
    * The user list that would be saved.
    */
@@ -174,7 +177,7 @@ final class DataLoader {
       
       my_address_list.add(new Address(address[0],
           Integer.parseInt(address[1]), address[2],
-          address[3], Integer.parseInt(address[4])));     
+          address[THREE], Integer.parseInt(address[4])));     
     }
   }
   
@@ -193,7 +196,7 @@ final class DataLoader {
       exp_date.set(Calendar.YEAR, Integer.parseInt(exp_string[1]));
       
       my_card_list.add(new CreditCard(Long.parseLong(card[0]),
-          exp_date, Integer.parseInt(card[2]), card[3], 
+          exp_date, Integer.parseInt(card[2]), card[THREE], 
           my_address_list.get(Integer.parseInt(card[4])), card[5]));
     }
   }
@@ -206,11 +209,11 @@ final class DataLoader {
       final String line = my_bid_scanner.nextLine();
       final String[] bid = line.split(DATA_SEPARATOR);
       
-      final String[] bid_string = bid[3].split(CALENDAR_SEPARATOR);
+      final String[] bid_string = bid[THREE].split(CALENDAR_SEPARATOR);
       final Calendar bid_date = Calendar.getInstance();
       bid_date.set(Integer.parseInt(bid_string[2]),
           Integer.parseInt(bid_string[0]), Integer.parseInt(bid_string[1]),
-          Integer.parseInt(bid_string[3]), Integer.parseInt(bid_string[4]));
+          Integer.parseInt(bid_string[THREE]), Integer.parseInt(bid_string[4]));
       
       my_bid_list.add(new Bid(bid[0], Double.parseDouble(bid[1]),
           bid[2], bid_date, my_card_list.get(Integer.parseInt(bid[4]))));
@@ -230,7 +233,7 @@ final class DataLoader {
       }
       
       final Item this_item = new Item(Integer.parseInt(item[0]), item[1],
-          Integer.parseInt(item[2]), Double.parseDouble(item[3]),
+          Integer.parseInt(item[2]), Double.parseDouble(item[THREE]),
           item[4], item[5], item[6], item[7], item[8]);
       
       this_item.setSellingPrice(Double.parseDouble(item[9]));
@@ -256,7 +259,7 @@ final class DataLoader {
       auction_date.set(Calendar.MONTH, Integer.parseInt(auction_date_string[0]));
       auction_date.set(Calendar.DAY_OF_MONTH, Integer.parseInt(auction_date_string[1]));
       auction_date.set(Calendar.YEAR, Integer.parseInt(auction_date_string[2]));
-      auction_date.set(Calendar.HOUR_OF_DAY, Integer.parseInt(auction_date_string[3]));
+      auction_date.set(Calendar.HOUR_OF_DAY, Integer.parseInt(auction_date_string[THREE]));
       auction_date.set(Calendar.MINUTE, 0);
       auction_date.set(Calendar.SECOND, 0);
       
@@ -265,7 +268,7 @@ final class DataLoader {
       }
       
       final Auction current_auction = new Auction(auction[0], auction[1],
-          auction[2], auction[3], auction_date,
+          auction[2], auction[THREE], auction_date,
           Integer.parseInt(auction[5]), auction[6]);
       
       final List<Item> auction_bids = new ArrayList<Item>();
@@ -291,7 +294,7 @@ final class DataLoader {
       final String[] user = line.split(DATA_SEPARATOR);
       final String username = user[1];
       final String password = user[2];
-      final String first_name = user[3];
+      final String first_name = user[THREE];
       final String last_name = user[4];
       
       if ("Bidder".equals(user[0])) {   
