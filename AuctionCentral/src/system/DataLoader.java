@@ -115,7 +115,7 @@ final class DataLoader {
    * The static method that be called to read the data from txt files to the system.
    * @param a_system the system that would be loaded
    */
-  public static void loadData(final AuctionCentralSystem a_system) throws IOException{
+  public static void loadData(final AuctionCentralSystem a_system) throws IOException {
     
     try {
       my_user_scanner = new Scanner(new FileInputStream(DATA_LOCATION + "user.txt"));
@@ -158,7 +158,7 @@ final class DataLoader {
     
   }
     
-  private static void showError() throws IOException{
+  private static void showError() throws IOException {
     JOptionPane.showMessageDialog(null,
         "Input file damaged, loading failure!", "error", JOptionPane.ERROR_MESSAGE);
     throw new IOException();
@@ -167,7 +167,7 @@ final class DataLoader {
   /**
    * This method load the address list from an address.txt file.
    */
-  private static void loadAddressList() throws IOException{
+  private static void loadAddressList() throws IOException {
     while (my_address_scanner.hasNextLine()) {
       final String line = my_address_scanner.nextLine();
       final String[] address = line.split(DATA_SEPARATOR);
@@ -181,7 +181,7 @@ final class DataLoader {
   /**
    * This method load the credit card list from an card.txt file.
    */
-  private static void loadCardList() throws IOException{
+  private static void loadCardList() throws IOException {
     
     while (my_card_scanner.hasNextLine()) {
       final String line = my_card_scanner.nextLine();
@@ -201,7 +201,7 @@ final class DataLoader {
   /**
    * This method load the bid list from an bid.txt file.
    */
-  private static void loadBidList() throws IOException{
+  private static void loadBidList() throws IOException {
     while (my_bid_scanner.hasNextLine()) {
       final String line = my_bid_scanner.nextLine();
       final String[] bid = line.split(DATA_SEPARATOR);
@@ -220,7 +220,7 @@ final class DataLoader {
   /**
    * This method load the item list from an item.txt file.
    */
-  private static void loadItemList() throws IOException{
+  private static void loadItemList() throws IOException {
     while (my_item_scanner.hasNextLine()) {
       final String line = my_item_scanner.nextLine();
       final String[] item = line.split(DATA_SEPARATOR);
@@ -246,7 +246,7 @@ final class DataLoader {
   /**
    * This method load the auction list from an adauctiondress.txt file.
    */
-  private static void loadAuctionList() throws IOException{
+  private static void loadAuctionList() throws IOException {
     while (my_auction_scanner.hasNextLine()) {
       final String line = my_auction_scanner.nextLine();
       final String[] auction = line.split(DATA_SEPARATOR);
@@ -284,7 +284,7 @@ final class DataLoader {
   /**
    * This method load the user list from an user.txt file.
    */
-  private static void loadUserList() throws IOException{
+  private static void loadUserList() throws IOException {
     
     while (my_user_scanner.hasNextLine()) {
       final String line = my_user_scanner.nextLine();
@@ -300,8 +300,8 @@ final class DataLoader {
         
         if ("true".equals(user[5])) {
      
-          CreditCard card = my_card_list.get(Integer.parseInt(user[6]));
-          Calendar exp_date = card.getExpDate();
+          final CreditCard card = my_card_list.get(Integer.parseInt(user[6]));
+          final Calendar exp_date = card.getExpDate();
           
           if (exp_date.compareTo(Calendar.getInstance()) <= 0) {
             this_bidder.cardExpired();
