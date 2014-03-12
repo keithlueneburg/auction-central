@@ -100,13 +100,13 @@ public class ItemTest {
     testItem.addBid(bid1);
     testItem.addBid(bid2);
 
-    if (testItem.unsealBid() == bid1) {
-      correctoutcomes++;
-    }
-
-    if (testItem.unsealBid() == null) {
-      correctoutcomes++;
-    }
+//    if (testItem.unsealBid() == bid1) {
+//      correctoutcomes++;
+//    }
+//
+//    if (testItem.unsealBid() == null) {
+//      correctoutcomes++;
+//    }
 
     assertEquals(2, correctoutcomes);
   }
