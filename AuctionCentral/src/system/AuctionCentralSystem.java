@@ -18,17 +18,6 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-
-
-
-
-
-
-
-
-
-
-
 import user.AbstractUser;
 import user.NonProfitUser;
 import user.User;
@@ -70,7 +59,7 @@ public class AuctionCentralSystem implements Observer {
    * The constructor, initialized the system.
    * in check-in5 manually set the current user is a non-profit user
    */
-  public AuctionCentralSystem() throws IOException{
+  public AuctionCentralSystem() throws IOException {
     
     my_auction = new ArrayList<Auction>();
     my_past_auction = new ArrayList<Auction>();
@@ -127,10 +116,18 @@ public class AuctionCentralSystem implements Observer {
     
   }
   
+  /**
+   * Loads the user.
+   * @param an_user_list - a list of users.
+   */
   public void loadUser(final List<User> an_user_list) {
     my_users = an_user_list;
   }
   
+  /**
+   * Load the auction.
+   * @param an_auction_list - a list of auctions.
+   */
   public void loadAuction(final List<Auction> an_auction_list) {
     my_auction = an_auction_list;
     refreshAuction();
@@ -141,7 +138,7 @@ public class AuctionCentralSystem implements Observer {
   /**
    * This method load all the data after starting the system.
    */
-  public void loadingData() throws IOException{
+  public void loadingData() throws IOException {
     DataLoader.loadData(this);
   }
   
@@ -257,7 +254,7 @@ public class AuctionCentralSystem implements Observer {
           auction_hour + each.getAuctionDuration(), 0, 0);
       
       
-      if (today.compareTo(auction_end) > 0 ) { 
+      if (today.compareTo(auction_end) > 0) { 
         
         final Auction past = each;
         my_past_auction.add(past);
@@ -270,6 +267,7 @@ public class AuctionCentralSystem implements Observer {
   
   /**
    * Just for my Junit test, DO NOT USE!!!
+   * @param an_index - the index of the user.
    */
   public void setUser(final int an_index) {
     my_current_user = my_users.get(an_index);
@@ -303,7 +301,12 @@ public class AuctionCentralSystem implements Observer {
     return valid_user;
   }
   
-  public boolean deleteAuction(Auction an_auction) {
+  /**
+   * Used to delete an auction.
+   * @param an_auction - the auction to delete.
+   * @return is_success - if it was deleted.
+   */
+  public boolean deleteAuction(final Auction an_auction) {
     Auction delete_auction = null;
     boolean is_success = false;
     for (Auction each: my_auction) {
@@ -324,7 +327,7 @@ public class AuctionCentralSystem implements Observer {
    * 
    * @return true if the user name is valid.
    */
-  public static boolean isValidUser_static(final String the_username) {
+  public static boolean isValidUserStatic(final String the_username) {
     boolean is_valid = false;
     Scanner sc = null;
     

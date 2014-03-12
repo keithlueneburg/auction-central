@@ -23,7 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
@@ -685,12 +685,12 @@ public class AuctionPanel extends JPanel {
   
   /**
    * test if a string is a valid phone number.
-   * @param a_phone
-   * @return
+   * @param a_phone - the phone number.
+   * @return is_valid - if it is a correct number.
    */
-  private boolean testPhone(String a_phone) {
+  private boolean testPhone(final String a_phone) {
     boolean is_valid = true;
-    String[] phone = a_phone.split("-");
+    final String[] phone = a_phone.split("-");
     if (a_phone.length() != 12 || phone.length != THREE) {
       is_valid = false;
     } else {
@@ -698,7 +698,7 @@ public class AuctionPanel extends JPanel {
         Integer.parseInt(phone[0]);
         Integer.parseInt(phone[1]);
         Integer.parseInt(phone[2]);
-      } catch (NumberFormatException ex){
+      } catch (final NumberFormatException ex) {
         is_valid = false;
       }
     }

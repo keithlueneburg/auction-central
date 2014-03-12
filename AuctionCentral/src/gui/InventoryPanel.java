@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Queue;
+
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,8 +24,9 @@ import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
 
 import user.Bidder;
-import user.NonProfitUser;
+
 import user.User;
+
 import auction.Auction;
 import auction.Bid;
 import auction.Item;
@@ -33,16 +34,12 @@ import auction.Item;
 /**
  * 
  * @author Kaiyuan Shi
+ * @version 1.0
  *
  */
+@SuppressWarnings("serial")
 public class InventoryPanel extends JPanel {
 
-  List<Item> my_item_list;
-
-  /**
-   * 
-   */
-  private static final int DEFAULT_WIDTH = 824;
   /**
    * 
    */
@@ -50,7 +47,13 @@ public class InventoryPanel extends JPanel {
   /**
    * 
    */
+  private static final int DEFAULT_WIDTH = 824;
+
+  /**
+   * 
+   */
   private static final int INSET_SIZE = 20;
+  List<Item> my_item_list;
   /**
    * The JList component that holds the auctions.
    */
@@ -216,8 +219,8 @@ public class InventoryPanel extends JPanel {
         if (my_index >= 0) {
           
           boolean has_bid = false;
-          Item temp_item = my_item_list.get(my_index);
-          List<Bid> bid_q = ((Bidder) my_user).getBids();
+          final Item temp_item = my_item_list.get(my_index);
+          final List<Bid> bid_q = ((Bidder) my_user).getBids();
           for (Bid a_bid : bid_q) {
             if (temp_item.getItemName().equals(a_bid.getItemName())) {
               has_bid = true;
@@ -226,16 +229,16 @@ public class InventoryPanel extends JPanel {
           }
           //System.out.println(has_bid);
           if (has_bid) {
-            JOptionPane.showMessageDialog(null, "You already have a bid for that item!", "Bid Already Made", 
-                JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You already have a bid for that item!", 
+                "Bid Already Made", JOptionPane.WARNING_MESSAGE);
           } else {
             
             boolean success_bid = false;
-            Bidder the_bidder = ((Bidder) my_app_frame.getSystem().getCurrentUser());
+            final Bidder the_bidder = (Bidder) my_app_frame.getSystem().getCurrentUser();
             double bid_price = 0.0;
-            do{
+            do {
               String bet_string =
-              JOptionPane.showInputDialog(null, "Bid price: ", "$0.00");
+                  JOptionPane.showInputDialog(null, "Bid price: ", "$0.00");
               
               
               
@@ -247,27 +250,25 @@ public class InventoryPanel extends JPanel {
                 
                 bid_price = Double.parseDouble(bet_string);
                 
-                final Item the_item = my_item_list.get(my_index);
-                if (bid_price >= the_item.getStartingBid()) {
+                final Item theitem = my_item_list.get(my_index);
+                if (bid_price >= theitem.getStartingBid()) {
                   success_bid = true;
-                  Bid temp_bid = new Bid(the_item.getItemName(), bid_price, the_bidder.getUsername(),
-                      new GregorianCalendar(), the_bidder.getCard());
+                  final Bid temp_bid = new Bid(theitem.getItemName(), bid_price, 
+                      the_bidder.getUsername(), new GregorianCalendar(), the_bidder.getCard());
                   
                   the_bidder.addBid(temp_bid);
-                  the_item.addBid(temp_bid);
+                  theitem.addBid(temp_bid);
                 } else if (!success_bid) {
                   JOptionPane.showMessageDialog(null, "Bid Too Low!", "Bid Too Low",
                       JOptionPane.WARNING_MESSAGE);
                 }
-              } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Wrong input!", "ERROR", JOptionPane.WARNING_MESSAGE);
-              } catch (NullPointerException e) {
+              } catch (final NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Wrong input!", "ERROR", 
+                    JOptionPane.WARNING_MESSAGE);
+              } catch (final NullPointerException e) {
               //do nothing
                 success_bid = true;
             	}
-              
-              
-              
             } while (!success_bid);
           }
         }
