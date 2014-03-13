@@ -180,7 +180,7 @@ public class BidListPanel extends JPanel {
         for (Auction auction : auction_list) {
           List<Item> item_list = auction.getItems();
           for (Item item : item_list) {
-            Queue<Bid> bid_queue = item.getBids();
+            List<Bid> bid_queue = item.getBids();
             for (Bid bid : bid_queue) {
               if (bid == this_bid) {
                 found = true;

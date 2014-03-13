@@ -63,7 +63,7 @@ public class Item {
   private double my_selling_price;
 
   /**The bids on the item.*/
-  private Queue<Bid> my_bids;
+  private List<Bid> my_bids;
 
   // //////////////////////////////////////////////////////////////////
   // CONSTRUCTORS
@@ -104,7 +104,7 @@ public class Item {
     my_condition = the_condition;
     my_comments = the_comments;
 
-    my_bids = new PriorityQueue<Bid>();
+    my_bids = new ArrayList<Bid>();
   }
 
   /**
@@ -318,7 +318,7 @@ public class Item {
    * 
    * @return myBids The list of Bids.
    */
-  public Queue<Bid> getBids() {
+  public List<Bid> getBids() {
     return my_bids;
   }
 
@@ -336,7 +336,7 @@ public class Item {
    *         to the list or not.
    */
   public boolean addBid(final Bid the_bid) {
-    return my_bids.offer(the_bid);
+    return my_bids.add(the_bid);
   }
 
   /**
@@ -422,7 +422,25 @@ public class Item {
    * @return the win bid
    */
   public Bid unsealBid() {
-    return my_bids.peek();
+    Bid win_bid = null;
+    
+    
+    for (Bid each: my_bids) {
+      if (win_bid == null) {
+        win_bid = each;
+      } else if ((each.getPrice() - win_bid.getPrice()) < 0.01) {
+        if (each.getBidTime().compareTo(win_bid.getBidTime()) < 0) {
+          win_bid = each;
+        }
+      } else if (each.getPrice() > win_bid.getPrice()) {
+        win_bid = each;
+      }
+    }
+    
+    
+    
+    
+    return win_bid;
     
   }
   
