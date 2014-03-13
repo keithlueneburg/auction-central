@@ -419,7 +419,7 @@ public class ItemPanel extends JPanel {
               if (bid_price >= my_item.getStartingBid()) {
                 success_bid = true;
                 Bid temp_bid = new Bid(my_item.getItemName(), bid_price, the_bidder.getUsername(),
-                    new GregorianCalendar(), the_bidder.getCard());
+                    Calendar.getInstance(), the_bidder.getCard());
                 
                 the_bidder.addBid(temp_bid);
                 my_item.addBid(temp_bid);
@@ -489,7 +489,7 @@ public class ItemPanel extends JPanel {
             
             message = "Winner: " + win_bid.getBidderName() + NEW_LINE;
             message += "Price: " + win_bid.getPrice() + NEW_LINE;
-            message += "Bid time: " + win_bid.getBidTime().get(Calendar.MONTH) + "/";
+            message += "Bid time: " + (win_bid.getBidTime().get(Calendar.MONTH) + 1) + "/";
             message += win_bid.getBidTime().get(Calendar.DAY_OF_MONTH) + "/";
             message += win_bid.getBidTime().get(Calendar.YEAR) + "/ ";
             message += win_bid.getBidTime().get(Calendar.HOUR_OF_DAY) + ":";

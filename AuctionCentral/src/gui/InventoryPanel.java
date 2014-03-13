@@ -11,8 +11,10 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+
 
 
 import javax.swing.JButton;
@@ -24,9 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
 
 import user.Bidder;
-
 import user.User;
-
 import auction.Auction;
 import auction.Bid;
 import auction.Item;
@@ -254,7 +254,7 @@ public class InventoryPanel extends JPanel {
                 if (bid_price >= theitem.getStartingBid()) {
                   success_bid = true;
                   final Bid temp_bid = new Bid(theitem.getItemName(), bid_price, 
-                      the_bidder.getUsername(), new GregorianCalendar(), the_bidder.getCard());
+                      the_bidder.getUsername(), Calendar.getInstance(), the_bidder.getCard());
                   
                   the_bidder.addBid(temp_bid);
                   theitem.addBid(temp_bid);

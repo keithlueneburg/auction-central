@@ -422,7 +422,6 @@ public class Item {
    * @return the win bid
    */
   public Bid unsealBid() {
-    
     return my_bids.peek();
     
   }
