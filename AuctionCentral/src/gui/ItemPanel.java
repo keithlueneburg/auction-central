@@ -271,7 +271,7 @@ public class ItemPanel extends JPanel {
    * Creates the auction used for editing.
    */
   private void createItem() {
-    if (my_auction.getItemCount() == 0) { // first item
+    /*if (my_auction.getItemCount() == 0) { // first item
       my_number = 1;
     } else if (my_item.getItemNumber() == 0) { // new item
       my_number = my_auction.getItemCount() + 1;
@@ -281,7 +281,17 @@ public class ItemPanel extends JPanel {
     } else { // not a new number
       my_number = my_item.getItemNumber();
       my_quantity = my_item.getItemQuantity();
+    }*/ //old
+    
+    //new 
+    if (my_item.getItemNumber() == 0) { // new item
+      my_number = my_auction.getItemCount() + 1;
+      my_item.setItemNumber(my_number);
+    } else {
+      my_number = my_item.getItemNumber(); 
+      my_quantity = my_item.getItemQuantity();
     }
+    
     my_name = my_item.getItemName();
     my_donor = my_item.getDonor();
     my_size = my_item.getSize();
@@ -366,6 +376,7 @@ public class ItemPanel extends JPanel {
                   "item price must be positive.", 
                    "Error", JOptionPane.ERROR_MESSAGE);
             } else if (!my_auction.getItems().contains(my_item)) {
+              System.out.println("new item #: " + my_item.getItemNumber());
               my_auction.addItem(my_item);
               my_app_frame.showInventory(my_auction);
             } else {

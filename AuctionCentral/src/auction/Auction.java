@@ -250,10 +250,10 @@ public class Auction {
   public boolean addItem(final Item the_item) {
     final boolean success = my_auction_items.add(the_item);
 
-    if (success) {
+    /*if (success) {
       the_item.setItemNumber(my_next_item);
       my_next_item++;
-    }
+    }*/
 
     return success;
   }
