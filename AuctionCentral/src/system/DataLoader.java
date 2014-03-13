@@ -327,12 +327,10 @@ final class DataLoader {
             this_bidder.regisiter(card, my_address_list.get(Integer.parseInt(user[7])));
 
             this_bidder.regisiter(card, my_address_list.get(Integer.parseInt(user[SEVEN])));
-            for (int i = EIGHT; i < user.length; i++) {
-              this_bidder.addBid(my_bid_list.get(Integer.parseInt(user[i])));
-            }
-            for (int i = EIGHT; i < user.length; i++) {
-              this_bidder.addBid(my_bid_list.get(Integer.parseInt(user[i])));
-            }
+            
+          }
+          for (int i = EIGHT; i < user.length; i++) {
+            this_bidder.addBid(my_bid_list.get(Integer.parseInt(user[i])));
           }
         }
           
