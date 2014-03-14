@@ -164,7 +164,7 @@ final class DataLoader {
       showError();
     } catch (final ArrayIndexOutOfBoundsException ex) {
       showError();
-    } catch (final Exception ex) {
+    } catch (final IOException ex) {
       showError();
     }
     
@@ -377,7 +377,7 @@ final class DataLoader {
           if (exp_date.compareTo(Calendar.getInstance()) <= 0) {
             this_bidder.cardExpired();
           } else {
-            this_bidder.register(card, my_address_list.get(Integer.parseInt(user[7])));
+            this_bidder.register(card, my_address_list.get(Integer.parseInt(user[SEVEN])));
 
             this_bidder.register(card, my_address_list.get(Integer.parseInt(user[SEVEN])));
             
@@ -385,7 +385,7 @@ final class DataLoader {
         }
           
           
-        for (int i = 8; i < user.length; i++) {
+        for (int i = EIGHT; i < user.length; i++) {
           this_bidder.addBid(my_bid_list.get(Integer.parseInt(user[i])));
         }
          

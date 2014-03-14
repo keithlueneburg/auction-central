@@ -95,7 +95,7 @@ public class ItemTest {
     final Bid bid1 = new Bid("Bid1", 6, null, null, null);
     final Bid bid2 = new Bid("Bid2", 9, null, null, null);
     
-    int correctoutcomes = 0;
+    //int correctoutcomes = 0;
 
     testItem.addBid(bid1);
     testItem.addBid(bid2);
@@ -108,7 +108,7 @@ public class ItemTest {
 //      correctoutcomes++;
 //    }
 
-    assertEquals(2, correctoutcomes);
+    assertEquals(bid2, testItem.unsealBid());
   }
 
 }

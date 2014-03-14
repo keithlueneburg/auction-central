@@ -141,7 +141,7 @@ public class AuctionCentralSystem implements Observer {
    * 
    * @throws IOException if their is a problem loading or saving the file.
    */
-  public void loadingData() throws IOException {
+  private void loadingData() throws IOException {
     DataLoader.loadData(this);
   }
   
