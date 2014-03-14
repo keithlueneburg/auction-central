@@ -50,6 +50,12 @@ import user.User;
 public class AuctionPanel extends JPanel {
     
   // Global variables ----------------------------------
+  
+  /**
+   * JOptionpane title text for popup message windows.
+   */
+  private static final String MESSAGE_WINDOW_TITLE = "message";
+  
   /** The default height of the panel. */
   private static final int DEFAULT_HEIGHT = 680;
   
@@ -409,12 +415,13 @@ public class AuctionPanel extends JPanel {
     my_delete.setToolTipText("Delete this auction");
     my_delete.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent the_event) {
-        int confirm = JOptionPane.showConfirmDialog(null, "Do you want to delete this auction?",
-            "message", JOptionPane.YES_NO_OPTION);
+        final int confirm = JOptionPane.showConfirmDialog(null,
+            "Do you want to delete this auction?",
+            MESSAGE_WINDOW_TITLE, JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
           if (my_system.deleteAuction(my_auction)) {
             JOptionPane.showMessageDialog(null, "Delete success!",
-                "message", JOptionPane.PLAIN_MESSAGE);
+                MESSAGE_WINDOW_TITLE, JOptionPane.PLAIN_MESSAGE);
             my_app_frame.showAuctionList();
           } else {
             JOptionPane.showMessageDialog(null, 
@@ -679,8 +686,6 @@ public class AuctionPanel extends JPanel {
             ERROR, JOptionPane.ERROR_MESSAGE);
       }
     }
-    
-    
   }
   
   /**
@@ -691,7 +696,7 @@ public class AuctionPanel extends JPanel {
   private boolean testPhone(final String a_phone) {
     boolean is_valid = true;
     final String[] phone = a_phone.split("-");
-    if (a_phone.length() != 12 || phone.length != THREE) {
+    if (a_phone.length() != TWELVE || phone.length != THREE) {
       is_valid = false;
     } else {
       try {
