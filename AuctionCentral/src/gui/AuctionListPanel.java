@@ -32,7 +32,6 @@ import user.User;
  */
 public class AuctionListPanel extends JPanel {
 
-  
   /**
    *  
    */
@@ -193,7 +192,7 @@ public class AuctionListPanel extends JPanel {
     create_button.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent an_event) {
         if (my_auction_list.size() < MAX_AUCTIONS) {
-          User current_user = my_app_frame.getSystem().getCurrentUser();
+          final User current_user = my_app_frame.getSystem().getCurrentUser();
           
           my_app_frame.showAuctionInfo(new Auction((NonProfitUser) current_user), true);
           
@@ -214,6 +213,7 @@ public class AuctionListPanel extends JPanel {
    * @author Kevin Alexander
    * @version 3/4/2014
    */
+  @SuppressWarnings("serial")
   private class ListPanel extends JPanel {
     /**
      * The GridBagLayout that is used for the list.
@@ -254,12 +254,14 @@ public class AuctionListPanel extends JPanel {
       my_layout_constraints.gridx = 0;
       my_layout_constraints.gridy = 0;
       my_layout_constraints.fill = GridBagConstraints.BOTH;
-      my_layout_constraints.insets = new Insets(INSET_SIZE, INSET_SIZE, INSET_SIZE, INSET_SIZE);
+      my_layout_constraints.insets = new Insets(INSET_SIZE, INSET_SIZE,
+          INSET_SIZE, INSET_SIZE);
       my_layout_constraints.anchor = GridBagConstraints.CENTER;
       my_layout_constraints.weightx = 1.0;
       my_layout_constraints.weighty = 1.0;
       my_layout.setConstraints(my_scrollpane, my_layout_constraints);
     }
+    
     /**
      * This method configures the JList by adding the Auctions to it.
      */
@@ -269,6 +271,7 @@ public class AuctionListPanel extends JPanel {
       my_jlist.setCellRenderer(new MyCellRenderer());
     }
   }
+  
   /**
    * This is the ListCellRenderer that makes the list have all the information
    * correctly laid out. It also sets that one line in the list and all the items
@@ -277,6 +280,7 @@ public class AuctionListPanel extends JPanel {
    * @author Kevin Alexander
    * @version 3/3/2014
    */
+  @SuppressWarnings("serial")
   private class MyCellRenderer extends JPanel implements ListCellRenderer {
     /**
      * This is the default grid size for the list.
@@ -325,51 +329,53 @@ public class AuctionListPanel extends JPanel {
       add(my_date);
       add(my_numitems);
     }
-    /**
-     * 
+    
+    /* (non-Javadoc)
+     * @see javax.swing.ListCellRenderer#getListCellRendererComponent(javax.swing.JList,
+     *  java.lang.Object, int, boolean, boolean)
      */
-    public Component getListCellRendererComponent(JList list, Object value, int index, 
-        boolean isSelected, boolean cellHasFocus) {
-      String _name = ((Auction) value).getAuctionName();
-      String _checkname = ((Auction) value).getIntakePerson();
-      String _date = ((Auction) value).getAuctionDate().getTime().toString();
-      String _num = "               ";
-      _num += Integer.toString(((Auction) value).getItemCount());
+    public Component getListCellRendererComponent(final JList a_list, final Object a_value,
+        final int the_index, final boolean the_is_selected, final boolean the_cell_has_focus) {
+      final String name = ((Auction) a_value).getAuctionName();
+      final String checkname = ((Auction) a_value).getIntakePerson();
+      final String date = ((Auction) a_value).getAuctionDate().getTime().toString();
+      String num = "               ";
+      num += Integer.toString(((Auction) a_value).getItemCount());
       
-      my_name.setText(_name);
-      my_checkname.setText(_checkname);
-      my_date.setText(_date);
-      my_numitems.setText(_num);
+      my_name.setText(name);
+      my_checkname.setText(checkname);
+      my_date.setText(date);
+      my_numitems.setText(num);
       
-      if (isSelected) {
+      if (the_is_selected) {
         
-        my_name.setBackground(list.getSelectionBackground());
-        my_checkname.setBackground(list.getSelectionBackground());
-        my_date.setBackground(list.getSelectionBackground());
-        my_numitems.setBackground(list.getSelectionBackground());
+        my_name.setBackground(a_list.getSelectionBackground());
+        my_checkname.setBackground(a_list.getSelectionBackground());
+        my_date.setBackground(a_list.getSelectionBackground());
+        my_numitems.setBackground(a_list.getSelectionBackground());
         
-        my_name.setForeground(list.getSelectionForeground());
-        my_checkname.setForeground(list.getSelectionForeground());
-        my_date.setForeground(list.getSelectionForeground());
-        my_numitems.setForeground(list.getSelectionForeground());
+        my_name.setForeground(a_list.getSelectionForeground());
+        my_checkname.setForeground(a_list.getSelectionForeground());
+        my_date.setForeground(a_list.getSelectionForeground());
+        my_numitems.setForeground(a_list.getSelectionForeground());
         
-        my_index = index;
+        my_index = the_index;
         
       } else {
         
-        my_name.setBackground(list.getBackground());
-        my_name.setForeground(list.getForeground());
-        my_checkname.setBackground(list.getBackground());
-        my_checkname.setForeground(list.getForeground());
-        my_date.setBackground(list.getBackground());
-        my_date.setForeground(list.getForeground());
-        my_numitems.setBackground(list.getBackground());
-        my_numitems.setForeground(list.getForeground());
+        my_name.setBackground(a_list.getBackground());
+        my_name.setForeground(a_list.getForeground());
+        my_checkname.setBackground(a_list.getBackground());
+        my_checkname.setForeground(a_list.getForeground());
+        my_date.setBackground(a_list.getBackground());
+        my_date.setForeground(a_list.getForeground());
+        my_numitems.setBackground(a_list.getBackground());
+        my_numitems.setForeground(a_list.getForeground());
         
       }
       
-      setEnabled(list.isEnabled());
-      setFont(list.getFont());
+      setEnabled(a_list.isEnabled());
+      setFont(a_list.getFont());
       
       return this;
       
