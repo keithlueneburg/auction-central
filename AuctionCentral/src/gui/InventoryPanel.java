@@ -1,5 +1,9 @@
 package gui;
 
+import auction.Auction;
+import auction.Bid;
+import auction.Item;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -12,10 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
-
-
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -27,33 +28,47 @@ import javax.swing.ListCellRenderer;
 
 import user.Bidder;
 import user.User;
-import auction.Auction;
-import auction.Bid;
-import auction.Item;
 
 /**
+ * A panel to display an auction's inventory.
  * 
  * @author Kaiyuan Shi
- * @version 1.0
+ * @version 3/13/2014
  *
  */
 @SuppressWarnings("serial")
 public class InventoryPanel extends JPanel {
 
   /**
-   * 
+   * Space character string.
+   */
+  private static final String SPACE = " ";
+
+  /**
+   * The columns for the label grid layout.
+   */
+  private static final int LABEL_GRID_COLUMNS = 3;
+  
+  /**
+   * The rows for the label grid layout. 
+   */
+  private static final int LABEL_GRID_ROWS = 4;
+  /**
+   * Default panel height.
    */
   private static final int DEFAULT_HEIGHT = 680;
   /**
-   * 
+   * Default panel width.
    */
   private static final int DEFAULT_WIDTH = 824;
-
   /**
-   * 
+   * Layout inset size.
    */
   private static final int INSET_SIZE = 20;
-  List<Item> my_item_list;
+  /**
+   * The list of items in the auction's inventory.
+   */
+  private List<Item> my_item_list;
   /**
    * The JList component that holds the auctions.
    */
@@ -79,11 +94,25 @@ public class InventoryPanel extends JPanel {
    */
   private ApplicationFrame my_app_frame;
 
+  /**
+   * The auction to show the inventory for.
+   */
   private Auction my_auction;
 
+  /**
+   * The user logged into the system.
+   */
   private User my_user;
 
-  public InventoryPanel(final ApplicationFrame the_jframe, final Auction an_auction, User a_user) {
+  /**
+   * Create a new InventoryPanel.
+   * 
+   * @param the_jframe The frame this panel belongs to.
+   * @param an_auction The auction to show the inventory for.
+   * @param a_user The user logged into the system.
+   */
+  public InventoryPanel(final ApplicationFrame the_jframe,
+      final Auction an_auction, final User a_user) {
     super();
 
     my_auction = an_auction;
@@ -122,7 +151,7 @@ public class InventoryPanel extends JPanel {
      my_label_panel.add(new JLabel("     Inventory:"));
      my_label_panel.add(new JLabel(""));*/
 
-    my_label_panel.setLayout(new GridLayout(4, 3));
+    my_label_panel.setLayout(new GridLayout(LABEL_GRID_ROWS, LABEL_GRID_COLUMNS));
     my_label_panel.add(new JLabel(""));
     my_label_panel.add(new JLabel(""));
     my_label_panel.add(new JLabel(""));
@@ -163,7 +192,7 @@ public class InventoryPanel extends JPanel {
         if (my_index >= 0) {
 
           boolean editable = false;
-          String user_name = my_user.getFirstName() + " ";
+          String user_name = my_user.getFirstName() + SPACE;
           user_name += my_user.getLastName();
 
           if (user_name.equals(my_auction.getContactPerson())) {
@@ -199,17 +228,14 @@ public class InventoryPanel extends JPanel {
       }
     });
 
-
     my_button_panel.add(view_button);
 
-    
-    String user_name = my_user.getFirstName() + " ";
+    String user_name = my_user.getFirstName() + SPACE;
     user_name += my_user.getLastName();
     if (user_name.equals(my_auction.getContactPerson())) {
       my_button_panel.add(add_button);
     }
-    
-    
+        
     final JButton bid_button = new JButton("Bid");
     bid_button.setMnemonic(KeyEvent.VK_I);
     bid_button.setToolTipText("Bid on an item");
@@ -221,8 +247,8 @@ public class InventoryPanel extends JPanel {
           boolean has_bid = false;
           final Item temp_item = my_item_list.get(my_index);
           final List<Bid> bid_q = ((Bidder) my_user).getBids();
-          for (Bid a_bid : bid_q) {
-            if (temp_item.getItemName().equals(a_bid.getItemName())) {
+          for (Bid bid : bid_q) {
+            if (temp_item.getItemName().equals(bid.getItemName())) {
               has_bid = true;
               break;
             }
@@ -234,13 +260,11 @@ public class InventoryPanel extends JPanel {
           } else {
             
             boolean success_bid = false;
-            final Bidder the_bidder = (Bidder) my_app_frame.getSystem().getCurrentUser();
+            final Bidder bidder = (Bidder) my_app_frame.getSystem().getCurrentUser();
             double bid_price = 0.0;
             do {
               String bet_string =
                   JOptionPane.showInputDialog(null, "Bid price: ", "$0.00");
-              
-              
               
               try {
                 
@@ -254,9 +278,9 @@ public class InventoryPanel extends JPanel {
                 if (bid_price >= theitem.getStartingBid()) {
                   success_bid = true;
                   final Bid temp_bid = new Bid(theitem.getItemName(), bid_price, 
-                      the_bidder.getUsername(), Calendar.getInstance(), the_bidder.getCard());
+                      bidder.getUsername(), Calendar.getInstance(), bidder.getCard());
                   
-                  the_bidder.addBid(temp_bid);
+                  bidder.addBid(temp_bid);
                   theitem.addBid(temp_bid);
                 } else if (!success_bid) {
                   JOptionPane.showMessageDialog(null, "Bid Too Low!", "Bid Too Low",
@@ -268,7 +292,7 @@ public class InventoryPanel extends JPanel {
               } catch (final NullPointerException e) {
               //do nothing
                 success_bid = true;
-            	}
+              }
             } while (!success_bid);
           }
         }
@@ -329,7 +353,8 @@ public class InventoryPanel extends JPanel {
       my_layout_constraints.gridx = 0;
       my_layout_constraints.gridy = 0;
       my_layout_constraints.fill = GridBagConstraints.BOTH;
-      my_layout_constraints.insets = new Insets(INSET_SIZE, INSET_SIZE, INSET_SIZE, INSET_SIZE);
+      my_layout_constraints.insets = new Insets(INSET_SIZE, INSET_SIZE, 
+          INSET_SIZE, INSET_SIZE);
       my_layout_constraints.anchor = GridBagConstraints.CENTER;
       my_layout_constraints.weightx = 1.0;
       my_layout_constraints.weighty = 1.0;
@@ -345,9 +370,11 @@ public class InventoryPanel extends JPanel {
     }
   }
 
+  
+  /**
+   * Cell renderer for the list of items.
+   */
   private class MyCellRenderer extends JPanel implements ListCellRenderer {
-
-
     /**
      * This is the default grid size for the list.
      */
@@ -367,7 +394,7 @@ public class InventoryPanel extends JPanel {
     private final JLabel my_item_quantity;
 
     /**
-     * 
+     * Creates an instance of MyCellRenderer.
      */
     MyCellRenderer() {
       my_item_number = new JLabel();
@@ -376,7 +403,7 @@ public class InventoryPanel extends JPanel {
       configRenderer();
     }
     /**
-     * 
+     * Configure the cell renderer.
      */
     private void configRenderer() {
       setLayout(new GridLayout(1, GRID_SIZE));
@@ -391,47 +418,42 @@ public class InventoryPanel extends JPanel {
 
 
     @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index, 
-        boolean isSelected, boolean cellHasFocus) {
-      int item_number = ((Item) value).getItemNumber();
-      String item_name = ((Item) value).getItemName();
-      int item_quantity = ((Item) value).getItemQuantity();
+    public Component getListCellRendererComponent(final JList a_list, final Object a_value,
+        final int the_index, final boolean the_is_selected, final boolean the_cell_has_focus) {
+      final int item_number = ((Item) a_value).getItemNumber();
+      final String item_name = ((Item) a_value).getItemName();
+      final int item_quantity = ((Item) a_value).getItemQuantity();
 
       my_item_number.setText(Integer.valueOf(item_number).toString());
       my_item_name.setText(item_name);
       my_item_quantity.setText(Integer.valueOf(item_quantity).toString());
 
-      if (isSelected) {
+      if (the_is_selected) {
 
-        my_item_number.setBackground(list.getSelectionBackground());
-        my_item_name.setBackground(list.getSelectionBackground());
-        my_item_quantity.setBackground(list.getSelectionBackground());
+        my_item_number.setBackground(a_list.getSelectionBackground());
+        my_item_name.setBackground(a_list.getSelectionBackground());
+        my_item_quantity.setBackground(a_list.getSelectionBackground());
 
-        my_item_number.setForeground(list.getSelectionForeground());
-        my_item_name.setForeground(list.getSelectionForeground());
-        my_item_quantity.setForeground(list.getSelectionForeground());
+        my_item_number.setForeground(a_list.getSelectionForeground());
+        my_item_name.setForeground(a_list.getSelectionForeground());
+        my_item_quantity.setForeground(a_list.getSelectionForeground());
 
-        my_index = index;
+        my_index = the_index;
 
       } else {
 
-        my_item_number.setBackground(list.getBackground());
-        my_item_number.setForeground(list.getForeground());
-        my_item_name.setBackground(list.getBackground());
-        my_item_name.setForeground(list.getForeground());
-        my_item_quantity.setBackground(list.getBackground());
-        my_item_quantity.setForeground(list.getForeground());
-
+        my_item_number.setBackground(a_list.getBackground());
+        my_item_number.setForeground(a_list.getForeground());
+        my_item_name.setBackground(a_list.getBackground());
+        my_item_name.setForeground(a_list.getForeground());
+        my_item_quantity.setBackground(a_list.getBackground());
+        my_item_quantity.setForeground(a_list.getForeground());
       }
 
-      setEnabled(list.isEnabled());
-      setFont(list.getFont());
+      setEnabled(a_list.isEnabled());
+      setFont(a_list.getFont());
 
       return this;
-
     }
-
   }
-
-
 }

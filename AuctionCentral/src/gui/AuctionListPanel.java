@@ -39,15 +39,14 @@ public class AuctionListPanel extends JPanel {
 
 
   /**
-   * Number of grid layout rows for the label panel. 
-   */
-  private static final int LABEL_GRID_HEIGHT = 4;
-  
-  
-  /**
    * Number of grid layout columns for the label panel. 
    */
-  private static final int LABEL_GRID_WIDTH = 4;
+  private static final int LABEL_GRID_COLUMNS = 4;
+    
+  /**
+   * Number of grid layout rows for the label panel. 
+   */
+  private static final int LABEL_GRID_ROWS = 4;
   /**
    * Required for serializable class (extends JPanel).
    */
@@ -134,7 +133,7 @@ public class AuctionListPanel extends JPanel {
    */
   public void configLabels() {
 
-    my_label_panel.setLayout(new GridLayout(LABEL_GRID_WIDTH, LABEL_GRID_HEIGHT));
+    my_label_panel.setLayout(new GridLayout(LABEL_GRID_ROWS, LABEL_GRID_COLUMNS));
     my_label_panel.add(new JLabel(""));
     my_label_panel.add(new JLabel(""));
     my_label_panel.add(new JLabel(""));
