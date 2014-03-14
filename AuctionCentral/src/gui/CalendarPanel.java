@@ -41,6 +41,11 @@ import system.AuctionCentralSystem;
 public class CalendarPanel extends JPanel {
 
   /**
+   * The month of 12 represents December + 1, i.e. the following January. 
+   */
+  private static final int MONTH_ROLLOVER = 12;
+
+  /**
    * Required for serializable class (extends JPanel).
    */
   private static final long serialVersionUID = 8363319605363170281L;
@@ -73,12 +78,12 @@ public class CalendarPanel extends JPanel {
   /**
    * Number of days wide to make the calendar.
    */
-  private static int CALENDAR_WIDTH = 7;
+  private static final int CALENDAR_WIDTH = 7;
 
   /**
    * Number of days tall to make the calendar.
    */
-  private static int CALENDAR_HEIGHT = 6;
+  private static final int CALENDAR_HEIGHT = 6;
 
   /**
    * Array of month names. 0 indexed (i.e. element 0 is "January", and 12 is
@@ -219,6 +224,7 @@ public class CalendarPanel extends JPanel {
     final List<Auction> auctions_on_this_day = getAuctionsOnDay(the_date);
 
     for (final Auction auction : auctions_on_this_day) {
+      @SuppressWarnings("serial")
       JButton auction_button = new JButton(new AbstractAction(auction.getAuctionName()) {
         @Override
         public void actionPerformed(final ActionEvent the_event) {
@@ -314,7 +320,7 @@ public class CalendarPanel extends JPanel {
     my_current_month++;
 
     // increment year, and reset month to 0 (Jan.) if month goes past 11 (Dec.)
-    if (my_current_month == 12) {
+    if (my_current_month == MONTH_ROLLOVER) {
       my_current_month = 0;
       my_current_year++;
     }
