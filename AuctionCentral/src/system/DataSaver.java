@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import user.AbstractUser;
 import user.AuctionCentralStaff;
 import user.Bidder;
 import user.NonProfitUser;
@@ -201,7 +200,7 @@ final class DataSaver {
   /**
    * This method add the user name, password, first name
    * and last name information to the output string.
-   * @param a_output the output string
+   * 
    * @param a_user the user that would be output
    * @return a output string that the user name, password, first name
    *  and last name information have been added

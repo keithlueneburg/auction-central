@@ -16,7 +16,6 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import user.AbstractUser;
 import user.AuctionCentralStaff;
 import user.Bidder;
 import user.NonProfitUser;
@@ -25,7 +24,7 @@ import user.User;
 
 /**
  * This class load the data txt files to the system.
- * @author kaiyuan Shi
+ * @author Kaiyuan Shi
  * @version Win. 2014
  */
 final class DataLoader {
@@ -132,6 +131,7 @@ final class DataLoader {
   /**
    * The static method that be called to read the data from txt files to the system.
    * @param a_system the system that would be loaded
+   * @throws IOException if there is a problem loading the data from the text file.
    */
   public static void loadData(final AuctionCentralSystem a_system) throws IOException {
     
@@ -176,6 +176,11 @@ final class DataLoader {
     
   }
     
+  /**
+   * Display an error popup window.
+   * 
+   * @throws IOException for notifying the system of the IO problem.
+   */
   private static void showError() throws IOException {
     JOptionPane.showMessageDialog(null,
         "Input file damaged, loading failure!", "error", JOptionPane.ERROR_MESSAGE);
@@ -184,6 +189,8 @@ final class DataLoader {
   
   /**
    * This method load the address list from an address.txt file.
+   * 
+   * @throws IOException if there is a problem loading the data from the text file.
    */
   private static void loadAddressList() throws IOException {
     while (my_address_scanner.hasNextLine()) {
@@ -198,6 +205,8 @@ final class DataLoader {
   
   /**
    * This method load the credit card list from an card.txt file.
+   * 
+   * @throws IOException if there is a problem loading the data from the text file.
    */
   private static void loadCardList() throws IOException {
     
@@ -218,6 +227,8 @@ final class DataLoader {
   
   /**
    * This method load the bid list from an bid.txt file.
+   * 
+   * @throws IOException if there is a problem loading the data from the text file.
    */
   private static void loadBidList() throws IOException {
     while (my_bid_scanner.hasNextLine()) {
@@ -237,6 +248,8 @@ final class DataLoader {
   
   /**
    * This method load the item list from an item.txt file.
+   * 
+   * @throws IOException if there is a problem loading the data from the text file.
    */
   private static void loadItemList() throws IOException {
     while (my_item_scanner.hasNextLine()) {
@@ -263,6 +276,8 @@ final class DataLoader {
   
   /**
    * This method load the auction list from an adauctiondress.txt file.
+   * 
+   * @throws IOException if there is a problem loading the data from the text file.
    */
   private static void loadAuctionList() throws IOException {
     while (my_auction_scanner.hasNextLine()) {
@@ -301,6 +316,8 @@ final class DataLoader {
   
   /**
    * This method load the user list from an user.txt file.
+   * 
+   * @throws IOException if there is a problem loading the data from the text file.
    */
   private static void loadUserList() throws IOException {
     
