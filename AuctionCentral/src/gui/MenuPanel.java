@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -14,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import auction.Auction;
 import system.AuctionCentralSystem;
 import user.AuctionCentralStaff;
 import user.Bidder;
@@ -35,7 +33,7 @@ import user.User;
  * Instructor: Dr. Adwoa Donyina
  * 
  * @author Keith Lueneburg
- * @version 3/2/2014
+ * @version 3/13/2014
  */
 @SuppressWarnings("serial")
 public class MenuPanel extends JPanel {
@@ -85,9 +83,9 @@ public class MenuPanel extends JPanel {
    */
   private JButton my_calendar_button;
   
-  //////////////////////////////////////
-  /// Bidder Button
-  //////////////////////////////////////
+  /**
+   * Button to open the "my bids" screen. 
+   */
   private JButton my_bids_button;
 
   /**
@@ -105,6 +103,9 @@ public class MenuPanel extends JPanel {
    */
   private AuctionCentralSystem my_system;
 
+  /**
+   * Button to open "register" screen.
+   */
   private JButton my_register_button;
 
   /**
@@ -208,9 +209,9 @@ public class MenuPanel extends JPanel {
     });
   }
   
-  /////////////////////////
-  //////
-  ////////////////////////
+  /**
+   * Set up the Bids button. 
+   */
   private void createBidsButton() {
     my_bids_button = new JButton(new AbstractAction("My Bids") {
       @Override
@@ -296,6 +297,9 @@ public class MenuPanel extends JPanel {
     }
   }
 
+  /**
+   * Disable the registration button.
+   */
   public void disableRegistration() {
     my_register_button.setEnabled(false);
   }
