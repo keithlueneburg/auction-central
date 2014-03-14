@@ -1,19 +1,7 @@
 package auction;
 
-
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
-
-import javax.swing.JOptionPane;
-
-import bidding.CreditCard;
-
-
-
-
 
 /**
  * This is the Item class. It holds all the information on a given item for an
@@ -27,7 +15,10 @@ import bidding.CreditCard;
  */
 public class Item {
 
-  private static final String NEW_LINE = "\n";
+  /**
+   * Minimum value that may be entered as a bid.
+   */
+  private static final double MIN_ALLOWABLE_BID = 0.01;
 
   // //////////////////////////////////////////////////////////////////
   // FIELDS
@@ -428,7 +419,7 @@ public class Item {
     for (Bid each: my_bids) {
       if (win_bid == null) {
         win_bid = each;
-      } else if ((each.getPrice() - win_bid.getPrice()) < 0.01) {
+      } else if ((each.getPrice() - win_bid.getPrice()) < MIN_ALLOWABLE_BID) {
         if (each.getBidTime().compareTo(win_bid.getBidTime()) < 0) {
           win_bid = each;
         }
