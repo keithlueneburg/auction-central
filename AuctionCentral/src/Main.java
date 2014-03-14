@@ -1,21 +1,18 @@
 import gui.ApplicationFrame;
 
 import java.awt.EventQueue;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+
 import java.io.IOException;
 import java.util.Observable;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.Icon;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import system.AuctionCentralSystem;
 import user.Guest;
 import user.User;
-
 
 /**
  * Class: Main
@@ -36,10 +33,13 @@ import user.User;
  */
 public final class Main {
   
+  /**
+   * The back end system for the program.
+   */
   private static AuctionCentralSystem my_system;
 
   /**
-   * A guest user for registration online
+   * A guest user for registration online.
    */
   private static User DEFAULT_GUEST_USER = new Guest("New User", "password",
       "guest", "user");
@@ -64,7 +64,7 @@ public final class Main {
       public void run() {
         try {
           my_system = new AuctionCentralSystem();
-        } catch (IOException ex) {
+        } catch (final IOException ex) {
           System.exit(0);
         }
         User login_user = null;
@@ -94,7 +94,6 @@ public final class Main {
               valid_login = true;
             }
           }
-
         }
         
         final RoleNotifier user_type_notifier = new RoleNotifier(my_system);
