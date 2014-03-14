@@ -1,35 +1,65 @@
 package gui;
 
-import user.*;
-import auction.*;
-
-import javax.swing.*;
-
-import user.NonProfitUser;
-import user.User;
 import auction.Auction;
+import auction.Bid;
+import auction.Item;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.text.NumberFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.*;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListCellRenderer;
 
 
+/**
+ * A panel containing a list of bids for the bidder to view.
+ * 
+ * @author Kevin Alexander
+ * @version 3/13/2014
+ *
+ */
+@SuppressWarnings("serial")
 public class BidListPanel extends JPanel {
   
   /**
-   * 
+   * Seconds per minute. 
+   */
+  private static final int SECONDS_PER_MINUTE = 60;
+  /**
+   * Minutes per hour.
+   */
+  private static final int MINUTES_PER_HOUR = 60;
+  /**
+   * Hours per day.
+   */
+  private static final int HOURS_PER_DAY = 24;
+  /**
+   * Default panel width. 
    */
   private static final int DEFAULT_WIDTH = 824;
   /**
-   * 
+   * Default panel height.
    */
   private static final int DEFAULT_HEIGHT = 680;
   /**
-   * 
+   * Size of the layout inset. 
    */
   private static final int INSET_SIZE = 20;
   /**
@@ -63,8 +93,9 @@ public class BidListPanel extends JPanel {
   /**
    * The constructor takes in two parameters: an ApplicationFrame and a list of Auctions.
    * It then initializes the frame and configures the panels.
+   * 
    * @param the_jframe The main ApplicationFrame.
-   * @param the_auctions The list of Auctions.
+   * @param the_bids The list of bids to display.
    */
   public BidListPanel(final ApplicationFrame the_jframe, 
       final List<Bid> the_bids) {
@@ -171,16 +202,16 @@ public class BidListPanel extends JPanel {
       delete_button.setVisible(false);
     }
     delete_button.addActionListener(new ActionListener() {
-      public void actionPerformed(final ActionEvent theEvent) {
-        List<Auction> auction_list = my_app_frame.getSystem().getAuctionList();
+      public void actionPerformed(final ActionEvent the_event) {
+        final List<Auction> auction_list = my_app_frame.getSystem().getAuctionList();
         boolean found = false;
-        Bid this_bid = my_bid_list.get(my_index);
+        final Bid this_bid = my_bid_list.get(my_index);
         Calendar auct_date = new GregorianCalendar();
         
         for (Auction auction : auction_list) {
-          List<Item> item_list = auction.getItems();
+          final List<Item> item_list = auction.getItems();
           for (Item item : item_list) {
-            List<Bid> bid_queue = item.getBids();
+            final List<Bid> bid_queue = item.getBids();
             for (Bid bid : bid_queue) {
               if (bid == this_bid) {
                 found = true;
@@ -199,7 +230,7 @@ public class BidListPanel extends JPanel {
         }
         
         if (new GregorianCalendar().getTimeInMillis() - auct_date.getTimeInMillis() 
-            >= 24 * 60 * 60) {
+            >= HOURS_PER_DAY * MINUTES_PER_HOUR * SECONDS_PER_MINUTE) {
           // delete bid
         }
       }
@@ -252,7 +283,8 @@ public class BidListPanel extends JPanel {
       my_layout_constraints.gridx = 0;
       my_layout_constraints.gridy = 0;
       my_layout_constraints.fill = GridBagConstraints.BOTH;
-      my_layout_constraints.insets = new Insets(INSET_SIZE, INSET_SIZE, INSET_SIZE, INSET_SIZE);
+      my_layout_constraints.insets = new Insets(INSET_SIZE, INSET_SIZE, 
+          INSET_SIZE, INSET_SIZE);
       my_layout_constraints.anchor = GridBagConstraints.CENTER;
       my_layout_constraints.weightx = 1.0;
       my_layout_constraints.weighty = 1.0;
@@ -324,50 +356,52 @@ public class BidListPanel extends JPanel {
       add(my_bid_price);
       add(my_bid_time);
     }
-    /**
-     * 
+    
+    
+    /* (non-Javadoc)
+     * @see javax.swing.ListCellRenderer#getListCellRendererComponent(javax.swing.JList,
+     *  java.lang.Object, int, boolean, boolean)
      */
-    public Component getListCellRendererComponent(JList list, Object value, int index, 
-        boolean isSelected, boolean cellHasFocus) {
-      String item_name = ((Bid) value).getItemName();
-      NumberFormat nf = NumberFormat.getCurrencyInstance();
-      String bid_price = nf.format(((Bid) value).getPrice());
-      String bid_time = ((Bid) value).getBidTime().getTime().toString();
+    public Component getListCellRendererComponent(final JList a_list, final Object a_value,
+        final int the_index, final boolean the_is_selected, final boolean the_cell_has_focus) {
+      final String item_name = ((Bid) a_value).getItemName();
+      final NumberFormat nf = NumberFormat.getCurrencyInstance();
+      final String bid_price = nf.format(((Bid) a_value).getPrice());
+      final String bid_time = ((Bid) a_value).getBidTime().getTime().toString();
       
       my_item_name.setText(item_name);
       my_bid_price.setText(bid_price);
       my_bid_time.setText(bid_time);
       
-      if (isSelected) {
+      if (the_is_selected) {
         
-        my_item_name.setBackground(list.getSelectionBackground());
-        my_bid_price.setBackground(list.getSelectionBackground());
-        my_bid_time.setBackground(list.getSelectionBackground());
+        my_item_name.setBackground(a_list.getSelectionBackground());
+        my_bid_price.setBackground(a_list.getSelectionBackground());
+        my_bid_time.setBackground(a_list.getSelectionBackground());
         
         
-        my_item_name.setForeground(list.getSelectionForeground());
-        my_bid_price.setForeground(list.getSelectionForeground());
-        my_bid_time.setForeground(list.getSelectionForeground());
+        my_item_name.setForeground(a_list.getSelectionForeground());
+        my_bid_price.setForeground(a_list.getSelectionForeground());
+        my_bid_time.setForeground(a_list.getSelectionForeground());
         
-        my_index = index;
+        my_index = the_index;
         
       } else {
         
-        my_item_name.setBackground(list.getBackground());
-        my_item_name.setForeground(list.getForeground());
-        my_bid_price.setBackground(list.getBackground());
-        my_bid_price.setForeground(list.getForeground());
-        my_bid_time.setBackground(list.getBackground());
-        my_bid_time.setForeground(list.getForeground());
+        my_item_name.setBackground(a_list.getBackground());
+        my_item_name.setForeground(a_list.getForeground());
+        my_bid_price.setBackground(a_list.getBackground());
+        my_bid_price.setForeground(a_list.getForeground());
+        my_bid_time.setBackground(a_list.getBackground());
+        my_bid_time.setForeground(a_list.getForeground());
         
       }
       
-      setEnabled(list.isEnabled());
-      setFont(list.getFont());
+      setEnabled(a_list.isEnabled());
+      setFont(a_list.getFont());
       
       return this;
       
     }
   }
 }
-
