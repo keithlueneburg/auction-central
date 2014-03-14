@@ -184,6 +184,10 @@ public class AuctionCentralSystem implements Observer {
    
   /**
    * This method add a new Auction to the auction list.
+   * 
+   * <dt><b>Preconditions:</b> The auction is in compliance with all business rules. <dd>
+   * <dt><b>Postconditions:</b> The auction is added to the system. <dd>
+   * 
    * @param an_auction the new auction would be added to the list
    * @return null if the new auction was successfully added, else the error message
    */

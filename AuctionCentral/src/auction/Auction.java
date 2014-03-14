@@ -60,6 +60,7 @@ public class Auction {
    */
   private List<Item> my_auction_items;
   /**
+   * Create a new Auction.
    * 
    * @param the_auction_name Auction name.
    * @param the_contact_person Contact person name.
@@ -147,7 +148,11 @@ public class Auction {
   /**
    * Set the auction date.
    * 
+   * <dt><b>Preconditions:</b> A valid date is passed in.<dd>
+   * <dt><b>Postconditions:</b> The date is set.<dd>
+   * 
    * @param the_auction_date The auction date.
+   * 
    */
   public void setAuctionDate(final Calendar the_auction_date) {
     my_auction_date = the_auction_date;
@@ -190,6 +195,7 @@ public class Auction {
   /**
    * Returns the auction number.
    * Added to show which auction we are using.
+   * 
    * @return AUCTION_NUMBER - the number of this auction.
    * @author Casey Morrison
    */
@@ -285,8 +291,10 @@ public class Auction {
   // METHODS
   /**
    * This method adds the given item to the auction and increments the number of items. 
+   *   
    * @param the_item The Item object that is wanting to be added to the auction.
    * @return A boolean to whether the item was added or not.
+   * 
    */
   public boolean addItem(final Item the_item) {
     final boolean success = my_auction_items.add(the_item);
@@ -302,6 +310,10 @@ public class Auction {
   /**
    * This method deletes the given item from the auction and decrements the number of 
    * items.
+   * 
+   * <dt><b>Preconditions:</b> The item exists in the auction. <dd>
+   * <dt><b>Postconditions:</b> The item is removed. <dd>
+   * 
    * @param the_item The item object that is wanting to be deleted from the auction.
    * @return A boolean to whether the item was added or not.
    */

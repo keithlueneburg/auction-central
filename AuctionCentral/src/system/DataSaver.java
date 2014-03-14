@@ -108,12 +108,15 @@ final class DataSaver {
 
   /**
    * The static method that be called to save the data from the system to txt files.
-   * @param a_user_list the user list that would be saved
-   * @param an_auction_list the auction list that would be saved
+   * 
    * <dt><b>Preconditions:</b><dd>
    * The data in the system should meet all the business rules.
    * <dt><b>Postconditions:</b><dd>
    * All of the data would be saved into 6 txt files.
+   * 
+   * @param a_user_list the user list that would be saved
+   * @param an_auction_list the auction list that would be saved
+   * 
    */
   public static void saveData(final List<User> a_user_list,
       final List<Auction> an_auction_list) {
@@ -151,8 +154,9 @@ final class DataSaver {
   /**
    * This method save the user list to an user.txt file.
    * <dt><b>Preconditions:</b><dd>
-   * 
+   * None.
    * <dt><b>Postconditions:</b><dd>
+   * The data will be saved in a manner that can be read back into the program.
    */
   private static void outputUserLists() {
     for (User each: my_user_list) {
@@ -201,11 +205,15 @@ final class DataSaver {
    * This method add the user name, password, first name
    * and last name information to the output string.
    * 
+   * <dt><b>Preconditions:</b><dd>
+   * None.
+   * <dt><b>Postconditions:</b><dd>
+   * The data will be saved in a manner that can be read back into the program.
+   * 
    * @param a_user the user that would be output
    * @return a output string that the user name, password, first name
    *  and last name information have been added
-   * <dt><b>Preconditions:</b><dd>
-   * <dt><b>Postconditions:</b><dd>
+   * 
    */
   private static String printUser(final  User a_user) {
     String ret = "";
@@ -221,7 +229,9 @@ final class DataSaver {
   /**
    * This method save the auction list to an auction.txt file.
    * <dt><b>Preconditions:</b><dd>
+   * None.
    * <dt><b>Postconditions:</b><dd>
+   * The data will be saved in a manner that can be read back into the program.
    */
   private static void outputAuctionLists() {
     
@@ -261,7 +271,9 @@ final class DataSaver {
   /**
    * This method save the item list to an item.txt file.
    * <dt><b>Preconditions:</b><dd>
+   * None.
    * <dt><b>Postconditions:</b><dd>
+   * The data will be saved in a manner that can be read back into the program.
    */
   private static void outputItemLists() {
     
@@ -298,7 +310,9 @@ final class DataSaver {
   /**
    * This method save the bid list to an bid.txt file.
    * <dt><b>Preconditions:</b><dd>
+   * None.
    * <dt><b>Postconditions:</b><dd>
+   * The data will be saved in a manner that can be read back into the program.
    */
   private static void outputBidLists() {
     for (Bid each: my_bid_list) {
@@ -325,7 +339,9 @@ final class DataSaver {
   /**
    * This method save the credit card list to an card.txt file.
    * <dt><b>Preconditions:</b><dd>
+   * None.
    * <dt><b>Postconditions:</b><dd>
+   * The data will be saved in a manner that can be read back into the program.
    */
   private static void outputCardLists() {
     
@@ -354,7 +370,9 @@ final class DataSaver {
   /**
    * This method save the address list to an address.txt file.
    * <dt><b>Preconditions:</b><dd>
+   * None.
    * <dt><b>Postconditions:</b><dd>
+   * The data will be saved in a manner that can be read back into the program.
    */
   private static void outputAddressLists() {
     for (Address each: my_address_list) {
@@ -368,9 +386,5 @@ final class DataSaver {
       
       my_address_writer.println(output);
     }
-    
-    
   }
-  
-  
 }

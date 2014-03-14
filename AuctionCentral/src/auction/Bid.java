@@ -32,6 +32,7 @@ public class Bid implements Comparable<Bid> {
 
   /**
    * Initializes the fields of the bid object.
+   * 
    * @param an_item_name the name of the item bid upon
    * @param a_price the price of the bid
    * @param a_bidder_name the name of the bidder
@@ -87,6 +88,9 @@ public class Bid implements Comparable<Bid> {
     return my_payment;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Comparable#compareTo(java.lang.Object)
+   */
   @Override
   public int compareTo(final Bid an_another_bid) {
     if ((my_price - an_another_bid.getPrice()) < SMALL) {

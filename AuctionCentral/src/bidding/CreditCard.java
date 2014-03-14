@@ -72,9 +72,9 @@ public final class CreditCard {
   /**
    * Create a new CreditCard object.
    * <p>
-   * <dt><b> Precondition: Valid parameters are passed to constructor. </b>
+   * <dt><b> Precondition: </b>Valid parameters are passed to constructor.
    * <dd>
-   * <dt><b> Postcondition: The CreditCard is initialized properly. </b>
+   * <dt><b> Postcondition: </b>The CreditCard is initialized properly.
    * <dd>
    * 
    * @param a_card_num
@@ -196,9 +196,9 @@ public final class CreditCard {
 
   /**
    * <p>
-   * <dt><b> Precondition: Card holder name is not blank. </b>
+   * <dt><b> Precondition: </b> Card holder name is not blank. 
    * <dd>
-   * <dt><b> Postcondition: Name is set. </b>
+   * <dt><b> Postcondition: </b>Name is set. 
    * <dd>
    * 
    * @param a_card_holder
@@ -250,9 +250,9 @@ public final class CreditCard {
   /**
    * Check to see if this CreditCard matches another CreditCard.
    * <p>
-   * <dt><b> Precondition: CreditCard has been initialized. </b>
+   * <dt><b> Precondition: </b>CreditCard has been initialized. 
    * <dd>
-   * <dt><b> Postcondition: The CreditCard has not been changed. </b>
+   * <dt><b> Postcondition: </b>The CreditCard has not been changed.
    * <dd>
    * 
    * @param an_object
@@ -298,9 +298,9 @@ public final class CreditCard {
   /**
    * Hash code for CreditCard.
    * <p>
-   * <dt><b> Precondition: CreditCard has been initialized. </b>
+   * <dt><b> Precondition: </b> CreditCard has been initialized.
    * <dd>
-   * <dt><b> Postcondition: The CreditCard has not been changed. </b>
+   * <dt><b> Postcondition: </b> The CreditCard has not been changed.
    * <dd>
    * 
    * @return the item's hashcode
@@ -313,9 +313,9 @@ public final class CreditCard {
   /**
    * Get a String representation of the CreditCard.
    * <p>
-   * <dt><b> Precondition: CreditCard has been initialized. </b>
+   * <dt><b> Precondition: </b> CreditCard has been initialized.
    * <dd>
-   * <dt><b> Postcondition: The CreditCard has not been changed. </b>
+   * <dt><b> Postcondition: </b> The CreditCard has not been changed. 
    * <dd>
    * 
    * @return A string representation of the card.

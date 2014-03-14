@@ -332,8 +332,10 @@ public class Item {
 
   /**
    * This method takes in a Bid item and adds it to the current list of Bid
-   * objects. Precondition: The list myBids has at least one Bid. Postcondition:
-   * The Bid item has been removed from the list of Bid objects.
+   * objects. 
+   * 
+   * <dt><b>Preconditions:</b> The Item has at least one bid. <dd>
+   * <dt><b>Postconditions:</b> The bid is removed. <dd>
    * 
    * @param the_bid
    *          The Bid object that is being removed from the myBids list.
@@ -408,7 +410,11 @@ public class Item {
   }*/
   
   /**
-   * another verision of unseal bid.
+   * Another version of unseal bid.
+   * 
+   * <dt><b>Preconditions:</b> There are bids on the item. <dd>
+   * <dt><b>Postconditions:</b> The highest valued bid is returned. <dd>
+   * 
    * @author Kaiyuan Shi
    * @return the win bid
    */
@@ -428,13 +434,6 @@ public class Item {
       }
     }
     
-    
-    
-    
     return win_bid;
-    
   }
-  
-  
-
 }

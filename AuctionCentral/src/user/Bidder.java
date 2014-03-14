@@ -118,6 +118,10 @@ public class Bidder extends AbstractUser {
   
   /**
    * Set's the user's credit card as expired.
+   * 
+   * <dt><b>Preconditions:</b> None <dd>
+   * <dt><b>Postconditions:</b> Bidder will not have an assigned credit card,
+   * and will no longer be registered. <dd>
    */
   public void cardExpired() {
     my_is_register = false;

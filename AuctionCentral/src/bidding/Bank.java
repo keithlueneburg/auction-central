@@ -28,9 +28,9 @@ public final class Bank {
   /**
    * Create a new Bank object.
    * <p>
-   * <dt><b> Precondition: Valid parameters are passed to constructor. </b>
+   * <dt><b> Precondition:</b> Valid parameters are passed to constructor.
    * <dd>
-   * <dt><b> Postcondition: The Bank has been initialized properly. </b>
+   * <dt><b> Postcondition:</b> The Bank has been initialized properly.
    * <dd>
    * 
    * @param a_name
@@ -55,9 +55,9 @@ public final class Bank {
   /**
    * Pays a bill for a bidder.
    * <p>
-   * <dt><b> Precondition: Valid parameters are passed to payment. </b>
+   * <dt><b> Precondition:</b> Valid parameters are passed to payment.
    * <dd>
-   * <dt><b> Postcondition: The Bill has been initialized properly. </b>
+   * <dt><b> Postcondition:</b> The Bill has been initialized properly.
    * <dd>
    * 
    * @param an_item
@@ -77,9 +77,9 @@ public final class Bank {
   /**
    * Check for equality with another Bank.
    * <p>
-   * <dt><b> Precondition: Bank has been initialized. </b>
+   * <dt><b> Precondition:</b> Bank has been initialized.
    * <dd>
-   * <dt><b> Postcondition: The Bank has not been changed. </b>
+   * <dt><b> Postcondition:</b> The Bank has not been changed.
    * <dd>
    * 
    * @param an_object
@@ -116,9 +116,9 @@ public final class Bank {
   /**
    * Hash code for bank.
    * <p>
-   * <dt><b> Precondition: Bank has been initialized. </b>
+   * <dt><b> Precondition:</b> Bank has been initialized.
    * <dd>
-   * <dt><b> Postcondition: The Bank has not been changed. </b>
+   * <dt><b> Postcondition:</b> The Bank has not been changed.
    * <dd>
    * 
    * @return the bank's hash code
@@ -133,9 +133,9 @@ public final class Bank {
   /**
    * String representation of bank.
    * <p>
-   * <dt><b> Precondition: Bank has been initialized. </b>
+   * <dt><b> Precondition:</b> Bank has been initialized.
    * <dd>
-   * <dt><b> Postcondition: The Bank has not been changed. </b>
+   * <dt><b> Postcondition:</b> The Bank has not been changed.
    * <dd>
    * 
    * @return string representing the bank.

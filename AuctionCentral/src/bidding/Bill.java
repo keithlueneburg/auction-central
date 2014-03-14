@@ -43,9 +43,9 @@ public final class Bill {
   /**
    * Create a new Bill object.
    * <p>
-   * <dt><b> Precondition: Valid parameters are passed to constructor. </b>
+   * <dt><b> Precondition:</b> Valid parameters are passed to constructor.
    * <dd>
-   * <dt><b> Postcondition: The Bill has been initialized properly. </b>
+   * <dt><b> Postcondition:</b> The Bill has been initialized properly.
    * <dd>
    * 
    * @param an_item
@@ -142,9 +142,9 @@ public final class Bill {
   /**
    * Get a printout of the Bill.
    * <p>
-   * <dt><b> Precondition: Bill has been initialized. </b>
+   * <dt><b> Precondition:</b> Bill has been initialized.
    * <dd>
-   * <dt><b> Postcondition: The Bill has not been changed. </b>
+   * <dt><b> Postcondition:</b> The Bill has not been changed.
    * <dd>
    */
   public void printBill() {

@@ -130,6 +130,12 @@ final class DataLoader {
   
   /**
    * The static method that be called to read the data from txt files to the system.
+   * 
+   * <dt><b>Preconditions:</b><dd>
+   * A valid data .txt file exists in the proper location.
+   * <dt><b>Postconditions:</b><dd>
+   * The data will all be loaded into the system.
+   * 
    * @param a_system the system that would be loaded
    * @throws IOException if there is a problem loading the data from the text file.
    */
@@ -190,6 +196,11 @@ final class DataLoader {
   /**
    * This method load the address list from an address.txt file.
    * 
+   * <dt><b>Preconditions:</b><dd>
+   * A valid data .txt file exists in the proper location.
+   * <dt><b>Postconditions:</b><dd>
+   * The data will all be loaded into the system.
+   * 
    * @throws IOException if there is a problem loading the data from the text file.
    */
   private static void loadAddressList() throws IOException {
@@ -205,6 +216,11 @@ final class DataLoader {
   
   /**
    * This method load the credit card list from an card.txt file.
+   * 
+   * <dt><b>Preconditions:</b><dd>
+   * A valid data .txt file exists in the proper location.
+   * <dt><b>Postconditions:</b><dd>
+   * The data will all be loaded into the system.
    * 
    * @throws IOException if there is a problem loading the data from the text file.
    */
@@ -228,6 +244,11 @@ final class DataLoader {
   /**
    * This method load the bid list from an bid.txt file.
    * 
+   * <dt><b>Preconditions:</b><dd>
+   * A valid data .txt file exists in the proper location.
+   * <dt><b>Postconditions:</b><dd>
+   * The data will all be loaded into the system.
+   * 
    * @throws IOException if there is a problem loading the data from the text file.
    */
   private static void loadBidList() throws IOException {
@@ -248,6 +269,11 @@ final class DataLoader {
   
   /**
    * This method load the item list from an item.txt file.
+   * 
+   * <dt><b>Preconditions:</b><dd>
+   * A valid data .txt file exists in the proper location.
+   * <dt><b>Postconditions:</b><dd>
+   * The data will all be loaded into the system.
    * 
    * @throws IOException if there is a problem loading the data from the text file.
    */
@@ -276,6 +302,11 @@ final class DataLoader {
   
   /**
    * This method load the auction list from an adauctiondress.txt file.
+   * 
+   * <dt><b>Preconditions:</b><dd>
+   * A valid data .txt file exists in the proper location.
+   * <dt><b>Postconditions:</b><dd>
+   * The data will all be loaded into the system.
    * 
    * @throws IOException if there is a problem loading the data from the text file.
    */
@@ -316,6 +347,11 @@ final class DataLoader {
   
   /**
    * This method load the user list from an user.txt file.
+   * 
+   * <dt><b>Preconditions:</b><dd>
+   * A valid data .txt file exists in the proper location.
+   * <dt><b>Postconditions:</b><dd>
+   * The data will all be loaded into the system.
    * 
    * @throws IOException if there is a problem loading the data from the text file.
    */
@@ -365,7 +401,4 @@ final class DataLoader {
       }   
     }
   }
-  
-  
-  
 }

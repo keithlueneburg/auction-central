@@ -83,6 +83,13 @@ final class AuctionDateTester {
 
   /**
    * This method get the solution of the test.
+   * 
+   * <dt><b>Preconditions:</b><dd>
+   * None
+   * <dt><b>Postconditions:</b><dd>
+   * The result will reflect whether or not the auction can be added to the system,
+   * in accordance with applicable business rules.
+   * 
    * @param an_auction the new auction would be added
    * @param an_auction_list the current auction list
    * @return the solution of the test, null if the new Auction can be added,
@@ -132,6 +139,12 @@ final class AuctionDateTester {
   
   /**
    * This method test if the new Auction's date is in 3 month after today.
+   * 
+   * <dt><b>Preconditions:</b><dd>
+   * A valid date object is passed in.
+   * <dt><b>Postconditions:</b><dd>
+   * The test results are valid.
+   * 
    * @param the_today today's date
    * @param the_auction_date new Auction's date
    * @return true if new Auction's date is in 3 month after today, 
@@ -187,11 +200,14 @@ final class AuctionDateTester {
   /**
    * This method test if the new Auction was added, would be more than 5 Auctions
    * in 7 days.
+   * 
+   * <dt><b>Preconditions:</b><dd>
+   * The new Auction's date must in 30 days after today
+   * 
    * @param an_auction the new Auction would added to the AuctionList
    * @return true if more than 5 Auctions in 7 days,
    *  false if no more than 5 Auctions in 7 days
-   * <dt><b>Preconditions:</b><dd>
-   * The new Auction's date must in 30 days after today
+   * 
    */
   private static boolean test7DayFull(final Auction an_auction) {
     boolean is_full = false;
@@ -217,11 +233,14 @@ final class AuctionDateTester {
   /**
    * This method calculate how many Auctions in the list in 7 days after
    * the parameter's Date.
+   * 
+   * <dt><b>Preconditions:</b><dd>
+   * The date of the parameter's must be one of the date in Auction list.
+   * 
    * @param an_auction_date a Date that be started
    * @return the number of Auctions in the list in 7 days after
    *  the parameter's Date
-   * <dt><b>Preconditions:</b><dd>
-   * The date of the parameter's must be one of the date in Auction list.
+   * 
    */
   private static int calculate7Day(final Calendar an_auction_date) {
     
@@ -262,10 +281,13 @@ final class AuctionDateTester {
   /**
    * This method test if the the new Auction was added, would be more than 2 Auctions
    * in 2 hours.
-   * @param an_auction the new Auction would added to the AuctionList
-   * @return true if there would be more than 2 Auctions in 2 hours, else false
+   * 
    * <dt><b>Preconditions:</b><dd>
    * There must be no more than 5 Auctions in 7 days
+   * 
+   * @param an_auction the new Auction would added to the AuctionList
+   * @return true if there would be more than 2 Auctions in 2 hours, else false
+   * 
    */
   private static boolean test1DayFull(final Auction an_auction) {
     boolean is_full = false;
@@ -308,12 +330,15 @@ final class AuctionDateTester {
   /**
    * This method test if the second auction begin after at least 2 hours
    * the first auction finish.
+   * 
+   * <dt><b>Preconditions:</b><dd>
+   * The time of the Auction before must before the time of the Auction after
+   * 
    * @param the_before the auction that begin first
    * @param the_after the auction that begin second
    * @return true if the second auction begin after at least 2 hours
    *  the first auction finish, else false
-   * <dt><b>Preconditions:</b><dd>
-   * The time of the Auction before must before the time of the Auction after
+   * 
    */
   private static boolean is2Hour(final Auction the_before, final Auction the_after) {
     boolean is_2_hour = true;
@@ -329,5 +354,3 @@ final class AuctionDateTester {
     return is_2_hour; 
   }
 }
-
-

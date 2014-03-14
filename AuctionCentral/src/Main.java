@@ -15,8 +15,6 @@ import user.Guest;
 import user.User;
 
 /**
- * Class: Main
- * 
  * Responsible for initial instantiation of GUI and program.
  * 
  * TCSS 360 - Software Development and Quality Assurance
@@ -29,7 +27,7 @@ import user.User;
  * 
  * @author Keith Lueneburg
  * @author Josh Hammer edits on the login screen
- * @version 3/2/2014
+ * @version 3/14/2014
  */
 public final class Main {
   
@@ -158,4 +156,3 @@ final class RoleNotifier extends Observable {
     notifyObservers(the_user);
   }
 }
-

@@ -46,6 +46,8 @@ public final class Address {
   private List<String> my_state_list;
 
   /**
+   * Create a new address.
+   * 
    * @param a_street - the street.
    * @param an_apt - the apt number.
    * @param a_city - the city.
@@ -161,9 +163,9 @@ public final class Address {
   /**
    * Check to see if this Address matches another Address.
    * <p>
-   * <dt><b> Precondition: Address has been initialized. </b>
+   * <dt><b> Precondition:</b> Address has been initialized.
    * <dd>
-   * <dt><b> Postcondition: The Address has not been changed. </b>
+   * <dt><b> Postcondition:</b> The Address has not been changed.
    * <dd>
    * 
    * @param an_object
@@ -202,9 +204,9 @@ public final class Address {
   /**
    * Hash code for address.
    * <p>
-   * <dt><b> Precondition: Address has been initialized. </b>
+   * <dt><b> Precondition: </b>Address has been initialized.
    * <dd>
-   * <dt><b> Postcondition: The Address has not been changed. </b>
+   * <dt><b> Postcondition: </b>The Address has not been changed.
    * <dd>
    * 
    * @return the address's hash code
@@ -219,9 +221,9 @@ public final class Address {
   /**
    * Get a String representation of the Address.
    * <p>
-   * <dt><b> Precondition: Address has been initialized. </b>
+   * <dt><b> Precondition: </b> Address has been initialized.
    * <dd>
-   * <dt><b> Postcondition: The Address has not been changed. </b>
+   * <dt><b> Postcondition:</b> The Address has not been changed.
    * <dd>
    * 
    * @return A string representation of the Address.
