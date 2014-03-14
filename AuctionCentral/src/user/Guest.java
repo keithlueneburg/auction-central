@@ -3,7 +3,7 @@ package user;
 /**
  * Represents a guest user of the system.
  * 
- * @author Josh
+ * @author Josh Hammer
  * 
  * @version 3/10/2014
  */

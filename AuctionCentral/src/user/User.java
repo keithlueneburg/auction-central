@@ -15,7 +15,7 @@ package user;
  * Instructor: Dr. Adwoa Donyina
  * 
  * @author Keith Lueneburg
- * @version 3/2/2014
+ * @version 3/10/2014
  */
 public interface User {
 

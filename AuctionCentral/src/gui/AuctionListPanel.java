@@ -22,7 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
 
-import user.AbstractUser;
 import user.NonProfitUser;
 import user.User;
 
@@ -33,6 +32,23 @@ import user.User;
  */
 public class AuctionListPanel extends JPanel {
 
+  
+  /**
+   *  
+   */
+  private static final int MAX_AUCTIONS = 25;
+
+
+  /**
+   * Number of grid layout rows for the label panel. 
+   */
+  private static final int LABEL_GRID_HEIGHT = 4;
+  
+  
+  /**
+   * Number of grid layout columns for the label panel. 
+   */
+  private static final int LABEL_GRID_WIDTH = 4;
   /**
    * Required for serializable class (extends JPanel).
    */
@@ -86,6 +102,7 @@ public class AuctionListPanel extends JPanel {
    * It then initializes the frame and configures the panels.
    * @param the_jframe The main ApplicationFrame.
    * @param the_auctions The list of Auctions.
+   * @param the_user The user that is logged into the system.
    */
   public AuctionListPanel(final ApplicationFrame the_jframe, 
       final List<Auction> the_auctions, final User the_user) {
@@ -118,7 +135,7 @@ public class AuctionListPanel extends JPanel {
    */
   public void configLabels() {
 
-    my_label_panel.setLayout(new GridLayout(4, 4));
+    my_label_panel.setLayout(new GridLayout(LABEL_GRID_WIDTH, LABEL_GRID_HEIGHT));
     my_label_panel.add(new JLabel(""));
     my_label_panel.add(new JLabel(""));
     my_label_panel.add(new JLabel(""));
@@ -169,13 +186,13 @@ public class AuctionListPanel extends JPanel {
     create_button.setToolTipText("Create a new auction");
     // If too many auctions already or current user is not NPO user,
     //make the new auction tied to the user/organization
-    if (my_auction_list.size() >= 25 
+    if (my_auction_list.size() >= MAX_AUCTIONS 
         || !(my_app_frame.getSystem().getCurrentUser() instanceof NonProfitUser)) {
       create_button.setEnabled(false);
     }
     create_button.addActionListener(new ActionListener() {
       public void actionPerformed(final ActionEvent an_event) {
-        if (my_auction_list.size() < 25) {
+        if (my_auction_list.size() < MAX_AUCTIONS) {
           User current_user = my_app_frame.getSystem().getCurrentUser();
           
           my_app_frame.showAuctionInfo(new Auction((NonProfitUser) current_user), true);

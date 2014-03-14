@@ -428,7 +428,7 @@ public class RegistrationPanel extends JPanel {
         
         if (my_user instanceof Guest) {
           Bidder new_bidder = new Bidder(username, password, first_name, last_name);
-          new_bidder.regisiter(card, address);
+          new_bidder.register(card, address);
          
           my_system.addUser(new_bidder);
           
@@ -436,7 +436,7 @@ public class RegistrationPanel extends JPanel {
           
           my_back_button.doClick();
         } else { //modify by Kaiyuan
-          ((Bidder) my_user).regisiter(card, address);
+          ((Bidder) my_user).register(card, address);
           my_back_button.setEnabled(true);
           my_back_button.doClick();
         }

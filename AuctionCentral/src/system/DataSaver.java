@@ -164,7 +164,7 @@ final class DataSaver {
         output += "Bidder" + DATA_SEPARATOR;
         output += printUser(each);
         
-        if (((Bidder) each).isRegisiter()) {
+        if (((Bidder) each).isRegistered()) {
         
           output += true + DATA_SEPARATOR;
           

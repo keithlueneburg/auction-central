@@ -324,9 +324,9 @@ final class DataLoader {
           if (exp_date.compareTo(Calendar.getInstance()) <= 0) {
             this_bidder.cardExpired();
           } else {
-            this_bidder.regisiter(card, my_address_list.get(Integer.parseInt(user[7])));
+            this_bidder.register(card, my_address_list.get(Integer.parseInt(user[7])));
 
-            this_bidder.regisiter(card, my_address_list.get(Integer.parseInt(user[SEVEN])));
+            this_bidder.register(card, my_address_list.get(Integer.parseInt(user[SEVEN])));
             
           }
         }

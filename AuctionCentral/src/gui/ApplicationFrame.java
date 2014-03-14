@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import system.AuctionCentralSystem;
-import user.User;
 import user.Bidder;
+import user.User;
 
 /**
  * Class: ApplicationFrame
@@ -58,6 +58,9 @@ public final class ApplicationFrame extends JFrame {
    */
   private final AuctionCentralSystem my_system;
   
+  /**
+   * The user currently logged into the system.
+   */
   private User my_user;
 
   /**
@@ -96,7 +99,7 @@ public final class ApplicationFrame extends JFrame {
     setup();
     
     //modify by Kaiyuan
-    if (my_user instanceof Bidder && ((Bidder) my_user).isRegisiter() == false) {
+    if (my_user instanceof Bidder && ((Bidder) my_user).isRegistered() == false) {
       JOptionPane.showMessageDialog(null, "Your card has expired, please add a new card!",
           "Expired card", JOptionPane.ERROR_MESSAGE);
       showRegistration();
@@ -187,6 +190,7 @@ public final class ApplicationFrame extends JFrame {
    * @param an_item
    *          The item to display the info for.
    * @param an_editable Make the panel editable or not. 
+   * @param an_auction The auction the item belongs to.
    */
   public void showItem(final Item an_item, final Auction an_auction, 
       final boolean an_editable) {
@@ -201,25 +205,43 @@ public final class ApplicationFrame extends JFrame {
     replaceContentPanel(new CalendarPanel(my_system, this));
   }
   
+  /**
+   * Show the registration panel.
+   */
   public void showRegistration() { //modify by Kaiyuan
     replaceContentPanel(new RegistrationPanel(my_system, this, my_user)); 
   }
   
-  ///////////////////////////////////
-  ///////
-  ///////////////////////////////////
+  
+  /**
+   * Show the list of a bidder's bids.
+   */
   public void showBidList() {
-    replaceContentPanel(new BidListPanel(this, ((Bidder) my_system.getCurrentUser()).getBids()));
+    replaceContentPanel(new BidListPanel(this,
+        ((Bidder) my_system.getCurrentUser()).getBids()));
+  }
+
+  /**
+   * Disable the registration button on the menu panel.
+   */
+  public void disableRegistration() {
+    ((MenuPanel) my_menu_panel).disableRegistration();
   }
   
+  /**
+   * WindowListener used to ensure data is saved when program window is
+   * closed directly.
+   * 
+   * @author Kaiyuan Shi
+   *
+   */
   private class MyWindowListener extends WindowAdapter {
-    public void windowClosing(WindowEvent e) {
+    /* (non-Javadoc)
+     * @see java.awt.event.WindowAdapter#windowClosing(java.awt.event.WindowEvent)
+     */
+    public void windowClosing(final WindowEvent an_event) {
       my_system.savingData();
       System.exit(0);
     }
-  }
-
-  public void disableRegistration() {
-    ((MenuPanel) my_menu_panel).disableRegistration();
   }
 }

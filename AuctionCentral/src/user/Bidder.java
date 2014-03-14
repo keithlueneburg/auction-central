@@ -96,7 +96,7 @@ public class Bidder extends AbstractUser {
    * Sets the register to true.
    * @return - true if successful.
    */
-  public boolean isRegisiter() {
+  public boolean isRegistered() {
     return my_is_register;
   }
   
@@ -109,13 +109,16 @@ public class Bidder extends AbstractUser {
    * 
    * @return - a boolean if it is a register.
    */
-  public boolean regisiter(final CreditCard a_card, final Address an_address) {
+  public boolean register(final CreditCard a_card, final Address an_address) {
     my_card = a_card;
     my_address = an_address;
     my_is_register = true;
     return my_is_register;
   }
   
+  /**
+   * Set's the user's credit card as expired.
+   */
   public void cardExpired() {
     my_is_register = false;
     my_card = null;

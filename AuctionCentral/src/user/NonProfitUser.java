@@ -1,17 +1,12 @@
 package user;
 
-import auction.Auction;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
 /**
  * Represents a nonprofit user.
  * 
  * @author Josh Hammer
+ * @author Keith Lueneburg (minor changes)
  * 
- * @version 3/2/2014
+ * @version 3/13/2014
  * 
  */
 public class NonProfitUser extends AbstractUser {
@@ -50,5 +45,4 @@ public class NonProfitUser extends AbstractUser {
   public String getOrganization() {
     return my_organization;
   }
-
 }
