@@ -1,7 +1,9 @@
 package gui;
 
+import bidding.Address;
+import bidding.CreditCard;
+
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -9,9 +11,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
+import java.util.Calendar;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -22,23 +23,56 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-import bidding.Address;
-import bidding.Bank;
-import bidding.CreditCard;
 import system.AuctionCentralSystem;
 import user.Bidder;
 import user.Guest;
 import user.User;
-import auction.Auction;
-
 
 /**
- * @author luenekw
- *
+ * Class: RegistrationPanel
+ * 
+ * Panel for registering a new user.
+ * 
+ * TCSS 360 - Software Development and Quality Assurance
+ * 
+ * University of Washington, Tacoma
+ * 
+ * Winter 2014
+ * 
+ * Instructor: Dr. Adwoa Donyina
+ * 
+ * @author Keith Lueneburg
+ * 
+ * @version 3/13/2014
  */
 @SuppressWarnings("serial")
-
 public class RegistrationPanel extends JPanel {
+  
+  /**
+   * Message to display when a user fails to fill out a text field.
+   */
+  private static final String BLANK_FIELDS_MESSAGE = "Fields cannot be blank";
+
+  /**
+   * Title text for error popup window. 
+   */
+  private static final String ERROR_MESSAGE_TITLE_TEXT = "Error";
+
+  /**
+   * Maximum numeric value for month field.
+   */
+  private static final int MAX_MONTH_VALUE = 12;
+
+  /**
+   * Height of east panel.
+   */
+  private static final int EAST_PANEL_HEIGHT = 680;
+
+  /**
+   * Width of east panel.
+   */
+  private static final int EAST_PANEL_WIDTH = 120;
+
   /** The default height of the panel. */
   private static final int DEFAULT_HEIGHT = 680;
     
@@ -141,6 +175,9 @@ public class RegistrationPanel extends JPanel {
   private AuctionCentralSystem my_system;
   
   //modify by Kaiyuan
+  /**
+   * The user logged into the system.
+   */
   private User my_user;
   
   /**
@@ -148,12 +185,13 @@ public class RegistrationPanel extends JPanel {
    * 
    * @param the_frame - the frame this panel is attached to.
    * @param the_system The system instance running behind the program.
+   * @param a_user The user logged into the system.
    * <dt><b>Preconditions:</b><dd>
    * The user can only be Bidder of Guest
    * If the user is a Bidder, he must not be registered.
    */
   public RegistrationPanel(final AuctionCentralSystem the_system, 
-      final ApplicationFrame the_frame, User a_user) {
+      final ApplicationFrame the_frame, final User a_user) {
     
     super(new BorderLayout());
     setPreferredSize(DEFAULT_SIZE);
@@ -201,7 +239,7 @@ public class RegistrationPanel extends JPanel {
     west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
     final JPanel north = new JPanel(new FlowLayout(FlowLayout.LEFT));
     final JPanel east = new JPanel(new GridLayout(1, 1));
-    east.setPreferredSize(new Dimension(120, 680));
+    east.setPreferredSize(new Dimension(EAST_PANEL_WIDTH, EAST_PANEL_HEIGHT));
     final JPanel south = new JPanel(new BorderLayout());
     final JPanel southcomment = new JPanel(new FlowLayout());
     final JPanel southset = new JPanel(new FlowLayout());
@@ -306,6 +344,9 @@ public class RegistrationPanel extends JPanel {
     });
   }
 
+  /**
+   * Save the user to the system.
+   */
   private void saveUser() {
 
     final String username = my_username_field.getText().trim();
@@ -317,7 +358,7 @@ public class RegistrationPanel extends JPanel {
     final String csc = my_csc_field.getText();
     final String exp_date_string = my_exp_date_field.getText();
     
-    Address address = new Address("street", 0, "city", "state", 98401);
+    final Address address = new Address("street", 0, "city", "state", 98401);
     
     boolean username_is_taken = false;
     boolean name_is_taken = false;
@@ -356,7 +397,7 @@ public class RegistrationPanel extends JPanel {
           && month <= today.get(Calendar.MONTH) + 1)) {
         is_valid_date = false;
       // make sure month value is from 1 to 12
-      } else if (month < 1 || month > 12) {
+      } else if (month < 1 || month > MAX_MONTH_VALUE) {
         is_valid_date = false;
       }
     
@@ -365,7 +406,7 @@ public class RegistrationPanel extends JPanel {
     }
     
     // Create an expiration date if input was valid.
-    Calendar exp_date = Calendar.getInstance();
+    final Calendar exp_date = Calendar.getInstance();
     if (is_valid_date) {
       exp_date.set(Calendar.DAY_OF_MONTH, 1);
       exp_date.set(Calendar.MONTH, month - 1);
@@ -375,7 +416,7 @@ public class RegistrationPanel extends JPanel {
     //modify by Kaiyuan
     if (exp_date.compareTo(Calendar.getInstance()) <= 0) {
       JOptionPane.showMessageDialog(null, "Expiration date must be in the future.",
-          "Error", JOptionPane.ERROR_MESSAGE);
+          ERROR_MESSAGE_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);
     } else {
     
       CreditCard card = null;
@@ -384,7 +425,7 @@ public class RegistrationPanel extends JPanel {
         card = new CreditCard(Long.parseLong(card_num), exp_date, Integer.parseInt(csc),
             username, address, "Bank");
       } catch (final NumberFormatException nfe) {
-        card_message = "Fields cannot be blank";
+        card_message = BLANK_FIELDS_MESSAGE;
       } catch (final IllegalArgumentException iae) {
         card_message = iae.getMessage();
       }
@@ -393,8 +434,8 @@ public class RegistrationPanel extends JPanel {
           || last_name.length() < 1) {
   
         JOptionPane.showMessageDialog(null, 
-            "Fields cannot be blank", 
-            "Error", JOptionPane.ERROR_MESSAGE);
+            BLANK_FIELDS_MESSAGE, 
+            ERROR_MESSAGE_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);
       
       } else if (username.contains(RESERVED_CHARACTER)
           || password.contains(RESERVED_CHARACTER)
@@ -403,31 +444,31 @@ public class RegistrationPanel extends JPanel {
         
         JOptionPane.showMessageDialog(null, 
             "Invalid character: `", 
-            "Error", JOptionPane.ERROR_MESSAGE);
+            ERROR_MESSAGE_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);
       } else if (!is_valid_date) {
       
         JOptionPane.showMessageDialog(null, 
             "Invalid date. Must be in the style of MM/YYYY, and after the current month.", 
-            "Error", JOptionPane.ERROR_MESSAGE);
+            ERROR_MESSAGE_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);
       } else if (username_is_taken) {
       
         JOptionPane.showMessageDialog(null, 
             "Username is taken.", 
-            "Error", JOptionPane.ERROR_MESSAGE);
+            ERROR_MESSAGE_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);
       
       } else if (name_is_taken) {
         JOptionPane.showMessageDialog(null, 
             "This name is already in the database.", 
-            "Error", JOptionPane.ERROR_MESSAGE);
+            ERROR_MESSAGE_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);
       
       } else if (card == null) {
         JOptionPane.showMessageDialog(null, 
             card_message, 
-            "Error", JOptionPane.ERROR_MESSAGE);
+            ERROR_MESSAGE_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);
       } else {
         
         if (my_user instanceof Guest) {
-          Bidder new_bidder = new Bidder(username, password, first_name, last_name);
+          final Bidder new_bidder = new Bidder(username, password, first_name, last_name);
           new_bidder.register(card, address);
          
           my_system.addUser(new_bidder);
@@ -446,6 +487,9 @@ public class RegistrationPanel extends JPanel {
   }
   
   //modify by Kaiyuan
+  /**
+   * Set up the bidder input fields.
+   */
   private void bidderInput() {
     my_username_field.setText(my_user.getUsername());
     my_username_field.setEditable(false);
