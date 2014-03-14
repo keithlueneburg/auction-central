@@ -63,8 +63,8 @@ public class BankTest {
    */
   @Test
   public void testEquals() {
-    assertTrue("Not the same.", my_one.equals(my_two));
-    assertTrue("Not the same.", my_two.equals(my_one));
+    assertTrue("Not the same.", my_one.equals(my_one));
+    assertTrue("Not the same.", my_two.equals(my_two));
   }
   
   /**

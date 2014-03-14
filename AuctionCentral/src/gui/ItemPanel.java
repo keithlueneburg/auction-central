@@ -446,7 +446,7 @@ public class ItemPanel extends JPanel {
                   "item price must be positive.", 
                    ERROR_MESSAGE_WINDOW_TITLE, JOptionPane.ERROR_MESSAGE);
             } else if (!my_auction.getItems().contains(my_item)) {
-              System.out.println("new item #: " + my_item.getItemNumber());
+              //System.out.println("new item #: " + my_item.getItemNumber());
               my_auction.addItem(my_item);
               my_app_frame.showInventory(my_auction);
             } else {
