@@ -3,8 +3,7 @@ package bidding;
 import java.util.List;
 
 /**
- * Class: Address
- * 
+ *  
  * Represents an address used for billing and to keep bidder data.
  * 
  * TCSS 360 - Software Development and Quality Assurance

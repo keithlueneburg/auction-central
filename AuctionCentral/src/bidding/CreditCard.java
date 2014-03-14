@@ -3,7 +3,6 @@ package bidding;
 import java.util.Calendar;
 
 /**
- * Class: CreditCard
  * 
  * Represents a credit card that a bidder will use to pay for a item that they
  * win the bidding for.

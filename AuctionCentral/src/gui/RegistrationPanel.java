@@ -29,8 +29,6 @@ import user.Guest;
 import user.User;
 
 /**
- * Class: RegistrationPanel
- * 
  * Panel for registering a new user.
  * 
  * TCSS 360 - Software Development and Quality Assurance

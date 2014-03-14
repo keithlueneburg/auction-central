@@ -20,7 +20,6 @@ import user.Guest;
 import user.User;
 
 /**
- * Class: MenuPanel
  * 
  * A JPanel which contains the software logo, as well as navigation buttons.
  * 

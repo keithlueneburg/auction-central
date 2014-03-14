@@ -149,6 +149,9 @@ final class RoleNotifier extends Observable {
    * Change the access role to the specified user.
    * 
    * @param the_user The user to give access to.
+   * 
+   * <dt><b>Preconditions:</b> An observer has been added to the Notifier.<dd>
+   * <dt><b>Postconditions:</b> The observers are notified.<dd>
    */
   void changeRole(final User the_user) {
     setChanged();

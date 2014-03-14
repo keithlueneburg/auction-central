@@ -26,6 +26,7 @@ import user.NonProfitUser;
 import user.User;
 
 /**
+ * A panel containing the list of active auctions in the system.
  * 
  * @author Kevin Alexander
  * @version 3/3/2014

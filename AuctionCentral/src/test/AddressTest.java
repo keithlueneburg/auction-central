@@ -8,8 +8,6 @@ import org.junit.Test;
 
 
 /**
- * Class: AddressTest
- * 
  * Contains tests for class: Address
  * 
  * TCSS 360 - Software Development and Quality Assurance

@@ -34,7 +34,6 @@ import user.User;
 
 
 /**
- * Class: AuctionPanel
  * 
  * Displays the panel that shows the auction information.
  * 

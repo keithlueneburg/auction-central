@@ -3,7 +3,6 @@ package bidding;
 import auction.Item;
 
 /**
- * Class: Bank
  * 
  * Represents a Bank that will process the bills and payments.
  * 

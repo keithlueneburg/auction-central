@@ -22,8 +22,6 @@ import javax.swing.JPanel;
 import system.AuctionCentralSystem;
 
 /**
- * Class: CalendarPanel
- * 
  * The JPanel that contains the calendar view for the AuctionCentral program.
  * 
  * TCSS 360 - Software Development and Quality Assurance

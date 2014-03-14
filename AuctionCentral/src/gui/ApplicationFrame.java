@@ -17,7 +17,6 @@ import user.Bidder;
 import user.User;
 
 /**
- * Class: ApplicationFrame
  * 
  * The main JFrame containing the rest of the GUI. A menu is displayed on the
  * left side, and the various content is displayed in the rest of the window.

@@ -1,10 +1,7 @@
 package user;
 
 /**
- * Class: User (interface)
- * 
  * Interface to be implemented by the system's different user classes.
- * 
  * 
  * TCSS 360 - Software Development and Quality Assurance
  * 

@@ -6,7 +6,6 @@ import java.util.Date;
 
 
 /**
- * Class: Bill
  * 
  * Represents a bill that a the Auction Central Staff will use to pay for a
  * charge a bidder for the item they win in the auction.

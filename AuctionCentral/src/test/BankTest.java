@@ -10,8 +10,6 @@ import org.junit.Test;
 
 
 /**
- * Class: BankTest
- * 
  * Contains tests for class: Bank
  * 
  * TCSS 360 - Software Development and Quality Assurance

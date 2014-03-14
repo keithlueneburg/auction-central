@@ -7,6 +7,7 @@ import java.util.List;
 
 import user.NonProfitUser;
 /**
+ * Represents an Auction in the AuctionCentral system.
  * 
  * @author Kevin Alexander
  * @version 2/28/2014

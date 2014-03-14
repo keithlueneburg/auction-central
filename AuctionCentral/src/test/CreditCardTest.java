@@ -11,8 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Class: CreditCardTest
- * 
  * Contains tests for class: CreditCard
  * 
  * TCSS 360 - Software Development and Quality Assurance University of
