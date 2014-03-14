@@ -257,6 +257,14 @@ public class TestSystem implements Observer {
   
   /**
    * Just for my Junit test, DO NOT USE!!!
+   * @return a list of the current user
+   */
+  public List<User> getUser() {
+    return my_users;
+  }
+  
+  /**
+   * Just for my Junit test, DO NOT USE!!!
    * @param an_index - the index of the user.
    */
   public void setUser(final User a_user) {
