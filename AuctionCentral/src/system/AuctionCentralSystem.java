@@ -1,10 +1,6 @@
 package system;
 
 import auction.Auction;
-import auction.Bid;
-import auction.Item;
-import bidding.Address;
-import bidding.CreditCard;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,10 +14,8 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import user.AbstractUser;
 import user.NonProfitUser;
 import user.User;
-import user.Bidder;
 
 /**
  * This class is the core system of the Auction Central System.
@@ -34,7 +28,12 @@ public class AuctionCentralSystem implements Observer {
    * Path to the user input/output data file.
    */
   private static final String USER_NAMES_PATH = "data/usernames.txt";
-  
+ 
+  /**
+   * Space character.
+   */
+  private static final String SPACE = " ";
+ 
   /**
    * The list of users in the system.
    */
@@ -58,6 +57,8 @@ public class AuctionCentralSystem implements Observer {
   /**
    * The constructor, initialized the system.
    * in check-in5 manually set the current user is a non-profit user
+   * 
+   * @throws IOException if their is a problem loading or saving the file.
    */
   public AuctionCentralSystem() throws IOException {
     
@@ -137,6 +138,8 @@ public class AuctionCentralSystem implements Observer {
   
   /**
    * This method load all the data after starting the system.
+   * 
+   * @throws IOException if their is a problem loading or saving the file.
    */
   public void loadingData() throws IOException {
     DataLoader.loadData(this);
@@ -204,14 +207,14 @@ public class AuctionCentralSystem implements Observer {
     final List<Auction> current_user_list = new ArrayList<Auction>();
     
     for (Auction each: my_auction) {
-      if ((my_current_user.getFirstName() + " " + my_current_user.getLastName()).equals(
+      if ((my_current_user.getFirstName() + SPACE + my_current_user.getLastName()).equals(
           each.getContactPerson())) {
         current_user_list.add(each);
       }
     }
     
     for (Auction each: my_past_auction) {
-      if ((my_current_user.getFirstName() + " " + my_current_user.getLastName()).equals(
+      if ((my_current_user.getFirstName() + SPACE + my_current_user.getLastName()).equals(
           each.getContactPerson())) {
         current_user_list.add(each);
       }

@@ -15,9 +15,59 @@ import java.util.List;
 final class AuctionDateTester {
   
   /**
+   * Days per standard year.
+   */
+  private static final int DAYS_PER_YEAR = 365;
+
+  /**
+   * Days per leap year.
+   */
+  private static final int DAYS_IN_LEAP_YEAR = 366;
+
+  /**
+   * Constant 400 for leap year calculations.
+   */
+  private static final int LEAP_YEAR_400 = 400;
+
+  /**
+   * Constant 4 for leap year calculations.
+   */
+  private static final int LEAP_YEAR_4 = 4;
+
+  /**
+   * Constant 100 for leap year calculations.
+   */
+  private static final int LEAP_YEAR_100 = 100;
+
+  /**
+   * Days in a week.
+   */
+  private static final int DAYS_PER_WEEK = 7;
+
+  /**
+   * Maximum auctions per 7 day period.
+   */
+  private static final int MAX_AUCTIONS_PER_7_DAYS = 5;
+
+  /**
+   * Max months an auction can be scheduled ahead.
+   */
+  private static final int MAX_MONTHS_SCHEDULE_AHEAD = 3;
+
+  /**
+   * Months in a year.
+   */
+  private static final int MONTHS_PER_YEAR = 12;
+
+  /**
+   * Maximum pending auctions that may be in the schedule.
+   */
+  private static final int MAX_ACTIVE_AUCTIONS = 25;
+
+  /**
    * The solution of the tester.
    */
-  private static String my_error_message = null;
+  private static String my_error_message;
   
   /**
    * The list of the current Auction list.
@@ -47,7 +97,7 @@ final class AuctionDateTester {
     final Calendar auction_date = an_auction.getAuctionDate();
     
     //business rule #1
-    if (my_auction.size() >= 25) { //no more than 25 auctions
+    if (my_auction.size() >= MAX_ACTIVE_AUCTIONS) { //no more than 25 auctions
       //too much auction
       my_error_message = "No more than 25 auctions may be schedule into the future!";
     }  else if (today.compareTo(auction_date) > 0
@@ -103,8 +153,9 @@ final class AuctionDateTester {
       if (auction_year > (today_year + 1)) { //is next year?
         is_in_3_month = false; //not next year
       } else { //is next year
-        if ((auction_month + 12) > (today_month + 2)) { //longer than 2 month?
-          if ((auction_month + 12) == (today_month + 3)) { //longer than 2 month, exact 3 month
+        if ((auction_month + MONTHS_PER_YEAR) > (today_month + 2)) { //longer than 2 month?
+          //longer than 2 month, exact 3 month
+          if ((auction_month + MONTHS_PER_YEAR) == (today_month + MAX_MONTHS_SCHEDULE_AHEAD)) {
             if (auction_day > today_day) {
               is_in_3_month = false; //3 month, but longer than the same day of the month
             }
@@ -118,7 +169,7 @@ final class AuctionDateTester {
       
       //same year, longer than 2 month
       if (auction_month > (today_month + 2)) { //longer than 2 month
-        if (auction_month == (today_month + 3)) { //exact 3 month
+        if (auction_month == (today_month + MAX_MONTHS_SCHEDULE_AHEAD)) { //exact 3 month
           if (auction_day > today_day) {
             is_in_3_month = false; //3 month, but longer than the same day of the month
           }
@@ -151,7 +202,7 @@ final class AuctionDateTester {
     for (Auction each: my_auction) {
       
       final int auction_num = calculate7Day(each.getAuctionDate());
-      if (auction_num > 5) {
+      if (auction_num > MAX_AUCTIONS_PER_7_DAYS) {
         is_full = true;
         break;
       }
@@ -188,17 +239,17 @@ final class AuctionDateTester {
         
         //only calculate Auction after the parameter
         if (auction_year == each_year) {
-          if (each_day < (auction_day + 7)) {
+          if (each_day < (auction_day + DAYS_PER_WEEK)) {
             seven_num++;
           }
         } else { //eachYear = auctionYear + 1;
-          if ((auction_year % 4 == 0 && auction_year % 100 != 0)
-              || auction_year % 400 == 0) { // leap year!
-            if ((each_day + 366) < (auction_day + 7)) {
+          if ((auction_year % LEAP_YEAR_4 == 0 && auction_year % LEAP_YEAR_100 != 0)
+              || auction_year % LEAP_YEAR_400 == 0) { // leap year!
+            if ((each_day + DAYS_IN_LEAP_YEAR) < (auction_day + DAYS_PER_WEEK)) {
               seven_num++;
             }
           } else {
-            if ((each_day + 365) < (auction_day + 7)) {
+            if ((each_day + DAYS_PER_YEAR) < (auction_day + DAYS_PER_WEEK)) {
               seven_num++;
             }
           }
