@@ -28,7 +28,7 @@ public class ItemTest {
     testItem = new Item();
     testItem.setItemName("Test Item");
   }
-
+  
   /**
    * @throws java.lang.Exception
    */
@@ -38,7 +38,8 @@ public class ItemTest {
 
   /**
    * Test method for
-   * {@link backend.Item#Item(int, java.lang.String, int, double, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
+   * {@link backend.Item#Item(int, java.lang.String, int, double, java.lang.String, 
+   * java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
    * .
    */
   @Test
@@ -47,7 +48,7 @@ public class ItemTest {
   }
 
   /**
-   * Test method for {@link backend.Item#Item()}.
+   * Test method for {@link auction.Item#Item()}.
    */
   @Test
   public void testItem() {
@@ -55,7 +56,7 @@ public class ItemTest {
   }
 
   /**
-   * Test method for {@link backend.Item#addBid(backend.Bid)}.
+   * Test method for {@link auction.Item#addBid(backend.Bid)}.
    */
   @Test
   public void testAddBid() {
@@ -67,7 +68,7 @@ public class ItemTest {
   }
 
   /**
-   * Test method for {@link backend.Item#removeBid(backend.Bid)}.
+   * Test method for {@link auction.Item#removeBid(backend.Bid)}.
    */
   @Test
   public void testRemoveBid() {
@@ -88,7 +89,7 @@ public class ItemTest {
 
   /**
    * Test method for
-   * {@link backend.Item#unsealBid(java.lang.String, java.lang.String)}.
+   * {@link auction.Item#unsealBid(java.lang.String, java.lang.String)}.
    */
   @Test
   public void testUnsealBid() {
